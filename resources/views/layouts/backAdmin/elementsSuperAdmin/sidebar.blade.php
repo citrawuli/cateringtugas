@@ -30,8 +30,8 @@
                             <span class="nav-text">Product</span>
                         </a>
                         <ul aria-expanded="false">
-                            <li><a href="{!! url('/CategoryTable'); !!}">Product Table</a></li>
-                            <li><a href="{!! url('/ViewFormCategory'); !!}">Product Form (add)</a></li>
+                            <li><a href="{!! url('/ProductTable'); !!}">Product Table</a></li>
+                            <li><a href="{!! url('/ViewFormProduct'); !!}">Product Form (add)</a></li>
                         </ul>
                     </li>
                 </ul>

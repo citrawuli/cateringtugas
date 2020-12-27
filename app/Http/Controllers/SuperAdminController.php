@@ -175,7 +175,7 @@ class SuperAdminController extends Controller
 
     public function viewcategorytable(){
         $category = DB::table('kategori_produk')->get();
-        $page_title = 'User Table';
+        $page_title = 'Category Table';
         $page_description = 'Some description for the page';
         $logo = "teamo/images/aisyacatering_kontak_logo.png";
         $logoText = "teamo/images/aisya-catering-logo3.png";
@@ -186,7 +186,7 @@ class SuperAdminController extends Controller
 
 
     public function viewcategoryforminput(){
-        $page_title = 'Add User Role Form';
+        $page_title = 'Add Category Form';
         $page_description = 'Some description for the page';
         $logo = "teamo/images/aisyacatering_kontak_logo.png";
         $logoText = "teamo/images/aisya-catering-logo3.png";
@@ -219,7 +219,7 @@ class SuperAdminController extends Controller
         $category = DB::table('kategori_produk')->where('kategori_produk.id', $id)
                 ->first();
        
-        $page_title = 'Edit User Form';
+        $page_title = 'Edit Category Form';
         $page_description = 'Some description for the page';
         $logo = "teamo/images/aisyacatering_kontak_logo.png";
         $logoText = "teamo/images/aisya-catering-logo3.png";
@@ -248,6 +248,66 @@ class SuperAdminController extends Controller
         Session::flash('message', "Data kategori user berhasil diubah");
         return Redirect::back();
     }
+
+    public function viewproducttable(){
+        $product = DB::table('produk')
+            ->join('kategori_produk', 'produk.id_kategori', '=', 'kategori_produk.id')
+            ->select('produk.*','kategori_produk.nama_kategori')
+            ->get();
+        $page_title = 'Product Table';
+        $page_description = 'Some description for the page';
+        $logo = "teamo/images/aisyacatering_kontak_logo.png";
+        $logoText = "teamo/images/aisya-catering-logo3.png";
+        $action = __FUNCTION__;
+        //dump($barang);        
+        return view('viewSuperAdmin.tableProduct', compact('product', 'page_title', 'page_description','action','logo','logoText'));
+    }
+
+    public function viewproductforminput(){
+        $category = DB::table('kategori_produk')->get();
+        $page_title = 'Add Category Form';
+        $page_description = 'Some description for the page';
+        $logo = "teamo/images/aisyacatering_kontak_logo.png";
+        $logoText = "teamo/images/aisya-catering-logo3.png";
+        $action = __FUNCTION__;
+        return view('viewSuperAdmin.addproductform', compact('category', 'page_title', 'page_description','action','logo','logoText'));
+    }
+
+    public function storeproduct(Request $request){
+        $validator = $request->validate([
+            'category_name' => ['required'],
+            'product_name' => ['required', 'string', 'max:50', 'unique:produk,nama_produk'],
+            'product_type' => ['max:50'],
+            'product_desc' => ['max:190'],
+            'product_price' => ['required'],
+        ],
+        [
+            'category_name.required' => 'Please select Category',
+            'product_name.required' => 'Please enter Product Name',
+            'product_name.unique' => 'This Product is already exist',
+            'product_name.max' => 'Product Name Must below 50 characters',
+            'product_type.max' => 'Product Type Must below 50 characters',
+            'product_desc.max' => 'Product Desc Must below 190 characters',
+            'product_price.required' => 'Please enter Product Price',
+            
+        ]
+        );
+
+        DB::table('produk')->insert([
+            'id_kategori'=> $request->input('category_name'),
+            'nama_produk' => $request->input('product_name'),
+            'tipe_produk' => $request->input('product_type'),
+            'deskripsi_produk' => $request->input('product_desc'),
+            'harga_produk' => $request->input('product_price'),
+            'created_at' =>  \Carbon\Carbon::now(), 
+            'updated_at' => \Carbon\Carbon::now()  
+        ]);
+
+        Session::flash('message', "Data Produk berhasil ditambahkan");
+        return Redirect::back();
+    }
+
+
 
 
 

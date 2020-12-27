@@ -42,6 +42,13 @@ Route::get('/EditCategory/{id}', [App\Http\Controllers\SuperAdminController::cla
 Route::post('/UpdateCategory/{id}', [App\Http\Controllers\SuperAdminController::class, 'updatecategory']); //update data form edit kategori ke DB
 
 
+Route::get('/ProductTable', [App\Http\Controllers\SuperAdminController::class, 'viewproducttable']); //lihat Table Product
+Route::get('/ViewFormProduct', [App\Http\Controllers\SuperAdminController::class, 'viewproductforminput']); //lihat form input produk
+Route::post('/StoreProduct', [App\Http\Controllers\SuperAdminController::class, 'storeproduct']); // store data produk ke DB
+Route::get('/EditProduct/{id}', [App\Http\Controllers\SuperAdminController::class, 'editproduct']); //lihat form edit produk
+Route::post('/UpdateProduct/{id}', [App\Http\Controllers\SuperAdminController::class, 'updateproduct']); //update data form edit produk ke DB
+
+
 Route::get('/user', [App\Http\Controllers\UserController::class, 'index'])->name('homeUser');
 Route::get('/adminPemesanan', [App\Http\Controllers\AdminPemesananController::class, 'index'])->name('homeAdminPemesanan');
 Route::get('/adminPembayaran', [App\Http\Controllers\AdminPembayaranController::class, 'index'])->name('homeAdminPembayaran');
