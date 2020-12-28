@@ -36,6 +36,18 @@
         </div>
 
         <div class="col-12">
+            @if (Session::has('message'))
+            <div class="alert alert-success alert-dismissible fade show">                                   
+                <svg viewBox="0 0 24 24" width="24" height="24" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round" class="mr-2"><polyline points="9 11 12 14 22 4">
+                </polyline><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"></path></svg>  
+                <strong>Success! </strong>{{ Session::get('message') }}
+                <button type="button" class="close h-100" data-dismiss="alert" aria-label="Close"><span><i class="mdi mdi-close"></i></span>
+                </button>
+            </div>
+            @endif
+        </div>
+
+        <div class="col-12">
             <br>
             <div class="card">
                 <div class="card-header text-white bg-danger">
@@ -61,36 +73,33 @@
                                         
                                         <a href="{{ url( '/EditCategory/' . $cat->id ) }}" class="btn btn-primary shadow btn-xs sharp mr-1" data-toggle="tooltip" data-placement="top" title="Edit kategori" id="editt"><i class="fa fa-pencil"></i></a>
                                         
-                                        <span data-toggle="modal" data-target="#exampleModalCenter">
-                                            <a class="btn btn-danger shadow btn-xs sharp" data-placement="top" title="Soft Delete Kategori" data-toggle="tooltip2" ><i class="fa fa-trash"></i></a>
+                                        <span data-placement="top" data-toggle="tooltip2"  title="Delete Kategori">
+                                            <a href="#exampleModalCenter{{ $cat->id }}" class="btn btn-danger shadow btn-xs sharp" data-toggle="modal" data-target="#exampleModalCenter{{ $cat->id }}" ><i class="fa fa-trash"></i></a>
                                         </span>
+
+
+                                            <div class="modal fade" id="exampleModalCenter{{ $cat->id }}">
+                                                <div class="modal-dialog modal-dialog-centered" role="document">
+                                                    <div class="modal-content">
+                                                        <div class="modal-header">
+                                                            <h5 class="modal-title">Delete Record</h5>
+                                                            <button type="button" class="close" data-dismiss="modal"><span>&times;</span>
+                                                            </button>
+                                                        </div>
+                                                        <div class="modal-body">
+                                                            <p>Apakah Anda yakin ingin menghapus permanen record <strong>"{{ $cat->nama_kategori }}"</strong> dengan id <strong>"{{ $cat->id }}"?</p>
+                                                        </div>
+                                                        <div class="modal-footer">
+                                                            <button type="button" class="btn btn-secondary light" data-dismiss="modal">Close</button>
+                                                            <a href="{{ url( '/DeleteCategory/' . $cat->id ) }}" class="btn btn-danger light">Delete</a>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+
                                     </div>
                                     
                                
-                                    <div class="modal fade" id="exampleModalCenter">
-                                        <div class="modal-dialog modal-dialog-centered" role="document">
-                                            <div class="modal-content">
-                                                <div class="modal-header">
-                                                    <h5 class="modal-title">DELETE CATEGORY RECORD</h5>
-                                                    <button type="button" class="close" data-dismiss="modal"><span>&times;</span>
-                                                    </button>
-                                                </div>
-                                                <div class="modal-body">
-                                                    <p>Apakah Anda yakin ingin menghapus kategori ini?</p>
-                                                </div>
-                                                <div class="modal-footer">
-                                                    <button type="button" class="btn btn-danger light" data-dismiss="modal">TIDAK</button>
-                                                    <button type="button" class="btn btn-primary">YA</button>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-
-
-
-
-
-
                                   </td>
                                 </tr>
                                 @endforeach        

@@ -27,6 +27,7 @@ Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name
 //COBA ROUTE
 Route::get('/coba', [App\Http\Controllers\SuperAdminController::class, 'dashboard_1']);
 
+//SUPER ADMIN
 Route::get('/superAdmin', [App\Http\Controllers\SuperAdminController::class, 'dashboard_1'])->name('homeSuperAdmin');
 Route::get('/UserTable', [App\Http\Controllers\SuperAdminController::class, 'viewusertable']); //lihat Table User dan Role
 Route::get('/UserFormInput', [App\Http\Controllers\SuperAdminController::class, 'viewuserforminput']); //lihat form input user
@@ -35,11 +36,13 @@ Route::get('/AddUserRole', [App\Http\Controllers\SuperAdminController::class, 'v
 Route::post('/StoreUserRole', [App\Http\Controllers\SuperAdminController::class, 'storeuserrole']); // store data role user ke DB
 Route::get('/EditUser/{id}', [App\Http\Controllers\SuperAdminController::class, 'edituser']); //lihat form edit role user
 Route::post('/UpdateUser/{id}', [App\Http\Controllers\SuperAdminController::class, 'updateuser']); //update data form edit user ke DB
+
 Route::get('/CategoryTable', [App\Http\Controllers\SuperAdminController::class, 'viewcategorytable']); //lihat Table Category
 Route::get('/ViewFormCategory', [App\Http\Controllers\SuperAdminController::class, 'viewcategoryforminput']); //lihat form input kategori
 Route::post('/StoreCategory', [App\Http\Controllers\SuperAdminController::class, 'storecategory']); // store data user ke DB
 Route::get('/EditCategory/{id}', [App\Http\Controllers\SuperAdminController::class, 'editcategory']); //lihat form edit kategori
 Route::post('/UpdateCategory/{id}', [App\Http\Controllers\SuperAdminController::class, 'updatecategory']); //update data form edit kategori ke DB
+Route::get('/DeleteCategory/{id}', [App\Http\Controllers\SuperAdminController::class, 'deletecategory']); //delete data category dari DB
 
 
 Route::get('/ProductTable', [App\Http\Controllers\SuperAdminController::class, 'viewproducttable']); //lihat Table Product
@@ -47,7 +50,12 @@ Route::get('/ViewFormProduct', [App\Http\Controllers\SuperAdminController::class
 Route::post('/StoreProduct', [App\Http\Controllers\SuperAdminController::class, 'storeproduct']); // store data produk ke DB
 Route::get('/EditProduct/{id}', [App\Http\Controllers\SuperAdminController::class, 'editproduct']); //lihat form edit produk
 Route::post('/UpdateProduct/{id}', [App\Http\Controllers\SuperAdminController::class, 'updateproduct']); //update data form edit produk ke DB
-
+Route::get('/DeleteProduct/{id}', [App\Http\Controllers\SuperAdminController::class, 'deleteproduct']); //delete data form delete produk ke DB
+Route::get('/TrashedProduct', [App\Http\Controllers\SuperAdminController::class, 'trashedproduct']); //lihat data produk di tong sampah
+Route::get('/RestoreProduct/{id}', [App\Http\Controllers\SuperAdminController::class, 'restoreproduct']); //kembalikan data produk dari tong sampah
+Route::get('/DeletePermanent/{id}', [App\Http\Controllers\SuperAdminController::class, 'deletepermanent']); //hapus permanen data produk dari tong sampah
+Route::get('/RestoreAllProduct', [App\Http\Controllers\SuperAdminController::class, 'restoreallproduct']); //kembalikan semua data produk dari tong sampah
+Route::get('/DeletePermanentAllProduct', [App\Http\Controllers\SuperAdminController::class, 'deletepermanentallproduct']); //hapus permanen semua data produk dari tong sampah
 
 Route::get('/user', [App\Http\Controllers\UserController::class, 'index'])->name('homeUser');
 Route::get('/adminPemesanan', [App\Http\Controllers\AdminPemesananController::class, 'index'])->name('homeAdminPemesanan');

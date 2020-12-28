@@ -11,6 +11,7 @@ use Redirect;
 use App\Models\User;
 use App\Models\role_users;
 use App\Models\kategoriProduk;
+use App\Models\produk;
 use Carbon\Carbon;
 use Exception;
 
@@ -245,7 +246,17 @@ class SuperAdminController extends Controller
         $model->nama_kategori = $request->input('category_name');
         $model->touch();
         $model->save();
-        Session::flash('message', "Data kategori user berhasil diubah");
+        Session::flash('message', "Data kategori berhasil diubah");
+        return Redirect::back();
+    }
+
+    public function deletecategory($id)
+    {
+        // menghapus data berdasarkan id yang dipilih
+        DB::table('kategori_produk')->where('id',$id)->delete();
+        
+    
+        Session::flash('message', "Data kategori berhasil dihapus");
         return Redirect::back();
     }
 
@@ -253,7 +264,7 @@ class SuperAdminController extends Controller
         $product = DB::table('produk')
             ->join('kategori_produk', 'produk.id_kategori', '=', 'kategori_produk.id')
             ->select('produk.*','kategori_produk.nama_kategori')
-            ->get();
+            ->whereNull('deleted_at')->get();
         $page_title = 'Product Table';
         $page_description = 'Some description for the page';
         $logo = "teamo/images/aisyacatering_kontak_logo.png";
@@ -293,17 +304,127 @@ class SuperAdminController extends Controller
         ]
         );
 
-        DB::table('produk')->insert([
-            'id_kategori'=> $request->input('category_name'),
-            'nama_produk' => $request->input('product_name'),
-            'tipe_produk' => $request->input('product_type'),
-            'deskripsi_produk' => $request->input('product_desc'),
-            'harga_produk' => $request->input('product_price'),
-            'created_at' =>  \Carbon\Carbon::now(), 
-            'updated_at' => \Carbon\Carbon::now()  
+
+        produk::create([
+            'id_kategori' => $request->category_name,
+            'nama_produk' => $request->product_name,
+            'tipe_produk' => $request->product_type,
+            'deskripsi_produk' => $request->product_desc,
+            'harga_produk' => $request->product_price,
+            'created_at' => \Carbon\Carbon::now(), 
+            'updated_at' => \Carbon\Carbon::now(), 
         ]);
 
         Session::flash('message', "Data Produk berhasil ditambahkan");
+        return Redirect::back();
+    }
+
+    public function editproduct($id)
+    {
+        $produk = DB::table('produk')->where('produk.id', $id)
+                ->first();
+        $category = DB::table('kategori_produk')->get();
+       
+        $page_title = 'Edit Category Form';
+        $page_description = 'Some description for the page';
+        $logo = "teamo/images/aisyacatering_kontak_logo.png";
+        $logoText = "teamo/images/aisya-catering-logo3.png";
+        $action = __FUNCTION__;
+
+        return view('viewSuperAdmin.userformeditproduk',compact('produk', 'category', 'page_title', 'page_description','action','logo','logoText') );
+
+    }
+
+    public function updateproduct(Request $request, $id)
+    {
+       $validator = $request->validate([
+            'category_name' => ['required'],
+            'product_name' => ['required', 'string', 'max:50'],
+            'product_type' => ['max:50'],
+            'product_desc' => ['max:190'],
+            'product_price' => ['required'],
+        ],
+        [
+            'category_name.required' => 'Please select Category',
+            'product_name.required' => 'Please enter Product Name',
+            'product_name.max' => 'Product Name Must below 50 characters',
+            'product_type.max' => 'Product Type Must below 50 characters',
+            'product_desc.max' => 'Product Desc Must below 190 characters',
+            'product_price.required' => 'Please enter Product Price',
+            
+        ]
+        );
+
+        $model = produk::find($id);
+        $model->id_kategori = $request->input('category_name');
+        $model->nama_produk = $request->input('product_name');
+        $model->tipe_produk = $request->input('product_type');
+        $model->deskripsi_produk = $request->input('product_desc');
+        $model->harga_produk = $request->input('product_price');
+        $model->touch();
+        $model->save();
+        Session::flash('message', "Data Produk berhasil diubah");
+        return Redirect::back();
+    }
+
+    public function deleteproduct($id)
+    {
+        $model = produk::find($id);
+        $model->delete();
+
+        Session::flash('message', "Data Produk {$model->nama_produk} berhasil dihapus");
+        return Redirect::back();
+    }
+
+    public function trashedproduct()
+    {
+        // mengampil data  yang sudah dihapus
+        $model = produk::onlyTrashed()->get();
+
+        $page_title = 'Trashed Product Table';
+        $page_description = 'Some description for the page';
+        $logo = "teamo/images/aisyacatering_kontak_logo.png";
+        $logoText = "teamo/images/aisya-catering-logo3.png";
+        $action = __FUNCTION__;
+        return view('viewSuperAdmin.tableTrashedProduct', compact('model', 'page_title', 'page_description','action','logo','logoText'));
+    }
+
+    public function restoreproduct($id)
+    {
+        $model = produk::onlyTrashed()->where('id',$id);
+        $model->restore();
+
+        Session::flash('message', "Data Produk berhasil dikembalikan");
+        return Redirect::back();
+    }
+
+    public function deletepermanent($id)
+    {
+        // hapus permanen data 
+        $model = produk::onlyTrashed()->where('id',$id);
+        $model->forceDelete();
+ 
+        Session::flash('message', "Data Produk berhasil dihapus permanen");
+        return Redirect::back();
+    }
+
+    public function restoreallproduct()
+    {
+            
+        $model = produk::onlyTrashed();
+        $model->restore();
+ 
+        Session::flash('message', "Semua Data Produk berhasil dikembalikan");
+        return Redirect::back();
+    }
+
+    public function deletepermanentallproduct()
+    {
+        // hapus permanen semua data  yang sudah dihapus
+        $model = produk::onlyTrashed();
+        $model->forceDelete();
+ 
+        Session::flash('message', "Semua Data Produk berhasil dihapus permanen");
         return Redirect::back();
     }
 

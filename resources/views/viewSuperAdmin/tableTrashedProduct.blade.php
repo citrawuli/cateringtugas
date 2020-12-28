@@ -6,13 +6,13 @@
         <div class="col-sm-6 p-md-0">
             <div class="welcome-text">
                 <h4>Hi, welcome back!</h4>
-                <span>Product Table</span>
+                <span>TrashedProduct Table</span>
             </div>
         </div>
         <div class="col-sm-6 p-md-0 justify-content-sm-end mt-2 mt-sm-0 d-flex">
             <ol class="breadcrumb">
-                <li class="breadcrumb-item"><a href="javascript:void(0)">Table</a></li>
-                <li class="breadcrumb-item active"><a href="javascript:void(0)">Product Table</a></li>
+                <li class="breadcrumb-item"><a href="{{ url('/ProductTable')}}">Product Table</a></li>
+                <li class="breadcrumb-item active"><a href="javascript:void(0)">Trashed Product Table</a></li>
             </ol>
         </div>
     </div>
@@ -32,8 +32,8 @@
                 </div>
                 <div class="card-body mb-0">
                     <!-- <button type="button" class="btn light btn-danger" data-toggle="modal" data-target="#exampleModalCenter">Add User</button> -->
-                    <a href="{!! url('/ViewFormProduct'); !!}" class="btn light btn-danger">Add Product</a>
-                    <a href="{{ url('/TrashedProduct')}}" class="btn btn-primary light btn-card"><i class="fa fa-trash"></i>See Trashed Product</a> 
+                    <a href="{!! url('/RestoreAllProduct'); !!}" class="btn light btn-danger">Kembalikan Semua</a>
+                    <a href="{{ url('/DeletePermanentAllProduct')}}" class="btn btn-primary light btn-card">Hapus Permanen Semua</a> 
                 </div>
             </div>
         </div>
@@ -49,12 +49,11 @@
             </div>
             @endif
         </div>
-
         <div class="col-12">
             <br>
             <div class="card">
                 <div class="card-header text-white bg-danger">
-                    <h4 class="card-title">Product Table</h4>
+                    <h4 class="card-title">Trashed Product Table</h4>
                 </div>
                 <div class="card-body">
                     <div class="table-responsive">
@@ -75,18 +74,18 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                @foreach( $product as $prod )
+                                @foreach( $model as $mod )
                                 <tr>
-                                  <td>{{ $prod->id }}</td>
-                                  <td>{{ $prod->nama_kategori }}</td>
-                                  <td>{{ $prod->nama_produk }}</td>
-                                  <td>{{ $prod->tipe_produk }}</td>
-                                  <td>{{ $prod->deskripsi_produk }}</td>
-                                  <td>@currency($prod->harga_produk)</td>
-                                  <td>{{ $prod->rating_produk }}</td><!-- 
-                                  <td>{{ $prod->deleted_at }}</td>
-                                  <td>{{ $prod->created_at }}</td>
-                                  <td>{{ $prod->updated_at }}</td> -->
+                                  <td>{{ $mod->id }}</td>
+                                  <td>{{ $mod->nama_kategori }}</td>
+                                  <td>{{ $mod->nama_produk }}</td>
+                                  <td>{{ $mod->tipe_produk }}</td>
+                                  <td>{{ $mod->deskripsi_produk }}</td>
+                                  <td>@currency($mod->harga_produk)</td>
+                                  <td>{{ $mod->rating_produk }}</td><!-- 
+                                  <td>{{ $mod->deleted_at }}</td>
+                                  <td>{{ $mod->created_at }}</td>
+                                  <td>{{ $mod->updated_at }}</td> -->
                                   <td>
                                     
                                     <div class="d-flex">
@@ -94,15 +93,15 @@
                                         <span data-placement="top" title="Show More Detail" data-toggle="tooltip3" >
                                             <a href=".bd-example-modal-lg"
                                             data-toggle="modal" 
-                                            data-target="#modaldetail{{ $prod->id }}"
-                                            data-title="Detail Produk {{ $prod->id }}"
+                                            data-target="#modaldetail{{ $mod->id }}"
+                                            data-title="Detail Produk {{ $mod->id }}"
                                             class="btn btn-info shadow btn-xs sharp mr-1">
                                             <i class="fa fa-eye"></i>
-                                        </a>
+                                            </a>
                                         </span>
 
                                        
-                                        <div id="modaldetail{{ $prod->id }}" class="modal fade bd-example-modal-lg" tabindex="-1" role="dialog" aria-hidden="true">
+                                        <div id="modaldetail{{ $mod->id }}" class="modal fade bd-example-modal-lg" tabindex="-1" role="dialog" aria-hidden="true">
                                             <div class="modal-dialog modal-lg">
                                                 <div class="modal-content">
                                                     <div class="modal-header">
@@ -124,16 +123,16 @@
 
                                                             <tbody>
                                                                 <center>
-                                                                    <p><strong>ID Produk : </strong><span>{{ $prod->id }}</span></p>
-                                                                    <p><span>{{ $prod->nama_kategori }}</span></p>
-                                                                    <p><span>{{ $prod->nama_produk }}</span></p><br>
+                                                                    <p><strong>ID Produk : </strong><span>{{ $mod->id }}</span></p>
+                                                                    <p><span>{{ $mod->nama_kategori }}</span></p>
+                                                                    <p><span>{{ $mod->nama_produk }}</span></p><br>
                                                                 </center>
                                                                 
                                                                 <tr>
                         
-                                                                  <td>{{ $prod->deleted_at }}</td>
-                                                                  <td>{{ $prod->created_at }}</td>
-                                                                  <td>{{ $prod->updated_at }}</td>
+                                                                  <td>{{ $mod->deleted_at }}</td>
+                                                                  <td>{{ $mod->created_at }}</td>
+                                                                  <td>{{ $mod->updated_at }}</td>
                                                                   
                                                                 </tr>
                                                                      
@@ -149,9 +148,38 @@
                                             </div>
                                         </div>
 
-                                        <a href="{{ url( '/EditProduct/' . $prod->id ) }}" class="btn btn-primary shadow btn-xs sharp mr-1" data-toggle="tooltip" data-placement="top" title="Edit Product" id="editt"><i class="fa fa-pencil"></i></a>
+                                        <a href="{{ url( '/RestoreProduct/' . $mod->id ) }}" class="btn btn-warning shadow btn-xs sharp mr-1" data-toggle="tooltip" data-placement="top" title="Restore Product" id="editt"><i class="fa fa-repeat"></i></a>
                                        
-                                        <a href="{{ url( '/DeleteProduct/' . $prod->id ) }}" class="btn btn-danger shadow btn-xs sharp" data-toggle="tooltip2" data-placement="top" title="Soft Delete Product"><i class="fa fa-trash"></i></a>
+                                        <!-- <a href="{{ url( '/DeletePermanent/' . $mod->id ) }}" class="btn btn-danger shadow btn-xs sharp" data-toggle="tooltip2" data-placement="top" title="Delete Product Permanent"><i class="fa fa-trash"></i></a> -->
+
+                                        <span data-placement="top" data-toggle="tooltip2"  title="Delete Product Permanent">
+                                            <a href="#exampleModalCenter{{ $mod->id }}" class="btn btn-danger shadow btn-xs sharp" data-toggle="modal" data-target="#exampleModalCenter{{ $mod->id }}" ><i class="fa fa-trash"></i></a>
+                                        </span>
+
+                                            <div class="modal fade" id="exampleModalCenter{{ $mod->id }}">
+                                                <div class="modal-dialog modal-dialog-centered" role="document">
+                                                    <div class="modal-content">
+                                                        <div class="modal-header">
+                                                            <h5 class="modal-title">Delete Record</h5>
+                                                            <button type="button" class="close" data-dismiss="modal"><span>&times;</span>
+                                                            </button>
+                                                        </div>
+                                                        <div class="modal-body">
+                                                            <p>Apakah Anda yakin ingin menghapus permanen record <strong>"{{ $mod->nama_produk }}"</strong> dengan id <strong>"{{ $mod->id }}"?</p>
+                                                        </div>
+                                                        <div class="modal-footer">
+                                                            <button type="button" class="btn btn-secondary light" data-dismiss="modal">Close</button>
+                                                            <a href="{{ url( '/DeletePermanent/' . $mod->id ) }}" class="btn btn-danger light">Delete</a>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+
+
+
+
+
                                     </div>
                                     
 
