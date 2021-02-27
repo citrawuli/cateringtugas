@@ -5,14 +5,14 @@
     <div class="row page-titles mx-0">
         <div class="col-sm-6 p-md-0">
             <div class="welcome-text">
-                <h4>Hi, welcome back!</h4>
-                <span>User Input Form</span>
+                <h4>Hi, selamat datang!</h4>
+                <span>Formulir Pengguna</span>
             </div>
         </div>
         <div class="col-sm-6 p-md-0 justify-content-sm-end mt-2 mt-sm-0 d-flex">
             <ol class="breadcrumb">
-                <li class="breadcrumb-item"><a href="{!! url('/UserTable'); !!}">User Table</a></li>
-                <li class="breadcrumb-item active"><a href="javascript:void(0)">User Role Form</a></li>
+                <li class="breadcrumb-item"><a href="{!! url('/UserTable'); !!}">Tabel Pengguna</a></li>
+                <li class="breadcrumb-item active"><a href="javascript:void(0)">Formulir Pengguna</a></li>
             </ol>
         </div>
     </div>
@@ -42,7 +42,7 @@
 	<div class="col-lg-12">
 		<div class="card">
             <div class="card-header">
-                <h4 class="card-title">Add User Role</h4>
+                <h4 class="card-title">Tambah Hak Akses</h4>
             </div>
             <div class="card-body">
                 <div class="basic-form">
@@ -50,7 +50,7 @@
                         @csrf
 
                         <div class="form-group">
-                            <label for="user_id">User</label>
+                            <label for="user_id">Pengguna (*)</label>
                             <div class="">
                               <select class="form-control "  id="single-select" required=""  name="user_id" >
                               <option disabled selected="">Select User</option>
@@ -62,7 +62,7 @@
                         </div>
 
                         <div class="form-group">
-                            <label for="role_id">Role</label>
+                            <label for="role_id">Hak Akses (*)</label>
                             <div class="">
                               <select class="form-control "  id="single-select" required=""  name="role_id" >
                               <option disabled selected="">Select User Role</option>
@@ -78,7 +78,7 @@
                         <div class="form-group row mb-0">
                             <div class="col-md-6 offset-md-4">
                                 <button type="submit" class="btn btn-primary">
-                                    {{ __('Add User Role') }}
+                                    {{ __('Tambah Peran Pengguna') }}
                                 </button>
                             </div>
                         </div>

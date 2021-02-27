@@ -5,14 +5,14 @@
     <div class="row page-titles mx-0">
         <div class="col-sm-6 p-md-0">
             <div class="welcome-text">
-                <h4>Hi, welcome back!</h4>
+                <h4>Hi, selamat datang!</h4>
                 <span>Product Table</span>
             </div>
         </div>
         <div class="col-sm-6 p-md-0 justify-content-sm-end mt-2 mt-sm-0 d-flex">
             <ol class="breadcrumb">
-                <li class="breadcrumb-item"><a href="javascript:void(0)">Table</a></li>
-                <li class="breadcrumb-item active"><a href="javascript:void(0)">Product Table</a></li>
+                <li class="breadcrumb-item"><a href="javascript:void(0)">Tabel</a></li>
+                <li class="breadcrumb-item active"><a href="javascript:void(0)">Daftar Produk</a></li>
             </ol>
         </div>
     </div>
@@ -32,8 +32,8 @@
                 </div>
                 <div class="card-body mb-0">
                     <!-- <button type="button" class="btn light btn-danger" data-toggle="modal" data-target="#exampleModalCenter">Add User</button> -->
-                    <a href="{!! url('/ViewFormProduct'); !!}" class="btn light btn-danger">Add Product</a>
-                    <a href="{{ url('/TrashedProduct')}}" class="btn btn-primary light btn-card"><i class="fa fa-trash"></i>See Trashed Product</a> 
+                    <a href="{!! url('/ViewFormProduct'); !!}" class="btn light btn-danger">Tambah Produk</a>
+                    <a href="{{ url('/TrashedProduct')}}" class="btn btn-primary light btn-card"><i class="fa fa-trash" style="margin-right: 10px;"></i>Lihat Tong Sampah</a> 
                 </div>
             </div>
         </div>
@@ -54,8 +54,9 @@
             <br>
             <div class="card">
                 <div class="card-header text-white bg-danger">
-                    <h4 class="card-title">Product Table</h4>
+                    <h4 class="card-title">Daftar Produk</h4>
                 </div>
+
                 <div class="card-body">
                     <div class="table-responsive">
                         <table id="example3" class="display" style="min-width: 845px">
@@ -71,7 +72,7 @@
                                     <th>Deleted At</th>
                                     <th>Created At</th>
                                     <th>Updated At</th> -->
-                                    <th>Action</th>
+                                    <th>Aksi</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -134,6 +135,75 @@
                                                                   <td>{{ $prod->deleted_at }}</td>
                                                                   <td>{{ $prod->created_at }}</td>
                                                                   <td>{{ $prod->updated_at }}</td>
+                                                                  
+                                                                </tr>
+                                                                     
+                                                            </tbody>
+
+                                                        </table>
+                                                       
+                                                    </div>
+                                                    <div class="modal-footer">
+                                                        <button type="button" class="btn btn-danger light" data-dismiss="modal">Close</button>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <span data-placement="top" title="Add Photo" data-toggle="tooltip3" >
+                                            <a href=".bd-example-modal-lg"
+                                            data-toggle="modal" 
+                                            data-target="#modaladdproduk{{ $prod->id }}"
+                                            data-title="Add Produk Photo{{ $prod->id }}"
+                                            class="btn btn-warning shadow btn-xs sharp mr-1">
+                                            <i class="flaticon-381-photo-camera-1"></i>
+                                        </a>
+                                        </span>
+
+                                        <div id="modaladdproduk{{ $prod->id }}" class="modal fade bd-example-modal-lg" tabindex="-1" role="dialog" aria-hidden="true">
+                                            <div class="modal-dialog modal-lg">
+                                                <div class="modal-content">
+                                                    <div class="modal-header">
+                                                        <h5 class="modal-title">More Detail</h5>
+                                                        <button type="button" class="close" data-dismiss="modal"><span>&times;</span>
+                                                        </button>
+                                                    </div>
+                                                    <div class="modal-body">
+                                                        
+                                                        
+                                                        <table >
+                                                            <thead>
+                                                                <tr>
+                                                                    <!-- <th>Deleted At</th>
+                                                                    <th>Created At</th>
+                                                                    <th>Updated At</th> -->
+                                                                </tr>
+                                                            </thead>
+
+                                                            <tbody>
+                                                                <center>
+                                                                    <p><strong>ID Produk : </strong><span>{{ $prod->id }}</span></p>
+                                                                    <p><span>{{ $prod->nama_kategori }}</span></p>
+                                                                    <p><span>{{ $prod->nama_produk }}</span></p><br>
+
+                                                                   <div class="compose-content">
+                                                                        <h5 class="mb-4"><i class="fa fa-paperclip"></i> Attatchment</h5>
+                                                                        <form action="{{ url( '/dropzone/store/' . $prod -> id ) }}" method="post" enctype="multipart/form-data" class="dropzone" id="dropzone">
+                                                                           {{csrf_field()}}
+                                                                            <div class="fallback">
+                                                                                <input name="file" type="file" multiple/>
+
+                                                                            </div>
+                                                                        </form>
+                                                                    </div>
+
+                                                                </center>
+                                                                
+                                                                <tr>
+                        
+                                                                  <!-- <td>{{ $prod->deleted_at }}</td>
+                                                                  <td>{{ $prod->created_at }}</td>
+                                                                  <td>{{ $prod->updated_at }}</td> -->
                                                                   
                                                                 </tr>
                                                                      

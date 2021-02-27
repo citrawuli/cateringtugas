@@ -54,7 +54,7 @@ class SuperAdminController extends Controller
             ->leftJoin('role_users', 'users.id', '=', 'role_users.user_id')
             ->leftJoin('roles', 'role_users.role_id', '=', 'roles.id')
             ->select('users.id', 'users.name','users.email','users.created_at','role_name', 'role_users.updated_at')
-            ->get();
+            ->whereNull('users.deleted_at')->get();
         $page_title = 'User Table';
         $page_description = 'Some description for the page';
         $logo = "teamo/images/aisyacatering_kontak_logo.png";
@@ -79,12 +79,12 @@ class SuperAdminController extends Controller
             'password' => ['required', 'string', 'min:8', 'confirmed'],
         ],
         [
-            'name.required' => 'Please enter your Username',
-            'email.required' => 'Please enter your Email',
-            'password.required' => 'Please enter your Password',
-            'email.unique' => 'This Email is already exist',
-            'password.min' => 'Password length Must be greater than 8 characters',
-            'password.confirmed' => 'Password Confirmation should match the Password',
+            'name.required' => 'Mohon mengisi nama pengguna',
+            'email.required' => 'Mohon mengisi email pengguna',
+            'password.required' => 'Mohon mengisi password pengguna',
+            'email.unique' => 'Email ini sudah ada',
+            'password.min' => 'Password harus lebih panjang dari 8 karakter',
+            'password.confirmed' => 'Konfirmasi password harus sama dengan password',
         ]
         );
 
@@ -95,7 +95,7 @@ class SuperAdminController extends Controller
             'password' => Hash::make($request->password),
         ]);
     
-        Session::flash('message', "Data user berhasil ditambahkan");
+        Session::flash('message', "Data pengguna berhasil ditambahkan");
         return Redirect::back();
     }
 
@@ -116,9 +116,9 @@ class SuperAdminController extends Controller
             'role_id' => ['required'],
         ],
         [
-            'user_id.required' => 'Column User can not be empty',
-            'role_id.required' => 'Column Role can not be empty',
-            'user_id.unique' => 'This user already has a role',
+            'user_id.required' => 'Kolom pengguna harus diisi',
+            'role_id.required' => 'Kolom hak akses harus diisi',
+            'user_id.unique' => 'Pengguna bersangkutan telah memiliki peran/hak akses',
         ]
         );
 
@@ -129,7 +129,7 @@ class SuperAdminController extends Controller
             'updated_at' => \Carbon\Carbon::now()  
         ]);
     
-        Session::flash('message', "Data role user berhasil ditambahkan");
+        Session::flash('message', "Data peran/hak akses pengguna berhasil ditambahkan");
         return Redirect::back();
     }
 
@@ -143,7 +143,7 @@ class SuperAdminController extends Controller
             $user = DB::table('users')->where('users.id', $id)
                 ->first();
         } catch (\ErrorException $e) {
-            return back()->withError("You cannot edit user role. This user doesn't have a role.");
+            return back()->withError("Anda tidak dapat mengedit pengguna bersangkutan karena pengguna tidak memiliki peran/hak akses.");
         }
 
 
@@ -170,12 +170,73 @@ class SuperAdminController extends Controller
         $model->role_id = $request->input('role');
         $model->touch();
         $model->save();
-        Session::flash('message', "Data role user berhasil diubah");
+        Session::flash('message', "Data peran/hak akses pengguna berhasil diubah");
+        return Redirect::back();
+    }
+
+    public function deleteuser($id)
+    {
+        $model = user::find($id);
+        $model->delete();
+
+        Session::flash('message', "Data pengguna {$model->name} berhasil dihapus");
+        return Redirect::back();
+    }
+
+    public function trasheduser()
+    {
+        // mengampil data  yang sudah dihapus
+        $model = user::onlyTrashed()->get();
+
+        $page_title = 'Trashed User Table';
+        $page_description = 'Some description for the page';
+        $logo = "teamo/images/aisyacatering_kontak_logo.png";
+        $logoText = "teamo/images/aisya-catering-logo3.png";
+        $action = __FUNCTION__;
+        return view('viewSuperAdmin.tableTrashedUser', compact('model', 'page_title', 'page_description','action','logo','logoText'));
+    }
+
+    public function restoreuser($id)
+    {
+        $model = user::onlyTrashed()->where('id',$id);
+        $model->restore();
+
+        Session::flash('message', "Data pengguna berhasil dikembalikan");
+        return Redirect::back();
+    }
+
+    public function deletepermanentuser($id)
+    {
+        // hapus permanen data 
+        $model = user::onlyTrashed()->where('id',$id);
+        $model->forceDelete();
+ 
+        Session::flash('message', "Data pengguna berhasil dihapus permanen");
+        return Redirect::back();
+    }
+
+    public function restorealluser()
+    {
+            
+        $model = user::onlyTrashed();
+        $model->restore();
+ 
+        Session::flash('message', "Semua data pengguna berhasil dikembalikan");
+        return Redirect::back();
+    }
+
+    public function deletepermanentalluser()
+    {
+        // hapus permanen semua data  yang sudah dihapus
+        $model = user::onlyTrashed();
+        $model->forceDelete();
+ 
+        Session::flash('message', "Semua data pengguna berhasil dihapus permanen");
         return Redirect::back();
     }
 
     public function viewcategorytable(){
-        $category = DB::table('kategori_produk')->get();
+        $category = DB::table('kategori_produk')->whereNull('deleted_at')->get();
         $page_title = 'Category Table';
         $page_description = 'Some description for the page';
         $logo = "teamo/images/aisyacatering_kontak_logo.png";
@@ -200,9 +261,9 @@ class SuperAdminController extends Controller
             'category_name' => ['required', 'string', 'max:25', 'unique:kategori_produk,nama_kategori'],
         ],
         [
-            'category_name.required' => 'Please enter Category Name',
-            'category_name.unique' => 'This Category is already exist',
-            'category_name.max' => 'Category Name Must below 25 characters',
+            'category_name.required' => 'Mohon mengisi nama kategori',
+            'category_name.unique' => 'Kategori ini sudah ada',
+            'category_name.max' => 'Panjang nama kategori harus di bawah 25 karakter',
         ]
         );
 
@@ -236,9 +297,9 @@ class SuperAdminController extends Controller
             'category_name' => ['required', 'string', 'max:25', 'unique:kategori_produk,nama_kategori'],
         ],
         [
-            'category_name.required' => 'Please enter Category Name',
-            'category_name.unique' => 'This Category is already exist',
-            'category_name.max' => 'Category Name Must below 25 characters',
+            'category_name.required' => 'Mohon mengisi nama pengguna',
+            'category_name.unique' => 'Kategori ini sudah ada',
+            'category_name.max' => 'Panjang nama kategori harus dibawah 25 karakter',
         ]
         );
 
@@ -252,11 +313,62 @@ class SuperAdminController extends Controller
 
     public function deletecategory($id)
     {
-        // menghapus data berdasarkan id yang dipilih
-        DB::table('kategori_produk')->where('id',$id)->delete();
-        
-    
-        Session::flash('message', "Data kategori berhasil dihapus");
+        $model = kategoriProduk::find($id);
+        $model->delete();
+
+        Session::flash('message', "Data kategori {$model->nama_kategori} berhasil dihapus");
+        return Redirect::back();
+    }
+
+    public function trashedcategory()
+    {
+        // mengampil data  yang sudah dihapus
+        $model = kategoriProduk::onlyTrashed()->get();
+
+        $page_title = 'Trashed Category Table';
+        $page_description = 'Some description for the page';
+        $logo = "teamo/images/aisyacatering_kontak_logo.png";
+        $logoText = "teamo/images/aisya-catering-logo3.png";
+        $action = __FUNCTION__;
+        return view('viewSuperAdmin.tableTrashedCategory', compact('model', 'page_title', 'page_description','action','logo','logoText'));
+    }
+
+    public function restorecategory($id)
+    {
+        $model = kategoriProduk::onlyTrashed()->where('id',$id);
+        $model->restore();
+
+        Session::flash('message', "Data kategori berhasil dikembalikan");
+        return Redirect::back();
+    }
+
+    public function deletepermanentcategory($id)
+    {
+        // hapus permanen data 
+        $model = kategoriProduk::onlyTrashed()->where('id',$id);
+        $model->forceDelete();
+ 
+        Session::flash('message', "Data kategori berhasil dihapus permanen");
+        return Redirect::back();
+    }
+
+    public function restoreallcategory()
+    {
+            
+        $model = kategoriProduk::onlyTrashed();
+        $model->restore();
+ 
+        Session::flash('message', "Semua data kategori berhasil dikembalikan");
+        return Redirect::back();
+    }
+ 
+    public function deletepermanentallcategory()
+    {
+        // hapus permanen semua data  yang sudah dihapus
+        $model = kategoriProduk::onlyTrashed();
+        $model->forceDelete();
+ 
+        Session::flash('message', "Semua data kategori berhasil dihapus permanen");
         return Redirect::back();
     }
 
@@ -264,7 +376,7 @@ class SuperAdminController extends Controller
         $product = DB::table('produk')
             ->join('kategori_produk', 'produk.id_kategori', '=', 'kategori_produk.id')
             ->select('produk.*','kategori_produk.nama_kategori')
-            ->whereNull('deleted_at')->get();
+            ->whereNull('produk.deleted_at')->get();
         $page_title = 'Product Table';
         $page_description = 'Some description for the page';
         $logo = "teamo/images/aisyacatering_kontak_logo.png";
@@ -272,6 +384,45 @@ class SuperAdminController extends Controller
         $action = __FUNCTION__;
         //dump($barang);        
         return view('viewSuperAdmin.tableProduct', compact('product', 'page_title', 'page_description','action','logo','logoText'));
+    }
+
+    public function viewproductgalerydropzone()
+    {
+        $files = scandir(public_path('images'));
+        $data = [];
+        foreach ($files as $row) {
+            if ($row != '.' && $row != '..') {
+                $data[] = [
+                    'name' => explode('.', $row)[0],
+                    'url' => asset('images/' . $row)
+                ];
+            }
+        }
+        return view('viewSuperAdmin.tableProduct', compact('data'));
+    }
+    
+    public function dropzoneStore(Request $request, $id)
+    {
+        // $image = $request->file('file');
+   
+        // $imageName = time() . '-' . strtoupper(Str::random(10)) . '.' . $image->extension();
+        // $image->move(public_path('images'), $imageName);
+   
+        // return response()->json(['success'=> $imageName]);
+
+        $produk = produk::find($id);
+
+        //image upload
+        $image=$request->file('file');
+
+        if($image){
+            $imageName=time(). $image->getClientOriginalName();
+            $image->move(public_path('images'),$imageName);
+            $imagePath= "/images/$imageName";
+            $produk->images()->create(['image_path'=>$imagePath]);
+        }
+
+        return "done";
     }
 
     public function viewproductforminput(){
@@ -288,18 +439,18 @@ class SuperAdminController extends Controller
         $validator = $request->validate([
             'category_name' => ['required'],
             'product_name' => ['required', 'string', 'max:50', 'unique:produk,nama_produk'],
-            'product_type' => ['max:50'],
-            'product_desc' => ['max:190'],
+            'product_type' => ['max:20'],
+            'product_desc' => ['max:150'],
             'product_price' => ['required'],
         ],
         [
-            'category_name.required' => 'Please select Category',
-            'product_name.required' => 'Please enter Product Name',
-            'product_name.unique' => 'This Product is already exist',
-            'product_name.max' => 'Product Name Must below 50 characters',
-            'product_type.max' => 'Product Type Must below 50 characters',
-            'product_desc.max' => 'Product Desc Must below 190 characters',
-            'product_price.required' => 'Please enter Product Price',
+            'category_name.required' => 'Mohon memilih nama kategori',
+            'product_name.required' => 'Mohon mengisi nama produk',
+            'product_name.unique' => 'Produk ini sudah ada',
+            'product_name.max' => 'Nama produk harus dibawah 50 karakter',
+            'product_type.max' => 'Tipe produk harus dibawah 20 karakter',
+            'product_desc.max' => 'Deskripsi produk harus dibawah 150 karakter',
+            'product_price.required' => 'Mohon mengisi harga produk',
             
         ]
         );
@@ -315,7 +466,7 @@ class SuperAdminController extends Controller
             'updated_at' => \Carbon\Carbon::now(), 
         ]);
 
-        Session::flash('message', "Data Produk berhasil ditambahkan");
+        Session::flash('message', "Data produk berhasil ditambahkan");
         return Redirect::back();
     }
 
@@ -340,17 +491,17 @@ class SuperAdminController extends Controller
        $validator = $request->validate([
             'category_name' => ['required'],
             'product_name' => ['required', 'string', 'max:50'],
-            'product_type' => ['max:50'],
-            'product_desc' => ['max:190'],
+            'product_type' => ['max:20'],
+            'product_desc' => ['max:150'],
             'product_price' => ['required'],
         ],
         [
-            'category_name.required' => 'Please select Category',
-            'product_name.required' => 'Please enter Product Name',
-            'product_name.max' => 'Product Name Must below 50 characters',
-            'product_type.max' => 'Product Type Must below 50 characters',
-            'product_desc.max' => 'Product Desc Must below 190 characters',
-            'product_price.required' => 'Please enter Product Price',
+            'category_name.required' => 'Mohon memilih nama kategori',
+            'product_name.required' => 'Mohon mengisi nama produk',
+            'product_name.max' => 'Nama produk harus dibawah 50 karakter',
+            'product_type.max' => 'Tipe produk harus dibawah 20 karakter',
+            'product_desc.max' => 'Deskripsi produk harus dibawah 150 karakter',
+            'product_price.required' => 'Mohon mengisi harga produk',
             
         ]
         );
@@ -363,7 +514,7 @@ class SuperAdminController extends Controller
         $model->harga_produk = $request->input('product_price');
         $model->touch();
         $model->save();
-        Session::flash('message', "Data Produk berhasil diubah");
+        Session::flash('message', "Data produk berhasil diubah");
         return Redirect::back();
     }
 
@@ -372,7 +523,7 @@ class SuperAdminController extends Controller
         $model = produk::find($id);
         $model->delete();
 
-        Session::flash('message', "Data Produk {$model->nama_produk} berhasil dihapus");
+        Session::flash('message', "Data produk {$model->nama_produk} berhasil dihapus");
         return Redirect::back();
     }
 
@@ -394,7 +545,7 @@ class SuperAdminController extends Controller
         $model = produk::onlyTrashed()->where('id',$id);
         $model->restore();
 
-        Session::flash('message', "Data Produk berhasil dikembalikan");
+        Session::flash('message', "Data produk berhasil dikembalikan");
         return Redirect::back();
     }
 
@@ -404,7 +555,7 @@ class SuperAdminController extends Controller
         $model = produk::onlyTrashed()->where('id',$id);
         $model->forceDelete();
  
-        Session::flash('message', "Data Produk berhasil dihapus permanen");
+        Session::flash('message', "Data produk berhasil dihapus permanen");
         return Redirect::back();
     }
 
@@ -414,22 +565,73 @@ class SuperAdminController extends Controller
         $model = produk::onlyTrashed();
         $model->restore();
  
-        Session::flash('message', "Semua Data Produk berhasil dikembalikan");
+        Session::flash('message', "Semua data produk berhasil dikembalikan");
         return Redirect::back();
     }
-
+ 
     public function deletepermanentallproduct()
     {
         // hapus permanen semua data  yang sudah dihapus
         $model = produk::onlyTrashed();
         $model->forceDelete();
  
-        Session::flash('message', "Semua Data Produk berhasil dihapus permanen");
+        Session::flash('message', "Semua data produk berhasil dihapus permanen");
         return Redirect::back();
     }
 
+    public function viewpemesanantable(){
+        $pemesanan = DB::table('users')
+            ->join('pemesanan', 'pemesanan.user_id', '=', 'users.id')
+            ->leftJoin('detailtransaksi', 'pemesanan.id', '=', 'detailtransaksi.id_pemesanan')
+            ->leftJoin('produk', 'detailtransaksi.id_produk', '=', 'produk.id')
+            ->select('pemesanan.*','users.name', 'produk.id as produk_id', 'detailtransaksi.id_produk as detail_idproduk', 'detailtransaksi.id_pemesanan as detail_idpemesanan')
+            ->whereNull('pemesanan.deleted_at')->get();
+        $page_title = 'Order Request Table';
+        $page_description = 'Some description for the page';
+        $logo = "teamo/images/aisyacatering_kontak_logo.png";
+        $logoText = "teamo/images/aisya-catering-logo3.png";
+        $action = __FUNCTION__;
+        //dump($barang);        
+        return view('viewSuperAdmin.tableRequestPemesanan', compact('pemesanan', 'page_title', 'page_description','action','logo','logoText'));
+    }
 
+    public function viewformpemesanan(){
+        $users = DB::table('users')->get();
+        $produk = DB::table('produk')->get();
+        $page_title = 'Add Category Form';
+        $page_description = 'Some description for the page';
+        $logo = "teamo/images/aisyacatering_kontak_logo.png";
+        $logoText = "teamo/images/aisya-catering-logo3.png";
+        $action = __FUNCTION__;
+        return view('viewSuperAdmin.addpemesananform', compact('users', 'produk', 'page_title', 'page_description','action','logo','logoText'));
+    }
 
+    public function loadDataUser(Request $request)
+    {
+        if ($request->has('q')) {
+            $cariuser = $request->q;
+            $data = DB::table('users')->select('id', 'name')->where('name', 'LIKE', '%$cariuser%')->get();
+            return response()->json($data);
+        }
+        return response()->json($data);
+    }
+
+    public function loadDataProduk(Request $request)
+    {
+        $produk = [];
+
+        if($request->has('q')){
+            $search = $request->q;
+            $produk =produk::select("id", "name_produk")
+                    ->where('name_produk', 'LIKE', "%$search%")
+                    ->get();
+        }
+        return response()->json($produk);
+    }
+
+    public function getdataproduk($id_produk){
+        echo json_encode(DB::table('produk')->where('id', $id_produk)->get());
+    }
 
 
 

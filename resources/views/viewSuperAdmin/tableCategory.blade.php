@@ -5,14 +5,14 @@
     <div class="row page-titles mx-0">
         <div class="col-sm-6 p-md-0">
             <div class="welcome-text">
-                <h4>Hi, welcome back!</h4>
-                <span>Category Table</span>
+                <h4>Hi, selamat datang!</h4>
+                <span>Daftar Kategori</span>
             </div>
         </div>
         <div class="col-sm-6 p-md-0 justify-content-sm-end mt-2 mt-sm-0 d-flex">
             <ol class="breadcrumb">
                 <li class="breadcrumb-item"><a href="javascript:void(0)">Table</a></li>
-                <li class="breadcrumb-item active"><a href="javascript:void(0)">Category Table</a></li>
+                <li class="breadcrumb-item active"><a href="javascript:void(0)">Daftar Kategori</a></li>
             </ol>
         </div>
     </div>
@@ -30,7 +30,8 @@
                 </div>
                 <div class="card-body mb-0">
                     <!-- <button type="button" class="btn light btn-danger" data-toggle="modal" data-target="#exampleModalCenter">Add User</button> -->
-                    <a href="{!! url('/ViewFormCategory'); !!}" class="btn light btn-danger">Add Category</a>
+                    <a href="{!! url('/ViewFormCategory'); !!}" class="btn light btn-danger">Tambah Kategori</a>
+                    <a href="{{ url('/TrashedCategory')}}" class="btn btn-primary light btn-card"><i class="fa fa-trash" style="margin-right: 10px;"></i>Lihat Tong Sampah</a> 
                 </div>
             </div>
         </div>
@@ -51,7 +52,7 @@
             <br>
             <div class="card">
                 <div class="card-header text-white bg-danger">
-                    <h4 class="card-title">Category Table</h4>
+                    <h4 class="card-title">Daftar Kategori</h4>
                 </div>
                 <div class="card-body">
                     <div class="table-responsive">
@@ -59,7 +60,7 @@
                             <thead>
                                 <tr>
                                     <th>ID</th>
-                                    <th>Category Name</th>
+                                    <th>Nama Kategori</th>
                                     <th>Action</th>
                                 </tr>
                             </thead>
@@ -71,32 +72,9 @@
                                   <td>
                                     <div class="d-flex">
                                         
-                                        <a href="{{ url( '/EditCategory/' . $cat->id ) }}" class="btn btn-primary shadow btn-xs sharp mr-1" data-toggle="tooltip" data-placement="top" title="Edit kategori" id="editt"><i class="fa fa-pencil"></i></a>
+                                        <a href="{{ url( '/EditCategory/' . $cat->id ) }}" class="btn btn-primary shadow btn-xs sharp mr-1" data-toggle="tooltip" data-placement="top" title="Edit Kategori" id="editt"><i class="fa fa-pencil"></i></a>
                                         
-                                        <span data-placement="top" data-toggle="tooltip2"  title="Delete Kategori">
-                                            <a href="#exampleModalCenter{{ $cat->id }}" class="btn btn-danger shadow btn-xs sharp" data-toggle="modal" data-target="#exampleModalCenter{{ $cat->id }}" ><i class="fa fa-trash"></i></a>
-                                        </span>
-
-
-                                            <div class="modal fade" id="exampleModalCenter{{ $cat->id }}">
-                                                <div class="modal-dialog modal-dialog-centered" role="document">
-                                                    <div class="modal-content">
-                                                        <div class="modal-header">
-                                                            <h5 class="modal-title">Delete Record</h5>
-                                                            <button type="button" class="close" data-dismiss="modal"><span>&times;</span>
-                                                            </button>
-                                                        </div>
-                                                        <div class="modal-body">
-                                                            <p>Apakah Anda yakin ingin menghapus permanen record <strong>"{{ $cat->nama_kategori }}"</strong> dengan id <strong>"{{ $cat->id }}"?</p>
-                                                        </div>
-                                                        <div class="modal-footer">
-                                                            <button type="button" class="btn btn-secondary light" data-dismiss="modal">Close</button>
-                                                            <a href="{{ url( '/DeleteCategory/' . $cat->id ) }}" class="btn btn-danger light">Delete</a>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-
+                                        <a href="{{ url( '/DeleteCategory/' . $cat->id ) }}" class="btn btn-danger shadow btn-xs sharp" data-toggle="tooltip2" data-placement="top" title="Soft Delete Kategori"><i class="fa fa-trash"></i></a>
                                     </div>
                                     
                                
@@ -106,7 +84,7 @@
                             </tbody>
                         </table>
                     </div>
-                </div>
+                </div>  
             </div>
         </div>
 

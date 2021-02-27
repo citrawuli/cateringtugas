@@ -11,6 +11,7 @@ class role_users extends Model
 
     protected $table = 'role_users';
     protected $primaryKey = 'user_id';
+    public $incrementing = false;
 
     /**
      * The attributes that are mass assignable.
@@ -19,6 +20,8 @@ class role_users extends Model
      */
     protected $fillable = [
         'role_id',
+        'user_id',//addthistodbv2
+        'created_at',
         'updated_at',
     ];
 

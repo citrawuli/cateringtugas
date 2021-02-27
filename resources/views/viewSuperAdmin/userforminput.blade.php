@@ -5,14 +5,14 @@
     <div class="row page-titles mx-0">
         <div class="col-sm-6 p-md-0">
             <div class="welcome-text">
-                <h4>Hi, welcome back!</h4>
-                <span>Add User Form</span>
+                <h4>Hi, selamat datang!</h4>
+                <span>Formulir Tambah Pengguna</span>
             </div>
         </div>
         <div class="col-sm-6 p-md-0 justify-content-sm-end mt-2 mt-sm-0 d-flex">
             <ol class="breadcrumb">
-                <li class="breadcrumb-item"><a href="{!! url('/UserTable'); !!}">User Table</a></li>
-                <li class="breadcrumb-item active"><a href="javascript:void(0)">User Form</a></li>
+                <li class="breadcrumb-item"><a href="{!! url('/UserTable'); !!}">Tabel Pengguna</a></li>
+                <li class="breadcrumb-item active"><a href="javascript:void(0)">Formulir Pengguna</a></li>
             </ol>
         </div>
     </div>
@@ -42,7 +42,7 @@
 	<div class="col-lg-12">
 		<div class="card">
             <div class="card-header">
-                <h4 class="card-title">Add User</h4>
+                <h4 class="card-title">Tambah Pengguna</h4>
             </div>
             <div class="card-body">
                 <div class="basic-form">
@@ -50,7 +50,7 @@
                         @csrf
 
                         <div class="form-group row">
-                            <label for="name" class="col-sm-3 col-form-label">{{ __('Name') }}</label>
+                            <label for="name" class="col-sm-3 col-form-label">{{ __('Nama (*)') }}</label>
 
                             <div class="col-md-6">
                                 <input id="name" type="text" class="form-control @error('name') is-invalid @enderror" name="name" value="{{ old('name') }}" required autocomplete="name" autofocus placeholder="Name">
@@ -64,7 +64,7 @@
                         </div>
 
                         <div class="form-group row">
-                            <label for="email" class="col-sm-3 col-form-label">{{ __('E-Mail Address') }}</label>
+                            <label for="email" class="col-sm-3 col-form-label">{{ __('Alamat E-mail (*)') }}</label>
 
                             <div class="col-md-6">
                                 <input id="email" type="email" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}" required autocomplete="email" placeholder="Email">
@@ -78,7 +78,7 @@
                         </div>
 
                         <div class="form-group row">
-                            <label for="password" class="col-sm-3 col-form-label">{{ __('Password') }}</label>
+                            <label for="password" class="col-sm-3 col-form-label">{{ __('Password (*)') }}</label>
 
                             <div class="col-md-6">
                                 <input id="password" type="password" class="form-control @error('password') is-invalid @enderror" name="password" required autocomplete="new-password" placeholder="Password">
@@ -92,7 +92,7 @@
                         </div>
 
                         <div class="form-group row">
-                            <label for="password-confirm" class="col-sm-3 col-form-label">{{ __('Confirm Password') }}</label>
+                            <label for="password-confirm" class="col-sm-3 col-form-label">{{ __('Konfirmasi Password (*)') }}</label>
 
                             <div class="col-md-6">
                                 <input id="password-confirm" type="password" class="form-control" name="password_confirmation" required autocomplete="new-password" placeholder="Confirm Password">
@@ -102,7 +102,7 @@
                         <div class="form-group row mb-0">
                             <div class="col-md-6 offset-md-4">
                                 <button type="submit" class="btn btn-primary">
-                                    {{ __('Add User') }}
+                                    {{ __('Tambah Pengguna') }}
                                 </button>
                             </div>
                         </div>

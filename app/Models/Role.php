@@ -9,6 +9,10 @@ class Role extends Model
 {
     use HasFactory;
 
+    protected $table = 'roles';
+    public $incrementing = false;
+    public $keyType = 'string';
+    
     public function users(){
       	return $this->belongsToMany(User::class, 'role_users');
   	}

@@ -610,7 +610,7 @@
                             <li class="nav-item dropdown header-profile">
                                 <a class="nav-link" href="#" role="button" data-toggle="dropdown">
 									<div class="header-info">
-										<span>Hello, <strong>{{ Auth::user()->name }}</strong></span>
+										<span>Halo, <strong>{{ Auth::user()->name }}</strong></span>
 									</div>
                                     <img src="{{ asset('davur/images/profile/pic1.jpg') }}" width="20" alt=""/>
                                 </a>

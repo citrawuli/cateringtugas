@@ -31,7 +31,7 @@
                                 </div>
                                 <div class="profile-info">
 									<div class="profile-photo">
-										<img src="{{ asset('images/profile/profile.png') }}" class="img-fluid rounded-circle" alt="">
+										<img src="{{ asset('davur/images/profile/profile.png') }}" class="img-fluid rounded-circle" alt="">
 									</div>
 									<div class="profile-details">
 										<div class="profile-name px-3 pt-2">
@@ -82,7 +82,7 @@
                                 </div>
                                 <div class="profile-blog mb-5">
                                     <h5 class="text-primary d-inline">Today Highlights</h5><a href="javascript:void()" class="pull-right f-s-16">More</a>
-                                    <img src="{{ asset('images/profile/1.jpg') }}" alt="" class="img-fluid mt-4 mb-4 w-100">
+                                    <img src="{{ asset('davur/images/profile/1.jpg') }}" alt="" class="img-fluid mt-4 mb-4 w-100">
                                     <h4>Darwin Creative Agency Theme</h4>
                                     <p class="mb-0">A small river named Duden flows by their place and supplies it with the necessary regelialia. It is a paradisematic country, in which roasted parts of sentences fly into your mouth.</p>
                                 </div>
@@ -91,37 +91,37 @@
                                     <div class="row mt-4">
                                         <div class="col-lg-4 col-xl-4 col-sm-4 col-6 int-col">
                                             <a href="javascript:void()" class="interest-cat">
-                                                <img src="{{ asset('images/profile/2.jpg') }}" alt="" class="img-fluid">
+                                                <img src="{{ asset('davur/images/profile/2.jpg') }}" alt="" class="img-fluid">
                                                 <p>Shopping Mall</p>
                                             </a>
                                         </div>
                                         <div class="col-lg-4 col-xl-4 col-sm-4 col-6 int-col">
                                             <a href="javascript:void()" class="interest-cat">
-                                                <img src="{{ asset('images/profile/3.jpg') }}" alt="" class="img-fluid">
+                                                <img src="{{ asset('davur/images/profile/3.jpg') }}" alt="" class="img-fluid">
                                                 <p>Photography</p>
                                             </a>
                                         </div>
                                         <div class="col-lg-4 col-xl-4 col-sm-4 col-6 int-col">
                                             <a href="javascript:void()" class="interest-cat">
-                                                <img src="{{ asset('images/profile/4.jpg') }}" alt="" class="img-fluid">
+                                                <img src="{{ asset('davur/images/profile/4.jpg') }}" alt="" class="img-fluid">
                                                 <p>Art &amp; Gallery</p>
                                             </a>
                                         </div>
                                         <div class="col-lg-4 col-xl-4 col-sm-4 col-6 int-col">
                                             <a href="javascript:void()" class="interest-cat">
-                                                <img src="{{ asset('images/profile/2.jpg') }}" alt="" class="img-fluid">
+                                                <img src="{{ asset('davur/images/profile/2.jpg') }}" alt="" class="img-fluid">
                                                 <p>Visiting Place</p>
                                             </a>
                                         </div>
                                         <div class="col-lg-4 col-xl-4 col-sm-4 col-6 int-col">
                                             <a href="javascript:void()" class="interest-cat">
-                                                <img src="{{ asset('images/profile/3.jpg') }}" alt="" class="img-fluid">
+                                                <img src="{{ asset('davur/images/profile/3.jpg') }}" alt="" class="img-fluid">
                                                 <p>Shopping</p>
                                             </a>
                                         </div>
                                         <div class="col-lg-4 col-xl-4 col-sm-4 col-6 int-col">
                                             <a href="javascript:void()" class="interest-cat">
-                                                <img src="{{ asset('images/profile/4.jpg') }}" alt="" class="img-fluid">
+                                                <img src="{{ asset('davur/images/profile/4.jpg') }}" alt="" class="img-fluid">
                                                 <p>Biking</p>
                                             </a>
                                         </div>
@@ -130,21 +130,21 @@
                                 <div class="profile-news">
                                     <h5 class="text-primary d-inline">Our Latest News</h5>
                                     <div class="media pt-3 pb-3">
-                                        <img src="{{ asset('images/profile/5.jpg') }}" alt="image" class="mr-3 rounded" width="75">
+                                        <img src="{{ asset('davur/images/profile/5.jpg') }}" alt="image" class="mr-3 rounded" width="75">
                                         <div class="media-body">
                                             <h5 class="m-b-5">Collection of textile samples</h5>
                                             <p class="mb-0">I shared this on my fb wall a few months back, and I thought.</p>
                                         </div>
                                     </div>
                                     <div class="media pt-3 pb-3">
-                                        <img src="{{ asset('images/profile/6.jpg') }}" alt="image" class="mr-3 rounded" width="75">
+                                        <img src="{{ asset('davur/images/profile/6.jpg') }}" alt="image" class="mr-3 rounded" width="75">
                                         <div class="media-body">
                                             <h5 class="m-b-5">Collection of textile samples</h5>
                                             <p class="mb-0">I shared this on my fb wall a few months back, and I thought.</p>
                                         </div>
                                     </div>
                                     <div class="media pt-3 pb-3">
-                                        <img src="{{ asset('images/profile/7.jpg') }}" alt="image" class="mr-3 rounded" width="75">
+                                        <img src="{{ asset('davur/images/profile/7.jpg') }}" alt="image" class="mr-3 rounded" width="75">
                                         <div class="media-body">
                                             <h5 class="m-b-5">Collection of textile samples</h5>
                                             <p class="mb-0">I shared this on my fb wall a few months back, and I thought.</p>
@@ -176,7 +176,7 @@
                                                         <a href="javascript:void()" class="btn btn-primary light mr-1 px-3"><i class="fa fa-camera"></i> </a><a href="javascript:void()" class="btn btn-primary">Post</a>
                                                     </div>
                                                     <div class="profile-uoloaded-post border-bottom-1 pb-5">
-                                                        <img src="{{ asset('images/profile/8.jpg') }}" alt="" class="img-fluid">
+                                                        <img src="{{ asset('davur/images/profile/8.jpg') }}" alt="" class="img-fluid">
                                                         <a class="post-title" href="javascript:void()">
                                                             <h4>Collection of textile samples lay spread</h4>
                                                         </a>
@@ -188,7 +188,7 @@
                                                                     class="fa fa-reply"></i></span>Reply</button>
                                                     </div>
                                                     <div class="profile-uoloaded-post border-bottom-1 pb-5">
-                                                        <img src="{{ asset('images/profile/9.jpg') }}" alt="" class="img-fluid">
+                                                        <img src="{{ asset('davur/images/profile/9.jpg') }}" alt="" class="img-fluid">
                                                         <a class="post-title" href="javascript:void()">
                                                             <h4>Collection of textile samples lay spread</h4>
                                                         </a>
@@ -200,7 +200,7 @@
                                                                     class="fa fa-reply"></i></span>Reply</button>
                                                     </div>
                                                     <div class="profile-uoloaded-post pb-5">
-                                                        <img src="{{ asset('images/profile/8.jpg') }}" alt="" class="img-fluid">
+                                                        <img src="{{ asset('davur/images/profile/8.jpg') }}" alt="" class="img-fluid">
                                                         <a class="post-title" href="javascript:void()">
                                                             <h4>Collection of textile samples lay spread</h4>
                                                         </a>

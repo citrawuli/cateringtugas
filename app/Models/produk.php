@@ -33,4 +33,9 @@ class produk extends Model
     {
         return $this->belongsTo(kategoriProduk::class);
     } 
+
+    public function images()
+    {
+        return $this->hasMany(galeriProduk::class);
+    }
 }

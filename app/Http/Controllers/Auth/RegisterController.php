@@ -51,8 +51,8 @@ class RegisterController extends Controller
     protected function validator(array $data)
     {
         return Validator::make($data, [
-            'name' => ['required', 'string', 'max:255'],
-            'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
+            'name' => ['required', 'string', 'max:50'],
+            'email' => ['required', 'string', 'email', 'max:50', 'unique:users'],
             'password' => ['required', 'string', 'min:8', 'confirmed'],
         ]);
     }
@@ -65,16 +65,35 @@ class RegisterController extends Controller
      */
     protected function create(array $data)
     {
+        $role = Role::where('role_name', '=', 'user')->firstOrFail();
         $user = User::create([
             'name' => $data['name'],
             'email' => $data['email'],
             'password' => Hash::make($data['password']),
         ]);
 
-        $role = Role::where('role_name', '=', 'user')->firstOrFail();
-        $user->roles()->attach($role);
+        // $user_id = DB::table('users')
+        //         ->latest()
+        //         ->first();
+        $user_id = User::latest('id')->first();
+        $user_id->roles()->attach($role);
+        // $customer = new User();
+        // $customer->name = $data['name'];
+        // $customer->email = $data['email'];
+        // $customer->password  = Hash::make($data['password']);
+        // $customer->save();
+        // $customer->roles()->attach($role);
 
-        return $user;
+        /*
+        IMPORTANT
+        public $incrementing = false; 
+        adding this line to the model IF NOT using increments but trigger
+
+        $user_id = $this->create($data)->id;
+        */
+
+        return $user_id;
+        //return $customer;
     }
 
 }

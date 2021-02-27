@@ -52,13 +52,13 @@
 									<div class="card-body revenue-chart px-3">
 											<div class="d-flex align-items-end pl-3">
 												<div class="mr-4">
-													<h3 class="font-w600 mb-0"><img src="{{ asset('images/svg/ic_stat3.svg') }}" height="22" width="22" class="mr-2 mb-1" alt=""/>
+													<h3 class="font-w600 mb-0"><img src="{{ asset('davur/images/svg/ic_stat3.svg') }}" height="22" width="22" class="mr-2 mb-1" alt=""/>
 														<span class="counter">257</span>k
 													</h3>
 													<small class="text-dark fs-14">Total Sales</small>
 												</div>
 												<div>
-													<h3 class="font-w600 mb-0"><img src="{{ asset('images/svg/ic_stat3.svg') }}" height="22" width="22" class="mr-2 mb-1" alt=""/><span class="counter">1,245</span></h3>
+													<h3 class="font-w600 mb-0"><img src="{{ asset('davur/images/svg/ic_stat3.svg') }}" height="22" width="22" class="mr-2 mb-1" alt=""/><span class="counter">1,245</span></h3>
 													<small class="text-dark fs-14">Avg. Sales per day</small>
 												</div>
 											</div>
@@ -86,7 +86,7 @@
 											<div class="row">
 												<div class="col-md-4 col-xl-4 col-xxl-6 col-sm-6 mb-5">
 													<div class="media mb-4">
-														<a href="{!! url('/ecom-product-detail'); !!}"><img src="{{ asset('images/dish/pic5.jpg') }}" style="width:100%;" class="rounded" alt=""/></a>
+														<a href="{!! url('/ecom-product-detail'); !!}"><img src="{{ asset('davur/images/dish/pic5.jpg') }}" style="width:100%;" class="rounded" alt=""/></a>
 													</div>
 													<div class="info">
 														<h5 class="mb-3"><a class="text-black" href="{!! url('/ecom-product-detail'); !!}">Meidum Spicy Spagethi Italiano</a></h5>
@@ -103,7 +103,7 @@
 												</div>
 												<div class="col-md-4 col-xl-4 col-xxl-6 col-sm-6 mb-5">
 													<div class="media mb-4">
-														<a href="{!! url('/ecom-product-detail'); !!}"><img src="{{ asset('images/dish/pic4.jpg') }}" style="width:100%;" class="rounded" alt=""/></a>
+														<a href="{!! url('/ecom-product-detail'); !!}"><img src="{{ asset('davur/images/dish/pic4.jpg') }}" style="width:100%;" class="rounded" alt=""/></a>
 													</div>
 													<div class="info">
 														<h5 class="text-black mb-3"><a class="text-black" href="{!! url('/ecom-product-detail'); !!}">Pizza Meal for Kids (Small size)</a></h5>
@@ -120,7 +120,7 @@
 												</div>
 												<div class="col-md-4 col-xl-4 col-xxl-6 col-sm-6 mb-5">
 													<div class="media mb-4">
-														<a href="{!! url('/ecom-product-detail'); !!}"><img src="{{ asset('images/dish/pic3.jpg') }}" style="width:100%;" class="rounded" alt=""/></a>
+														<a href="{!! url('/ecom-product-detail'); !!}"><img src="{{ asset('davur/images/dish/pic3.jpg') }}" style="width:100%;" class="rounded" alt=""/></a>
 													</div>
 													<div class="info">
 														<h5 class="text-black mb-3"><a class="text-black" href="{!! url('/ecom-product-detail'); !!}">Meidum Spicy Spagethi Italiano</a></h5>
@@ -137,7 +137,7 @@
 												</div>
 												<div class="col-md-4 col-xl-4 col-xxl-6 col-sm-6 mb-5">
 													<div class="media mb-4">
-														<a href="{!! url('/ecom-product-detail'); !!}"><img src="{{ asset('images/dish/pic2.jpg') }}" style="width:100%;" class="rounded" alt=""/></a>
+														<a href="{!! url('/ecom-product-detail'); !!}"><img src="{{ asset('davur/images/dish/pic2.jpg') }}" style="width:100%;" class="rounded" alt=""/></a>
 													</div>
 													<div class="info">
 														<h5 class="text-black mb-3"><a class="text-black" href="{!! url('/ecom-product-detail'); !!}">Medium Spicy Pizza with Kemangi Leaf</a></h5>
@@ -154,7 +154,7 @@
 												</div>
 												<div class="col-md-4 col-xl-4 col-xxl-6 col-sm-6 mb-5">
 													<div class="media mb-4">
-														<a href="{!! url('/ecom-product-detail'); !!}"><img src="{{ asset('images/dish/pic1.jpg') }}" style="width:100%;" class="rounded" alt=""/></a>
+														<a href="{!! url('/ecom-product-detail'); !!}"><img src="{{ asset('davur/images/dish/pic1.jpg') }}" style="width:100%;" class="rounded" alt=""/></a>
 													</div>
 													<div class="info">
 														<h5 class="text-black mb-3"><a class="text-black" href="{!! url('/ecom-product-detail'); !!}">Tuna soup spinach with himalaya salt</a></h5>
@@ -171,7 +171,7 @@
 												</div>
 												<div class="col-md-4 col-xl-4 col-xxl-6 col-sm-6 mb-5">
 													<div class="media mb-4">
-														<a href="{!! url('/ecom-product-detail'); !!}"><img src="{{ asset('images/dish/pic5.jpg') }}" style="width:100%;" class="rounded" alt=""/></a>
+														<a href="{!! url('/ecom-product-detail'); !!}"><img src="{{ asset('davur/images/dish/pic5.jpg') }}" style="width:100%;" class="rounded" alt=""/></a>
 													</div>
 													<div class="info">
 														<h5 class="text-black mb-3"><a class="text-black" href="{!! url('/ecom-product-detail'); !!}">Tuna soup spinach with himalaya salt</a></h5>
@@ -192,7 +192,7 @@
 											<div class="row">
 												<div class="col-md-4 col-xl-4 col-xxl-6 col-sm-6 mb-5">
 													<div class="media mb-4">
-														<a href="{!! url('/ecom-product-detail'); !!}"><img src="{{ asset('images/dish/pic5.jpg') }}" style="width:100%;" class="rounded" alt=""/></a>
+														<a href="{!! url('/ecom-product-detail'); !!}"><img src="{{ asset('davur/images/dish/pic5.jpg') }}" style="width:100%;" class="rounded" alt=""/></a>
 													</div>
 													<div class="info">
 														<h5 class="text-black mb-3"><a class="text-black" href="{!! url('/ecom-product-detail'); !!}">Meidum Spicy Spagethi Italiano</a></h5>
@@ -209,7 +209,7 @@
 												</div>
 												<div class="col-md-4 col-xl-4 col-xxl-6 col-sm-6 mb-5">
 													<div class="media mb-4">
-														<a href="{!! url('/ecom-product-detail'); !!}"><img src="{{ asset('images/dish/pic4.jpg') }}" style="width:100%;" class="rounded" alt=""/></a>
+														<a href="{!! url('/ecom-product-detail'); !!}"><img src="{{ asset('davur/images/dish/pic4.jpg') }}" style="width:100%;" class="rounded" alt=""/></a>
 													</div>
 													<div class="info">
 														<h5 class="text-black mb-3"><a class="text-black" href="{!! url('/ecom-product-detail'); !!}">Pizza Meal for Kids (Small size)</a></h5>
@@ -226,7 +226,7 @@
 												</div>
 												<div class="col-md-4 col-xl-4 col-xxl-6 col-sm-6 mb-5">
 													<div class="media mb-4">
-														<a href="{!! url('/ecom-product-detail'); !!}"><img src="{{ asset('images/dish/pic3.jpg') }}" style="width:100%;" class="rounded" alt=""/></a>
+														<a href="{!! url('/ecom-product-detail'); !!}"><img src="{{ asset('davur/images/dish/pic3.jpg') }}" style="width:100%;" class="rounded" alt=""/></a>
 													</div>
 													<div class="info">
 														<h5 class="text-black mb-3"><a class="text-black" href="{!! url('/ecom-product-detail'); !!}">Meidum Spicy Spagethi Italiano</a></h5>
@@ -243,7 +243,7 @@
 												</div>
 												<div class="col-md-4 col-xl-4 col-xxl-6 col-sm-6 mb-5">
 													<div class="media mb-4">
-														<a href="{!! url('/ecom-product-detail'); !!}"><img src="{{ asset('images/dish/pic2.jpg') }}" style="width:100%;" class="rounded" alt=""/></a>
+														<a href="{!! url('/ecom-product-detail'); !!}"><img src="{{ asset('davur/images/dish/pic2.jpg') }}" style="width:100%;" class="rounded" alt=""/></a>
 													</div>
 													<div class="info">
 														<h5 class="text-black mb-3"><a class="text-black" href="{!! url('/ecom-product-detail'); !!}">Tuna soup spinach with himalaya salt</a></h5>
@@ -264,7 +264,7 @@
 											<div class="row">
 												<div class="col-md-4 col-xl-4 col-xxl-6 col-sm-6 mb-5">
 													<div class="media mb-4">
-														<a href="{!! url('/ecom-product-detail'); !!}"><img src="{{ asset('images/dish/pic4.jpg') }}" style="width:100%;" class="rounded" alt=""/></a>
+														<a href="{!! url('/ecom-product-detail'); !!}"><img src="{{ asset('davur/images/dish/pic4.jpg') }}" style="width:100%;" class="rounded" alt=""/></a>
 													</div>
 													<div class="info">
 														<h5 class="text-black mb-3"><a class="text-black" href="{!! url('/ecom-product-detail'); !!}">Tuna soup spinach with himalaya salt</a></h5>
@@ -281,7 +281,7 @@
 												</div>
 												<div class="col-md-4 col-xl-4 col-xxl-6 col-sm-6 mb-5">
 													<div class="media mb-4">
-														<a href="{!! url('/ecom-product-detail'); !!}"><img src="{{ asset('images/dish/pic2.jpg') }}" style="width:100%;" class="rounded" alt=""/></a>
+														<a href="{!! url('/ecom-product-detail'); !!}"><img src="{{ asset('davur/images/dish/pic2.jpg') }}" style="width:100%;" class="rounded" alt=""/></a>
 													</div>
 													<div class="info">
 														<h5 class="text-black mb-3"><a class="text-black" href="{!! url('/ecom-product-detail'); !!}">Medium Spicy Pizza with Kemangi Leaf</a></h5>
@@ -329,7 +329,7 @@
 									<div class="card-body p-0 pt-3">
 										<div class="media items-list-1">
 											<span class="number col-1 px-0 align-self-center">#1</span>
-											<a href="{!! url('/ecom-product-detail'); !!}"><img class="img-fluid rounded mr-3" width="85" src="{{ asset('images/dish/pic1.jpg') }}" alt="DexignZone"></a>
+											<a href="{!! url('/ecom-product-detail'); !!}"><img class="img-fluid rounded mr-3" width="85" src="{{ asset('davur/images/dish/pic1.jpg') }}" alt="DexignZone"></a>
 											<div class="media-body col-sm-4 col-6 col-xxl-5 px-0">
 												<h5 class="mt-0 mb-3"><a class="text-black" href="{!! url('/ecom-product-detail'); !!}">Tuna soup spinach with himalaya salt</a></h5>
 												<small class="font-w500"><strong class="text-secondary mr-2">$12.56</strong> <a class="text-primary" href="javascript:void(0);">PIZZA</a></small>
@@ -346,7 +346,7 @@
 										</div>
 										<div class="media items-list-1">
 											<span class="number col-1 px-0 align-self-center">#2</span>
-											<a href="{!! url('/ecom-product-detail'); !!}"><img class="img-fluid rounded mr-3" width="85" src="{{ asset('images/dish/pic2.jpg') }}" alt="DexignZone"></a>
+											<a href="{!! url('/ecom-product-detail'); !!}"><img class="img-fluid rounded mr-3" width="85" src="{{ asset('davur/images/dish/pic2.jpg') }}" alt="DexignZone"></a>
 											<div class="media-body col-sm-4 col-6 col-xxl-5 px-0">
 												<h5 class="mt-0 mb-3 text-black"><a class="text-black" href="{!! url('/ecom-product-detail'); !!}">Tuna soup spinach with himalaya salt</a></h5>
 												<small class="font-w500"><strong class="text-secondary mr-2">$12.56</strong> <a class="text-primary" href="javascript:void(0);">JUICE</a></small>
@@ -363,7 +363,7 @@
 										</div>
 										<div class="media items-list-1">
 											<span class="number col-1 px-0 align-self-center">#3</span>
-											<a href="{!! url('/ecom-product-detail'); !!}"><img class="img-fluid rounded mr-3" width="85" src="{{ asset('images/dish/pic3.jpg') }}" alt="DexignZone"></a>
+											<a href="{!! url('/ecom-product-detail'); !!}"><img class="img-fluid rounded mr-3" width="85" src="{{ asset('davur/images/dish/pic3.jpg') }}" alt="DexignZone"></a>
 											<div class="media-body col-sm-4 col-6 col-xxl-5 px-0">
 												<h5 class="mt-0 mb-3 text-black"><a class="text-black" href="{!! url('/ecom-product-detail'); !!}">Chicken curry special with cucumber</a></h5>
 												<small class="font-w500"><strong class="text-secondary mr-2">$12.56</strong> <a class="text-primary" href="javascript:void(0);">PIZZA</a></small>
@@ -380,7 +380,7 @@
 										</div>
 										<div class="media items-list-1">
 											<span class="number col-1 px-0 align-self-center">#4</span>
-											<a href="{!! url('/ecom-product-detail'); !!}"><img class="img-fluid rounded mr-3" width="85" src="{{ asset('images/dish/pic4.jpg') }}" alt="DexignZone"></a>
+											<a href="{!! url('/ecom-product-detail'); !!}"><img class="img-fluid rounded mr-3" width="85" src="{{ asset('davur/images/dish/pic4.jpg') }}" alt="DexignZone"></a>
 											<div class="media-body col-sm-4 col-6 col-xxl-5 px-0">
 												<h5 class="mt-0 mb-3 text-black"><a class="text-black" href="{!! url('/ecom-product-detail'); !!}">Watermelon juice with ice</a></h5>
 												<small class="font-w500"><strong class="text-secondary mr-2">$12.56</strong> <a class="text-primary" href="javascript:void(0);">PIZZA</a></small>
@@ -397,7 +397,7 @@
 										</div>
 										<div class="media items-list-1">
 											<span class="number col-1 px-0 align-self-center">#5</span>
-											<a href="{!! url('/ecom-product-detail'); !!}"><img class="img-fluid rounded mr-3" width="85" src="{{ asset('images/dish/pic5.jpg') }}" alt="DexignZone"></a>
+											<a href="{!! url('/ecom-product-detail'); !!}"><img class="img-fluid rounded mr-3" width="85" src="{{ asset('davur/images/dish/pic5.jpg') }}" alt="DexignZone"></a>
 											<div class="media-body col-sm-4 col-6 col-xxl-5 px-0">
 												<h5 class="mt-0 mb-3 text-black"><a class="text-black" href="{!! url('/ecom-product-detail'); !!}">Tuna soup spinach with himalaya salt</a></h5>
 												<small class="font-w500"><strong class="text-secondary mr-2">$12.56</strong> <a class="text-primary" href="javascript:void(0);">BURGER</a></small>
@@ -445,7 +445,7 @@
 									<div class="card-body tab-content">
 										<div class="tab-pane fade show active" id="monthly">
 											<div class="media mb-4 items-list-2">
-												<a href="{!! url('/ecom-product-detail'); !!}"><img class="img-fluid rounded mr-3" width="85" src="{{ asset('images/dish/pic5.jpg') }}" alt="DexignZone"></a>
+												<a href="{!! url('/ecom-product-detail'); !!}"><img class="img-fluid rounded mr-3" width="85" src="{{ asset('davur/images/dish/pic5.jpg') }}" alt="DexignZone"></a>
 												<div class="media-body col-6 px-0">
 													<h5 class="mt-0 mb-1"><a class="text-black" href="{!! url('/ecom-product-detail'); !!}">Meidum Spicy Spagethi Italiano</a></h5>
 													<small class="font-w500 mb-3"><a class="text-primary" href="javascript:void(0);"> BURGER</a></small>
@@ -469,7 +469,7 @@
 												</div>
 											</div>
 											<div class="media mb-4 items-list-2">
-												<a href="{!! url('/ecom-product-detail'); !!}"><img class="img-fluid rounded mr-3" width="85" src="{{ asset('images/dish/pic4.jpg') }}" alt="DexignZone"></a>
+												<a href="{!! url('/ecom-product-detail'); !!}"><img class="img-fluid rounded mr-3" width="85" src="{{ asset('davur/images/dish/pic4.jpg') }}" alt="DexignZone"></a>
 												<div class="media-body col-6 px-0">
 													<h5 class="mt-0 mb-1"><a class="text-black" href="{!! url('/ecom-product-detail'); !!}">Pizza Meal for Kids (Small size)</a></h5>
 													<small class="font-w500 mb-3"><a class="text-primary" href="javascript:void(0);"> PIZZA</a></small>
@@ -493,7 +493,7 @@
 												</div>
 											</div>
 											<div class="media mb-4 items-list-2">
-												<a href="{!! url('/ecom-product-detail'); !!}"><img class="img-fluid rounded mr-3" width="85" src="{{ asset('images/dish/pic3.jpg') }}" alt="DexignZone"></a>
+												<a href="{!! url('/ecom-product-detail'); !!}"><img class="img-fluid rounded mr-3" width="85" src="{{ asset('davur/images/dish/pic3.jpg') }}" alt="DexignZone"></a>
 												<div class="media-body col-6 px-0">
 													<h5 class="mt-0 mb-1"><a class="text-black" href="{!! url('/ecom-product-detail'); !!}">Medium Spicy Pizza with Kemangi Leaf</a></h5>
 													<small class="font-w500 mb-3"><a class="text-primary" href="javascript:void(0);"> JUICE</a></small>
@@ -517,7 +517,7 @@
 												</div>
 											</div>
 											<div class="media mb-4 items-list-2">
-												<a href="{!! url('/ecom-product-detail'); !!}"><img class="img-fluid rounded mr-3" width="85" src="{{ asset('images/dish/pic2.jpg') }}" alt="DexignZone"></a>
+												<a href="{!! url('/ecom-product-detail'); !!}"><img class="img-fluid rounded mr-3" width="85" src="{{ asset('davur/images/dish/pic2.jpg') }}" alt="DexignZone"></a>
 												<div class="media-body col-6 px-0">
 													<h5 class="mt-0 mb-1"><a class="text-black" href="{!! url('/ecom-product-detail'); !!}">Tuna soup spinach with himalaya salt</a></h5>
 													<small class="font-w500 mb-3"><a class="text-primary" href="javascript:void(0);"> PIZZA</a></small>
@@ -541,7 +541,7 @@
 												</div>
 											</div>
 											<div class="media items-list-2">
-												<a href="{!! url('/ecom-product-detail'); !!}"><img class="img-fluid rounded mr-3" width="85" src="{{ asset('images/dish/pic1.jpg') }}" alt="DexignZone"></a>
+												<a href="{!! url('/ecom-product-detail'); !!}"><img class="img-fluid rounded mr-3" width="85" src="{{ asset('davur/images/dish/pic1.jpg') }}" alt="DexignZone"></a>
 												<div class="media-body col-6 px-0">
 													<h5 class="mt-0 mb-1"><a class="text-black" href="{!! url('/ecom-product-detail'); !!}">Watermelon juice with ice</a></h5>
 													<small class="font-w500 mb-3"><a class="text-primary" href="javascript:void(0);">BURGER</a></small>
@@ -567,7 +567,7 @@
 										</div>
 										<div class="tab-pane fade" id="weekly">
 											<div class="media mb-4 items-list-2">
-												<a href="{!! url('/ecom-product-detail'); !!}"><img class="img-fluid rounded mr-3" width="85" src="{{ asset('images/dish/pic3.jpg') }}" alt="DexignZone"></a>
+												<a href="{!! url('/ecom-product-detail'); !!}"><img class="img-fluid rounded mr-3" width="85" src="{{ asset('davur/images/dish/pic3.jpg') }}" alt="DexignZone"></a>
 												<div class="media-body col-6 px-0">
 													<h5 class="mt-0 mb-1"><a class="text-black" href="{!! url('/ecom-product-detail'); !!}">Pizza Meal for Kids (Small size)</a></h5>
 													<small class="font-w500 mb-3"><a class="text-primary" href="javascript:void(0);">BURGER</a></small>
@@ -591,7 +591,7 @@
 												</div>
 											</div>
 											<div class="media mb-4 items-list-2">
-												<a href="{!! url('/ecom-product-detail'); !!}"><img class="img-fluid rounded mr-3" width="85" src="{{ asset('images/dish/pic2.jpg') }}" alt="DexignZone"></a>
+												<a href="{!! url('/ecom-product-detail'); !!}"><img class="img-fluid rounded mr-3" width="85" src="{{ asset('davur/images/dish/pic2.jpg') }}" alt="DexignZone"></a>
 												<div class="media-body col-6 px-0">
 													<h5 class="mt-0 mb-1"><a class="text-black" href="{!! url('/ecom-product-detail'); !!}">Meidum Spicy Spagethi Italiano</a></h5>
 													<small class="font-w500 mb-3"><a class="text-primary" href="javascript:void(0);">PIZZA</a></small>
@@ -615,7 +615,7 @@
 												</div>
 											</div>
 											<div class="media items-list-2">
-												<a href="{!! url('/ecom-product-detail'); !!}"><img class="img-fluid rounded mr-3" width="85" src="{{ asset('images/dish/pic1.jpg') }}" alt="DexignZone"></a>
+												<a href="{!! url('/ecom-product-detail'); !!}"><img class="img-fluid rounded mr-3" width="85" src="{{ asset('davur/images/dish/pic1.jpg') }}" alt="DexignZone"></a>
 												<div class="media-body col-6 px-0">
 													<h5 class="mt-0 mb-1"><a class="text-black" href="{!! url('/ecom-product-detail'); !!}">Tuna soup spinach with himalaya salt</a></h5>
 													<small class="font-w500 mb-3"><a class="text-primary" href="javascript:void(0);"> JUICE</a></small>
@@ -641,7 +641,7 @@
 										</div>
 										<div class="tab-pane fade" id="today">
 											<div class="media mb-4 items-list-2">
-												<a href="{!! url('/ecom-product-detail'); !!}"><img class="img-fluid rounded mr-3" width="85" src="{{ asset('images/dish/pic2.jpg') }}" alt="DexignZone"></a>
+												<a href="{!! url('/ecom-product-detail'); !!}"><img class="img-fluid rounded mr-3" width="85" src="{{ asset('davur/images/dish/pic2.jpg') }}" alt="DexignZone"></a>
 												<div class="media-body col-6 px-0">
 													<h5 class="mt-0 mb-1"><a class="text-black" href="{!! url('/ecom-product-detail'); !!}">Tuna soup spinach with himalaya salt</a></h5>
 													<small class="font-w500 mb-3"><a class="text-primary" href="javascript:void(0);"> JUICE</a></small>
@@ -665,7 +665,7 @@
 												</div>
 											</div>
 											<div class="media items-list-2">
-												<a href="{!! url('/ecom-product-detail'); !!}"><img class="img-fluid rounded mr-3" width="85" src="{{ asset('images/dish/pic1.jpg') }}" alt="DexignZone"></a>
+												<a href="{!! url('/ecom-product-detail'); !!}"><img class="img-fluid rounded mr-3" width="85" src="{{ asset('davur/images/dish/pic1.jpg') }}" alt="DexignZone"></a>
 												<div class="media-body col-6 px-0">
 													<h5 class="mt-0 mb-1"><a class="text-black" href="{!! url('/ecom-product-detail'); !!}">Watermelon juice with ice</a></h5>
 													<small class="font-w500 mb-3"><a class="text-primary" href="javascript:void(0);">PIZZA</a></small>

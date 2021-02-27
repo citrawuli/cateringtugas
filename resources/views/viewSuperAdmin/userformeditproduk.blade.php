@@ -5,7 +5,7 @@
     <div class="row page-titles mx-0">
         <div class="col-sm-6 p-md-0">
             <div class="welcome-text">
-                <h4>Hi, welcome back!</h4>
+                <h4>Hi, selamat datang!</h4>
                 <span>Edit Product Form</span>
             </div>
         </div>
@@ -46,7 +46,7 @@
             </div>
             <div class="card-body">
                 <div class="basic-form">
-                     <form method="POST" action="{{ url( '/UpdateProduct/' . $produk -> id ) }}">
+                     <form id="form-id" method="POST" action="{{ url( '/UpdateProduct/' . $produk -> id ) }}">
                         @csrf
 
                         <div class="form-group row">
@@ -97,8 +97,9 @@
                                 <div class="input-group mb-3">
                                      <div class="input-group-prepend">
                                         <span class="input-group-text">Rp</span>
-                                    </div>
-                                    <input id="product" type="number" min="0" class="form-control @error('product_price') is-invalid @enderror" name="product_price" required  placeholder="Product Price" value="{{ $produk->harga_produk}}">
+                                    </div><!-- 
+                                    <input id="product" type="number" min="0" class="form-control @error('product_price') is-invalid @enderror" name="product_price" required  placeholder="Product Price" value="{{ $produk->harga_produk}}"> -->
+                                    <input id="hproduct" type="text" min="0" class="form-control @error('product_price') is-invalid @enderror" required  placeholder="Product Price" name="product_price" value="{{ $produk->harga_produk}}">
                                 </div>
                             </div>
                         </div>
@@ -122,4 +123,25 @@
         </div>
     </div>
 </div>
+@endsection
+
+@section('script')
+<script>
+$(document).ready(function(){
+    // let a = document.getElementById("hiddenrp");
+    $('#hproduct').mask('#.##0', {reverse: true});
+    //$('#hproduct').inputmask({removeMaskOnSubmit: true});
+
+    // $('#hproduct').keyup(function(){
+    //     a=$('#hproduct').val();
+    //     console.log(a);
+    //     document.getElementById("hiddenrp").value=a.unmask();
+    // });
+
+    $("#form-id").submit(function(){
+        var value=$('#hproduct').cleanVal();
+        $('#hproduct').val(value);
+    });
+});
+</script>
 @endsection

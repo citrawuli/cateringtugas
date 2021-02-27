@@ -140,5 +140,6 @@
         Scripts
     ***********************************-->
 	@include('davur.elements.footer-scripts')
+    @yield('script')
 </body>
 </html>

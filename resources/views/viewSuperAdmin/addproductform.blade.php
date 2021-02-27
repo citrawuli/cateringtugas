@@ -5,14 +5,14 @@
     <div class="row page-titles mx-0">
         <div class="col-sm-6 p-md-0">
             <div class="welcome-text">
-                <h4>Hi, welcome back!</h4>
-                <span>Add Product Form</span>
+                <h4>Hi, selamat datang!</h4>
+                <span>Formulir Tambah Produk</span>
             </div>
         </div>
         <div class="col-sm-6 p-md-0 justify-content-sm-end mt-2 mt-sm-0 d-flex">
             <ol class="breadcrumb">
-                <li class="breadcrumb-item"><a href="{!! url('/ProductTable'); !!}">Product Table</a></li>
-                <li class="breadcrumb-item active"><a href="javascript:void(0)">Product Form</a></li>
+                <li class="breadcrumb-item"><a href="{!! url('/ProductTable'); !!}">Daftar Produk</a></li>
+                <li class="breadcrumb-item active"><a href="javascript:void(0)">Formulir Produk</a></li>
             </ol>
         </div>
     </div>
@@ -42,16 +42,16 @@
 	<div class="col-lg-12">
 		<div class="card">
             <div class="card-header">
-                <h4 class="card-title">Add Product</h4>
+                <h4 class="card-title">Tambah Produk</h4>
             </div>
             <div class="card-body">
                 <div class="basic-form">
-                     <form method="POST" action="{{ url('/StoreProduct') }}">
+                     <form id="form-id" method="POST" action="{{ url('/StoreProduct') }}">
                         @csrf
 
                         
                         <div class="form-group row">
-                            <label for="category_name" class="col-sm-3 col-form-label">Category*</label>
+                            <label for="category_name" class="col-sm-3 col-form-label">Kategori (*)</label>
                             <div class="col-md-6">
                               <select class="form-control "  id="single-select" required=""  name="category_name" autofocus>
                               <option disabled selected="" autofocus>Select Category</option>
@@ -63,7 +63,7 @@
                         </div>
 
                         <div class="form-group row">
-                            <label for="product" class="col-sm-3 col-form-label">{{ __('Product Name*') }}</label>
+                            <label for="product" class="col-sm-3 col-form-label">{{ __('Nama Produk (*)') }}</label>
 
                             <div class="col-md-6">
                                 <input id="product" type="text" class="form-control @error('product_name') is-invalid @enderror" name="product_name" required  placeholder="Product Name">
@@ -71,15 +71,15 @@
                         </div>
 
                         <div class="form-group row">
-                            <label for="product" class="col-sm-3 col-form-label">{{ __('Product Type') }}</label>
+                            <label for="product" class="col-sm-3 col-form-label">{{ __('Tipe Produk') }}</label>
 
                             <div class="col-md-6">
-                                <input id="product" type="text" class="form-control @error('product_type') is-invalid @enderror" name="product_type"  placeholder="Product Type (optional)">
+                                <input id="tproduct" type="text" class="form-control @error('product_type') is-invalid @enderror" name="product_type"  placeholder="Product Type (optional)">
                             </div>
                         </div>
 
                         <div class="form-group row">
-                            <label for="product" class="col-sm-3 col-form-label">{{ __('Product Description') }}</label>
+                            <label for="product" class="col-sm-3 col-form-label">{{ __('Deskripsi Produk') }}</label>
 
                             <div class="col-md-6">
                                 <textarea rows="5" class="form-control @error('product_desc') is-invalid @enderror" name="product_desc"  placeholder="Type your description here (optional)"></textarea>
@@ -88,14 +88,15 @@
                         </div>
 
                         <div class="form-group row">
-                            <label for="product" class="col-sm-3 col-form-label">{{ __('Product Price*') }}</label>
+                            <label for="product" class="col-sm-3 col-form-label">{{ __('Harga Produk (*)') }}</label>
 
                             <div class="col-md-6">
                                 <div class="input-group mb-3">
                                      <div class="input-group-prepend">
                                         <span class="input-group-text">Rp</span>
                                     </div>
-                                    <input id="product" type="number" min="0" class="form-control @error('product_price') is-invalid @enderror" name="product_price" required  placeholder="Product Price">
+                                    <input id="hproduct" type="text" min="0" class="form-control @error('product_price') is-invalid @enderror" required  placeholder="Product Price" name="product_price">
+                                    <!-- <input id="hiddenrp" hidden="" type="text" min="0" name="product_price"placeholder="Product Price"> -->
                                 </div>
                             </div>
                         </div>
@@ -104,7 +105,7 @@
                         <div class="form-group row mb-0">
                             <div class="col-md-6 offset-md-4">
                                 <button type="submit" class="btn btn-primary">
-                                    {{ __('Add Product') }}
+                                    {{ __('Tambah Produk') }}
                                 </button>
                             </div>
                         </div>
@@ -118,4 +119,25 @@
         </div>
     </div>
 </div>
+@endsection
+
+@section('script')
+<script>
+$(document).ready(function(){
+    // let a = document.getElementById("hiddenrp");
+    $('#hproduct').mask('#.##0', {reverse: true});
+    //$('#hproduct').inputmask({removeMaskOnSubmit: true});
+
+    // $('#hproduct').keyup(function(){
+    //     a=$('#hproduct').val();
+    //     console.log(a);
+    //     document.getElementById("hiddenrp").value=a.unmask();
+    // });
+
+    $("#form-id").submit(function(){
+        var value=$('#hproduct').cleanVal();
+        $('#hproduct').val(value);
+    });
+});
+</script>
 @endsection

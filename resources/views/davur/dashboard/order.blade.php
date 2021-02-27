@@ -32,7 +32,7 @@
 							<div class="col-xl-12 col-lg-6 ">
 								<div class="card h-auto">
 									<div class="card-body text-center">
-										<img src="{{ asset('images/avatar/1.jpg') }}" width="150" class="rounded-circle mb-4" alt=""/>
+										<img src="{{ asset('davur/images/avatar/1.jpg') }}" width="150" class="rounded-circle mb-4" alt=""/>
 										<h4 class="mb-3 text-black font-w600">James Witwitcky</h4>
 										<a href="javascript:void(0);" class="btn btn-primary light btn-xs">Customer</a>
 									</div>
@@ -45,7 +45,7 @@
 										</div>
 										<div class="card-footer border-0 py-4 bg-warning rounded-xl">
 											<div class="media align-items-center">
-												<img class="mr-3 img-fluid rounded-circle" width="50" src="{{ asset('images/delivery.png') }}" alt="DexignZone">
+												<img class="mr-3 img-fluid rounded-circle" width="50" src="{{ asset('davur/images/delivery.png') }}" alt="DexignZone">
 												<div class="media-body">
 													<h5 class="my-0 text-white">6 The Avenue, <br/>London EC50 4GN</h5>
 												</div>
@@ -114,7 +114,7 @@
 												<tr>
 													<td>
 														<div class="media">
-															<a href="{!! url('/ecom-product-detail'); !!}"><img class="mr-3 img-fluid rounded" width="85" src="{{ asset('images/dish/pic1.jpg') }}" alt="DexignZone"></a>
+															<a href="{!! url('/ecom-product-detail'); !!}"><img class="mr-3 img-fluid rounded" width="85" src="{{ asset('davur/images/dish/pic1.jpg') }}" alt="DexignZone"></a>
 															<div class="media-body">
 																<small class="mt-0 mb-1 font-w500"><a class="text-primary" href="javascript:void(0);">BURGER</a></small>
 																<h5 class="mt-0 mb-2 mb-4"><a class="text-black" href="{!! url('/ecom-product-detail'); !!}">Chicken curry special with cucumber</a></h5>
@@ -145,7 +145,7 @@
 												<tr>
 													<td>
 														<div class="media">
-															<a href="{!! url('/ecom-product-detail'); !!}"><img class="mr-3 img-fluid rounded" width="85" src="{{ asset('images/dish/pic2.jpg') }}" alt="DexignZone"></a>
+															<a href="{!! url('/ecom-product-detail'); !!}"><img class="mr-3 img-fluid rounded" width="85" src="{{ asset('davur/images/dish/pic2.jpg') }}" alt="DexignZone"></a>
 															<div class="media-body">
 																<small class="mt-0 mb-1 font-w500"><a class="text-primary" href="javascript:void(0);">PIZZA</a></small>
 																<h5 class="mt-0 mb-2 text-black mb-4"><a class="text-black" href="{!! url('/ecom-product-detail'); !!}">Italiano pizza with garlic</a></h5>
@@ -176,7 +176,7 @@
 												<tr>
 													<td>
 														<div class="media">
-															<a href="{!! url('/ecom-product-detail'); !!}"><img class="mr-3 img-fluid rounded" width="85" src="{{ asset('images/dish/pic3.jpg') }}" alt="DexignZone"></a>
+															<a href="{!! url('/ecom-product-detail'); !!}"><img class="mr-3 img-fluid rounded" width="85" src="{{ asset('davur/images/dish/pic3.jpg') }}" alt="DexignZone"></a>
 															<div class="media-body">
 																<small class="mt-0 mb-1 font-w500"><a class="text-primary" href="javascript:void(0);">JUICE</a></small>
 																<h5 class="mt-0 mb-2 text-black mb-4"><a class="text-black" href="{!! url('/ecom-product-detail'); !!}">Watermelon juice with ice</a></h5>
@@ -213,13 +213,13 @@
 								<div class="card">
 									<div class="card-body">
 										<div class="full-map-area mb-4">
-											<img src="{{ asset('images/map-2.png') }}" alt=""> 
+											<img src="{{ asset('davur/images/map-2.png') }}" alt=""> 
 											<a href="javascript:void(0);" class="btn btn-danger btn-xs">View in Fullscreen</a>
 											<i class="flaticon-381-location-4"></i>
 										</div>
 										<div class="row mx-0">
 											<div class="media align-items-center col-md-4 col-lg-6 px-0 mb-3 mb-md-0">
-												<img class="mr-3 img-fluid rounded-circle" width="65" src="{{ asset('images/avatar/3.jpg') }}" alt="DexignZone">
+												<img class="mr-3 img-fluid rounded-circle" width="65" src="{{ asset('davur/images/avatar/3.jpg') }}" alt="DexignZone">
 												<div class="media-body">
 													<h4 class="my-0 text-black">Kevin Hobs Jr.</h4>
 													<small>ID 412455</small>

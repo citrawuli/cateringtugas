@@ -5,7 +5,7 @@
     <div class="row page-titles mx-0">
         <div class="col-sm-6 p-md-0">
             <div class="welcome-text">
-                <h4>Hi, welcome back!</h4>
+                <h4>Hi, selamat datang!</h4>
                 <span>TrashedProduct Table</span>
             </div>
         </div>
@@ -60,8 +60,8 @@
                         <table id="example3" class="display" style="min-width: 845px">
                             <thead>
                                 <tr>
-                                    <th>ID</th>
-                                    <th>Kategori</th>
+                                    <th>ID</th><!-- 
+                                    <th>Kategori</th> -->
                                     <th>Nama</th>
                                     <th>Tipe</th>
                                     <th>Deskripsi</th>
@@ -76,8 +76,8 @@
                             <tbody>
                                 @foreach( $model as $mod )
                                 <tr>
-                                  <td>{{ $mod->id }}</td>
-                                  <td>{{ $mod->nama_kategori }}</td>
+                                  <td>{{ $mod->id }}</td><!-- 
+                                  <td>{{ $mod->nama_kategori }}</td> -->
                                   <td>{{ $mod->nama_produk }}</td>
                                   <td>{{ $mod->tipe_produk }}</td>
                                   <td>{{ $mod->deskripsi_produk }}</td>
