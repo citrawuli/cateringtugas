@@ -14,6 +14,8 @@ use App\Models\kategoriProduk;
 use App\Models\produk;
 use Carbon\Carbon;
 use Exception;
+use Illuminate\Support\Str;
+use Illuminate\Support\Facades\Input;
 
 class SuperAdminController extends Controller
 {
@@ -385,6 +387,58 @@ class SuperAdminController extends Controller
         //dump($barang);        
         return view('viewSuperAdmin.tableProduct', compact('product', 'page_title', 'page_description','action','logo','logoText'));
     }
+    public function viewcobadropzone(){
+        $page_title = 'COBA DROPZONE';
+        $page_description = 'Some description for the page';
+        $logo = "teamo/images/aisyacatering_kontak_logo.png";
+        $logoText = "teamo/images/aisya-catering-logo3.png";
+        $action = __FUNCTION__;
+        return view('viewSuperAdmin.cobadropzone', compact('page_title', 'page_description','action','logo','logoText'));
+    }
+    public function dropzoneCobaStore(Request $request)
+    {
+        //if($request->hasFile('file')){
+            $image = $request->file('file');
+            //dd($request->all());
+            //dd($request);
+            // if ($request->hasFile('file')) {
+            //     return $request->file('file')->getClientOriginalName();
+            // } else {
+            //     return 'no file!';
+            // }
+
+        $image_tmp = $request->image;
+        //$fileName = time() . '.'.$image_tmp->clientExtension();
+        //dd($image_tmp);
+
+            //dd($_FILES);
+            $imageName = time() . '-' . strtoupper(Str::random(10)) . '.' . $image->extension();
+            $image->move(public_path('images'), $imageName);
+            $imagePath= "/images/$imageName";
+            $produk->images()->create(['image_path'=>$imagePath]);
+            return response()->json(['success'=> $imageName]);
+        //}
+
+        // //CARA 2
+        // $produk = produk::find($id);
+
+        // //image upload
+        // $image=$request->file('file');
+        // //dd($image);
+
+        // if ($request->file('file')!=null){ 
+        //     $file = $request->file('file');
+        //     // dd($file);
+        // }
+        // // if($image){
+        //     $imageName=time(). $image->getClientOriginalName();
+        //     $image->move(public_path('images'),$imageName);
+        //     $imagePath= "/images/$imageName";
+        //     $produk->images()->create(['image_path'=>$imagePath]);
+        // // 
+
+        // return response()->json(['success'=>$imagePath]);
+    }
 
     public function viewproductgalerydropzone()
     {
@@ -401,28 +455,84 @@ class SuperAdminController extends Controller
         return view('viewSuperAdmin.tableProduct', compact('data'));
     }
     
+    public function dropzoneView($id)
+    {
+        $produk = produk::find($id);
+        //$category = kategoriProduk::find($id);
+        //$category = DB::table('kategori_produk')->get();
+        $page_title = 'DROPZONE';
+        $page_description = 'Some description for the page';
+        $logo = "teamo/images/aisyacatering_kontak_logo.png";
+        $logoText = "teamo/images/aisya-catering-logo3.png";
+        $action = __FUNCTION__;
+        return view('viewSuperAdmin.addphotodropzone', compact('produk','page_title', 'page_description','action','logo','logoText'));
+    }
+
     public function dropzoneStore(Request $request, $id)
     {
-        // $image = $request->file('file');
-   
-        // $imageName = time() . '-' . strtoupper(Str::random(10)) . '.' . $image->extension();
-        // $image->move(public_path('images'), $imageName);
-   
-        // return response()->json(['success'=> $imageName]);
-
         $produk = produk::find($id);
+    
+        
+        // //if($request->hasFile('file')){
+        //     $image = $request->file('file');
+        //     //dd($request->all());
+        //     //dd($request);
+        //     // if ($request->hasFile('file')) {
+        //     //     return $request->file('file')->getClientOriginalName();
+        //     // } else {
+        //     //     return 'no file!';
+        //     // }
 
+        // $image_tmp = $request->image;
+        // //$fileName = time() . '.'.$image_tmp->clientExtension();
+        // //dd($image_tmp);
+
+        //     //dd($_FILES);
+        //     $imageName = time() . '-' . strtoupper(Str::random(10)) . '.' . $image->extension();
+        //     $image->move(public_path('images'), $imageName);
+        //     $imagePath= "/images/$imageName";
+        //     $produk->images()->create(['image_path'=>$imagePath]);
+        //     return response()->json(['success'=> $imageName]);
+        // //}
+
+        //CARA 2
         //image upload
         $image=$request->file('file');
+        //dd($image);
 
-        if($image){
-            $imageName=time(). $image->getClientOriginalName();
+        if ($request->file('file')!=null){ 
+            $file = $request->file('file');
+            $imageName=time(). '-'.$image->getClientOriginalName();
             $image->move(public_path('images'),$imageName);
             $imagePath= "/images/$imageName";
             $produk->images()->create(['image_path'=>$imagePath]);
+            return response()->json(['success'=>$imagePath]);
+        } else{
+            return $request;
         }
+        
+    }
 
-        return "done";
+    public function dropzoneFetch()
+    {
+        $images = \File::allFiles(public_path('images'));
+        $output = '<div class="row">';
+        foreach($images as $image){
+            $output .= '
+            <div class="col-md-2" style="margin-bottom:16px;" align="center">
+                    <img src="'.asset('images/' . $image->getFilename()).'" class="img-thumbnail" width="175" height="175" style="height:175px;" />
+                    <button type="button" class="btn btn-link remove_image" id="'.$image->getFilename().'">Remove</button>
+                </div>
+            ';
+        }
+        $output .= '</div>';
+        echo $output;
+    }
+
+    public function dropzoneDelete(Request $request){
+        if($request->get('name')){
+            \File::delete(public_path('images/' . $request->get('name')));
+        }
     }
 
     public function viewproductforminput(){
@@ -582,9 +692,9 @@ class SuperAdminController extends Controller
     public function viewpemesanantable(){
         $pemesanan = DB::table('users')
             ->join('pemesanan', 'pemesanan.user_id', '=', 'users.id')
-            ->leftJoin('detailtransaksi', 'pemesanan.id', '=', 'detailtransaksi.id_pemesanan')
-            ->leftJoin('produk', 'detailtransaksi.id_produk', '=', 'produk.id')
-            ->select('pemesanan.*','users.name', 'produk.id as produk_id', 'detailtransaksi.id_produk as detail_idproduk', 'detailtransaksi.id_pemesanan as detail_idpemesanan')
+            ->leftJoin('detail_transaksi', 'pemesanan.id_pemesanan', '=', 'detail_transaksi.id_pemesanan')
+            ->leftJoin('produk', 'detail_transaksi.id_produk', '=', 'produk.id')
+            ->select('pemesanan.*','users.name', 'produk.id as produk_id', 'detail_transaksi.id_produk as detail_idproduk', 'detail_transaksi.id_pemesanan as detail_idpemesanan')
             ->whereNull('pemesanan.deleted_at')->get();
         $page_title = 'Order Request Table';
         $page_description = 'Some description for the page';

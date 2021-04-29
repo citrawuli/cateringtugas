@@ -295,6 +295,14 @@ return [
 							'davur/vendor/datatables/css/jquery.dataTables.min.css',
 							'davur/vendor/dropzone/dist/dropzone.css',
 				],
+				'viewcobadropzone' => [
+              				'davur/vendor/bootstrap-select/dist/css/bootstrap-select.min.css',
+							'davur/vendor/dropzone/dist/dropzone.css',
+				],
+				'dropzoneView' => [
+              				'davur/vendor/bootstrap-select/dist/css/bootstrap-select.min.css',
+							'davur/vendor/dropzone/dist/dropzone.css',
+				],
 				'viewproductforminput' => [
 							'davur/vendor/bootstrap-select/dist/css/bootstrap-select.min.css',
 							'davur/vendor/bootstrap-daterangepicker/daterangepicker.css',
@@ -940,6 +948,20 @@ return [
 			                'davur/vendor/chart.js/Chart.bundle.min.js',
 			                'davur/vendor/apexchart/apexchart.js',
 				],
+				'viewcobadropzone' => [
+              				'davur/vendor/bootstrap-select/dist/js/bootstrap-select.min.js',
+				            'davur/js/custom.min.js',
+				            'davur/js/deznav-init.js',
+				            'davur/vendor/dropzone/dist/dropzone.js',
+				],
+
+				'dropzoneView'=> [
+              				'davur/vendor/bootstrap-select/dist/js/bootstrap-select.min.js',
+				            'davur/js/custom.min.js',
+				            'davur/js/deznav-init.js',
+				            'davur/vendor/dropzone/dist/dropzone.js',
+				],
+				
 				'viewproductforminput' => [
 			              	'davur/vendor/bootstrap-select/dist/js/bootstrap-select.min.js',
 			              	'davur/vendor/chart.js/Chart.bundle.min.js',
@@ -983,24 +1005,29 @@ return [
 				],
 				'viewpemesanantable' => [
               				'davur/vendor/bootstrap-select/dist/js/bootstrap-select.min.js',
-				            'davur/vendor/datatables/js/jquery.dataTables.min.js',
-				            'davur/js/plugins-init/datatables.init.js',
+				            
 				            'davur/js/custom.min.js',
 				            'davur/js/deznav-init.js',
+
+				            'davur/vendor/datatables/js/jquery.dataTables.min.js',
+				            'davur/js/plugins-init/datatables.init.js',
 				],
 				'viewformpemesanan' => [
 			              	'davur/vendor/bootstrap-select/dist/js/bootstrap-select.min.js',
+			              	'davur/js/custom.min.js',
+			              	'davur/js/deznav-init.js',
 			              	'davur/vendor/chart.js/Chart.bundle.min.js',
 			              	'davur/vendor/apexchart/apexchart.js',
 
 							'davur/vendor/jquery-validation/jquery.validate.min.js',
 							'davur/js/plugins-init/jquery.validate-init.js',
-			              	'davur/js/custom.min.js',
-			              	'davur/js/deznav-init.js',
+			              	
 			              	'davur/vendor/select2/js/select2.full.min.js',
 
 							'davur/vendor/jquery-steps/build/jquery.steps.min.js',
 							'davur/js/plugins-init/jquery-steps-init.js',
+
+							'davur/js/plugins-init/datatables.init.js',
 
 							'davur/vendor/moment/moment.min.js',
 							'davur/vendor/bootstrap-daterangepicker/daterangepicker.js',

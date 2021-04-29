@@ -11,8 +11,8 @@
         </div>
         <div class="col-sm-6 p-md-0 justify-content-sm-end mt-2 mt-sm-0 d-flex">
             <ol class="breadcrumb">
-                <li class="breadcrumb-item"><a href="{!! url('/ProductTable'); !!}">Product Table</a></li>
-                <li class="breadcrumb-item active"><a href="javascript:void(0)">Product Form</a></li>
+                <li class="breadcrumb-item"><a href="{!! url('/ProductTable'); !!}">Daftar Produk</a></li>
+                <li class="breadcrumb-item active"><a href="javascript:void(0)">Formulir Edit Produk</a></li>
             </ol>
         </div>
     </div>
@@ -54,11 +54,11 @@
                             <div class="col-md-6">
                               <select class="form-control "  id="single-select" required=""  name="category_name" autofocus>
                 
-                              @foreach($category as $cat)
+                                @foreach($category as $cat)
                                     @if ($produk->id_kategori == $cat->id)
                                         <option value="{{ $cat->id }}" selected>{{$cat->nama_kategori}}</option>
                                     @else
-                                        <option value="{{ $cat->id }}" selected>{{$cat->nama_kategori}}</option>
+                                        <option value="{{ $cat->id }}">{{$cat->nama_kategori}}</option>
                                     @endif
                                 @endforeach
                               </select>

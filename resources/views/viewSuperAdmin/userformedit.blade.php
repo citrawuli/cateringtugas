@@ -11,8 +11,8 @@
         </div>
         <div class="col-sm-6 p-md-0 justify-content-sm-end mt-2 mt-sm-0 d-flex">
             <ol class="breadcrumb">
-                <li class="breadcrumb-item"><a href="{!! url('/UserTable'); !!}">User Table</a></li>
-                <li class="breadcrumb-item active"><a href="javascript:void(0)">User Form</a></li>
+                <li class="breadcrumb-item"><a href="{!! url('/UserTable'); !!}">Daftar Pengguna</a></li>
+                <li class="breadcrumb-item active"><a href="javascript:void(0)">Formulir Pengguna</a></li>
             </ol>
         </div>
     </div>
@@ -42,7 +42,7 @@
 	<div class="col-lg-12">
 		<div class="card">
             <div class="card-header">
-                <h4 class="card-title">Edit User</h4>
+                <h4 class="card-title">Edit Pengguna</h4>
             </div>
             <div class="card-body">
                 <div class="basic-form">

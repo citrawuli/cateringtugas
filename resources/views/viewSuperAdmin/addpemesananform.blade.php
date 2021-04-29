@@ -158,7 +158,7 @@
                             
                                               
                         <div class="table-responsive">
-                                    <table class="table table-striped">
+                                    <table class="table table-striped" class="display" id="simulationRow">
                                         <thead>
                                             <tr>
                                                 <th class="center">#</th>
@@ -197,8 +197,8 @@
 
                                 <div class="row">
                                     <div class="col-lg-12">
-                                        <button type="button" class="btn btn-outline-primary btn-sm">Add Row</button>
-                                        <button type="button" class="btn btn-outline-warning btn-sm pull-right">Delete Row</button> 
+                                        <button type="button" class="btn btn-outline-primary btn-sm" id="addRow">Add Row</button>
+                                        <button type="button" class="btn btn-outline-warning btn-sm pull-right" id="deleteRow">Delete Row</button> 
                                     </div>
                                 </div>
 
@@ -257,6 +257,7 @@
 @endsection
 
 @section('script')
+<script src="http://cdn.datatables.net/1.10.18/js/jquery.dataTables.min.js" defer="" type="text/javascript"></script>
 <script>
 
 // $(document).ready(function() {
@@ -347,6 +348,41 @@ let produk= document.getElementById('select_produk');
             rowharga.value = parseInt(harga.value) * qty.value;
             
         });
+
+        //ADD ROW
+            var table = $('#simulationRow').DataTable();
+            var counter = 1;
+         
+            $('#addRow').on( 'click', function () {
+                table.row.add( [
+                    counter +'.1',
+                    counter +'.2',
+                    counter +'.3',
+                    counter +'.4',
+                    counter +'.5'
+                    //var rowHtml = $("#simulationRow").find("tr")[0].outerHTML
+                ] ).draw( false );
+         
+                counter++;
+            });
+         
+            // Automatically add a first row of data
+            //$('#addRow').click();
+
+        //DELETE ROW
+            $('#simulationRow tbody').on( 'click', 'tr', function () {
+                if ( $(this).hasClass('selected') ) {
+                    $(this).removeClass('selected');
+                }
+                else {
+                    table.$('tr.selected').removeClass('selected');
+                    $(this).addClass('selected');
+                }
+            });
+         
+            $('#deleteRow').click( function () {
+                table.row('.selected').remove().draw( false );
+            });
     });
 
 </script>

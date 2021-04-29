@@ -14,6 +14,8 @@ class produk extends Model
     protected $primaryKey = 'id';
     protected $dates = ['deleted_at'];
 
+    public $incrementing = false;//so when I called it in blade"addphoto", it doesnt return 0
+
     /**
      * The attributes that are mass assignable.
      *

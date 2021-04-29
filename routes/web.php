@@ -67,7 +67,14 @@ Route::get('/RestoreProduct/{id}', [App\Http\Controllers\SuperAdminController::c
 Route::get('/DeletePermanent/{id}', [App\Http\Controllers\SuperAdminController::class, 'deletepermanent']); //hapus permanen data produk dari tong sampah
 Route::get('/RestoreAllProduct', [App\Http\Controllers\SuperAdminController::class, 'restoreallproduct']); //kembalikan semua data produk dari tong sampah
 Route::get('/DeletePermanentAllProduct', [App\Http\Controllers\SuperAdminController::class, 'deletepermanentallproduct']); //hapus permanen semua data produk dari tong sampah
-Route::post('/dropzone/store/{id}', [App\Http\Controllers\SuperAdminController::class, 'dropzoneStore']);
+
+Route::get('/dropzone/coba', [App\Http\Controllers\SuperAdminController::class, 'viewcobadropzone']);
+//Route::post('/dropzone/storecoba', [App\Http\Controllers\SuperAdminController::class, 'dropzoneCobaStore'])->name('dropzone.upload');
+
+Route::get('/dropzoneview/{id}', [App\Http\Controllers\SuperAdminController::class, 'dropzoneView']);
+Route::post('/dropzone/store/{id}', [App\Http\Controllers\SuperAdminController::class, 'dropzoneStore'])->name('dropzone.upload');
+Route::get('/dropzone/fetch', [App\Http\Controllers\SuperAdminController::class, 'dropzoneFetch'])->name('dropzone.fetch');
+Route::get('/dropzone/delete', [App\Http\Controllers\SuperAdminController::class, 'dropzoneDelete'])->name('dropzone.delete');
 
 Route::get('/PemesananTable', [App\Http\Controllers\SuperAdminController::class, 'viewpemesanantable']); //lihat Table Pemesanan
 Route::get('/ViewFormPemesanan', [App\Http\Controllers\SuperAdminController::class, 'viewformpemesanan']); //lihat form

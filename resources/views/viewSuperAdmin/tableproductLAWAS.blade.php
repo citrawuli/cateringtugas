@@ -150,7 +150,7 @@
                                             </div>
                                         </div>
 
-                                        <!-- <span data-placement="top" title="Add Photo" data-toggle="tooltip3" >
+                                        <span data-placement="top" title="Add Photo" data-toggle="tooltip3" >
                                             <a href=".bd-example-modal-lg"
                                             data-toggle="modal" 
                                             data-target="#modaladdproduk{{ $prod->id }}"
@@ -158,7 +158,7 @@
                                             class="btn btn-warning shadow btn-xs sharp mr-1">
                                             <i class="flaticon-381-photo-camera-1"></i>
                                         </a>
-                                        </span> -->
+                                        </span>
 
                                         <div id="modaladdproduk{{ $prod->id }}" class="modal fade bd-example-modal-lg" tabindex="-1" role="dialog" aria-hidden="true">
                                             <div class="modal-dialog modal-lg">
@@ -245,8 +245,6 @@
                                                 </div>
                                             </div>
                                         </div>
-
-                                        <a href="{{ url('/dropzoneview/'. $prod->id)}}" class="btn btn-warning shadow btn-xs sharp mr-1"><i class="flaticon-381-photo-camera-1" data-toggle="tooltip" data-placement="top" title="Add Photo"></i></a> 
 
                                         <a href="{{ url( '/EditProduct/' . $prod->id ) }}" class="btn btn-primary shadow btn-xs sharp mr-1" data-toggle="tooltip" data-placement="top" title="Edit Product" id="editt"><i class="fa fa-pencil"></i></a>
                                        
