@@ -1,6 +1,7 @@
 @extends('layouts.backAdmin.layout.defaultSuperAdmin')
 
 @section('content')
+
 <div class="container-fluid">
     <div class="row page-titles mx-0">
         <div class="col-sm-6 p-md-0">
@@ -158,10 +159,10 @@
                             
                                               
                         <div class="table-responsive">
-                                    <table class="table table-striped" class="display" id="simulationRow">
+                                    <table class="table table-striped display" id="simulationRow">
                                         <thead>
                                             <tr>
-                                                <th class="center">#</th>
+                                                <!-- <th class="center">#</th> -->
                                                 <th>Produk</th>
                                                 <th class="center">Qty</th>
                                                 <th class="right">Harga Jual</th>
@@ -170,7 +171,7 @@
                                         </thead>
                                         <tbody>
                                             <tr>
-                                                <td class="center">1</td>
+                                                <!-- <td class="center">1</td> -->
                                                 <td class="left strong">
                                                     <div class="">
                                                         <select class="form-control selected_product"  id="select_produk" required=""  name="selected_product" >
@@ -319,10 +320,29 @@ let qty= document.getElementById('quantity');
 let rowharga= document.getElementById('totalrowharga');
 let produk= document.getElementById('select_produk');
 
-
-
     $(document).ready(function() {
-        $('.selected_product').on('change', function(){
+        
+        // $('.selected_product').on('change', function(){
+        //     console.log('row produk');
+        //     let produkval = $(this).val();
+
+        //         var url = "{{URL('/getdataproduk')}}";
+        //         var dltUrl = url+"/"+produkval;
+        //         $.ajax({
+        //             url: dltUrl,
+        //             type:'GET',
+        //             success:function(response){
+        //                 var response = JSON.parse(response);
+        //                 console.log(response);
+                            
+        //                 harga.value = `${response[0]['harga_produk']}`;
+        //                 rowharga.value = parseInt(harga.value) * qty.value;
+        //             }          
+        //         })
+            
+        // });
+
+        $(document).on('change','.selected_product', function(){
             console.log('row produk');
             let produkval = $(this).val();
 
@@ -342,8 +362,15 @@ let produk= document.getElementById('select_produk');
             
         });
 
+
         // $.ajaxSetup({ headers: { 'X-CSRF-TOKEN': jQuery('meta[name="csrf-token"]').attr('content') } });
-        $('#quantity').on('change', function(){
+        // $('#quantity').on('change', function(){
+        //     console.log('row quantity');
+        //     rowharga.value = parseInt(harga.value) * qty.value;
+            
+        // });
+
+        $(document).on('change','#quantity', function(){
             console.log('row quantity');
             rowharga.value = parseInt(harga.value) * qty.value;
             
@@ -351,19 +378,43 @@ let produk= document.getElementById('select_produk');
 
         //ADD ROW
             var table = $('#simulationRow').DataTable();
-            var counter = 1;
+
+            //var counter = 1;
          
             $('#addRow').on( 'click', function () {
-                table.row.add( [
-                    counter +'.1',
-                    counter +'.2',
-                    counter +'.3',
-                    counter +'.4',
-                    counter +'.5'
-                    //var rowHtml = $("#simulationRow").find("tr")[0].outerHTML
-                ] ).draw( false );
+                var html = '<tr>';
+                html += '<td class="left strong"><div class=""><select class="form-control selected_product"  id="select_produk" required=""  name="selected_product" ><option disabled selected="">Enter Produk</option>@foreach($produk as $p)<option value="{{ $p->id }}">{{$p->nama_produk}}</option>@endforeach</select></div></td>';
+                html +='<td class="center" style="width:10%;"><input id="quantity" type="number" min="0" class="form-control @error('quantity') is-invalid @enderror" name="quantity" required  placeholder="" ></td>';
+                html +='<td class="right"><input id="hargajual" type="number" min="0" class="form-control @error('hargajual') is-invalid @enderror" name="hargajual"  placeholder="" disabled=""></td>';
+                html +='<td class="right"><input id="totalrowharga" type="number" min="0" class="form-control @error('totalrow') is-invalid @enderror" name="totalrowharga" required  placeholder="" disabled=""></td>';
+                html += '</tr>';
+                // $('#simulationRow tbody').prepend(html);
+
+                // var rowHtml = $("#simulationRow").find("tbody>tr")[0].outerHTML;
+                // console.log(rowHtml);
+                // table.row.add($(rowHtml)).draw(false);
+
+                table.row.add($(html)).draw(false);
+
+
+                // $('#simulationRow tbody>tr:last #select_produk').text('').change();
+                //$('#simulationRow tbody>tr:last #select_produk').val('');
+                //$("td.select_produk", row).empty();
+                
+
+                // //CARA ASLI
+                // // table.row.add( 
+                // //     [
+                // //     counter +'.1',
+                // //     counter +'.2',
+                // //     counter +'.3',
+                // //     counter +'.4',
+                // //     counter +'.5'
+                    
+                // //     ]
+                // // ).draw( false );
          
-                counter++;
+                // counter++;
             });
          
             // Automatically add a first row of data
@@ -383,6 +434,8 @@ let produk= document.getElementById('select_produk');
             $('#deleteRow').click( function () {
                 table.row('.selected').remove().draw( false );
             });
+
+            
     });
 
 </script>
