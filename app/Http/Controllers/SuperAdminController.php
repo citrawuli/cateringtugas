@@ -12,6 +12,7 @@ use App\Models\User;
 use App\Models\role_users;
 use App\Models\kategoriProduk;
 use App\Models\produk;
+use App\Models\galeriProduk;
 use Carbon\Carbon;
 use Exception;
 use Illuminate\Support\Str;
@@ -387,6 +388,7 @@ class SuperAdminController extends Controller
         //dump($barang);        
         return view('viewSuperAdmin.tableProduct', compact('product', 'page_title', 'page_description','action','logo','logoText'));
     }
+    
     public function viewcobadropzone(){
         $page_title = 'COBA DROPZONE';
         $page_description = 'Some description for the page';
@@ -395,8 +397,8 @@ class SuperAdminController extends Controller
         $action = __FUNCTION__;
         return view('viewSuperAdmin.cobadropzone', compact('page_title', 'page_description','action','logo','logoText'));
     }
-    public function dropzoneCobaStore(Request $request)
-    {
+
+    public function dropzoneCobaStore(Request $request){
         //if($request->hasFile('file')){
             $image = $request->file('file');
             //dd($request->all());
@@ -440,8 +442,7 @@ class SuperAdminController extends Controller
         // return response()->json(['success'=>$imagePath]);
     }
 
-    public function viewproductgalerydropzone()
-    {
+    public function viewproductgalerydropzone(){
         $files = scandir(public_path('images'));
         $data = [];
         foreach ($files as $row) {
@@ -455,8 +456,7 @@ class SuperAdminController extends Controller
         return view('viewSuperAdmin.tableProduct', compact('data'));
     }
     
-    public function dropzoneView($id)
-    {
+    public function dropzoneView($id){
         $produk = produk::find($id);
         //$category = kategoriProduk::find($id);
         //$category = DB::table('kategori_produk')->get();
@@ -468,49 +468,44 @@ class SuperAdminController extends Controller
         return view('viewSuperAdmin.addphotodropzone', compact('produk','page_title', 'page_description','action','logo','logoText'));
     }
 
-    public function dropzoneStore(Request $request, $id)
-    {
+    public function dropzoneStore(Request $request, $id){
         $produk = produk::find($id);
+        $id = $produk->id;
     
-        
-        // //if($request->hasFile('file')){
-        //     $image = $request->file('file');
-        //     //dd($request->all());
-        //     //dd($request);
-        //     // if ($request->hasFile('file')) {
-        //     //     return $request->file('file')->getClientOriginalName();
-        //     // } else {
-        //     //     return 'no file!';
-        //     // }
-
-        // $image_tmp = $request->image;
-        // //$fileName = time() . '.'.$image_tmp->clientExtension();
-        // //dd($image_tmp);
-
-        //     //dd($_FILES);
-        //     $imageName = time() . '-' . strtoupper(Str::random(10)) . '.' . $image->extension();
-        //     $image->move(public_path('images'), $imageName);
-        //     $imagePath= "/images/$imageName";
-        //     $produk->images()->create(['image_path'=>$imagePath]);
-        //     return response()->json(['success'=> $imageName]);
-        // //}
-
-        //CARA 2
-        //image upload
         $image=$request->file('file');
-        //dd($image);
-
-        if ($request->file('file')!=null){ 
-            $file = $request->file('file');
+        //dd($request->all());
             $imageName=time(). '-'.$image->getClientOriginalName();
             $image->move(public_path('images'),$imageName);
             $imagePath= "/images/$imageName";
-            $produk->images()->create(['image_path'=>$imagePath]);
-            return response()->json(['success'=>$imagePath]);
-        } else{
-            return $request;
-        }
-        
+
+            galeriProduk::create([
+                'id_produk' => $id,
+                'foto' => $imagePath,
+                'id_default' => '0',
+                'created_at' => \Carbon\Carbon::now(), 
+                'updated_at' => \Carbon\Carbon::now(), 
+            ]);
+                       
+            //Session::flash('message', "Gambar berhasil ditambahkan");
+            //return Redirect::back()->with('message', 'SUKSES!');
+            // return redirect()->, ['message' => 'Y Sukses']);
+            return redirect('/ProductTable/'); 
+
+
+            //return redirect('dropzoneview/'.$id)->with('message', 'SUKSES!');
+            //return redirect()->route('dropzone.view', [$id]);
+            //return response()->json(['success'=>$imagePath]);
+            //echo asset('images'.$imageName);
+            // return response()->json([  
+            //     'message'   => 'Image Upload Successfully',
+            //     'uploaded_image' => 'asset("$imagePath")', 
+            //     'class_name'  => 'alert-success'
+            // ]);                   
+            //return response()->json(true);
+        // }   
+        // else {
+        //     return "no upload yet";
+        // }      
     }
 
     public function dropzoneFetch()
@@ -529,9 +524,36 @@ class SuperAdminController extends Controller
         echo $output;
     }
 
+    public function dropzoneFetchBismillah(){
+        $images = \File::allFiles(public_path('images'));
+        return View('viewSuperAdmin.addphotodropzone',compact('images'));
+    }
+
+    public function dropzoneFetchID($id)
+    {
+        $prodImageData = DB::table('galeri_produk')->where('galeri_produk.id_produk', $id)->get();
+        $prodImageID=$prodImageData->id_produk;
+
+        $images = \File::allFiles(public_path('images'));
+        $output = '<div class="row">';
+        foreach($images as $image){
+            $output .= '
+            <div class="col-md-2" style="margin-bottom:16px;" align="center">
+                <img src="'.asset('images/' . $image->getFilename()).'" class="img-thumbnail" width="175" height="175" style="height:175px;" />
+                <button type="button" class="btn btn-link remove_image" id="'.$image->getFilename().'">Remove</button>
+            </div>
+            ';
+        }
+        $output .= '</div>';
+        echo $output;
+    }
+
     public function dropzoneDelete(Request $request){
+        
         if($request->get('name')){
             \File::delete(public_path('images/' . $request->get('name')));
+            
+
         }
     }
 

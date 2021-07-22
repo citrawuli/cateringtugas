@@ -71,7 +71,7 @@ Route::get('/DeletePermanentAllProduct', [App\Http\Controllers\SuperAdminControl
 Route::get('/dropzone/coba', [App\Http\Controllers\SuperAdminController::class, 'viewcobadropzone']);
 //Route::post('/dropzone/storecoba', [App\Http\Controllers\SuperAdminController::class, 'dropzoneCobaStore'])->name('dropzone.upload');
 
-Route::get('/dropzoneview/{id}', [App\Http\Controllers\SuperAdminController::class, 'dropzoneView']);
+Route::get('/dropzoneview/{id}', [App\Http\Controllers\SuperAdminController::class, 'dropzoneView'])->name('dropzone.view');
 Route::post('/dropzone/store/{id}', [App\Http\Controllers\SuperAdminController::class, 'dropzoneStore'])->name('dropzone.upload');
 Route::get('/dropzone/fetch', [App\Http\Controllers\SuperAdminController::class, 'dropzoneFetch'])->name('dropzone.fetch');
 Route::get('/dropzone/delete', [App\Http\Controllers\SuperAdminController::class, 'dropzoneDelete'])->name('dropzone.delete');

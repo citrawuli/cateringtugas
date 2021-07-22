@@ -3,7 +3,9 @@
 @section('content')
 
 
-
+<head>
+    <meta name="csrf-token" content="{{ csrf_token() }}" />
+</head>
 
 
 
@@ -31,7 +33,7 @@
         <button type="button" class="close h-100" data-dismiss="alert" aria-label="Close"><span><i class="mdi mdi-close"></i></span>
         </button>
     </div>
-    @endif
+    @endif 
 
     @if ($errors->any())
         <div class="alert alert-danger alert-dismissible fade show">
@@ -76,7 +78,7 @@
      <form action="{{ url( '/dropzone/store/' . $produk -> id ) }}" method="post" files="true" enctype="multipart/form-data" class="dropzone" id="dropzoneForm">                                              
         @csrf                                                             
         <div class="fallback">
-            <input name="file[]" type="file" multiple="multiple" hidden="">
+            <input name="file[]" type="file" id="filephoto" multiple="multiple" hidden="">
         </div>                                                                  
     </form>
 
@@ -84,11 +86,15 @@
       <button type="submit" class="btn btn-primary" id="submit-all" style="margin-top: 10px;">Submit Images</button>
     </div>
 
-    <div class="panel-heading">
+    <!-- <div class="panel-heading">
       <br><h5 class="mb-4"><i class="fa fa-paperclip"></i> Uploaded Image</h5>
     </div>
-      <div class="panel-body" id="uploaded_image">
-    </div>
+
+    <div class="panel-body" id="uploaded_image">
+        <img src="'.asset('images/' . $image->getFilename()).'"  width="175" height="175" style="height:175px;" />
+        <button type="button" class="btn btn-link remove_image" id="'.$image->getFilename().'">Remove</button>
+    </div> -->
+
 </div>
 
 
@@ -117,6 +123,7 @@
 <script>
     Dropzone.options.dropzoneForm = {
 	    autoProcessQueue : false,
+      addRemoveLinks: true,
 	    acceptedFiles : ".png,.jpg,.gif,.bmp,.jpeg",
 
 	    init:function(){
@@ -125,21 +132,64 @@
 
 	      	submitButton.addEventListener('click', function(){
 	        	myDropzone.processQueue();
+            //load_images();
 	      	});
 
 	      	this.on("complete", function(){
+            //alert("UPLOAD BERHASIL")
+            Swal.fire(
+              'Success!',
+              'Upload Berhasil',
+              'success'
+            )
 	        	if(this.getQueuedFiles().length == 0 && this.getUploadingFiles().length == 0){
 	          		var _this = this;
 	          		_this.removeAllFiles();
 	        	}
-	        	load_images();
 	      	});
 	    }
 	};
 
-  	load_images();
-
+    //NGGAK JADI PAKAI AJAX DI BAWAH :) NGGAK PERLU
   	function load_images(){
+      var urlst = "{{ url( '/dropzone/store/' . $produk -> id ) }}";
+      var photo = $('#filephoto').val();
+          console.log("terpanggil");
+      $.post(urlst,{ _token: "{{ csrf_token() }}", foto:photo },function(result){
+            console.log(result);
+        });
+      //CARA 2 JUGA BERHASIL
+      //$.ajaxSetup({ headers: { 'X-CSRF-TOKEN': jQuery('meta[name="csrf-token"]').attr('content') } });
+	    // $.ajax({
+      //     url:urlst,
+      //     type:'POST',
+      //     // data: $('#dropzoneForm').serialize(),
+      //     data: {
+      //       foto:photo
+		  //     },
+      //     headers: {
+			//       'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+			//     },
+	    //   	success:function(data){
+      //       var response = data;
+      //           console.log(response);
+      //       // $(".alert-success").css("display", "block");
+      //       // $(".alert-success").append("Upload Berhasil");
+      //       $('.alert-success').css('display', 'block');
+      //       $('.alert-success').html(data.message);
+      //       $('.alert-success').addClass(data.class_name);
+	    //     	$('#uploaded_image').html(data.uploaded_image);
+      //       //$('#uploaded_image').html(data);
+	    //   	}, error: function (error) {
+      //     console.log('upload Error', error);
+      //     alert('Something went wrong');
+      //     }
+	    // })
+
+
+  	}
+
+    function load_images_asli(){
 	    $.ajax({
 	      	url:"{{ route('dropzone.fetch') }}",
 	      	success:function(data){
@@ -154,7 +204,7 @@
       		url:"{{ route('dropzone.delete') }}",
       		data:{name : name},
       		success:function(data){
-        		load_images();
+        		load_images_asli();
       		}
     	})
   	});

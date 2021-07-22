@@ -302,6 +302,7 @@ return [
 				'dropzoneView' => [
               				'davur/vendor/bootstrap-select/dist/css/bootstrap-select.min.css',
 							'davur/vendor/dropzone/dist/dropzone.css',
+							'davur/vendor/sweetalert2/dist/sweetalert2.min.css',
 				],
 				'viewproductforminput' => [
 							'davur/vendor/bootstrap-select/dist/css/bootstrap-select.min.css',
@@ -960,6 +961,8 @@ return [
 				            'davur/js/custom.min.js',
 				            'davur/js/deznav-init.js',
 				            'davur/vendor/dropzone/dist/dropzone.js',
+				            'davur/vendor/sweetalert2/dist/sweetalert2.min.js',
+				            'davur/js/plugins-init/sweetalert.init.js',
 				],
 				
 				'viewproductforminput' => [

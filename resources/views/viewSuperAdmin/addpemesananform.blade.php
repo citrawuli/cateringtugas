@@ -81,7 +81,7 @@
                             <label for="nomor_telp" class="col-sm-3 col-form-label">{{ __('Nomor telepon*') }}</label>
 
                             <div class="col-md-6">
-                                <input id="nomor_telp" type="text" class="form-control @error('nomor_telp') is-invalid @enderror" name="nomor_telp"  placeholder="081xxx">
+                                <input id="nomor_telp" type="number" class="form-control @error('nomor_telp') is-invalid @enderror" name="nomor_telp"  placeholder="081xxx">
                             </div>
                         </div>
 
@@ -174,7 +174,7 @@
                                                 <!-- <td class="center">1</td> -->
                                                 <td class="left strong">
                                                     <div class="">
-                                                        <select class="form-control selected_product"  id="select_produk" required=""  name="selected_product" >
+                                                        <select class="form-control selected_product"  id="select_produk" required=""  name="selected_product[]" >
                                                         <option disabled selected="">Enter Produk</option>
                                                         @foreach($produk as $p)
                                                         <option value="{{ $p->id }}">{{$p->nama_produk}}</option>
@@ -183,13 +183,13 @@
                                                     </div>
                                                 </td>
                                                 <td class="center" style="width:10%;">
-                                                    <input id="quantity" type="number" min="0" class="form-control @error('quantity') is-invalid @enderror" name="quantity" required  placeholder="" >
+                                                    <input id="quantity" type="number" min="0" class="form-control @error('quantity') is-invalid @enderror" name="quantity[]" required  placeholder="" >
                                                 </td>
                                                 <td class="right">
-                                                    <input id="hargajual" type="number" min="0" class="form-control @error('hargajual') is-invalid @enderror" name="hargajual"  placeholder="" disabled="">
+                                                    <input id="hargajual" type="number" min="0" class="form-control @error('hargajual') is-invalid @enderror" name="hargajual[]"  placeholder="" disabled="">
                                                 </td>
                                                 <td class="right">
-                                                    <input id="totalrowharga" type="number" min="0" class="form-control @error('totalrow') is-invalid @enderror" name="totalrowharga" required  placeholder="" disabled="">
+                                                    <input id="totalrowharga" type="number" min="0" class="form-control @error('totalrow') is-invalid @enderror" name="totalrowharga[]" required  placeholder="" disabled="">
                                                 </td>
                                             </tr>
                                         </tbody>
@@ -363,6 +363,49 @@ let produk= document.getElementById('select_produk');
         });
 
 
+        // $(tbody).on('change','.selected_product', function(){
+        //     console.log('row produk');
+        //     let produkval = $(this).val();
+
+        //         var url = "{{URL('/getdataproduk')}}";
+        //         var dltUrl = url+"/"+produkval;
+        //         $.ajax({
+        //             url: dltUrl,
+        //             type:'GET',
+        //             success:function(response){
+        //                 var response = JSON.parse(response);
+        //                 console.log(response);
+                            
+        //                 harga.value = `${response[0]['harga_produk']}`;
+        //                 rowharga.value = parseInt(harga.value) * qty.value;
+        //             }          
+        //         })
+            
+        // });
+
+        // $(tbody).on('change','.selected_product', function(){
+        //     console.log('row produk');
+        //     let tr =$(this).parent().parent();
+        //     let produkval = tr.val();
+
+        //         var url = "{{URL('/getdataproduk')}}";
+        //         var dltUrl = url+"/"+produkval;
+        //         $.ajax({
+        //             url: dltUrl,
+        //             type:'GET',
+        //             success:function(response){
+        //                 var response = JSON.parse(response);
+        //                 console.log(response);
+        //                 let harga = `${response[0]['harga_produk']}`;
+        //                 tr.find('#hargajual').val(harga);
+        //                 tr.find('#totalrowharga').val(parseInt(harga) * qty.value);
+        //                 //harga.value = `${response[0]['harga_produk']}`;
+        //                 //rowharga.value = parseInt(harga.value) * qty.value;
+        //             }          
+        //         })
+            
+        // });
+
         // $.ajaxSetup({ headers: { 'X-CSRF-TOKEN': jQuery('meta[name="csrf-token"]').attr('content') } });
         // $('#quantity').on('change', function(){
         //     console.log('row quantity');
@@ -372,6 +415,8 @@ let produk= document.getElementById('select_produk');
 
         $(document).on('change','#quantity', function(){
             console.log('row quantity');
+            // var id = $(this).find('input[name=product_id]').val();
+			// var qty = $(this).find('input[name=quantity]').val();
             rowharga.value = parseInt(harga.value) * qty.value;
             
         });
@@ -380,21 +425,30 @@ let produk= document.getElementById('select_produk');
             var table = $('#simulationRow').DataTable();
 
             //var counter = 1;
-         
+            var p = <?php echo json_encode($produk); ?>;
             $('#addRow').on( 'click', function () {
-                var html = '<tr>';
-                html += '<td class="left strong"><div class=""><select class="form-control selected_product"  id="select_produk" required=""  name="selected_product" ><option disabled selected="">Enter Produk</option>@foreach($produk as $p)<option value="{{ $p->id }}">{{$p->nama_produk}}</option>@endforeach</select></div></td>';
-                html +='<td class="center" style="width:10%;"><input id="quantity" type="number" min="0" class="form-control @error('quantity') is-invalid @enderror" name="quantity" required  placeholder="" ></td>';
-                html +='<td class="right"><input id="hargajual" type="number" min="0" class="form-control @error('hargajual') is-invalid @enderror" name="hargajual"  placeholder="" disabled=""></td>';
-                html +='<td class="right"><input id="totalrowharga" type="number" min="0" class="form-control @error('totalrow') is-invalid @enderror" name="totalrowharga" required  placeholder="" disabled=""></td>';
+                //var id=p['id'];
+                var id=14;
+                console.log('id');
+                console.log(p);
+                // var html = '<tr>';
+                var html = '<tr id="'+id+'">';
+                html += '<td class="left strong"><div class=""><select class="form-control selected_product"  id="select_produk'+id+'" required=""  name="selected_product[]" ><option disabled selected="">Enter Produk</option>@foreach($produk as $p)<option value="{{ $p->id }}">{{$p->nama_produk}}</option>@endforeach</select></div></td>';
+                html +='<td class="center" style="width:10%;"><input id="quantity'+id+'" type="number" min="0" class="form-control @error('+quantity+') is-invalid @enderror" name="quantity[]" required  placeholder="" ></td>';
+                html +='<td class="right"><input id="hargajual'+id+'" type="number" min="0" class="form-control @error('+hargajual+') is-invalid @enderror" name="hargajual[]"  placeholder="" disabled=""></td>';
+                html +='<td class="right"><input id="totalrowharga'+id+'" type="number" min="0" class="form-control @error('+totalrow+') is-invalid @enderror" name="totalrowharga[]" required  placeholder="" disabled=""></td>';
                 html += '</tr>';
-                // $('#simulationRow tbody').prepend(html);
 
+
+               
+
+                //$('#simulationRow tbody').prepend(html); prepend or append is fine
+                table.row.add($(html)).draw(false);
                 // var rowHtml = $("#simulationRow").find("tbody>tr")[0].outerHTML;
                 // console.log(rowHtml);
                 // table.row.add($(rowHtml)).draw(false);
 
-                table.row.add($(html)).draw(false);
+                
 
 
                 // $('#simulationRow tbody>tr:last #select_produk').text('').change();
