@@ -70,7 +70,7 @@
                   </tr>
                 </table>
                 <br>
-              </div>
+              </div> 
                 
 <div class="compose-content">
     <h5 class="mb-4"><i class="fa fa-paperclip"></i> Attachment</h5>

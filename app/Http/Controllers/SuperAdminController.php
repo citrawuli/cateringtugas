@@ -380,6 +380,9 @@ class SuperAdminController extends Controller
             ->join('kategori_produk', 'produk.id_kategori', '=', 'kategori_produk.id')
             ->select('produk.*','kategori_produk.nama_kategori')
             ->whereNull('produk.deleted_at')->get();
+        // $fotoproduk = DB::table('galeri_produk')
+        //     ->join('produk','galeri_produk.id_produk', '=', 'produk.id')
+        //     ->select('produk.id', 'galeri_produk.*')->get();
         $page_title = 'Product Table';
         $page_description = 'Some description for the page';
         $logo = "teamo/images/aisyacatering_kontak_logo.png";
@@ -489,7 +492,7 @@ class SuperAdminController extends Controller
             //Session::flash('message', "Gambar berhasil ditambahkan");
             //return Redirect::back()->with('message', 'SUKSES!');
             // return redirect()->, ['message' => 'Y Sukses']);
-            return redirect('/ProductTable/'); 
+            //return redirect('/ProductTable/'); 
 
 
             //return redirect('dropzoneview/'.$id)->with('message', 'SUKSES!');
@@ -508,8 +511,7 @@ class SuperAdminController extends Controller
         // }      
     }
 
-    public function dropzoneFetch()
-    {
+    public function dropzoneFetch(){
         $images = \File::allFiles(public_path('images'));
         $output = '<div class="row">';
         foreach($images as $image){
@@ -524,37 +526,33 @@ class SuperAdminController extends Controller
         echo $output;
     }
 
-    public function dropzoneFetchBismillah(){
-        $images = \File::allFiles(public_path('images'));
-        return View('viewSuperAdmin.addphotodropzone',compact('images'));
-    }
-
-    public function dropzoneFetchID($id)
-    {
-        $prodImageData = DB::table('galeri_produk')->where('galeri_produk.id_produk', $id)->get();
-        $prodImageID=$prodImageData->id_produk;
-
-        $images = \File::allFiles(public_path('images'));
-        $output = '<div class="row">';
-        foreach($images as $image){
-            $output .= '
-            <div class="col-md-2" style="margin-bottom:16px;" align="center">
-                <img src="'.asset('images/' . $image->getFilename()).'" class="img-thumbnail" width="175" height="175" style="height:175px;" />
-                <button type="button" class="btn btn-link remove_image" id="'.$image->getFilename().'">Remove</button>
-            </div>
-            ';
-        }
-        $output .= '</div>';
-        echo $output;
-    }
-
     public function dropzoneDelete(Request $request){
-        
         if($request->get('name')){
-            \File::delete(public_path('images/' . $request->get('name')));
-            
+            \File::delete(public_path($request->get('name')));
 
+            //$model = galeriProduk::find($request->get('id'));
+            $model = galeriProduk::where('id_galeri',$request->get('id'));
+            $model->forceDelete();
+            //dd($request->get('id'));
+            //$model->forceDelete();
+            //\File::delete(public_path('images/' . $request->get('name')));
+            
         }
+    }
+
+    public function getModalPhotoProduct($id){
+        $fotoproduk = DB::table('galeri_produk')
+                ->where('galeri_produk.id_produk', $id)->get();
+        return response()->json($fotoproduk);
+                    // @foreach ($fotoproduk as $fotopr)
+                    // <div class="col-md-2" style="margin-bottom:16px;" align="center">
+                    //     <img class="bd-placeholder-img"src="{{ asset('{$fotopr->foto}') }}">
+                    //     <button type="button" class="btn btn-link remove_image" id="'.$fotopr->getFilename().'">Remove</button>
+                                                                    
+                    // </div>
+                    // @endforeach
+        // return $fotoproduk;
+
     }
 
     public function viewproductforminput(){

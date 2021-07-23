@@ -1,6 +1,11 @@
 @extends('layouts.backAdmin.layout.defaultSuperAdmin')
 
 @section('content')
+<style type="text/css">
+	#galeri{
+		display: none;
+	}
+</style>
 <div class="container-fluid">
     <div class="row page-titles mx-0">
         <div class="col-sm-6 p-md-0">
@@ -93,7 +98,7 @@
                                     <div class="d-flex">
                                         
                                         <span data-placement="top" title="Show More Detail" data-toggle="tooltip3" >
-                                            <a href=".bd-example-modal-lg"
+                                        <a href=".bd-example-modal-lg"
                                             data-toggle="modal" 
                                             data-target="#modaldetail{{ $prod->id }}"
                                             data-title="Detail Produk {{ $prod->id }}"
@@ -101,7 +106,6 @@
                                             <i class="fa fa-eye"></i>
                                         </a>
                                         </span>
-
                                        
                                         <div id="modaldetail{{ $prod->id }}" class="modal fade bd-example-modal-lg" tabindex="-1" role="dialog" aria-hidden="true">
                                             <div class="modal-dialog modal-lg">
@@ -128,6 +132,8 @@
                                                                     <p><strong>ID Produk : </strong><span>{{ $prod->id }}</span></p>
                                                                     <p><span>{{ $prod->nama_kategori }}</span></p>
                                                                     <p><span>{{ $prod->nama_produk }}</span></p><br>
+                                                                    <p><a href="#" onclick="get_images('{{ $prod->id }}');" id="lihat">---Lihat Foto Produk---</a></p>
+                                                                    <p id="galeri"></p>
                                                                 </center>
                                                                 
                                                                 <tr>
@@ -271,13 +277,15 @@
 @section('script')
 <script>
 $(document).ready(function(){
-  $('[data-toggle="tooltip"]').tooltip();
-});
-$(document).ready(function(){
-  $('[data-toggle="tooltip2"]').tooltip();
-});
-$(document).ready(function(){
-  $('[data-toggle="tooltip3"]').tooltip();
+    $('[data-toggle="tooltip"]').tooltip();
+
+    $('[data-toggle="tooltip2"]').tooltip();
+
+    $('[data-toggle="tooltip3"]').tooltip();
+
+    
+
+
 });
 
 // Dropzone.options.dropzoneForm = {
@@ -346,54 +354,70 @@ $(document).ready(function(){
 </script>
 
 <script>
-
-
-    Dropzone.options.dropzoneForm = {
-        autoProcessQueue : false,
-        acceptedFiles : ".png,.jpg,.gif,.bmp,.jpeg",
-        autoDiscover : false,
-
-
-        init:function(){
-            var submitButton = document.querySelector("#submit-all");
-            myDropzone = this;
-
-            submitButton.addEventListener('click', function(){
-                myDropzone.processQueue();
-            });
-
-            this.on("complete", function(){
-                if(this.getQueuedFiles().length == 0 && this.getUploadingFiles().length == 0){
-                    var _this = this;
-                    _this.removeAllFiles();
-                }
-                load_images();
-            });
-        }
-    };
-
-
-    load_images();
-
-    function load_images(){
+    function get_images(id){
+        //alert(id);
+        var idpro=id;
+        
+        var url = "{{URL('/getModalPhotoProduct')}}";
+        var urlst = url+"/"+idpro;
+        // //var urlst = "{{ url('/getModalPhotoProduct/'. $prod->id)}}";
+        
         $.ajax({
-            url:"{{ route('dropzone.fetch') }}",
-            success:function(data){
-                $('#uploaded_image').html(data);
-            }
-        })
-    }
+            type: 'GET',
+            url:urlst,
+            success: function (data) {
+                var response = data;
+                console.log(response);
+                $("#galeri").css("display","block");
+                $("#lihat").css("display","none");
+                //$("#galeri").html(data);
+                $.each(data, function(index, obj){
+                    var tr = $("<tr></tr>");
+                    var a = obj.foto;
+                    tr.append("<td><img src='{{ asset("+a+") }}' width='175' height='175' style='height:175px;'/></td>");
+                    tr.append("<td><button type='button' class='btn btn-link remove_image' id='"+obj.id_galeri+"' name='"+a+"'>Remove</button></td>");
+                    tr.append("<td>"+a+"</td>");
+                    // tr.append("<td>"+ obj.first_name +"</td>");
+                    // tr.append("<td>"+ obj.last_name +"</td>");
+                    // tr.append("<td>"+ obj.gender +"</td>");
+                    // tr.append("<td>"+ obj.created_at +"</td>");
+                    // <div class="col-md-2" style="margin-bottom:16px;" align="center">
+                    // //         
+                    // //         <button type="button" class="btn btn-link remove_image" id="'.$image->getFilename().'">Remove</button>
+                    // //     </div>
 
+                    $("#galeri").append(tr);
+                });
+
+                
+                // var your_html = "";
+                // $.each(obj['getstamps'], function (key, val) {
+                // your_html += "<p>My Value :" +  val + ") </p>"
+                // });
+                // $("#data").append(you_html); //// For Append
+                // $("#mydiv").html(your_html)   //// For replace with previous one
+            },
+            error: function() { 
+                console.log(data);
+            }
+        });
+  	}
+</script>
+
+<script>
     $(document).on('click', '.remove_image', function(){
-        var name = $(this).attr('id');
+        var name = $(this).attr('name');
+        var id = $(this).attr('id');
+        console.log("masuk remove");
+        // console.log(name);
+        // console.log(id);
         $.ajax({
             url:"{{ route('dropzone.delete') }}",
-            data:{name : name},
+            data:{name : name, id:id},
             success:function(data){
-                load_images();
+                // load_images();
             }
         })
     });
-
 </script>
 @endsection

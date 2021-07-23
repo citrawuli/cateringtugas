@@ -57,6 +57,7 @@ Route::get('/DeletePermanentAllCategory', [App\Http\Controllers\SuperAdminContro
 
 
 Route::get('/ProductTable', [App\Http\Controllers\SuperAdminController::class, 'viewproducttable']); //lihat Table Product
+Route::get('/getModalPhotoProduct/{id}', [App\Http\Controllers\SuperAdminController::class, 'getModalPhotoProduct']); //lihat Galeri Product per id
 Route::get('/ViewFormProduct', [App\Http\Controllers\SuperAdminController::class, 'viewproductforminput']); //lihat form input produk
 Route::post('/StoreProduct', [App\Http\Controllers\SuperAdminController::class, 'storeproduct']); // store data produk ke DB
 Route::get('/EditProduct/{id}', [App\Http\Controllers\SuperAdminController::class, 'editproduct']); //lihat form edit produk
