@@ -9,7 +9,7 @@ class blog extends Model
 {
     use HasFactory;
 
-    protected $table = 'blog';
+    protected $table = 'blogs';
 
     /**
      * The attributes that are mass assignable.
@@ -17,6 +17,7 @@ class blog extends Model
      * @var array
      */
     protected $fillable = [
+        'user_id',
         'judul_blog',
         'konten_blog',
     ];

@@ -203,7 +203,7 @@
                                                                                 <button type="submit" class="btn btn-primary" id="submit-all" style="margin-top: 10px;">Submit Images</button>
                                                                             </div> -->
 
-                                                                        <form id="dropzoneForm" class="dropzone" action="{{ url( '/dropzone/store/' . $prod -> id ) }}">
+                                                                        <form id="dropzoneForm{{ $prod->id }}" class="dropzone" action="{{ url( '/dropzone/store/' . $prod -> id ) }}">
                                                                                 @csrf
                                                                                 <div class="fallback">
                                                                                     <input name="file" type="file" multiple />

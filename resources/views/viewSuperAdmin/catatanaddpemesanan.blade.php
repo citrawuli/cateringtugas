@@ -170,7 +170,7 @@
                                             </tr>
                                         </thead>
                                         <tbody>
-                                            {{-- <tr>
+                                            <tr id='prod-"+index+"'>
                                                 <!-- <td class="center">1</td> -->
                                                 <td class="left strong">
                                                     <div class="">
@@ -191,7 +191,7 @@
                                                 <td class="right">
                                                     <input id="totalrowharga" type="number" min="0" class="form-control @error('totalrow') is-invalid @enderror" name="totalrowharga[]" required  placeholder="" disabled="">
                                                 </td>
-                                            </tr> --}}
+                                            </tr>
                                         </tbody>
                                     </table>
                                 </div>
@@ -210,15 +210,15 @@
                                             <tbody>
                                                 <tr>
                                                     <td class="left"><strong>Subtotal</strong></td>
-                                                    <td class="right">Rp <p style="display:inline" id="sub_total">0</p></td>
+                                                    <td class="right">Rp</td>
                                                 </tr>
                                                 <tr>
                                                     <td class="left"><strong>Discount (20%)</strong></td>
                                                     <td class="right">Rp</td>
                                                 </tr>
                                                 <tr>
-                                                    <td class="left"><strong>PPN (10%)</strong></td>
-                                                    <td class="right">Rp <p style="display:inline" id="ppn">0</p></td>
+                                                    <td class="left"><strong>VAT (10%)</strong></td>
+                                                    <td class="right">Rp</td>
                                                 </tr>
                                                 <tr>
                                                     <td class="left"><strong>Total</strong></td>
@@ -315,111 +315,175 @@
 // })
     
 // });
-
-
+let harga= document.getElementById('hargajual');
+let qty= document.getElementById('quantity');
+let rowharga= document.getElementById('totalrowharga');
+let produk= document.getElementById('select_produk');
 
     $(document).ready(function() {
         
+        // $('.selected_product').on('change', function(){
+        //     console.log('row produk');
+        //     let produkval = $(this).val();
+
+        //         var url = "{{URL('/getdataproduk')}}";
+        //         var dltUrl = url+"/"+produkval;
+        //         $.ajax({
+        //             url: dltUrl,
+        //             type:'GET',
+        //             success:function(response){
+        //                 var response = JSON.parse(response);
+        //                 console.log(response);
+                            
+        //                 harga.value = `${response[0]['harga_produk']}`;
+        //                 rowharga.value = parseInt(harga.value) * qty.value;
+        //             }          
+        //         })
+            
+        // });
+
+        $(document).on('change','.selected_product', function(){
+            console.log('row produk');
+            let produkval = $(this).val();
+            console.log("val"+produkval);
+                var a = "{{URL('/getdataproduk')}}";
+                var dltUrl = a+"/"+produkval;
+                $.ajax({
+                    url: dltUrl,
+                    type:'GET',
+                    success:function(response){
+                        var response = JSON.parse(response);
+                        console.log(response);
+                            
+                        harga.value = `${response[0]['harga_produk']}`;
+                        rowharga.value = parseInt(harga.value) * qty.value;
+                    }          
+                })
+            
+        });
+
+
+        // $(tbody).on('change','.selected_product', function(){
+        //     console.log('row produk');
+        //     let produkval = $(this).val();
+
+        //         var url = "{{URL('/getdataproduk')}}";
+        //         var dltUrl = url+"/"+produkval;
+        //         $.ajax({
+        //             url: dltUrl,
+        //             type:'GET',
+        //             success:function(response){
+        //                 var response = JSON.parse(response);
+        //                 console.log(response);
+                            
+        //                 harga.value = `${response[0]['harga_produk']}`;
+        //                 rowharga.value = parseInt(harga.value) * qty.value;
+        //             }          
+        //         })
+            
+        // });
+
+        // $(tbody).on('change','.selected_product', function(){
+        //     console.log('row produk');
+        //     let tr =$(this).parent().parent();
+        //     let produkval = tr.val();
+
+        //         var url = "{{URL('/getdataproduk')}}";
+        //         var dltUrl = url+"/"+produkval;
+        //         $.ajax({
+        //             url: dltUrl,
+        //             type:'GET',
+        //             success:function(response){
+        //                 var response = JSON.parse(response);
+        //                 console.log(response);
+        //                 let harga = `${response[0]['harga_produk']}`;
+        //                 tr.find('#hargajual').val(harga);
+        //                 tr.find('#totalrowharga').val(parseInt(harga) * qty.value);
+        //                 //harga.value = `${response[0]['harga_produk']}`;
+        //                 //rowharga.value = parseInt(harga.value) * qty.value;
+        //             }          
+        //         })
+            
+        // });
+
+        // $.ajaxSetup({ headers: { 'X-CSRF-TOKEN': jQuery('meta[name="csrf-token"]').attr('content') } });
+        // $('#quantity').on('change', function(){
+        //     console.log('row quantity');
+        //     rowharga.value = parseInt(harga.value) * qty.value;
+            
+        // });
+
+        $(document).on('change','#quantity', function(){
+            console.log('row quantity');
+            // var id = $(this).find('input[name=product_id]').val();
+			// var qty = $(this).find('input[name=quantity]').val();
+            rowharga.value = parseInt(harga.value) * qty.value;
+            
+        });
+
         //ADD ROW
             var table = $('#simulationRow').DataTable();
-            var p = <?php echo json_encode($produk);?>;
-            var counter = 1;
+
+            //var counter = 1;
+            var p = <?php echo json_encode($produk); ?>;
+
+            function getIndex(id_pro){
+                for(var i=0;i<p.length;i++){
+                    if(p[i]['id'] == id_pro){
+                        return i;
+                    }
+                }
+            }
+
+            
 
             $('#addRow').on( 'click', function () {
                 //var id=p['id'];
-                var id=counter;
-                //$(this).parent().index();
-                console.log('id '+id);
+                var id=$("#simulationRow tr").index( $(x).parents('tr'));
+                console.log('id');
                 console.log(p);
                 // var html = '<tr>';
                 var html = '<tr id="'+id+'">';
-                html += '<td class="left strong"><div class=""><select class="form-control selected_product"  id="select_produk'+id+'" required=""  name="select_produk'+id+'" ><option disabled selected="">Enter Produk</option>@foreach($produk as $p)<option value="{{ $p->id }}">{{$p->nama_produk}}</option>@endforeach</select></div></td>';
-                html +='<td class="center" style="width:10%;"><input id="quantity'+id+'" type="number" min="0" class="form-control @error('+quantity+') is-invalid @enderror" name="quantity'+id+'" required   ></td>';
+                html += '<td class="left strong"><div class=""><select class="form-control selected_product"  id="select_produk'+id+'" required=""  name="selected_product[]" ><option disabled selected="">Enter Produk</option>@foreach($produk as $p)<option value="{{ $p->id }}">{{$p->nama_produk}}</option>@endforeach</select></div></td>';
+                html +='<td class="center" style="width:10%;"><input id="quantity'+id+'" type="number" min="0" class="form-control @error('+quantity+') is-invalid @enderror" name="quantity[]" required  placeholder="" ></td>';
                 html +='<td class="right"><input id="hargajual'+id+'" type="number" min="0" class="form-control @error('+hargajual+') is-invalid @enderror" name="hargajual[]"  placeholder="" disabled=""></td>';
-                html +='<td class="right"><input id="totalrowharga'+id+'" type="number"  class="form-control @error('+totalrow+') is-invalid @enderror totalrowharga" name="totalrowharga'+id+'" required  placeholder="" disabled=""></td>';
+                html +='<td class="right"><input id="totalrowharga'+id+'" type="number" min="0" class="form-control @error('+totalrow+') is-invalid @enderror" name="totalrowharga[]" required  placeholder="" disabled=""></td>';
                 html += '</tr>';
 
+
+               
+
+                //$('#simulationRow tbody').prepend(html); prepend or append is fine
                 table.row.add($(html)).draw(false);
-                counter++;
-                
-                hitung(id);
-                
-            });
-            function hitung(id){
+                // var rowHtml = $("#simulationRow").find("tbody>tr")[0].outerHTML;
+                // console.log(rowHtml);
+                // table.row.add($(rowHtml)).draw(false);
 
-                let harga= $("#hargajual"+id);
-                console.log("harga");
-                console.log(harga);
-                let qty= $("#quantity"+id);
-                console.log("qty "+harga);
-                let rowharga= $("#totalrowharga"+id);
-                let produk= $("#select_produk"+id);
-                //dont use class .select okayyy it wil ruined all
-                $(document).on('change','#select_produk'+id, function(){
-                    console.log('row produk');
-                    let produkval = $(this).val();
-                    console.log("val"+produkval);
-                        var a = "{{URL('/getdataproduk')}}";
-                        var dltUrl = a+"/"+produkval;
-                        $.ajax({
-                            url: dltUrl,
-                            type:'GET',
-                            success:function(response){
-                                console.log("response");
-                                var response = JSON.parse(response);
-                                console.log(response);
-                                
-                                var hg = `${response[0]['harga_produk']}`;
-                                harga.val(hg);
-                                console.log("hargaa");
-                                console.log(hg);
+                
 
-                                //$("#hargajual"+id).html(response[0]['harga_produk']);    
-                                
-                                let thg= hg * qty.val();
-                                //$("#totalrowharga"+id).val(thg);
-                                $("#totalrowharga"+id).val(thg);
-                                hitung_calc();
-                            }          
-                        })
+
+                // $('#simulationRow tbody>tr:last #select_produk').text('').change();
+                //$('#simulationRow tbody>tr:last #select_produk').val('');
+                //$("td.select_produk", row).empty();
+                
+
+                // //CARA ASLI
+                // // table.row.add( 
+                // //     [
+                // //     counter +'.1',
+                // //     counter +'.2',
+                // //     counter +'.3',
+                // //     counter +'.4',
+                // //     counter +'.5'
                     
-                });
-
-                $(document).on('change','#quantity'+id, function(){
-                    console.log('row quantity');
-                    //oke entah kenapa yg ini bisa. awas non nan * non nan jadi nan lagi!!!
-                    qty2=parseInt(qty.val());
-                    // console.log(qty2);
-                    // alert ( isNaN(qty2)); 
-
-                    hargaa=parseInt(harga.val());
-                    // console.log(hargaa);
-                    // alert ( isNaN(hargaa)); 
-
-                    //thg= parseInt(hargaa.innerHTML) * qty2.value;
-                    thg= qty2 * hargaa;
-                    //alert ( isNaN(thg)); 
-                    $("#totalrowharga"+id).val(thg);
-
-                    hitung_calc();
-                });
-
-            }
-
-            function hitung_calc(){
-                console.log('row calc');
-                total=0;
-                $('.totalrowharga').each(function() {
-                    total += parseInt($(this).val());
-                });
-                $('#sub_total').html(total);
-                tax_sum=total/100*$('#tax').val();
-                $('#tax_amount').val(tax_sum.toFixed(2));
-                $('#total_amount').val((tax_sum+total).toFixed(2));
-            }
+                // //     ]
+                // // ).draw( false );
          
-        //Automatically add a first row of data
-            $('#addRow').click();
+                // counter++;
+            });
+         
+            // Automatically add a first row of data
+            //$('#addRow').click();
 
         //DELETE ROW
             $('#simulationRow tbody').on( 'click', 'tr', function () {

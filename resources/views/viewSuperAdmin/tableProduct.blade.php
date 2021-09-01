@@ -2,7 +2,7 @@
 
 @section('content')
 <style type="text/css">
-	#galeri{
+	#galeri,#kosong{
 		display: none;
 	}
 </style>
@@ -132,8 +132,16 @@
                                                                     <p><strong>ID Produk : </strong><span>{{ $prod->id }}</span></p>
                                                                     <p><span>{{ $prod->nama_kategori }}</span></p>
                                                                     <p><span>{{ $prod->nama_produk }}</span></p><br>
-                                                                    <p><a href="#" onclick="get_images('{{ $prod->id }}');" id="lihat">---Lihat Foto Produk---</a></p>
-                                                                    <p id="galeri"></p>
+                                                                    <p><a href="#collapseExample" name="{{ $prod->id }}" id="lihat" data-toggle="collapse" role="button" class="lihat">---Lihat Foto Produk---</a></p>
+                                                                    
+                                                                    
+                                                                    <p><a href="#" name="" id="kosong">---Tidak Ada Foto Produk---</a></p>
+                                                                    <!-- bawah ini bikin uncaught bolak balik pake public path hmmm ayo ngakali yang atas!!!-->
+                                                                    <!-- <p><a href="#" onclick="get_images('{{ $prod->id }}');" id="lihat">---Lihat Foto Produk---</a></p> -->
+                                                                    <div class="collapse" id="collapseExample">
+                                                                        <div id="galeri" class="card card-body">
+                                                                        </div>
+                                                                    </div>
                                                                 </center>
                                                                 
                                                                 <tr>
@@ -165,92 +173,6 @@
                                             <i class="flaticon-381-photo-camera-1"></i>
                                         </a>
                                         </span> -->
-
-                                        <div id="modaladdproduk{{ $prod->id }}" class="modal fade bd-example-modal-lg" tabindex="-1" role="dialog" aria-hidden="true">
-                                            <div class="modal-dialog modal-lg">
-                                                <div class="modal-content">
-                                                    <div class="modal-header">
-                                                        <h5 class="modal-title">Add Product</h5>
-                                                        <button type="button" class="close" data-dismiss="modal"><span>&times;</span>
-                                                        </button>
-                                                    </div>
-                                                    <div class="modal-body">
-                                                        
-                                                        
-                                                        <table >
-                                                            <thead>
-                                                                <tr>
-                                                                    <!-- <th>Deleted At</th>
-                                                                    <th>Created At</th>
-                                                                    <th>Updated At</th> -->
-                                                                </tr>
-                                                            </thead>
-
-                                                            <tbody>
-                                                                <!--GIMANA CARA BIKIN SUBMIT BUTTON JADI UNIK, UBAH STRUKTUR HTML! PR!-->
-                                                                <center>
-                                                                    <p><strong>ID Produk : </strong><span>{{ $prod->id }}</span></p>
-                                                                    <p><span>{{ $prod->nama_kategori }}</span></p>
-                                                                    <p><span>{{ $prod->nama_produk }}</span></p><br>
-
-                                                                   <div class="compose-content">
-                                                                        <h5 class="mb-4"><i class="fa fa-paperclip"></i> Attachment</h5>
-                                                                        <!-- <form action="{{ url( '/dropzone/store/' . $prod -> id ) }}" method="post" files="true" enctype="multipart/form-data" class="dropzone" id="dropzoneForm">
-                                                        
-                                                                           @csrf
-                                                                           
-                                                                            <div class="fallback">
-                                                                                <input name="file[]" type="file" multiple="multiple" hidden="">
-
-                                                                            </div>
-                                                                            
-                                                                        </form>
-                                                                        <div align="center">
-                                                                                <button type="submit" class="btn btn-primary" id="submit-all" style="margin-top: 10px;">Submit Images</button>
-                                                                            </div> -->
-
-                                                                        <form id="dropzoneForm" class="dropzone" action="{{ url( '/dropzone/store/' . $prod -> id ) }}">
-                                                                                @csrf
-                                                                                <div class="fallback">
-                                                                                    <input name="file" type="file" multiple />
-                                                                                </div>
-                                                                        </form>
-                                                                        <div align="center">
-                                                                            <button type="button" class="btn btn-primary" id="submit-all" style="margin-top: 10px;">Upload</button>
-                                                                        </div>
-
-                                                                        <div class="panel-heading">
-                                                                            <!-- <h3 class="panel-title">Uploaded Image</h3> -->
-                                                                            <br><h5 class="mb-4"><i class="fa fa-paperclip"></i> Uploaded Image</h5>
-                                                                        </div>
-                                                                            <div class="panel-body" id="uploaded_image">
-                                                                        </div>
-
-                                                                    </div>
-
-                                                                
-
-                                                                </center>
-                                                                
-                                                                <tr>
-                        
-                                                                  <!-- <td>{{ $prod->deleted_at }}</td>
-                                                                  <td>{{ $prod->created_at }}</td>
-                                                                  <td>{{ $prod->updated_at }}</td> -->
-                                                                  
-                                                                </tr>
-                                                                     
-                                                            </tbody>
-
-                                                        </table>
-                                                       
-                                                    </div>
-                                                    <div class="modal-footer">
-                                                        <button type="button" class="btn btn-danger light" data-dismiss="modal">Close</button>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
 
                                         <a href="{{ url('/dropzoneview/'. $prod->id)}}" class="btn btn-warning shadow btn-xs sharp mr-1"><i class="flaticon-381-photo-camera-1" data-toggle="tooltip" data-placement="top" title="Add Photo"></i></a> 
 
@@ -287,73 +209,94 @@ $(document).ready(function(){
 
 
 });
-
-// Dropzone.options.dropzoneForm = {
-//     autoProcessQueue:false,
-//     maxFilesize         :       1,
-//     acceptedFiles: ".jpeg,.jpg,.png,.gif"
-// };
-
-// Dropzone.options.dropzoneForm = {
-//     paramName: "file",
-//     autoProcessQueue : false,
-//     acceptedFiles : ".png,.jpg,.gif,.bmp,.jpeg",
-//     uploadMultiple: true,
-//     parallelUploads: 10,
-//     maxFiles: 10,
-
-//     init:function(){
-//         var submitButton = document.getElementById('submit-all');   
-//         myDropzone = this;
-
-//         submitButton.addEventListener('click', function(){
-//             myDropzone.processQueue();
-//         });
-
-//         this.on("complete", function(){
-//             if(this.getQueuedFiles().length == 0 && this.getUploadingFiles().length == 0){
-//                 var _this = this;
-//                 _this.removeAllFiles();
-//             }
-//             load_images();
-//         });
-//     }
-// };
-
-// load_images();
-
-// function load_images(){
-//     $.ajax({
-//         url:"{{ route('dropzone.fetch') }}",
-//         success:function(data) {
-//             $('#uploaded_image').html(data);
-//         }
-//     })
-// }
-
-// $(document).on('click', '.remove_image', function(){
-//     var name = $(this).attr('id');
-//     $.ajax({
-//         url:"{{ route('dropzone.delete') }}",
-//         data:{name : name},
-//         success:function(data){
-//             load_images();
-//         }
-//     })
-// });
-// // var buttons = document.querySelectorAll('#editt');
-
-// // buttons.forEach(function(button) {
-// //   if (button.value==null) {
-// //     button.style.display = "none"
-// //   }
-// // });
-
-
-
 </script>
 
 <script>
+    //use one click function is good but with document upfront it will effect the entire document. Dont use document this time :')!!!
+$(document).ready(function(){
+    $(document).on('click', '.lihat', function(e){
+    //$('#lihat').click(function(){
+        //e.preventDefault();
+        // $( "#lihat" ).unbind('click');
+        var idpro = $(this).attr('name');
+        console.log("masuk lihat");
+        //console.log(idpro);
+        var url = "{{URL('/getModalPhotoProduct')}}";
+        var urlst = url+"/"+idpro;
+        // //var urlst = "{{ url('/getModalPhotoProduct/'. $prod->id)}}";
+        
+        $.ajax({
+            type: 'GET',
+            url:urlst,
+            success: function (data) {
+                var response = data;
+                console.log(response);
+
+                //showgal(response);
+                if (response == '') { 
+                    console.log("Array is empty!") 
+                    //alert("Tidak ada gambar!");
+                    swal({
+                        title: "Gambar Tidak Ada!",
+                        text: "Hei, tambahkan gambar terlebih dahulu."
+                    });
+                }
+                
+                $("#galeri").css("display","block");
+                
+                //$("#galeri").html(data);
+                $.each(response, function(index, obj){
+                    var tr = $("<tr></tr>");
+                    var base_url = '{{ url("") }}';
+                    var a = base_url+obj.foto;
+                    var b = '{{asset('+obj.foto+')}}';
+                    console.log(b);
+
+                    // create a new image tag, setting the src and alt text thanks https://laracasts.com/discuss/channels/laravel/display-image-in-view-with-ajax
+                    var img = document.createElement("img");
+                    img.src = a; // http://yoursite.com/img/image.jpg
+                    img.alt = 'Product Image';
+                    img.width ='200';
+                    img.height ='200';
+
+                    //add the newly created image to an existing div on the page
+                    var targetDiv = document.getElementById("galeri"); 
+                    console.log(targetDiv);
+                    targetDiv.append(img); 
+
+                    //BISA
+                    //tr.append("<td><img src='{{asset("/images/1627130088-about-background.jpg")}}' width='175' height='175' /></td>");
+                    //NGGAK BISA, nggak ke generate a atau obj.foto jadi url, broken image, url 404
+                    //tr.append("<td><img src='"+b+"' class='rounded-circle mb-4'/></td>");
+                    //tr.append("<td><img src='{{ asset("+a+") }}' class='rounded-circle mb-4'/></td>");
+                    //tr.append("<img href='{{ public_path("+a+")}}' width='175' height='175' style='height:175px;'/>");
+                    tr.append("<td><button type='button' class='btn btn-link remove_image' id='"+obj.id_galeri+"' name='"+obj.foto+"'>Remove</button></td>");
+                    //tr.append("<td>"+a+"</td>");
+                    tr.append("<td><a href='"+a+"' target='_blank'>Lihat Gambar Full</a></td>");
+                    //CONTOH
+                    // tr.append("<td>"+ obj.first_name +"</td>");
+                    // tr.append("<td>"+ obj.last_name +"</td>");
+                    $("#galeri").append(tr);
+                    //$("#galeri").html(img);
+                });
+                
+            },
+            error: function() { 
+                console.log(data);
+            }
+        });
+    });
+
+    // $(".ignore-click").click(function(){
+    //     return false;
+    // })
+
+    function showgal(response){
+                
+    }
+
+    
+    //gak jadi pake onclick getimage, ada masalah uncaught error
     function get_images(id){
         //alert(id);
         var idpro=id;
@@ -375,12 +318,11 @@ $(document).ready(function(){
                     var tr = $("<tr></tr>");
                     var a = obj.foto;
                     tr.append("<td><img src='{{ asset("+a+") }}' width='175' height='175' style='height:175px;'/></td>");
+                    // tr.append("<img href='{{ public_path("+a+")}}' width='175' height='175' style='height:175px;'/>");
                     tr.append("<td><button type='button' class='btn btn-link remove_image' id='"+obj.id_galeri+"' name='"+a+"'>Remove</button></td>");
-                    tr.append("<td>"+a+"</td>");
+                    tr.append("<td><a href='"+a+"'>Lihat Gambar </a></td>");
                     // tr.append("<td>"+ obj.first_name +"</td>");
                     // tr.append("<td>"+ obj.last_name +"</td>");
-                    // tr.append("<td>"+ obj.gender +"</td>");
-                    // tr.append("<td>"+ obj.created_at +"</td>");
                     // <div class="col-md-2" style="margin-bottom:16px;" align="center">
                     // //         
                     // //         <button type="button" class="btn btn-link remove_image" id="'.$image->getFilename().'">Remove</button>
@@ -402,6 +344,7 @@ $(document).ready(function(){
             }
         });
   	}
+});
 </script>
 
 <script>
@@ -416,6 +359,7 @@ $(document).ready(function(){
             data:{name : name, id:id},
             success:function(data){
                 // load_images();
+                //$(this).closest("tr").remove();
             }
         })
     });

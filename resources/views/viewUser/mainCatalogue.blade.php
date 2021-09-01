@@ -2175,46 +2175,51 @@
         <div class="teamo-instagram">
             <div class="instagram owl-slick equal-container"
                  data-slick='{"autoplay":false, "autoplaySpeed":1000, "arrows":false, "dots":false, "infinite":true, "speed":800, "rows":1}'
-                 data-responsive='[{"breakpoint":"2000","settings":{"slidesToShow":5}},{"breakpoint":"1200","settings":{"slidesToShow":4}},{"breakpoint":"992","settings":{"slidesToShow":3}},{"breakpoint":"768","settings":{"slidesToShow":2}},{"breakpoint":"481","settings":{"slidesToShow":2}}]'>
+                 data-responsive='[{"breakpoint":"2000","settings":{"slidesToShow":5}},
+                 {"breakpoint":"1200","settings":{"slidesToShow":4}},
+                 {"breakpoint":"992","settings":{"slidesToShow":3}},
+                 {"breakpoint":"768","settings":{"slidesToShow":2}},
+                 {"breakpoint":"481","settings":{"slidesToShow":1}}]'>
                 <div class="item-instagram">
-                    <a href="https://www.instagram.com/p/CHhdkVdAJh3/?utm_source=ig_web_copy_link">
+                    <a href="http://www.instagram.com/p/CHhdkVdAJh3/?utm_source=ig_web_copy_link" target="_blank">
                         <img src="{{ asset('teamo/images/ig1.jpg')}}" alt="img">
+                        <span class="text">
+                            <i class="icon flaticon-instagram" aria-hidden="true"></i>
+                        </span>
                     </a>
-                    <span class="text">
-                        <i class="icon flaticon-instagram" aria-hidden="true"></i>
-			        </span>
+                    
                 </div>
                 <div class="item-instagram">
-                    <a href="#">
+                    <a href="http://www.instagram.com/p/CIVfH-wgerH/?utm_medium=copy_link" target="_blank">
                         <img src="{{ asset('teamo/images/ig2.jpg')}}" alt="img">
+                        <span class="text">
+                            <i class="icon flaticon-instagram" aria-hidden="true"></i>
+                        </span>
                     </a>
-                    <span class="text">
-                        <i class="icon flaticon-instagram" aria-hidden="true"></i>
-			        </span>
                 </div>
                 <div class="item-instagram">
-                    <a href="#">
+                    <a href="http://www.instagram.com/p/CIRa9S2ASsw/?utm_medium=copy_link" target="_blank">
                         <img src="{{ asset('teamo/images/ig3.jpg')}}" alt="img">
+                        <span class="text">
+                            <i class="icon flaticon-instagram" aria-hidden="true"></i>
+                        </span>
                     </a>
-                    <span class="text">
-                        <i class="icon flaticon-instagram" aria-hidden="true"></i>
-			        </span>
                 </div>
                 <div class="item-instagram">
-                    <a href="#">
+                    <a href="http://www.instagram.com/p/CHzsMgdgqj7/?utm_medium=copy_link" target="_blank">
                         <img src="{{ asset('teamo/images/ig4.jpg')}}" alt="img">
+                        <span class="text">
+                            <i class="icon flaticon-instagram" aria-hidden="true"></i>
+                        </span>
                     </a>
-                    <span class="text">
-                        <i class="icon flaticon-instagram" aria-hidden="true"></i>
-			        </span>
                 </div>
                 <div class="item-instagram">
-                    <a href="#">
+                    <a href="http://www.instagram.com/p/CHWLOUDg981/?utm_medium=copy_link" target="_blank">
                         <img src="{{ asset('teamo/images/ig5.jpg')}}" alt="img">
+                        <span class="text">
+                            <i class="icon flaticon-instagram" aria-hidden="true"></i>
+                        </span>
                     </a>
-                    <span class="text">
-                        <i class="icon flaticon-instagram" aria-hidden="true"></i>
-			        </span>
                 </div>
             </div>
         </div>

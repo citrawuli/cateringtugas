@@ -42,6 +42,22 @@
                             <li><a href="{!! url('/PemesananTable'); !!}">Daftar Permintaan</a></li>
                         </ul>
                     </li>
+                    <li><a class="has-arrow ai-icon" href="javascript:void()" aria-expanded="false">
+                        <i class="flaticon-381-tab"></i>
+                        <span class="nav-text">Orderan</span>
+                    </a>
+                        <ul aria-expanded="false">
+                            <li><a href="{!! url('/OrderTable'); !!}">Daftar Order</a></li>
+                        </ul>
+                    </li>
+                    <li><a class="has-arrow ai-icon" href="javascript:void()" aria-expanded="false">
+                        <i class="flaticon-381-notebook-3"></i>
+                        <span class="nav-text">Blog</span>
+                    </a>
+                        <ul aria-expanded="false">
+                            <li><a href="{!! url('/BlogTable'); !!}">Daftar Blog</a></li>
+                        </ul>
+                    </li>
                 </ul>
             
 				<div class="add-menu-sidebar">

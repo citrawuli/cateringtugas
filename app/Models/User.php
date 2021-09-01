@@ -62,4 +62,9 @@ class User extends Authenticatable
     {
         return $this->id;
     }
+
+    public function gettoken()
+    {
+        return $this->remember_token;
+    }
 }

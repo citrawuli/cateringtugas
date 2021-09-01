@@ -33,11 +33,15 @@
         <div class="container">
             <div class="top-bar-left">
                 <div class="header-message">
-                    Selamat datang di online store kami!
+                    <b>Selamat datang di online store kami!</b>
+                    Catering wilayah Surabaya dan sekitarnya. <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-telephone-fill" viewBox="0 0 16 16">
+                    <path fill-rule="evenodd" d="M1.885.511a1.745 1.745 0 0 1 2.61.163L6.29 2.98c.329.423.445.974.315 1.494l-.547 2.19a.678.678 0 0 0 .178.643l2.457 2.457a.678.678 0 0 0 .644.178l2.189-.547a1.745 1.745 0 0 1 1.494.315l2.306 1.794c.829.645.905 1.87.163 2.611l-1.034 1.034c-.74.74-1.846 1.065-2.877.702a18.634 18.634 0 0 1-7.01-4.42 18.634 18.634 0 0 1-4.42-7.009c-.362-1.03-.037-2.137.703-2.877L1.885.511z"/>
+                    </svg> <a href=" {{ url('/kontak') }} " target="_blank" class="teamo-menu-item-title" onMouseOver="this.style.color='black'"
+                    onMouseOut="this.style.color='white'"  title="About">Hubungi kami</a> untuk konsultasi lebih lanjut.
                 </div>
             </div>
             <div class="top-bar-right">
-                <div class="header-language">
+                <!-- <div class="header-language">
                     <div class="teamo-language teamo-dropdown">
                         <a href="#" class="active language-toggle" data-teamo="teamo-dropdown">
 									<span>
@@ -61,7 +65,7 @@
                             </li>
                         </ul>
                     </div>
-                </div>
+                </div> -->
                 <ul class="header-user-links">
                     <li>
                         <a href="{{route('login')}}">Login</a>
@@ -91,8 +95,7 @@
                         <form class="form-search form-search-width-category">
                             <div class="form-content">
                                 <div class="category">
-                                    <select title="cate" data-placeholder="All Categories" class="chosen-select"
-                                            tabindex="1">
+                                    <select title="cate" data-placeholder="All Categories" class="chosen-select" tabindex="1">
                                         <option value="United States">Accessories</option>
                                         <option value="United Kingdom">Cacti</option>
                                         <option value="Afghanistan">Succulents</option>
@@ -239,7 +242,7 @@
                                 <span class="flaticon-user"></span>
                             </a>
                             <div class="header-account teamo-submenu">
-                                <div class="header-user-form-tabs">
+                                <!-- <div class="header-user-form-tabs">
                                     <ul class="tab-link">
                                         <li class="active">
                                             <a data-toggle="tab" aria-expanded="true" href="#header-tab-login">Login</a>
@@ -285,7 +288,7 @@
                                             </form>
                                         </div>
                                     </div>
-                                </div>
+                                </div> -->
                             </div>
                         </div>
                         <a class="menu-bar mobile-navigation menu-toggle" href="#">
@@ -314,7 +317,7 @@
                     <div class="block-content verticalmenu-content">
                         <ul class="teamo-nav-vertical vertical-menu teamo-clone-mobile-menu">
                             <li class="menu-item">
-                                <a href="#" class="teamo-menu-item-title" title="Tentang Kami">Tentang Kami</a>
+                                <a href="{{ url('tentangkami') }}" class="teamo-menu-item-title" title="Tentang Kami">Tentang Kami</a>
                             </li>
                             <li class="menu-item menu-item-has-children">
                                 <a title="Info" href="#" class="teamo-menu-item-title">Info</a>
@@ -488,7 +491,7 @@
                                 </ul>
                             </li>
                             <li class="menu-item">
-                                <a href="about.html" class="teamo-menu-item-title" title="About">Kontak</a>
+                                <a href=" {{ url('/kontak') }} " class="teamo-menu-item-title " title="About">Kontak</a>
                             </li>
                         </ul>
                     </div>
@@ -603,15 +606,17 @@
                 <div class="box-footer col-xs-12 col-sm-4 col-md-4 col-lg-4 hidden-xs">
                     <div class="teamo-newsletter style1">
                         <div class="newsletter-head">
-                            <h3 class="title">Newsletter</h3>
+                            <h3 class="title">AISYA CATERING SURABAYA</h3>
                         </div>
                         <div class="newsletter-form-wrap">
                             <div class="list">
-                                Sign up for our free video course and <br/> urban garden inspiration
+                            <b>Alamat Kantor :</b>Jl. Kebonsari III No.28, Kebonsari, Kec. Jambangan, Kota Surabaya, Jawa Timur 60233<br/> 
+                            <b>Kontak Kantor :</b> (031) 828 1065
+                            
                             </div>
-                            <input type="email" class="input-text email email-newsletter"
+                            <!-- <input type="email" class="input-text email email-newsletter"
                                    placeholder="Your email letter">
-                            <button class="button btn-submit submit-newsletter">SUBSCRIBE</button>
+                            <button class="button btn-submit submit-newsletter">SUBSCRIBE</button> -->
                         </div>
                     </div>
                 </div>
@@ -644,7 +649,7 @@
                         <div class="teamo-socials">
                             <ul class="socials">
                                 <li>
-                                    <a href="#" class="social-item" target="_blank">
+                                    <a href="http://wa.me/6282123522472" class="social-item" target="_blank">
                                         <i class="icon fa fa-whatsapp"></i>
                                     </a>
                                 </li>
@@ -661,9 +666,9 @@
                             </ul>
                         </div>
                         <div class="coppyright">
-                            Copyright © 2020
-                            <a href="#">Teamo</a>
-                            . All rights reserved
+                            © 2021 CATERING SURABAYA, AISYA CATERING.
+                            <!-- <a href="#">Teamo</a> -->
+                            All rights reserved
                         </div>
                     </div>
                 </div>
@@ -738,7 +743,7 @@
 <script src="{{ asset('teamo/js/lightbox.min.js') }}"></script>
 <script src="{{ asset('teamo/js/owl.thumbs.min.js') }}"></script>
 <script src="{{ asset('teamo/js/jquery.scrollbar.min.js') }}"></script>
-<!--<script src='https://maps.googleapis.com/maps/api/js?key=AIzaSyC3nDHy1dARR-Pa_2jjPCjvsOR4bcILYsM'></script>-->
+{{-- <script src='https://maps.googleapis.com/maps/api/js?key=AIzaSyC3nDHy1dARR-Pa_2jjPCjvsOR4bcILYsM'></script> --}}
 <script src="{{ asset('teamo/js/frontend-plugin.js') }}"></script>
 @yield('script')
 </body>

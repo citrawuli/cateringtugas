@@ -9,6 +9,7 @@ use Illuminate\Support\Facades\Validator;
 use Session;
 use Redirect;
 use App\Models\User;
+use App\Models\blog;
 use App\Models\role_users;
 use App\Models\kategoriProduk;
 use App\Models\produk;
@@ -759,8 +760,72 @@ class SuperAdminController extends Controller
         return response()->json($produk);
     }
 
+    public function blogTable(){
+        // $blog = DB::table('blogs')
+        //     ->whereNull('blogs.deleted_at')->get();
+        $blog = DB::table('blogs')
+            ->join('users', 'blogs.user_id', '=', 'users.id')
+            ->leftJoin('role_users', 'users.id', '=', 'role_users.user_id')
+            ->leftJoin('roles', 'role_users.role_id', '=', 'roles.id')
+            ->select('blogs.*', 'users.name','role_name')
+            ->whereNull('blogs.deleted_at')->get();
+        $page_title = 'Blog Table';
+        $page_description = 'Some description for the page';
+        $logo = "teamo/images/aisyacatering_kontak_logo.png";
+        $logoText = "teamo/images/aisya-catering-logo3.png";
+        $action = __FUNCTION__;
+        //dump($barang);        
+        return view('viewSuperAdmin.tableBlog', compact('blog', 'page_title', 'page_description','action','logo','logoText'));
+    }
+
+    public function blogForm(){
+        $users = DB::table('users')->get();
+        $page_title = 'Add Blog';
+        $page_description = 'Some description for the page';
+        $logo = "teamo/images/aisyacatering_kontak_logo.png";
+        $logoText = "teamo/images/aisya-catering-logo3.png";
+        $action = __FUNCTION__;
+        return view('viewSuperAdmin.addBlog', compact('users', 'page_title', 'page_description','action','logo','logoText'));
+    }
+
     public function getdataproduk($id_produk){
         echo json_encode(DB::table('produk')->where('id', $id_produk)->get());
+    }
+
+    public function storeblog(Request $request)
+    {
+        $validator = $request->validate([
+            'judulblog' => ['required', 'max:100'],
+            'summernote' => ['required'],
+        ],
+        [
+            'judulblog.required' => 'Mohon mengisi judul blog',
+            'summernote.required' => 'Mohon mengisi konten blog',
+            'judulblog.max' => 'Judul blog harus dibawah 100 karakter',
+            'summernote.max' => 'Konten blog harus dibawah 65.535 karakter',
+        ]
+        );
+
+        // $model = produk::find($id);
+        // $model->id_kategori = $request->input('category_name');
+        // $model->nama_produk = $request->input('product_name');
+        // $model->tipe_produk = $request->input('product_type');
+        // $model->deskripsi_produk = $request->input('product_desc');
+        // $model->harga_produk = $request->input('product_price');
+        // $model->touch();
+        // $model->save();
+        // Session::flash('message', "Data produk berhasil diubah");
+        // return Redirect::back();
+
+        //dd($request->all()); 
+        Blog::create([
+            'user_id' => $request->cariuser,
+            'judul_blog' => $request->judulblog,
+            'konten_blog' => $request->summernote,
+        ]);
+    
+        Session::flash('message', "Blog berhasil ditambahkan");
+        return Redirect::back();
     }
 
 

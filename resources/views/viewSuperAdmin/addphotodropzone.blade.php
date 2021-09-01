@@ -78,7 +78,7 @@
      <form action="{{ url( '/dropzone/store/' . $produk -> id ) }}" method="post" files="true" enctype="multipart/form-data" class="dropzone" id="dropzoneForm">                                              
         @csrf                                                             
         <div class="fallback">
-            <input name="file[]" type="file" id="filephoto" multiple="multiple" hidden="">
+            <input name="file[]" type="file" id="filephoto" multiple hidden="">
         </div>                                                                  
     </form>
 
@@ -121,11 +121,11 @@
 @section('script')
 <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/dropzone/5.5.1/dropzone.js"></script> --> -->
 <script>
+
     Dropzone.options.dropzoneForm = {
 	    autoProcessQueue : false,
       addRemoveLinks: true,
 	    acceptedFiles : ".png,.jpg,.gif,.bmp,.jpeg",
-
 	    init:function(){
 	      	var submitButton = document.querySelector("#submit-all");
 	      	myDropzone = this;

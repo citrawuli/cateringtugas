@@ -21,6 +21,14 @@ Route::get('/', function () {
     return view('viewUser.mainCatalogue'); 
 }); //home KATALOG
 
+// Route::get('/kontak', function () {
+//     return view('layouts.kontak'); 
+// }); //kontak
+Route::get('/kontak', [App\Http\Controllers\CatalogController::class, 'kontak'])->name('kontak');
+Route::get('/tentangkami', function () {
+    return view('layouts.tentangkami'); 
+}); //tentangkami
+
 Auth::routes();
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home'); 
 
@@ -86,6 +94,11 @@ Route::get('/user', [App\Http\Controllers\UserController::class, 'index'])->name
 Route::get('/adminPemesanan', [App\Http\Controllers\AdminPemesananController::class, 'index'])->name('homeAdminPemesanan');
 Route::get('/adminPembayaran', [App\Http\Controllers\AdminPembayaranController::class, 'index'])->name('homeAdminPembayaran');
 Route::get('/getdataproduk/{id}', [App\Http\Controllers\SuperAdminController::class,'getdataproduk']);
+
+Route::get('/BlogTable', [App\Http\Controllers\SuperAdminController::class, 'blogTable']);
+Route::get('/blogForm', [App\Http\Controllers\SuperAdminController::class, 'blogForm']);
+Route::post('/StoreBlog', [App\Http\Controllers\SuperAdminController::class, 'storeBlog']);
+Route::get('/blog/{id}', [App\Http\Controllers\SuperAdminController::class, 'showBlog']);
 
 
 
