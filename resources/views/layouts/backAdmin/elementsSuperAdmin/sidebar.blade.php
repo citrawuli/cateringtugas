@@ -39,7 +39,7 @@
                             <span class="nav-text">Permintaan Order</span>
                         </a>
                         <ul aria-expanded="false">
-                            <li><a href="{!! url('/PemesananTable'); !!}">Daftar Permintaan</a></li>
+                            <li><a href="{!! url('/PemesananTable'); !!}">Daftar Permintaan Order</a></li>
                         </ul>
                     </li>
                     <li><a class="has-arrow ai-icon" href="javascript:void()" aria-expanded="false">

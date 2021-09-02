@@ -341,7 +341,7 @@ return [
 				],
 				'viewformpemesanan' => [
 							'davur/vendor/bootstrap-select/dist/css/bootstrap-select.min.css',
-							
+							'davur/vendor/jquery-steps/css/jquery.steps.css',
 							
 							'davur/vendor/select2/css/select2.min.css',
 
@@ -350,8 +350,6 @@ return [
 							
 							'davur/vendor/pickadate/themes/default.css',
 							'davur/vendor/pickadate/themes/default.date.css',
-
-							'davur/vendor/jquery-steps/css/jquery.steps.css',
 							
 
 				],
@@ -1034,20 +1032,19 @@ return [
 				],
 				'viewformpemesanan' => [
 			              	'davur/vendor/bootstrap-select/dist/js/bootstrap-select.min.js',
+							'davur/vendor/jquery-steps/build/jquery.steps.min.js',
+							'davur/vendor/jquery-validation/jquery.validate.min.js',
+							'davur/js/plugins-init/jquery.validate-init.js',
+							'davur/js/plugins-init/jquery-steps-init.js',
 			              	'davur/js/custom.min.js',
 			              	'davur/js/deznav-init.js',
 			              	'davur/vendor/chart.js/Chart.bundle.min.js',
 			              	'davur/vendor/apexchart/apexchart.js',
-
-							'davur/vendor/jquery-validation/jquery.validate.min.js',
-							'davur/js/plugins-init/jquery.validate-init.js',
 			              	
 			              	'davur/vendor/select2/js/select2.full.min.js',
-
-							'davur/vendor/jquery-steps/build/jquery.steps.min.js',
-							'davur/js/plugins-init/jquery-steps-init.js',
-
 							'davur/js/plugins-init/datatables.init.js',
+							
+							'davur/vendor/maskk/js/jquery.mask.js',
 
 							'davur/vendor/moment/moment.min.js',
 							'davur/vendor/bootstrap-daterangepicker/daterangepicker.js',
