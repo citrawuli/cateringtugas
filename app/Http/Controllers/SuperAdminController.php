@@ -739,11 +739,12 @@ class SuperAdminController extends Controller
 
     public function loadDataUser(Request $request)
     {
-        if ($request->has('q')) {
-            $cariuser = $request->q;
-            $data = DB::table('users')->select('id', 'name')->where('name', 'LIKE', '%$cariuser%')->get();
-            return response()->json($data);
-        }
+        // if ($request->has('q')) {
+        //     $cariuser = $request->q;
+        //     $data = DB::table('users')->select("*")->where('name', 'LIKE', '%$cariuser%')->get();
+        //     return response()->json($data);
+        // }
+        $data=User::all();
         return response()->json($data);
     }
 

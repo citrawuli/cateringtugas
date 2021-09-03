@@ -74,6 +74,7 @@
 
                                         <div class="col-md-6">
                                             <input id="nama_lengkap" type="text" class="form-control @error('nama_lengkap') is-invalid @enderror" name="nama_lengkap" required  placeholder="Nama lengkap">
+                                            <a id="searchandpaste" href="#" class="btn btn-primary" style="display:inline-block"><i class="flaticon-381-search-1" ></i></a> 
                                         </div>
                                     </div>
 
@@ -191,9 +192,21 @@
                                                         </tr>
                                                         <tr>
                                                             <td class="left"><strong>Discount</strong></td>
-                                                            <td class="right" >Rp 
-                                                                <input id="discount" type="number" min="0" class="form-control @error('discount') is-invalid @enderror" 
+                                                            <td class="right" >
+                                                                {{-- <input id="discount" type="number" min="0" class="discount form-control @error('discount') is-invalid @enderror" 
                                                                 name="discount" required  placeholder="0" style="width:88%; display:inline; white-space:nowrap; margin-left: 5px;">
+                                                                 --}}
+                                                                 
+                                                                <div class="row">
+                                                                    <label for="money-radio" class="radio-inline mr-3"><input type="radio" id="money-radio" name="discount"/> Rp Off</label>
+                                                                    <input type="text" class="discount control-group" id="money-text" name="money-off" style="margin-left: 5px" placeholder="dalam rupiah"/>
+                                                                </div>
+
+                                                                <div class="row">
+                                                                    <label for="percent-radio" class="radio-inline mr-3"><input type="radio" id="percent-radio" name="discount"/> % Off</label>
+                                                                    <input type="text" class="discount control-group" id="percent-text" name="percent-off" style="margin-left: 14px" placeholder="dalam persen" />
+                                                                </div>
+                                                            
                                                             </td>
                                                         </tr>
                                                         {{-- <tr>
@@ -239,64 +252,8 @@
 <script src="http://cdn.datatables.net/1.10.18/js/jquery.dataTables.min.js" defer="" type="text/javascript"></script>
 <script>
 
-// $(document).ready(function() {
-//     $('#single-select').select2({
-//         placeholder: 'Cari...',
-//         var eurl = "{{URL('/cariUser')}}";
-//         ajax: {
-//             url: eurl,
-//             dataType: 'json',
-//             delay: 250,
-//             processResults: function (data) {
-//                 return {
-//                     results:  $.map(data, function (item) {
-//                         return {
-//                             text: item.name,
-//                             id: item.id
-//                         }
-//                     })
-//                 };
-//             },
-//             cache: true
-//         }
-//     });
-
-//     $('.cariproduk').select2({
-//         placeholder: 'Select Produk',
-//         var eurl = "{{URL('/cariProduk')}}";
-//         ajax: {
-//             url: eurl,
-//             dataType: 'json',
-//             delay: 250,
-//             processResults: function (data) {
-//                 return {
-//                     results: $.map(data, function (item) {
-//                         return {
-//                             text: item.nama_produk,
-//                             id: item.id
-//                         }
-//                     })
-//                 };
-//             },
-//             cache: true
-//         }
-//     });
-
-// $('.datepicker').pickadate({
-//     var date = new Date();
-//         var currentMonth = date.getMonth();
-//         var currentDate = date.getDate();
-//         var currentYear = date.getFullYear();
-//     disable: [
-//         new Date(new Date(currentYear, currentMonth, currentDate)),
-//     ]
-// })
-    
-// });
-
-
-
     $(document).ready(function() {
+        
         $('#simulationRow').dataTable({searching: false});
 
         //MASK 
@@ -308,12 +265,10 @@
             var counter = 1;
 
             $('#addRow').on( 'click', function () {
-                //var id=p['id'];
+                
                 var id=counter;
-                //$(this).parent().index();
-                console.log('id '+id);
-                console.log(p);
-                // var html = '<tr>';
+                // console.log('id '+id);
+
                 var html = '<tr id="'+id+'">';
                 html += '<td class="left strong"><div class=""><select class="form-control selected_product"  id="select_produk'+id+'" required=""  name="select_produk'+id+'" ><option disabled selected="">Enter Produk</option>@foreach($produk as $p)<option value="{{ $p->id }}">{{$p->nama_produk}}</option>@endforeach</select></div></td>';
                 html +='<td class="center" style="width:12%;"><input id="quantity'+id+'" type="number" min="1" class="form-control @error('+quantity+') is-invalid @enderror" name="quantity'+id+'" required   ></td>';
@@ -331,31 +286,31 @@
             function hitung(id){
 
                 let harga= $("#hargajual"+id);
-                console.log("harga");
-                console.log(harga);
+                // console.log("harga");
+                // console.log(harga);
                 let qty= $("#quantity"+id);
-                console.log("qty "+harga);
+                // console.log("qty "+harga);
                 let rowharga= $("#totalrowharga"+id);
                 let produk= $("#select_produk"+id);
                 //dont use class .select okayyy it wil ruined all
                 $(document).on('change','#select_produk'+id, function(){
-                    console.log('row produk');
+                    console.log('row select produk');
                     let produkval = $(this).val();
-                    console.log("val"+produkval);
+                    // console.log("val"+produkval);
                         var a = "{{URL('/getdataproduk')}}";
                         var dltUrl = a+"/"+produkval;
                         $.ajax({
                             url: dltUrl,
                             type:'GET',
                             success:function(response){
-                                console.log("response");
                                 var response = JSON.parse(response);
-                                console.log(response);
+                                // console.log("response");
+                                // console.log(response);
                                 
                                 var hg = `${response[0]['harga_produk']}`;
                                 harga.val(hg);
-                                console.log("hargaa");
-                                console.log(hg);
+                                // console.log("hargaa");
+                                // console.log(hg);
 
                                 //$("#hargajual"+id).html(response[0]['harga_produk']);    
                                 
@@ -393,15 +348,24 @@
             }
 
             function hitung_calc(){
-                console.log('row calc');
+                //console.log('row calc');
                 sbtotal=0;
                 $('.totalrowharga').each(function() {
                     sbtotal += parseInt($(this).val());
                 });
                 
                 $('#sub_total').html(sbtotal);
-                
-                discount = $('#discount').val();
+                discount=0;
+               //discount = $('.discount').val(); this is without radio button
+                if ($('#money-radio').is(':checked')) {
+                    $('#percent-text').value="";
+                    discount = $('#money-text').val();
+                }
+                else if($('#percent-radio').is(':checked')) {
+                    $('#money-text').value="";
+                    discount = ($('#percent-text').val()/100)*sbtotal;
+                }
+               
                 
                 
                 ta=parseInt(sbtotal-discount);
@@ -410,12 +374,60 @@
                 $('#total_amount').html(ta);
             }
 
-            $(document).on('change','#discount', function(){
+            $(document).on('input','.discount', function(){
                 console.log('row discount');
                 hitung_calc();
                     
             });
 
+        
+            $('#percent-radio, #money-radio').change(function() {
+                if ($('#percent-radio').is(':checked')) {
+                    $('#percent-text').removeAttr('disabled').focus();
+                } else {
+                    $('#percent-text').attr('disabled', 'disabled');
+                }
+
+                if ($('#money-radio').is(':checked')){
+                    $('#money-text').removeAttr('disabled').focus();
+                } else {
+                    $('#money-text').attr('disabled', 'disabled');
+                }
+            }).change();
+
+            $(document).on('click', '#searchandpaste', function(){
+                var u = "{{URL('/cariUser')}}";
+                    $.ajax({
+                        type:'GET',
+                        url:u,
+                        success:function(response){
+                            // var response = JSON.parse(response);
+                            console.log(response);
+
+                            //arr to obj
+                            var userArr = response;
+                            var userData = {};
+                            for(var i=0; i<userArr.length; i++){
+                                userData[userArr[i].name] = null;
+                                userData2[userArr[i].name] = userArr[i];
+                            }
+                            //arr to obj end
+
+                            $('#nama_lengkap').autocomplete({
+                                data:userData,
+                                success:function(reqdata){
+                                    $(#alamat_lengkap).val(userData2[reqdata]['email'])
+                                }
+                            });
+                            // $('#id_kecamatan').empty();
+                            // $('#id_kecamatan').append('<option value="null" selected="selected">Pilih Kecamatan</option>');
+                            // response.forEach(element=>{
+                            // $('#id_kecamatan').append(`<option value="${element['id_kecamatan']}"> ${element['nama_kecamatan']}</option>`);
+                            // });
+                        }
+                    });
+            });
+            
          
         //Automatically add a first row of data
             $('#addRow').click();
@@ -437,7 +449,7 @@
             });
 
             
-    });
+   });
 
 </script>
 @endsection

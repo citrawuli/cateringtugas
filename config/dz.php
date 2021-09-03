@@ -1038,13 +1038,12 @@ return [
 							'davur/js/plugins-init/jquery-steps-init.js',
 			              	'davur/js/custom.min.js',
 			              	'davur/js/deznav-init.js',
-			              	'davur/vendor/chart.js/Chart.bundle.min.js',
-			              	'davur/vendor/apexchart/apexchart.js',
 			              	
 			              	'davur/vendor/select2/js/select2.full.min.js',
 							'davur/js/plugins-init/datatables.init.js',
 							
 							'davur/vendor/maskk/js/jquery.mask.js',
+							'davur/vendor/jqueryui/js/jquery-ui.min.js',
 
 							'davur/vendor/moment/moment.min.js',
 							'davur/vendor/bootstrap-daterangepicker/daterangepicker.js',
