@@ -14,6 +14,7 @@ use App\Models\role_users;
 use App\Models\kategoriProduk;
 use App\Models\produk;
 use App\Models\galeriProduk;
+use App\Models\Pemesanan;
 use Carbon\Carbon;
 use Exception;
 use Illuminate\Support\Str;
@@ -711,12 +712,26 @@ class SuperAdminController extends Controller
     }
 
     public function viewpemesanantable(){
-        $pemesanan = DB::table('users')
-            ->join('pemesanan', 'pemesanan.user_id', '=', 'users.id')
+        $pemesanan2 = DB::table('users')
+            ->rightJoin('pemesanan', 'pemesanan.user_id', '=', 'users.id')
             ->leftJoin('detail_transaksi', 'pemesanan.id_pemesanan', '=', 'detail_transaksi.id_pemesanan')
             ->leftJoin('produk', 'detail_transaksi.id_produk', '=', 'produk.id')
             ->select('pemesanan.*','users.name', 'produk.id as produk_id', 'detail_transaksi.id_produk as detail_idproduk', 'detail_transaksi.id_pemesanan as detail_idpemesanan')
             ->whereNull('pemesanan.deleted_at')->get();
+        $pemesanan = Pemesanan::with(['products'])->whereNull('pemesanan.deleted_at')->get();
+        //dd($pemesanan);
+        // NOTE : Change to entity gak ketampil nih!!! Ada di array releationship lol
+        // yuk semangat buat nampilin di blade modal produk pivotnya apa aja!!!
+        
+        // foreach ($pemesanan as $key => $pesanan) {
+        //     foreach ($pesanan->products as $attribute) {
+        //         // dd($attribute->pivot->id_produk);
+        //         // echo $attribute->pivot->id_produk;
+        //         $retri= $attribute->pivot->get();
+        //     }
+        // } gak jadi pake ini, diganti ditempatkan di blade, soalnya nanti kalau ini bakal tampil semuanya per kolom
+
+
         $page_title = 'Order Request Table';
         $page_description = 'Some description for the page';
         $logo = "teamo/images/aisyacatering_kontak_logo.png";
@@ -736,6 +751,66 @@ class SuperAdminController extends Controller
         $action = __FUNCTION__;
         return view('viewSuperAdmin.addpemesananform', compact('users', 'produk', 'page_title', 'page_description','action','logo','logoText'));
     }
+
+    public function storePemesanan(Request $request){
+        // $validator = $request->validate([
+        //     'nama_lengkap_pembeli' => ['required', 'max:50'],
+        //     'no_hp_pembeli' => ['required', 'max:15'],
+        //     'alamat_lengkap_pembeli' => ['required', 'max:100'],
+        //     'keterangan' => ['max:200'],
+        // ],
+        // [
+        //     'nama_lengkap_pembeli.required' => 'Nama harus diisi',
+        //     'no_hp_pembeli.required' => 'Nomor ponsel harus diisi',
+        //     'alamat_lengkap_pembeli.required' => 'Alamat pengiriman harus diisi',
+        //     'nama_lengkap_pembeli.max' => 'Nama harus dibawah 50 karakter',
+        //     'no_hp_pembeli.max' => 'Nomor ponsel harus dibawah 15 karakter',
+        //     'alamat_lengkap_pembeli.max' => 'Alamat pengiriman harus dibawah 100 karakter ',
+        //     'keterangan.max' => 'Keterangan harus dibawah 200 karakter',
+        //     ]
+        // );
+        
+        $a=Carbon::parse($request->input('untuk_tanggal'));
+        //dd($request->all());
+        //$tgl= \Carbon\Carbon::createFromFormat('d M,Y',$a)->format('d-m-Y');
+        $ord = Pemesanan::create([
+            'user_id' =>  $request->cariuser,
+            'nama_lengkap_pembeli'  =>  $request->nama_lengkap,
+            'no_hp_pembeli' =>  $request->nomor_telp,
+            'alamat_lengkap_pembeli' =>  $request->alamat_lengkap,
+            'untuk_tanggal' =>  $a,
+            'untuk_jam' =>  $request->untuk_jam,
+            'pengambilan' =>  $request->optionkirim,
+            'keterangan' =>  $request->keterangan,
+            'discount' =>  $request->money_off,
+            'discount_inpercent' =>  $request->percent_off,
+            'total_transaksi' =>  $request->product_total,
+            'status_pemesanan' =>  "1",
+            'created_at' => \Carbon\Carbon::now(), 
+            'updated_at' => \Carbon\Carbon::now(), 
+        ]);
+        
+        $lastId = Pemesanan::latest()->first()->id_pemesanan;
+       //dd($request->all());
+
+        $products = $request->input('select_produk', []);
+        $quantities = $request->input('quantity', []);
+        $sub_totals = $request->totalrowharga;
+        for ($product=0; $product < count($products); $product++) {
+            if ($products[$product] != '') {
+                //dd($sub_totals); dont use disable input in subtotal, it will return offset
+                $try=$ord->products()->attach($products[$product], 
+                    ['id_pemesanan'=>$lastId,
+                    'kuantitas' => $quantities[$product], 
+                    'sub_total' => $sub_totals[$product],
+                ]);
+                
+            }
+        }
+    
+        Session::flash('message', "Data orderan berhasil ditambahkan");
+        return Redirect::back();
+    } 
 
     public function loadDataUser(Request $request)
     {

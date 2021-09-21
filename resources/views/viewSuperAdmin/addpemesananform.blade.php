@@ -67,18 +67,24 @@
                                         </div>
                                     </div>
 
-                                    <br><h4>Data Pembeli</h4>
+                                    <br><h4>Data Pembeli untuk Dihubungi</h4>
 
                                     <div class="form-group row">
                                         <label for="nama_lengkap" class="col-sm-3 col-form-label">{{ __('Nama lengkap*') }}</label>
 
                                         <div class="col-md-6">
                                             <input id="nama_lengkap" type="text" class="form-control @error('nama_lengkap') is-invalid @enderror" name="nama_lengkap" required  placeholder="Nama lengkap">
-                                            <a id="searchandpaste" href="#" class="btn btn-primary" style="display:inline-block"><i class="flaticon-381-search-1" ></i></a> 
+                                            
+                                                {{-- <select class="form-control cariuser"  id="nama_lengkap" required=""  name="cariuser"> --}}
+                                                
+                                            
+                                            
+                                            {{-- <a id="searchandpaste" href="#" class="btn btn-primary" style="display:inline-block"><i class="flaticon-381-search-1" ></i></a>  --}}
                                         </div>
                                     </div>
 
                                     <div class="form-group row">
+                                        
                                         <label for="nomor_telp" class="col-sm-3 col-form-label">{{ __('Nomor telepon*') }}</label>
 
                                         <div class="col-md-6">
@@ -123,8 +129,8 @@
                                         <label for="product" class="col-sm-3 col-form-label">{{ __('Pengambilan') }}</label>
 
                                         <div class="col-md-6">
-                                            <label class="radio-inline mr-3"><input type="radio" value="Diambil" name="optionkirim"> Diambil</label>
-                                            <label class="radio-inline mr-3"><input type="radio" value="Dikirim Go-Car" name="optionkirim"> Dikirim Go-Car</label>
+                                            <label class="radio-inline mr-3"><input type="radio" value="1" name="optionkirim"> Diambil</label>
+                                            <label class="radio-inline mr-3"><input type="radio" value="2" name="optionkirim"> Dikirim Go-Car</label>
                                         </div>
                                     </div>
 
@@ -136,7 +142,7 @@
                                         </div>
                                         
                                     </div>
-
+{{-- 
                                     <div class="form-group row">
                                         <label for="product" class="col-sm-3 col-form-label">{{ __('Total transaksi') }}</label>
 
@@ -145,12 +151,22 @@
                                                 <div class="input-group-prepend">
                                                     <span class="input-group-text">Rp</span>
                                                 </div>
-                                                <input id="product" type="number" min="0" class="form-control @error('product_price') is-invalid @enderror" name="product_price" required  placeholder="Total Transaksi" disabled="">
+                                                <input id="product_total" type="number" min="0" class="form-control @error('product_price') is-invalid @enderror" name="product_total" required  placeholder="Total Transaksi" disabled="">
                                             </div>
                                         </div>
-                                    </div>
+                                    </div> --}}
 
+                                    <input id="product_total" hidden type="number" 
+                                    class="form-control @error('product_total') is-invalid @enderror" 
+                                    name="product_total" required  placeholder="Total Transaksi" hidden>
 
+                                    {{-- <input id="sub_total_todb" hidden type="number" 
+                                    class="form-control @error('sub_total_todb') is-invalid @enderror" 
+                                    name="sub_total_todb"  placeholder="Sub Total" hidden> --}}
+                                    
+                                    
+
+                                    
 
                             </section>
 
@@ -199,12 +215,12 @@
                                                                  
                                                                 <div class="row">
                                                                     <label for="money-radio" class="radio-inline mr-3"><input type="radio" id="money-radio" name="discount"/> Rp Off</label>
-                                                                    <input type="text" class="discount control-group" id="money-text" name="money-off" style="margin-left: 5px" placeholder="dalam rupiah"/>
+                                                                    <input type="text" class="discount control-group" id="money-text" name="money_off" style="margin-left: 5px" placeholder="dalam rupiah"/>
                                                                 </div>
 
                                                                 <div class="row">
                                                                     <label for="percent-radio" class="radio-inline mr-3"><input type="radio" id="percent-radio" name="discount"/> % Off</label>
-                                                                    <input type="text" class="discount control-group" id="percent-text" name="percent-off" style="margin-left: 14px" placeholder="dalam persen" />
+                                                                    <input type="text" class="discount control-group" id="percent-text" name="percent_off" style="margin-left: 14px" placeholder="dalam persen" />
                                                                 </div>
                                                             
                                                             </td>
@@ -215,7 +231,7 @@
                                                         </tr> --}}
                                                         <tr>
                                                             <td class="left"><strong>Total</strong></td>
-                                                            <td class="right"><strong>Rp <p style="display:inline" id="total_amount">0</p></strong><br></td>
+                                                            <td class="right"><strong>Rp <p style="display:inline" id="total_amount" name="total_amount">0</p></strong><br></td>
                                                         </tr>
                                                     </tbody>
                                                 </table>
@@ -253,9 +269,17 @@
 <script>
 
     $(document).ready(function() {
-        
-        $('#simulationRow').dataTable({searching: false});
+        //TABLE
+            $('#simulationRow').dataTable({searching: false});
 
+        //DATE
+        // $('.datepicker-default').datetimepicker({
+        //     // MYTODO: change locale depending on current user locale.
+        //     locale: 'id',
+        //     format: 'DD-MM-YY',
+        //     useCurrent: false
+        // });
+        
         //MASK 
             //$('#discount').mask('#.##0', {reverse: true});
 
@@ -270,10 +294,10 @@
                 // console.log('id '+id);
 
                 var html = '<tr id="'+id+'">';
-                html += '<td class="left strong"><div class=""><select class="form-control selected_product"  id="select_produk'+id+'" required=""  name="select_produk'+id+'" ><option disabled selected="">Enter Produk</option>@foreach($produk as $p)<option value="{{ $p->id }}">{{$p->nama_produk}}</option>@endforeach</select></div></td>';
-                html +='<td class="center" style="width:12%;"><input id="quantity'+id+'" type="number" min="1" class="form-control @error('+quantity+') is-invalid @enderror" name="quantity'+id+'" required   ></td>';
-                html +='<td class="right"><input id="hargajual'+id+'" type="number" min="0" class="form-control @error('+hargajual+') is-invalid @enderror" name="hargajual[]"  placeholder="" disabled=""></td>';
-                html +='<td class="right"><input id="totalrowharga'+id+'" type="number"  class="form-control @error('+totalrow+') is-invalid @enderror totalrowharga" name="totalrowharga'+id+'" required  placeholder="" disabled=""></td>';
+                html += '<td class="left strong"><div class=""><select class="form-control selected_product"  id="select_produk'+id+'" required=""  name="select_produk[]" ><option disabled selected="">Enter Produk</option>@foreach($produk as $p)<option value="{{ $p->id }}">{{$p->nama_produk}}</option>@endforeach</select></div></td>';
+                html +='<td class="center" style="width:12%;"><input id="quantity'+id+'" type="number" min="1" class="form-control @error('+quantity+') is-invalid @enderror" name="quantity[]" required   ></td>';
+                html +='<td class="right"><input id="hargajual'+id+'" type="number" min="0" class="form-control @error('+hargajual+') is-invalid @enderror" name="hargajual[]" disabled=""></td>';
+                html +='<td class="right"><input id="totalrowharga'+id+'" type="number"  class="form-control @error('+totalrow+') is-invalid @enderror totalrowharga" name="totalrowharga[]" required readonly></td>';
                 html += '</tr>';
 
                 table.row.add($(html)).draw(false);
@@ -355,15 +379,20 @@
                 });
                 
                 $('#sub_total').html(sbtotal);
+                $('#sub_total_todb').html(sbtotal);
                 discount=0;
                //discount = $('.discount').val(); this is without radio button
                 if ($('#money-radio').is(':checked')) {
-                    $('#percent-text').value="";
+                    $('#percent-text').val(null);
                     discount = $('#money-text').val();
+                    $('#discount_todb').val(discount);
                 }
                 else if($('#percent-radio').is(':checked')) {
-                    $('#money-text').value="";
+                    $('#money-text').val(null);
                     discount = ($('#percent-text').val()/100)*sbtotal;
+                    $('#discount_dbinpercent').val(discount);
+
+
                 }
                
                 
@@ -372,6 +401,8 @@
                 // alert(isNaN(discount));
                 // alert(isNaN(ta));
                 $('#total_amount').html(ta);
+                $('#product_total').val(ta);
+                
             }
 
             $(document).on('input','.discount', function(){
@@ -394,41 +425,96 @@
                     $('#money-text').attr('disabled', 'disabled');
                 }
             }).change();
+        
+        //gakbisa
+            // $(document).on('click', '#searchandpaste', function(){
+            //     $('#nama_lengkap').find('input').autocomplete();
+            //     var u = "{{URL('/cariUser')}}";
+            //         $.ajax({
+            //             type:'GET',
+            //             url:u,
+            //             success:function(response){
+            //                 // var response = JSON.parse(response);
+            //                 // console.log(response);
 
-            $(document).on('click', '#searchandpaste', function(){
-                var u = "{{URL('/cariUser')}}";
-                    $.ajax({
-                        type:'GET',
-                        url:u,
-                        success:function(response){
-                            // var response = JSON.parse(response);
-                            console.log(response);
+            //                 //arr to obj
+            //                 var userArr = response;
+            //                 var userData = {};
+            //                 var userData2 = {};
+            //                 for(var i=0; i<userArr.length; i++){
+            //                     userData[userArr[i].name] = null;
+            //                     userData2[userArr[i].name] = userArr[i];
+            //                 }
+            //                 //arr to obj end
+            //                 console.log(userData2);
+                            
+            //             }
+            //         });
 
-                            //arr to obj
-                            var userArr = response;
-                            var userData = {};
-                            for(var i=0; i<userArr.length; i++){
-                                userData[userArr[i].name] = null;
-                                userData2[userArr[i].name] = userArr[i];
-                            }
-                            //arr to obj end
-
-                            $('#nama_lengkap').autocomplete({
-                                data:userData,
-                                success:function(reqdata){
-                                    $(#alamat_lengkap).val(userData2[reqdata]['email'])
-                                }
-                            });
-                            // $('#id_kecamatan').empty();
-                            // $('#id_kecamatan').append('<option value="null" selected="selected">Pilih Kecamatan</option>');
-                            // response.forEach(element=>{
-                            // $('#id_kecamatan').append(`<option value="${element['id_kecamatan']}"> ${element['nama_kecamatan']}</option>`);
-                            // });
-                        }
-                    });
-            });
+            //         $('#nama_lengkap').autocomplete({
+            //                     minLength: 2,
+            //                     source:response,
+            //                     // success:function(reqdata){
+            //                     //     console.log("success reqdata");
+            //                     //     console.log(reqdata);
+                                    
+            //                     //     $("#alamat_lengkap").val(userData2[reqdata]['alamat_user'])
+            //                     // }
+            //                 });
+            // });
+        
+        //gak bisa
+            // $( "#nama_lengkap" ).find('input').autocomplete({
+            //     source: function( request, response ) {
+            //         var u = "{{URL('/cariUser')}}";
+            //         $.ajax({
+            //             url:u,
+            //             type: 'get',
+            //             success: function( data ) {
+            //                 response( data );
+            //             }
+            //         });
+            //     },
+            //     select: function (event, ui) {
+            //         // Set selection
+            //         $('#alamat_lengkap').val(ui['alamat_user'); // display the selected text
+            //         // $('#selectuser_id').val(ui.item.value); // save selected id to input
+            //         return false;
+            //     },
+            //     focus: function(event, ui){
+            //         $('#alamat_lengkap').val(ui.item.alamat_user);
+            //         // $( "#selectuser_id" ).val( ui.item.value );
+            //         return false;
+            //     },
+            // });
+        //end
+        
+        
+        // $('#nama_lengkap').select2({
+        //     placeholder: 'Cari...',
+        //     ajax: {
+        //         url: "{{URL('/cariUser')}}",
+        //         dataType: 'json',
+        //         delay: 250,
+        //         processResults: function (data) {
+        //             return {
+        //                 results:  $.map(data, function (item) {
+        //                 return {
+        //                     id: item.id,
+        //                     text: item.name,
+        //                 }
+        //             })
+        //         };
+        //     },
+        //         cache: true
+        //     }
+        // });
             
          
+        
+        
+        
+        
         //Automatically add a first row of data
             $('#addRow').click();
 

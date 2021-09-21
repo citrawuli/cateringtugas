@@ -89,6 +89,7 @@ Route::get('/PemesananTable', [App\Http\Controllers\SuperAdminController::class,
 Route::get('/ViewFormPemesanan', [App\Http\Controllers\SuperAdminController::class, 'viewformpemesanan']); //lihat form
 Route::get('/cariUser', [App\Http\Controllers\SuperAdminController::class, 'loadDataUser']); //lihat ajax select2
 Route::get('/cariProduk', [App\Http\Controllers\SuperAdminController::class,'loadDataProduk']);
+Route::post('/StorePemesanan', [App\Http\Controllers\SuperAdminController::class, 'storePemesanan']); // store data pemesanan dan detail ke DB
 
 Route::get('/user', [App\Http\Controllers\UserController::class, 'index'])->name('homeUser');
 Route::get('/adminPemesanan', [App\Http\Controllers\AdminPemesananController::class, 'index'])->name('homeAdminPemesanan');

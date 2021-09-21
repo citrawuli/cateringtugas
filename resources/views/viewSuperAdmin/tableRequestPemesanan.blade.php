@@ -74,11 +74,13 @@
                                 <tr>
                                     <th>ID</th>
                                     <th>Tanggal Order</th>
+                                    <th>Untuk tanggal</th>
                                     <th>Nama Pemesan</th>
                                     <th>Lokasi</th>
                                     <th>Jumlah Transaksi</th>
                                     <th>Status Order</th>
-                                    <th>Keterangan</th><!-- 
+                                    <th>Keterangan</th>
+                                    <th>Diskon</th><!-- 
                                     <th>Deleted At</th>
                                     <th>Created At</th>
                                     <th>Updated At</th> -->
@@ -86,14 +88,16 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                @foreach( $pemesanan as $order )
+                                @foreach( $pemesanan as $key =>$order )
+                                {{-- {{dd($pemesanan)}}  --}}
                                 <tr>
-                                  <td>{{ $order->id }}</td>
-                                  <td>{{ $order->created_at }}</td>
+                                  <td>{{ $order->id_pemesanan }}</td>
+                                  <td>{{ date('d-M-Y H:i:s', strtotime($order->created_at)) }}</td>
+                                  <td>{{ date('d-M-Y', strtotime($order->untuk_tanggal)) }}</td>
                                   <td>{{ $order->nama_lengkap_pembeli }}</td>
                                   <td>{{ $order->alamat_lengkap_pembeli }}</td>
                                   <td>@currency($order->total_transaksi)</td>
-                                  @if ($order ->status_pemesanan == 'Menunggu Konfirmasi')
+                                  {{-- @if ($order ->status_pemesanan == 'Menunggu Konfirmasi')
                                   <td><span class="badge light badge-warning"><i class="fa fa-circle text-warning mr-1"></i>{{ $order->status_pemesanan }}</span></td>
                                   @elseif ($order ->status_pemesanan == 'Diterima')
                                   <td><span class="badge light badge-success"><i class="fa fa-circle text-success mr-1"></i>{{ $order->status_pemesanan }}</span></td>
@@ -101,8 +105,19 @@
                                   <td><span class="badge light badge-danger"><i class="fa fa-circle text-danger mr-1"></i>{{ $order->status_pemesanan }}</span></td>
                                   @elseif ($order ->status_pemesanan == 'Dibatalkan')
                                   <td><span class="badge light badge-secondary"><i class="fa fa-circle text-secondary mr-1"></i>{{ $order->status_pemesanan }}</span></td>
+                                  @endif --}}
+
+                                  @if ($order ->status_pemesanan == '1')
+                                  <td><span class="badge light badge-warning"><i class="fa fa-circle text-warning mr-1"></i>Menunggu Konfirmasi</span></td>
+                                  @elseif ($order ->status_pemesanan == '2')
+                                  <td><span class="badge light badge-success"><i class="fa fa-circle text-success mr-1"></i>Diterima</span></td>
+                                  @elseif ($order ->status_pemesanan == '3')
+                                  <td><span class="badge light badge-danger"><i class="fa fa-circle text-danger mr-1"></i>Ditolak</span></td>
+                                  @elseif ($order ->status_pemesanan == '4')
+                                  <td><span class="badge light badge-secondary"><i class="fa fa-circle text-secondary mr-1"></i>Dibatalkan</span></td>
                                   @endif
-                                  <td>{{ $order->keterangan }}</td><!-- 
+                                  <td>{{ $order->keterangan ?? 'Tidak ada'}}</td>
+                                  <td>{{ $order->discount ?? 'Tidak ada'}}</td><!-- 
                                   <td>{{ $order->deleted_at }}</td>
                                   <td>{{ $order->created_at }}</td>
                                   <td>{{ $order->updated_at }}</td> -->
@@ -112,15 +127,15 @@
                                         <span data-placement="top" title="Show More Detail" data-toggle="tooltip3" >
                                             <a href=".bd-example-modal-lg"
                                             data-toggle="modal" 
-                                            data-target="#modaldetail{{ $order->id }}"
-                                            data-title="Detail Produk {{ $order->id }}"
+                                            data-target="#modaldetail{{ $order->id_pemesanan }}"
+                                            data-title="Detail Produk {{ $order->id_pemesanan }}"
                                             class="btn btn-info shadow btn-xs sharp mr-1">
                                             <i class="fa fa-eye"></i>
                                         </a>
                                         </span>
 
                                        
-                                        <div id="modaldetail{{ $order->id }}" class="modal fade bd-example-modal-lg" tabindex="-1" role="dialog" aria-hidden="true">
+                                        <div id="modaldetail{{ $order->id_pemesanan }}" class="modal fade bd-example-modal-lg" tabindex="-1" role="dialog" aria-hidden="true">
                                             <div class="modal-dialog modal-lg">
                                                 <div class="modal-content">
                                                     <div class="modal-header">
@@ -134,30 +149,83 @@
                                                         <table >
                                                             <thead>
                                                                 <tr>
+                                                                    <th>ID Produk</th>
+                                                                    <th>Produk</th>
+                                                                    <th>Sub Total</th>
+                                                                    <th>Kuantitas</th>
+                                                                </tr>
+                                                            </thead>
+
+                                                            <tbody>
+                                                                <center>
+                                                                    <p><strong>ID Pemesanan : </strong><span>{{ $order->id_pemesanan }}</span></p>
+                                                                    <p><strong>Untuk Tanggal : </strong><span>{{ date('d-M-Y', strtotime($order->untuk_tanggal)) }}</span></p>
+                                                                    <p><strong>Untuk Jam : </strong><span>{{ $order->untuk_jam }}</span></p>
+                                                                    <p><strong>Pengambilan dengan : </strong>
+                                                                        <span>{{ $order->pengambilan }}</span>
+                                                                        @if ($order ->pengambilan == '1')
+                                                                        <td><span class="badge light badge-warning"><i class="fa fa-circle text-warning mr-1"></i>Diambil sendiri</span></td>
+                                                                        @elseif ($order ->status_pemesanan == '2')
+                                                                        <td><span class="badge light badge-success"><i class="fa fa-circle text-success mr-1"></i>Dikirim Go-Car</span></td>
+                                                                        @endif
+                                                                    </p>
+                                                                    <p><strong>Alamat : </strong><span>{{ $order->alamat_lengkap_pembeli }}</span></p><br>
+                                                                    <p><strong>Produk yang di pesan : </strong>
+                                                                        <span>
+                                                                        {{-- @foreach ($retri as $det_pem  ) --}}
+                                                                            {{-- <ul>  --}}
+                                                                            {{-- {{dd($retri)}}     --}}
+                                                                            {{-- <li>{{ $det_pem->id_produk ?? "null" }}</li> --}}
+                                                                            {{-- <li>{{ $pv->pivot_id_produk }}</li> --}}
+                                                                            {{-- </ul> --}}
+                                                                        {{-- @endforeach --}}
+        
+                                                                        @foreach ($order->products as $det_pem  )
+                                                                            {{-- {{dd($order->products )}}     --}}
+                                                                                {{-- <ul>  --}}
+                                                                                
+                                                                                {{-- <li>{{ $det_pem->pivot->id_produk ?? "null" }}</li>
+                                                                                <li>{{ $det_pem->pivot->sub_total ?? "null" }}</li>
+                                                                                <li>{{ $det_pem->pivot->kuantitas ?? "null" }}</li>
+                                                                                </ul> --}}
+
+                                                                            <tr>
+                                                                                {{-- nullnya ga bisa jalan satu statement I wonder whyy --}}
+                                                                                <td>{{ $det_pem->pivot->id_produk ?: 'null' }}</td>
+                                                                                <td>{{ $det_pem->nama_produk ?: 'null' }}</td>
+                                                                                <td>{{ $det_pem->pivot->sub_total ?: 'null'}}</td>
+                                                                                <td>{{ $det_pem->pivot->kuantitas ?:  'null'}}</td>
+                                                                               
+                                                                            </tr>
+                                                                       
+                                                                        @endforeach
+                                                                        {{-- {{ $order->detail_idproduk }} --}}
+                                                                        </span>
+                                                                    </p>
+                                                                </center>
+                                                                
+                                                                
+                                                                     
+                                                            </tbody>
+
+                                                        </table>
+
+                                                        <table>
+                                                            <thead>
+                                                                <tr>
                                                                     <th>Deleted At</th>
                                                                     <th>Created At</th>
                                                                     <th>Updated At</th>
                                                                 </tr>
                                                             </thead>
 
-                                                            <tbody>
-                                                                <center>
-                                                                    <p><strong>ID Pemesanan : </strong><span>{{ $order->id }}</span></p>
-                                                                    <p><strong>Untuk Tanggal : </strong><span>{{ $order->untuk_tanggal }}</span></p>
-                                                                    <p><strong>Untuk Jam : </strong><span>{{ $order->untuk_jam }}</span></p>
-                                                                    <p><strong>Pengambilan dengan : </strong><span>{{ $order->pengambilan }}</span></p><br>
-                                                                    <p><strong>Produk yang di pesan : </strong><span>{{ $order->id }}</span></p>
-                                                                </center>
-                                                                
+                                                            
                                                                 <tr>
-                        
-                                                                  <td>{{ $order->deleted_at }}</td>
-                                                                  <td>{{ $order->created_at }}</td>
-                                                                  <td>{{ $order->updated_at }}</td>
-                                                                  
+                                                                    <td>{{ $order->deleted_at }}</td>
+                                                                    <td>{{ $order->created_at }}</td>
+                                                                    <td>{{ $order->updated_at }}</td>
+                                                                    
                                                                 </tr>
-                                                                     
-                                                            </tbody>
 
                                                         </table>
                                                        
@@ -169,9 +237,9 @@
                                             </div>
                                         </div>
 
-                                        <a href="{{ url( '/EditOrder/' . $order->id ) }}" class="btn btn-primary shadow btn-xs sharp mr-1" data-toggle="tooltip" data-placement="top" title="Edit Order" id="editt"><i class="fa fa-pencil"></i></a>
+                                        <a href="{{ url( '/EditOrder/' . $order->id_pemesanan ) }}" class="btn btn-primary shadow btn-xs sharp mr-1" data-toggle="tooltip" data-placement="top" title="Edit Order" id="editt"><i class="fa fa-pencil"></i></a>
                                        
-                                        <a href="{{ url( '/DeleteOrder/' . $order->id ) }}" class="btn btn-danger shadow btn-xs sharp" data-toggle="tooltip2" data-placement="top" title="Soft Delete Order"><i class="fa fa-trash"></i></a>
+                                        <a href="{{ url( '/DeleteOrder/' . $order->id_pemesanan ) }}" class="btn btn-danger shadow btn-xs sharp" data-toggle="tooltip2" data-placement="top" title="Soft Delete Order"><i class="fa fa-trash"></i></a>
                                         
                                             <div class="dropdown ml-auto text-right">
                                                 <div class="btn-link" data-toggle="dropdown">

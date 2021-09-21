@@ -40,4 +40,12 @@ class produk extends Model
     {
         return $this->hasMany(galeriProduk::class);
     }
+
+    public function pemesanans()
+    {
+        //return $this->belongsToMany(RelatedModel, pivot_table_name, foreign_key_of_current_model_in_pivot_table, foreign_key_of_other_model_in_pivot_table);
+        return $this->belongsToMany(Pemesanan::class, detail_transaksi::class, 'id_pemesanan', 'id_produk');
+    }
+
+
 }
