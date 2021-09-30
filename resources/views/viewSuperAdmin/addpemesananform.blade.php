@@ -215,12 +215,12 @@
                                                                  
                                                                 <div class="row">
                                                                     <label for="money-radio" class="radio-inline mr-3"><input type="radio" id="money-radio" name="discount"/> Rp Off</label>
-                                                                    <input type="text" class="discount control-group" id="money-text" name="money_off" style="margin-left: 5px" placeholder="dalam rupiah"/>
+                                                                    <input type="number" class="discount control-group" id="money-text" name="money_off" style="margin-left: 5px" placeholder="dalam rupiah"/>
                                                                 </div>
 
                                                                 <div class="row">
                                                                     <label for="percent-radio" class="radio-inline mr-3"><input type="radio" id="percent-radio" name="discount"/> % Off</label>
-                                                                    <input type="text" class="discount control-group" id="percent-text" name="percent_off" style="margin-left: 14px" placeholder="dalam persen" />
+                                                                    <input type="number" class="discount control-group" id="percent-text" name="percent_off" style="margin-left: 14px" placeholder="dalam persen" />
                                                                 </div>
                                                             
                                                             </td>

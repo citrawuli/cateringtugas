@@ -91,6 +91,10 @@ Route::get('/cariUser', [App\Http\Controllers\SuperAdminController::class, 'load
 Route::get('/cariProduk', [App\Http\Controllers\SuperAdminController::class,'loadDataProduk']);
 Route::post('/StorePemesanan', [App\Http\Controllers\SuperAdminController::class, 'storePemesanan']); // store data pemesanan dan detail ke DB
 
+Route::post('/accept/{id}', [App\Http\Controllers\SuperAdminController::class, 'acceptorder']); //change status order into accept
+Route::post('/reject/{id}', [App\Http\Controllers\SuperAdminController::class, 'rejectorder']); //change status order into reject
+Route::post('/confirm/{id}', [App\Http\Controllers\SuperAdminController::class, 'confirmorder']); //change status order into confirm
+
 Route::get('/user', [App\Http\Controllers\UserController::class, 'index'])->name('homeUser');
 Route::get('/adminPemesanan', [App\Http\Controllers\AdminPemesananController::class, 'index'])->name('homeAdminPemesanan');
 Route::get('/adminPembayaran', [App\Http\Controllers\AdminPembayaranController::class, 'index'])->name('homeAdminPembayaran');

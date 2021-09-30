@@ -1,6 +1,11 @@
 @extends('layouts.backAdmin.layout.defaultSuperAdmin')
 
 @section('content')
+
+<head>
+    <meta name="csrf-token" content="{{ csrf_token() }}" />
+</head>
+
 <div class="container-fluid">
     <div class="row page-titles mx-0">
         <div class="col-sm-6 p-md-0">
@@ -162,15 +167,15 @@
                                                                     <p><strong>Untuk Tanggal : </strong><span>{{ date('d-M-Y', strtotime($order->untuk_tanggal)) }}</span></p>
                                                                     <p><strong>Untuk Jam : </strong><span>{{ $order->untuk_jam }}</span></p>
                                                                     <p><strong>Pengambilan dengan : </strong>
-                                                                        <span>{{ $order->pengambilan }}</span>
+                                                                        {{-- <span>{{ $order->pengambilan }}</span> --}}
                                                                         @if ($order ->pengambilan == '1')
-                                                                        <td><span class="badge light badge-warning"><i class="fa fa-circle text-warning mr-1"></i>Diambil sendiri</span></td>
-                                                                        @elseif ($order ->status_pemesanan == '2')
-                                                                        <td><span class="badge light badge-success"><i class="fa fa-circle text-success mr-1"></i>Dikirim Go-Car</span></td>
+                                                                        <span class="badge light badge-warning"><i class="fa fa-circle text-warning mr-1"></i>Diambil sendiri</span>
+                                                                        @elseif ($order ->pengambilan == '2')
+                                                                        <span class="badge light badge-success"><i class="fa fa-circle text-success mr-1"></i>Dikirim Go-Car</span>
                                                                         @endif
                                                                     </p>
                                                                     <p><strong>Alamat : </strong><span>{{ $order->alamat_lengkap_pembeli }}</span></p><br>
-                                                                    <p><strong>Produk yang di pesan : </strong>
+                                                                    <p><strong>TABEL PRODUK YANG DIPESAN </strong>
                                                                         <span>
                                                                         {{-- @foreach ($retri as $det_pem  ) --}}
                                                                             {{-- <ul>  --}}
@@ -246,8 +251,9 @@
                                                     <svg width="24px" height="24px" viewBox="0 0 24 24" version="1.1"><g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd"><rect x="0" y="0" width="24" height="24"></rect><circle fill="#000000" cx="5" cy="12" r="2"></circle><circle fill="#000000" cx="12" cy="12" r="2"></circle><circle fill="#000000" cx="19" cy="12" r="2"></circle></g></svg>
                                                 </div>
                                                 <div class="dropdown-menu dropdown-menu-right">
-                                                    <a class="dropdown-item" href="#"><i class="las la-check-square scale5 text-primary mr-2"></i> Accept Order</a>
-                                                    <a class="dropdown-item" href="#"><i class="las la-times-circle scale5 text-danger mr-2"></i> Reject Order</a>
+                                                    <a class="dropdown-item accept" id="accept" name="{{$order->id_pemesanan}}"><i class="las la-check-square scale5 text-primary mr-2"></i> Accept Order</a>
+                                                    <a class="dropdown-item reject" id="reject" name="{{$order->id_pemesanan}}"><i class="las la-times-circle scale5 text-danger mr-2"></i> Reject Order</a>
+                                                    <a class="dropdown-item confirm" id="confirm" name="{{$order->id_pemesanan}}"><i class="las la-undo scale5 text-warning mr-2"></i> Confirm Order</a>
                                                 </div>
                                             </div>
 
@@ -274,14 +280,113 @@
 @section('script')
 <script>
 $(document).ready(function(){
-  $('[data-toggle="tooltip"]').tooltip();
+    // $('#example3').DataTable({
+    // dom: 'Bfrtip',
+    // orderCellsTop: true,
+    // buttons: [
+    //     {
+    //         text: "Filter: Menunggu Konfirmasi",
+    //         // action: function(e, dt, node, config){
+    //         //     dt.column(0).search("United States").draw();
+    //         // }
+    //     }
+    // ]
+    // });
+
+    $('[data-toggle="tooltip"]').tooltip();
+    $('[data-toggle="tooltip2"]').tooltip();
+    $('[data-toggle="tooltip3"]').tooltip();
+
+    $.ajaxSetup({ headers: { 'X-CSRF-TOKEN': jQuery('meta[name="csrf-token"]').attr('content') } });
+    $('.accept').on('click', function () {
+        //its a table row, so yeah... dont do #accept okayy, use more general than id so you figured the rowss
+        //I already used id but it will not be as easy as this :)
+        var getid=$(this).attr('name');
+        console.log("getid");
+        console.log(getid);
+        
+        var a = "{{URL('/accept')}}";
+        var fUrl = a+"/"+getid;
+        $.ajax({
+            url: fUrl,
+            type:'POST',
+            headers: {
+			    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+			},
+            success:function(response){
+                
+                setTimeout(function(){window.location = window.location}, 300); 
+                
+                                
+            },
+            error: function() {
+                console.log( "Ajax Not Working" );
+            }         
+        })    
+                        
+    });
+
+    $('.reject').on('click', function () {
+        //its a table row, so yeah... dont do #accept okayy, use more general than id so you figured the rowss
+        //I already used id but it will not be as easy as this :)
+        var getid=$(this).attr('name');
+        console.log("getid");
+        console.log(getid);
+        
+        var a = "{{URL('/reject')}}";
+        var fUrl = a+"/"+getid;
+        $.ajax({
+            url: fUrl,
+            type:'POST',
+            headers: {
+			    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+			},
+            success:function(response){
+                setTimeout(function(){window.location = window.location}, 300); 
+                                
+            },
+            error: function() {
+                console.log( "Ajax Not Working" );
+            }         
+        })    
+                        
+    });
+
+    $('.confirm').on('click', function () {
+        //its a table row, so yeah... dont do #accept okayy, use more general than id so you figured the rowss
+        //I already used id but it will not be as easy as this :)
+        var getid=$(this).attr('name');
+        console.log("getid");
+        console.log(getid);
+        
+        var a = "{{URL('/confirm')}}";
+        var fUrl = a+"/"+getid;
+        $.ajax({
+            url: fUrl,
+            type:'POST',
+            headers: {
+			    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+			},
+            success:function(response){
+                setTimeout(function(){window.location = window.location}, 300); 
+                                
+            },
+            error: function() {
+                console.log( "Ajax Not Working" );
+            }         
+        })    
+                        
+    });
+
+    
+
+   
+
+
+
 });
-$(document).ready(function(){
-  $('[data-toggle="tooltip2"]').tooltip();
-});
-$(document).ready(function(){
-  $('[data-toggle="tooltip3"]').tooltip();
-});
+
+
 
 // var buttons = document.querySelectorAll('#editt');
 

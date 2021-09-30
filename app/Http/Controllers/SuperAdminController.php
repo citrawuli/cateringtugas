@@ -741,6 +741,30 @@ class SuperAdminController extends Controller
         return view('viewSuperAdmin.tableRequestPemesanan', compact('pemesanan', 'page_title', 'page_description','action','logo','logoText'));
     }
 
+    public function acceptorder($id){
+        $model = Pemesanan::find($id);
+        //dd($model);
+        $model->status_pemesanan = "2";
+        $model->touch();
+        $model->save();
+    }
+
+    public function rejectorder($id){
+        $model = Pemesanan::find($id);
+        // dd($model);
+        $model->status_pemesanan = "3";
+        $model->touch();
+        $model->save();
+    }
+
+    public function confirmorder($id){
+        $model = Pemesanan::find($id);
+        // dd($model);
+        $model->status_pemesanan = "1";
+        $model->touch();
+        $model->save();
+    }
+
     public function viewformpemesanan(){
         $users = DB::table('users')->get();
         $produk = DB::table('produk')->get();
@@ -770,25 +794,29 @@ class SuperAdminController extends Controller
         //     ]
         // );
         
+        // dd($request->all());
+        //why I cant save discount value huh?!!
+
         $a=Carbon::parse($request->input('untuk_tanggal'));
-        //dd($request->all());
-        //$tgl= \Carbon\Carbon::createFromFormat('d M,Y',$a)->format('d-m-Y');
-        $ord = Pemesanan::create([
-            'user_id' =>  $request->cariuser,
-            'nama_lengkap_pembeli'  =>  $request->nama_lengkap,
-            'no_hp_pembeli' =>  $request->nomor_telp,
-            'alamat_lengkap_pembeli' =>  $request->alamat_lengkap,
-            'untuk_tanggal' =>  $a,
-            'untuk_jam' =>  $request->untuk_jam,
-            'pengambilan' =>  $request->optionkirim,
-            'keterangan' =>  $request->keterangan,
-            'discount' =>  $request->money_off,
-            'discount_inpercent' =>  $request->percent_off,
-            'total_transaksi' =>  $request->product_total,
-            'status_pemesanan' =>  "1",
-            'created_at' => \Carbon\Carbon::now(), 
-            'updated_at' => \Carbon\Carbon::now(), 
-        ]);
+        $b=$request->money_off;
+        dd($b);
+        // $tgl= \Carbon\Carbon::createFromFormat('d M,Y',$a)->format('d-m-Y');
+        // $ord = Pemesanan::create([
+        //     'user_id' =>  $request->cariuser,
+        //     'nama_lengkap_pembeli'  =>  $request->nama_lengkap,
+        //     'no_hp_pembeli' =>  $request->nomor_telp,
+        //     'alamat_lengkap_pembeli' =>  $request->alamat_lengkap,
+        //     'untuk_tanggal' =>  $a,
+        //     'untuk_jam' =>  $request->untuk_jam,
+        //     'pengambilan' =>  $request->optionkirim,
+        //     'keterangan' =>  $request->keterangan,
+        //     'discount' =>  $b,
+        //     'discount_inpercent' =>  $request->percent_off,
+        //     'total_transaksi' =>  $request->product_total,
+        //     'status_pemesanan' =>  "1",
+        //     'created_at' => \Carbon\Carbon::now(), 
+        //     'updated_at' => \Carbon\Carbon::now(), 
+        // ]);
         
         $lastId = Pemesanan::latest()->first()->id_pemesanan;
        //dd($request->all());
