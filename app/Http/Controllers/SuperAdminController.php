@@ -799,27 +799,29 @@ class SuperAdminController extends Controller
 
         $a=Carbon::parse($request->input('untuk_tanggal'));
         $b=$request->money_off;
-        dd($b);
-        // $tgl= \Carbon\Carbon::createFromFormat('d M,Y',$a)->format('d-m-Y');
-        // $ord = Pemesanan::create([
-        //     'user_id' =>  $request->cariuser,
-        //     'nama_lengkap_pembeli'  =>  $request->nama_lengkap,
-        //     'no_hp_pembeli' =>  $request->nomor_telp,
-        //     'alamat_lengkap_pembeli' =>  $request->alamat_lengkap,
-        //     'untuk_tanggal' =>  $a,
-        //     'untuk_jam' =>  $request->untuk_jam,
-        //     'pengambilan' =>  $request->optionkirim,
-        //     'keterangan' =>  $request->keterangan,
-        //     'discount' =>  $b,
-        //     'discount_inpercent' =>  $request->percent_off,
-        //     'total_transaksi' =>  $request->product_total,
-        //     'status_pemesanan' =>  "1",
-        //     'created_at' => \Carbon\Carbon::now(), 
-        //     'updated_at' => \Carbon\Carbon::now(), 
-        // ]);
+        $ba=$request->percent_off;
+        //dd($b,$ba);
+        //$tgl= \Carbon\Carbon::createFromFormat('d M,Y',$a)->format('d-m-Y');
         
+        $ord = Pemesanan::create([
+            'user_id' =>  $request->cariuser,
+            'nama_lengkap_pembeli'  =>  $request->nama_lengkap,
+            'no_hp_pembeli' =>  $request->nomor_telp,
+            'alamat_lengkap_pembeli' =>  $request->alamat_lengkap,
+            'untuk_tanggal' =>  $a,
+            'untuk_jam' =>  $request->untuk_jam,
+            'pengambilan' =>  $request->optionkirim,
+            'keterangan' =>  $request->keterangan,
+            'discount' =>  $b,
+            'discount_inpercent' =>  $request->percent_off,
+            'total_transaksi' =>  $request->product_total,
+            'status_pemesanan' =>  "1",
+            'created_at' => \Carbon\Carbon::now(), 
+            'updated_at' => \Carbon\Carbon::now(), 
+        ]);
+        //dd($request->all());
         $lastId = Pemesanan::latest()->first()->id_pemesanan;
-       //dd($request->all());
+       
 
         $products = $request->input('select_produk', []);
         $quantities = $request->input('quantity', []);
@@ -839,6 +841,83 @@ class SuperAdminController extends Controller
         Session::flash('message', "Data orderan berhasil ditambahkan");
         return Redirect::back();
     } 
+
+    public function deleteOrder($id)
+    {
+        $model = Pemesanan::find($id);
+        $model->delete();
+
+        Session::flash('message', "Data permintaan pemesanan {$model->name} berhasil dihapus");
+        return Redirect::back();
+    }
+
+    public function trashedOrder()
+    {
+        // mengampil data  yang sudah dihapus
+        $model = Pemesanan::onlyTrashed()->get();
+
+        $page_title = 'Trashed Order Table';
+        $page_description = 'Some description for the page';
+        $logo = "teamo/images/aisyacatering_kontak_logo.png";
+        $logoText = "teamo/images/aisya-catering-logo3.png";
+        $action = __FUNCTION__;
+        return view('viewSuperAdmin.tableTrashedOrder', compact('model', 'page_title', 'page_description','action','logo','logoText'));
+    }
+
+    public function restoreOrder($id)
+    {
+        $model = Pemesanan::onlyTrashed()->where('id_pemesanan',$id);
+        $model->restore();
+
+        Session::flash('message', "Data permintaan pemesanan berhasil dikembalikan");
+        return Redirect::back();
+    }
+
+    public function deletepermanentOrder($id)
+    {
+        // hapus permanen data 
+        $model = Pemesanan::onlyTrashed()->where('id_pemesanan',$id);
+        $model->get()->each(function ($order) {
+
+            $order->products()->detach();
+            $order->delete();
+    
+        });
+    
+        //$model->products()->detach();
+        $model->first()->forceDelete();
+ 
+        Session::flash('message', "Data permintaan pemesanan berhasil dihapus permanen");
+        return Redirect::back();
+    }
+
+    public function restoreallOrder()
+    {
+            
+        $model = Pemesanan::onlyTrashed();
+        $model->restore();
+ 
+        Session::flash('message', "Semua data permintaan pemesanan berhasil dikembalikan");
+        return Redirect::back();
+    }
+
+    public function deletepermanentallOrder()
+    {
+        // hapus permanen semua data  yang sudah dihapus
+        $model = Pemesanan::onlyTrashed();
+        $model->get()->each(function ($order) {
+
+            $order->products()->detach();
+            $order->delete();
+    
+        });
+    
+        //$model->products()->detach();
+        $model->forceDelete();
+ 
+        Session::flash('message', "Semua data permintaan pemesanan berhasil dihapus permanen");
+        return Redirect::back();
+    }
 
     public function loadDataUser(Request $request)
     {

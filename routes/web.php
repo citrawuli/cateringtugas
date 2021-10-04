@@ -94,6 +94,13 @@ Route::post('/StorePemesanan', [App\Http\Controllers\SuperAdminController::class
 Route::post('/accept/{id}', [App\Http\Controllers\SuperAdminController::class, 'acceptorder']); //change status order into accept
 Route::post('/reject/{id}', [App\Http\Controllers\SuperAdminController::class, 'rejectorder']); //change status order into reject
 Route::post('/confirm/{id}', [App\Http\Controllers\SuperAdminController::class, 'confirmorder']); //change status order into confirm
+Route::get('/DeleteOrder/{id}', [App\Http\Controllers\SuperAdminController::class, 'deleteOrder']); //delete data form delete kategori ke DB
+Route::get('/TrashedOrder', [App\Http\Controllers\SuperAdminController::class, 'trashedOrder']); //lihat data order di tong sampah
+Route::get('/RestoreOrder/{id}', [App\Http\Controllers\SuperAdminController::class, 'restoreOrder']); //kembalikan data order dari tong sampah
+Route::get('/DeletePermanentOrder/{id}', [App\Http\Controllers\SuperAdminController::class, 'deletepermanentOrder']); //hapus permanen data order dari tong sampah
+Route::get('/RestoreAllOrder', [App\Http\Controllers\SuperAdminController::class, 'restoreallOrder']); //kembalikan semua data order dari tong sampah
+Route::get('/DeletePermanentAllOrder', [App\Http\Controllers\SuperAdminController::class, 'deletepermanentallOrder']); //hapus permanen semua data order dari tong sampah
+
 
 Route::get('/user', [App\Http\Controllers\UserController::class, 'index'])->name('homeUser');
 Route::get('/adminPemesanan', [App\Http\Controllers\AdminPemesananController::class, 'index'])->name('homeAdminPemesanan');

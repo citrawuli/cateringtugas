@@ -11,13 +11,13 @@
         <div class="col-sm-6 p-md-0">
             <div class="welcome-text">
                 <h4>Hi, selamat datang!</h4>
-                <span>Product Table</span>
+                <span>Tabel Pemesanan</span>
             </div>
         </div>
         <div class="col-sm-6 p-md-0 justify-content-sm-end mt-2 mt-sm-0 d-flex">
             <ol class="breadcrumb">
-                <li class="breadcrumb-item"><a href="javascript:void(0)">Table</a></li>
-                <li class="breadcrumb-item active"><a href="javascript:void(0)">Order Request Table</a></li>
+                <li class="breadcrumb-item"><a href="javascript:void(0)">Tabel</a></li>
+                <li class="breadcrumb-item active"><a href="javascript:void(0)">Tabel Pemesanan</a></li>
             </ol>
         </div>
     </div>
@@ -37,8 +37,8 @@
                 </div>
                 <div class="card-body mb-0">
                     <!-- <button type="button" class="btn light btn-danger" data-toggle="modal" data-target="#exampleModalCenter">Add User</button> -->
-                    <a href="{!! url('/ViewFormPemesanan'); !!}" class="btn light btn-danger">Add Order</a>
-                    <a href="{{ url('/b')}}" class="btn btn-primary light btn-card"><i class="fa fa-trash"></i>See Trashed Product</a> 
+                    <a href="{!! url('/ViewFormPemesanan'); !!}" class="btn light btn-danger">Tambah Pemesanan</a>
+                    <a href="{{ url('/TrashedOrder')}}" class="btn btn-primary light btn-card"><i class="fa fa-trash"></i>Lihat Tong Sampah Pemesanan</a> 
                 </div>
             </div>
         </div>
@@ -59,7 +59,7 @@
             <br>
             <div class="card">
                 <div class="card-header text-white bg-danger">
-                    <h4 class="card-title">Order Request Table</h4>
+                    <h4 class="card-title">Tabel Pemesanan</h4>
                 </div>
 
                 <!-- <div class="" >
@@ -74,7 +74,7 @@
 
                 <div class="card-body">
                     <div class="table-responsive">
-                        <table id="example3" class="display" style="min-width: 845px">
+                        <table id="ordertable" class="display" style="min-width: 845px">
                             <thead>
                                 <tr>
                                     <th>ID</th>
@@ -280,18 +280,17 @@
 @section('script')
 <script>
 $(document).ready(function(){
-    // $('#example3').DataTable({
-    // dom: 'Bfrtip',
-    // orderCellsTop: true,
-    // buttons: [
-    //     {
-    //         text: "Filter: Menunggu Konfirmasi",
-    //         // action: function(e, dt, node, config){
-    //         //     dt.column(0).search("United States").draw();
-    //         // }
-    //     }
-    // ]
-    // });
+
+    $('#ordertable').DataTable( {
+        dom: 'Blfrtip',
+        // Bfrtip you need to add l on your dom. See this for ref: https://datatables.net/reference/option/dom.
+        buttons: [
+            'copy', 'csv', 'excel', 'pdf', 'print'
+        ],
+        
+    });
+    
+
 
     $('[data-toggle="tooltip"]').tooltip();
     $('[data-toggle="tooltip2"]').tooltip();
