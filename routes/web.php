@@ -91,10 +91,14 @@ Route::get('/cariUser', [App\Http\Controllers\SuperAdminController::class, 'load
 Route::get('/cariProduk', [App\Http\Controllers\SuperAdminController::class,'loadDataProduk']);
 Route::post('/StorePemesanan', [App\Http\Controllers\SuperAdminController::class, 'storePemesanan']); // store data pemesanan dan detail ke DB
 
+Route::get('/EditOrder/{id}', [App\Http\Controllers\SuperAdminController::class, 'EditOrder']); //lihat form edit order
+Route::post('/UpdateOrder/{id}', [App\Http\Controllers\SuperAdminController::class, 'UpdateOrder']); //update data form edit order ke DB
+
+
 Route::post('/accept/{id}', [App\Http\Controllers\SuperAdminController::class, 'acceptorder']); //change status order into accept
 Route::post('/reject/{id}', [App\Http\Controllers\SuperAdminController::class, 'rejectorder']); //change status order into reject
 Route::post('/confirm/{id}', [App\Http\Controllers\SuperAdminController::class, 'confirmorder']); //change status order into confirm
-Route::get('/DeleteOrder/{id}', [App\Http\Controllers\SuperAdminController::class, 'deleteOrder']); //delete data form delete kategori ke DB
+Route::get('/DeleteOrder/{id}', [App\Http\Controllers\SuperAdminController::class, 'deleteOrder']); //delete data form delete order ke DB
 Route::get('/TrashedOrder', [App\Http\Controllers\SuperAdminController::class, 'trashedOrder']); //lihat data order di tong sampah
 Route::get('/RestoreOrder/{id}', [App\Http\Controllers\SuperAdminController::class, 'restoreOrder']); //kembalikan data order dari tong sampah
 Route::get('/DeletePermanentOrder/{id}', [App\Http\Controllers\SuperAdminController::class, 'deletepermanentOrder']); //hapus permanen data order dari tong sampah

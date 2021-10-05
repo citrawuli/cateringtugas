@@ -11,13 +11,13 @@
         <div class="col-sm-6 p-md-0">
             <div class="welcome-text">
                 <h4>Hi, selamat datang!</h4>
-                <span>Tabel Pemesanan</span>
+                <span>Tabel Permintaan</span>
             </div>
         </div>
         <div class="col-sm-6 p-md-0 justify-content-sm-end mt-2 mt-sm-0 d-flex">
             <ol class="breadcrumb">
                 <li class="breadcrumb-item"><a href="javascript:void(0)">Tabel</a></li>
-                <li class="breadcrumb-item active"><a href="javascript:void(0)">Tabel Pemesanan</a></li>
+                <li class="breadcrumb-item active"><a href="javascript:void(0)">Daftar Permintaan</a></li>
             </ol>
         </div>
     </div>
@@ -38,7 +38,7 @@
                 <div class="card-body mb-0">
                     <!-- <button type="button" class="btn light btn-danger" data-toggle="modal" data-target="#exampleModalCenter">Add User</button> -->
                     <a href="{!! url('/ViewFormPemesanan'); !!}" class="btn light btn-danger">Tambah Pemesanan</a>
-                    <a href="{{ url('/TrashedOrder')}}" class="btn btn-primary light btn-card"><i class="fa fa-trash"></i>Lihat Tong Sampah Pemesanan</a> 
+                    <a href="{{ url('/TrashedOrder')}}" class="btn btn-primary light btn-card"><i class="fa fa-trash"></i>Lihat Tong Sampah Permintaan</a> 
                 </div>
             </div>
         </div>
@@ -59,9 +59,9 @@
             <br>
             <div class="card">
                 <div class="card-header text-white bg-danger">
-                    <h4 class="card-title">Tabel Pemesanan</h4>
-                </div>
-
+                    <h4 class="card-title">Tabel Permintaan</h4>
+                </div><br>
+                
                 <!-- <div class="" >
                     <div class="toolbar mb-4" role="toolbar">
                         <div class="btn-group mb-1">
@@ -85,7 +85,7 @@
                                     <th>Jumlah Transaksi</th>
                                     <th>Status Order</th>
                                     <th>Keterangan</th>
-                                    <th>Diskon</th><!-- 
+                                    <!-- 
                                     <th>Deleted At</th>
                                     <th>Created At</th>
                                     <th>Updated At</th> -->
@@ -122,7 +122,7 @@
                                   <td><span class="badge light badge-secondary"><i class="fa fa-circle text-secondary mr-1"></i>Dibatalkan</span></td>
                                   @endif
                                   <td>{{ $order->keterangan ?? 'Tidak ada'}}</td>
-                                  <td>{{ $order->discount ?? 'Tidak ada'}}</td><!-- 
+                                  <!-- 
                                   <td>{{ $order->deleted_at }}</td>
                                   <td>{{ $order->created_at }}</td>
                                   <td>{{ $order->updated_at }}</td> -->
@@ -174,7 +174,9 @@
                                                                         <span class="badge light badge-success"><i class="fa fa-circle text-success mr-1"></i>Dikirim Go-Car</span>
                                                                         @endif
                                                                     </p>
-                                                                    <p><strong>Alamat : </strong><span>{{ $order->alamat_lengkap_pembeli }}</span></p><br>
+                                                                    <p><strong>Alamat : </strong><span>{{ $order->alamat_lengkap_pembeli }}</span></p>
+                                                                    <p><strong>Nomor Telepon : </strong><span>{{ $order->no_hp_pembeli }}</span></p><br>
+                                                                    
                                                                     <p><strong>TABEL PRODUK YANG DIPESAN </strong>
                                                                         <span>
                                                                         {{-- @foreach ($retri as $det_pem  ) --}}
@@ -207,6 +209,8 @@
                                                                         {{-- {{ $order->detail_idproduk }} --}}
                                                                         </span>
                                                                     </p>
+                                                                    <p><strong>Diskon : <span>{{ $order->discount ?? 'Tidak ada'}}</span></strong></p>
+                                                                    
                                                                 </center>
                                                                 
                                                                 
@@ -278,16 +282,30 @@
 @endsection
 
 @section('script')
+
 <script>
+    
 $(document).ready(function(){
 
     $('#ordertable').DataTable( {
-        dom: 'Blfrtip',
+        dom: 'lBfrtip',
         // Bfrtip you need to add l on your dom. See this for ref: https://datatables.net/reference/option/dom.
         buttons: [
-            'copy', 'csv', 'excel', 'pdf', 'print'
-        ],
-        
+            {
+                extend: 'copy',
+                text: window.copyButtonTrans,
+                exportOptions: {
+                    columns: ':visible'
+                }
+            },
+            {
+                extend: 'csv',
+                text: window.csvButtonTrans,
+                exportOptions: {
+                    columns: ':visible'
+                }
+            }
+        ]
     });
     
 
