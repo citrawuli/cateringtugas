@@ -383,6 +383,16 @@ return [
 					'davur/vendor/pickadate/themes/default.css',
 					'davur/vendor/pickadate/themes/default.date.css',
 				],
+				'Invoice' => [
+					'davur/vendor/bootstrap-select/dist/css/bootstrap-select.min.css',
+				  	'davur/vendor/datatables/css/jquery.dataTables.min.css',
+	  			],
+				'OrderCalendar' => [
+					'davur/vendor/bootstrap-select/dist/css/bootstrap-select.min.css',
+					'davur/vendor/fullcalendar/css/fullcalendarV3.min.css',
+					'davur/css/icomoon.css',
+	  			],
+				 
 				    
 			],
 			'js' => [
@@ -1132,6 +1142,26 @@ return [
 					'davur/js/plugins-init/clock-picker-init.js',
 					'davur/js/plugins-init/pickadate-init.js',
 				], 
+				'Invoice' => [
+					'davur/vendor/bootstrap-select/dist/js/bootstrap-select.min.js',
+				  
+					'davur/js/custom.min.js',
+					'davur/js/deznav-init.js',
+
+					'davur/vendor/datatables/js/jquery.dataTables.min.js',
+					'davur/js/plugins-init/datatables.init.js',
+	  			],
+				'OrderCalendar' => [
+					'davur/vendor/bootstrap-select/dist/js/bootstrap-select.min.js',
+					'davur/vendor/chart.js/Chart.bundle.min.js',
+					'davur/vendor/apexchart/apexchart.js',
+					'davur/vendor/jqueryui/js/jquery-ui.min.js',
+					'davur/vendor/moment/moment.min.js',
+					'davur/vendor/fullcalendar/js/fullcalendar.min.js',
+					// 'davur/js/plugins-init/fullcalendar-initnew.js',
+			        'davur/js/custom.min.js',
+			        'davur/js/deznav-init.js',
+				],
 			]
 		],
 	]

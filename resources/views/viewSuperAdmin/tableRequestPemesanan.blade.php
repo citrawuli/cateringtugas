@@ -11,13 +11,13 @@
         <div class="col-sm-6 p-md-0">
             <div class="welcome-text">
                 <h4>Hi, selamat datang!</h4>
-                <span>Tabel Permintaan</span>
+                <span>Tabel Order Masuk</span>
             </div>
         </div>
         <div class="col-sm-6 p-md-0 justify-content-sm-end mt-2 mt-sm-0 d-flex">
             <ol class="breadcrumb">
                 <li class="breadcrumb-item"><a href="javascript:void(0)">Tabel</a></li>
-                <li class="breadcrumb-item active"><a href="javascript:void(0)">Daftar Permintaan</a></li>
+                <li class="breadcrumb-item active"><a href="javascript:void(0)">Daftar Order Masuk</a></li>
             </ol>
         </div>
     </div>
@@ -59,10 +59,10 @@
             <br>
             <div class="card">
                 <div class="card-header text-white bg-danger">
-                    <h4 class="card-title">Tabel Permintaan</h4>
+                    <h4 class="card-title">Daftar Order Masuk</h4>
                 </div><br>
                 
-                <!-- <div class="" >
+                {{-- <div class="" >
                     <div class="toolbar mb-4" role="toolbar">
                         <div class="btn-group mb-1">
                             <button type="button" class="btn btn-primary light px-3"><i class="fa fa-archive"></i></button>
@@ -70,7 +70,15 @@
                             <button type="button" class="btn btn-primary light px-3"><i class="fa fa-trash"></i></button>
                         </div>
                     </div>
-                </div> -->
+                </div> --}}
+
+                <div class="btn-group btn-group-sm" style="margin-left: 5%; margin-right:5%">
+                    <button id="menunggu" class="btn light btn-warning filter">Menunggu Konfirmasi</button>
+                    <button id="diterima" class="btn light btn-success filter">Diterima</button>
+                    <button id="ditolak" class="btn light btn-danger filter">Ditolak</button>
+                    <button id="dibatalkan" class="btn light btn-info filter">Dibatalkan</button>
+                    <button id="semua" class="btn light btn-secondary filter">Semua</button>
+                </div>
 
                 <div class="card-body">
                     <div class="table-responsive">
@@ -84,7 +92,7 @@
                                     <th>Lokasi</th>
                                     <th>Jumlah Transaksi</th>
                                     <th>Status Order</th>
-                                    <th>Keterangan</th>
+                                    {{-- <th>Keterangan</th> --}}
                                     <!-- 
                                     <th>Deleted At</th>
                                     <th>Created At</th>
@@ -115,13 +123,16 @@
                                   @if ($order ->status_pemesanan == '1')
                                   <td><span class="badge light badge-warning"><i class="fa fa-circle text-warning mr-1"></i>Menunggu Konfirmasi</span></td>
                                   @elseif ($order ->status_pemesanan == '2')
-                                  <td><span class="badge light badge-success"><i class="fa fa-circle text-success mr-1"></i>Diterima</span></td>
+                                  <td><span class="badge light badge-success"><i class="fa fa-circle text-success mr-1"></i>Diterima</span>
+                                    <a href="{!! url('/Invoice/'. $order->id_pemesanan); !!}" class="btn btn-success btn-xs btn-rounded">Invoice</a>
+                                    
+                                  </td>
                                   @elseif ($order ->status_pemesanan == '3')
                                   <td><span class="badge light badge-danger"><i class="fa fa-circle text-danger mr-1"></i>Ditolak</span></td>
                                   @elseif ($order ->status_pemesanan == '4')
-                                  <td><span class="badge light badge-secondary"><i class="fa fa-circle text-secondary mr-1"></i>Dibatalkan</span></td>
+                                  <td><span class="badge light badge-info"><i class="fa fa-circle text-secondary mr-1"></i>Dibatalkan</span></td>
                                   @endif
-                                  <td>{{ $order->keterangan ?? 'Tidak ada'}}</td>
+                                  {{-- <td>{{ $order->keterangan ?? 'Tidak ada'}}</td> --}}
                                   <!-- 
                                   <td>{{ $order->deleted_at }}</td>
                                   <td>{{ $order->created_at }}</td>
@@ -156,6 +167,7 @@
                                                                 <tr>
                                                                     <th>ID Produk</th>
                                                                     <th>Produk</th>
+                                                                    <th>Harga</th>
                                                                     <th>Sub Total</th>
                                                                     <th>Kuantitas</th>
                                                                 </tr>
@@ -175,7 +187,8 @@
                                                                         @endif
                                                                     </p>
                                                                     <p><strong>Alamat : </strong><span>{{ $order->alamat_lengkap_pembeli }}</span></p>
-                                                                    <p><strong>Nomor Telepon : </strong><span>{{ $order->no_hp_pembeli }}</span></p><br>
+                                                                    <p><strong>Nomor Telepon : </strong><span>{{ $order->no_hp_pembeli }}</span></p>
+                                                                    <p><strong>Keterangan : </strong><span>{{ $order->keterangan ?? 'Tidak ada'}}</span></p><br>
                                                                     
                                                                     <p><strong>TABEL PRODUK YANG DIPESAN </strong>
                                                                         <span>
@@ -200,6 +213,7 @@
                                                                                 {{-- nullnya ga bisa jalan satu statement I wonder whyy --}}
                                                                                 <td>{{ $det_pem->pivot->id_produk ?: 'null' }}</td>
                                                                                 <td>{{ $det_pem->nama_produk ?: 'null' }}</td>
+                                                                                <td>{{ $det_pem->harga_produk ?: 'null' }}</td>
                                                                                 <td>{{ $det_pem->pivot->sub_total ?: 'null'}}</td>
                                                                                 <td>{{ $det_pem->pivot->kuantitas ?:  'null'}}</td>
                                                                                
@@ -209,7 +223,9 @@
                                                                         {{-- {{ $order->detail_idproduk }} --}}
                                                                         </span>
                                                                     </p>
-                                                                    <p><strong>Diskon : <span>{{ $order->discount ?? 'Tidak ada'}}</span></strong></p>
+                                                                    <p><strong>Total Subtotal Rp: <span>{{ $order->total_sub ?? 'Tidak ada'}}</span></strong></p>
+                                                                    <p><strong>Diskon Rp: <span>{{ $order->discount ?? 'Tidak ada'}}</span></strong></p>
+                                                                    <p><strong>Diskon % : <span>{{ $order->discount_inpercent ?? 'Tidak ada'}}</span></strong></p>
                                                                     
                                                                 </center>
                                                                 
@@ -240,26 +256,47 @@
                                                        
                                                     </div>
                                                     <div class="modal-footer">
-                                                        <button type="button" class="btn btn-danger light" data-dismiss="modal">Close</button>
+                                                    {{-- menunggu --}}
+                                                    @if ($order ->status_pemesanan == '1')
+                                                        <a type="button" id="accept" name="{{$order->id_pemesanan}}" class="btn btn-success light accept" ><i class="las la-check-square scale5 text-success mr-2"></i>Accept</a>
+                                                        <a type="button" id="reject" name="{{$order->id_pemesanan}}" class="btn btn-danger light reject"><i class="las la-times-circle scale5 text-danger mr-2"></i>Reject</a>
+                                                        <button type="button" class="btn btn-secondary light" data-dismiss="modal">Close</button>
+                                                    {{-- diterima --}}
+                                                    @elseif ($order ->status_pemesanan == '2')
+                                                        
+                                                        <a type="button" id="reject" name="{{$order->id_pemesanan}}" class="btn btn-danger light reject"><i class="las la-times-circle scale5 text-danger mr-2"></i>Reject</a>
+                                                        <a type="button" id="confirm" name="{{$order->id_pemesanan}}" class="btn btn-warning light confirm"><i class="las la-undo scale5 text-warning mr-2"></i>Confirm</a>
+                                                        <button type="button" class="btn btn-secondary light" data-dismiss="modal">Close</button>
+                                                    {{-- ditolak --}}
+                                                    @elseif ($order ->status_pemesanan == '3')   
+                                                        <a type="button" id="accept" name="{{$order->id_pemesanan}}" class="btn btn-success light accept" ><i class="las la-check-square scale5 text-success mr-2"></i>Accept</a>
+                                                        <a type="button" id="confirm" name="{{$order->id_pemesanan}}" class="btn btn-warning light confirm"><i class="las la-undo scale5 text-warning mr-2"></i>Confirm</a>
+                                                        <button type="button" class="btn btn-secondary light" data-dismiss="modal">Close</button>
+                                                    {{-- dibatalkan --}}
+                                                    @elseif ($order ->status_pemesanan == '4')   
+                                                        <button type="button" class="btn btn-secondary light" data-dismiss="modal">Close</button>
+                                                    @endif
                                                     </div>
                                                 </div>
                                             </div>
                                         </div>
 
-                                        <a href="{{ url( '/EditOrder/' . $order->id_pemesanan ) }}" class="btn btn-primary shadow btn-xs sharp mr-1" data-toggle="tooltip" data-placement="top" title="Edit Order" id="editt"><i class="fa fa-pencil"></i></a>
+                                        {{-- untuk edit --}}
+                                        {{-- <a href="{{ url( '/EditOrder/' . $order->id_pemesanan ) }}" class="btn btn-primary shadow btn-xs sharp mr-1" data-toggle="tooltip" data-placement="top" title="Edit Order" id="editt"><i class="fa fa-pencil"></i></a> --}}
                                        
                                         <a href="{{ url( '/DeleteOrder/' . $order->id_pemesanan ) }}" class="btn btn-danger shadow btn-xs sharp" data-toggle="tooltip2" data-placement="top" title="Soft Delete Order"><i class="fa fa-trash"></i></a>
                                         
-                                            <div class="dropdown ml-auto text-right">
+                                        {{-- untuk accept confirm --}}
+                                            {{-- <div class="dropdown ml-auto text-right">
                                                 <div class="btn-link" data-toggle="dropdown">
                                                     <svg width="24px" height="24px" viewBox="0 0 24 24" version="1.1"><g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd"><rect x="0" y="0" width="24" height="24"></rect><circle fill="#000000" cx="5" cy="12" r="2"></circle><circle fill="#000000" cx="12" cy="12" r="2"></circle><circle fill="#000000" cx="19" cy="12" r="2"></circle></g></svg>
                                                 </div>
                                                 <div class="dropdown-menu dropdown-menu-right">
-                                                    <a class="dropdown-item accept" id="accept" name="{{$order->id_pemesanan}}"><i class="las la-check-square scale5 text-primary mr-2"></i> Accept Order</a>
-                                                    <a class="dropdown-item reject" id="reject" name="{{$order->id_pemesanan}}"><i class="las la-times-circle scale5 text-danger mr-2"></i> Reject Order</a>
-                                                    <a class="dropdown-item confirm" id="confirm" name="{{$order->id_pemesanan}}"><i class="las la-undo scale5 text-warning mr-2"></i> Confirm Order</a>
+                                                    <a class="dropdown-item accept" id="accept" name="{{$order->id_pemesanan}}"><i class="las la-check-square scale5 text-primary mr-2"></i> Diterima</a>
+                                                    <a class="dropdown-item reject" id="reject" name="{{$order->id_pemesanan}}"><i class="las la-times-circle scale5 text-danger mr-2"></i> Ditolak</a>
+                                                    <a class="dropdown-item confirm" id="confirm" name="{{$order->id_pemesanan}}"><i class="las la-undo scale5 text-warning mr-2"></i> Menunggu Konfirmasi</a>
                                                 </div>
-                                            </div>
+                                            </div> --}}
 
                                         
 
@@ -287,25 +324,9 @@
     
 $(document).ready(function(){
 
-    $('#ordertable').DataTable( {
+    var dataTable= $('#ordertable').DataTable( {
         dom: 'lBfrtip',
         // Bfrtip you need to add l on your dom. See this for ref: https://datatables.net/reference/option/dom.
-        buttons: [
-            {
-                extend: 'copy',
-                text: window.copyButtonTrans,
-                exportOptions: {
-                    columns: ':visible'
-                }
-            },
-            {
-                extend: 'csv',
-                text: window.csvButtonTrans,
-                exportOptions: {
-                    columns: ':visible'
-                }
-            }
-        ]
     });
     
 
@@ -396,7 +417,29 @@ $(document).ready(function(){
     });
 
     
+    $('#diterima').on('click', function () {
+        dataTable.columns(6).search("Diterima", true, false, true).draw();
+    });
 
+    $('#ditolak').on('click', function () {
+        dataTable.columns(6).search("Ditolak", true, false, true).draw();
+    });
+
+    $('#menunggu').on('click', function () {
+        dataTable.columns(6).search("Menunggu Konfirmasi", true, false, true).draw();
+    });
+
+    $('#dibatalkan').on('click', function () {
+        dataTable.columns(6).search("Dibatalkan", true, false, true).draw();
+    });
+
+    $('#semua').on('click', function () {
+        dataTable.columns(6).search("Menunggu Konfirmasi|Ditolak|Diterima", true, false, true).draw();
+    });
+
+    // $('#diterima').on('click', function () {
+    //     dataTable.columns(6).search("Rejected|Done", true, false, true).draw();
+    // });
    
 
 

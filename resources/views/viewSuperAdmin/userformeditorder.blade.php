@@ -197,7 +197,7 @@
                                                 <tbody>
                                                 {{-- lihat js --}}
                                             @foreach ($order->products as $det_pem  )
-                                               <tr id="{{ $loop->iteration }}" class="iteratenew">
+                                               <tr id="iteration">
                                                     
                                                     <td class="left strong"><div class=""><select class="form-control selected_product"  id="select_produk{{ $loop->iteration }}" required=""  name="select_produk[]" >
                                                         <option disabled selected="">Enter Produk</option>
@@ -317,11 +317,9 @@
         //data
         var iter = $('#iteration');
         var counteriteration=parseInt(iter.val());
-        //alert(counteriteration);
-        $('.iteratenew').each(function() {
-            
-            hitung(counteriteration);
-        });
+        alert(counteriteration);
+       
+       
         
         //ADD ROW
             var table = $('#simulationRow').DataTable();

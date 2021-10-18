@@ -105,7 +105,7 @@
                                         <label for="product" class="col-sm-3 col-form-label">{{ __('Untuk tanggal*') }}</label>
 
                                         <div class="col-md-6">
-                                            <input class="datepicker-default form-control @error('untuk_tanggal') is-invalid @enderror" id="datepicker" name="untuk_tanggal" placeholder="Pilih Tanggal">
+                                            <input class="datepicker-default form-control @error('untuk_tanggal') is-invalid @enderror" id="datepicker" name="untuk_tanggal" placeholder="Pilih Tanggal" required>
                                         </div>
                                         
                                     </div>
@@ -160,9 +160,10 @@
                                     class="form-control @error('product_total') is-invalid @enderror" 
                                     name="product_total" required  placeholder="Total Transaksi" hidden>
 
-                                    {{-- <input id="sub_total_todb" hidden type="number" 
+
+                                    <input id="sub_total_todb" hidden type="number" 
                                     class="form-control @error('sub_total_todb') is-invalid @enderror" 
-                                    name="sub_total_todb"  placeholder="Sub Total" hidden> --}}
+                                    name="sub_total_todb"  placeholder="Sub Total" hidden>
                                     
                                     
 
@@ -379,7 +380,7 @@
                 });
                 
                 $('#sub_total').html(sbtotal);
-                $('#sub_total_todb').html(sbtotal);
+                $('#sub_total_todb').val(parseInt(sbtotal));
                 discount=0;
                //discount = $('.discount').val(); this is without radio button
                 if ($('#money-radio').is(':checked')) {

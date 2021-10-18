@@ -93,7 +93,7 @@ Route::post('/StorePemesanan', [App\Http\Controllers\SuperAdminController::class
 
 Route::get('/EditOrder/{id}', [App\Http\Controllers\SuperAdminController::class, 'EditOrder']); //lihat form edit order
 Route::post('/UpdateOrder/{id}', [App\Http\Controllers\SuperAdminController::class, 'UpdateOrder']); //update data form edit order ke DB
-
+Route::get('/Invoice/{id}', [App\Http\Controllers\SuperAdminController::class, 'Invoice']); // lihat invoice
 
 Route::post('/accept/{id}', [App\Http\Controllers\SuperAdminController::class, 'acceptorder']); //change status order into accept
 Route::post('/reject/{id}', [App\Http\Controllers\SuperAdminController::class, 'rejectorder']); //change status order into reject
@@ -104,6 +104,8 @@ Route::get('/RestoreOrder/{id}', [App\Http\Controllers\SuperAdminController::cla
 Route::get('/DeletePermanentOrder/{id}', [App\Http\Controllers\SuperAdminController::class, 'deletepermanentOrder']); //hapus permanen data order dari tong sampah
 Route::get('/RestoreAllOrder', [App\Http\Controllers\SuperAdminController::class, 'restoreallOrder']); //kembalikan semua data order dari tong sampah
 Route::get('/DeletePermanentAllOrder', [App\Http\Controllers\SuperAdminController::class, 'deletepermanentallOrder']); //hapus permanen semua data order dari tong sampah
+
+Route::get('/OrderCalendar', [App\Http\Controllers\SuperAdminController::class, 'OrderCalendar']); //lihat Kalender Pemesanan
 
 
 Route::get('/user', [App\Http\Controllers\UserController::class, 'index'])->name('homeUser');

@@ -36,18 +36,18 @@
                     </li>
                     <li><a class="has-arrow ai-icon" href="javascript:void()" aria-expanded="false">
                             <i class="flaticon-381-notepad"></i>
-                            <span class="nav-text">Permintaan Order</span>
+                            <span class="nav-text">Order Masuk</span>
                         </a>
                         <ul aria-expanded="false">
-                            <li><a href="{!! url('/PemesananTable'); !!}">Daftar Permintaan Order</a></li>
+                            <li><a href="{!! url('/PemesananTable'); !!}">Daftar Order Masuk</a></li>
                         </ul>
                     </li>
                     <li><a class="has-arrow ai-icon" href="javascript:void()" aria-expanded="false">
                         <i class="flaticon-381-tab"></i>
-                        <span class="nav-text">Orderan</span>
+                        <span class="nav-text">Kalender Orderan</span>
                     </a>
                         <ul aria-expanded="false">
-                            <li><a href="{!! url('/OrderTable'); !!}">Daftar Order</a></li>
+                            <li><a href="{!! url('/OrderCalendar'); !!}">Kalender Order</a></li>
                         </ul>
                     </li>
                     <li><a class="has-arrow ai-icon" href="javascript:void()" aria-expanded="false">

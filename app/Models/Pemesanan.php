@@ -34,6 +34,10 @@ class Pemesanan extends Model
         'status_pemesanan',
         'created_at',
         'updated_at',
+        "discount",
+        "discount_inpercent",
+        "total_sub"
+
     ];
 
     public function products()

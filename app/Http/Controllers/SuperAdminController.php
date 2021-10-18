@@ -19,6 +19,7 @@ use Carbon\Carbon;
 use Exception;
 use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Input;
+use PDF;
 
 class SuperAdminController extends Controller
 {
@@ -815,11 +816,12 @@ class SuperAdminController extends Controller
             'discount' =>  $b,
             'discount_inpercent' =>  $request->percent_off,
             'total_transaksi' =>  $request->product_total,
+            'total_sub' =>  $request->sub_total_todb,
             'status_pemesanan' =>  "1",
             'created_at' => \Carbon\Carbon::now(), 
             'updated_at' => \Carbon\Carbon::now(), 
         ]);
-        //dd($request->all());
+        // dd($request->all());
         $lastId = Pemesanan::latest()->first()->id_pemesanan;
        
 
@@ -873,6 +875,27 @@ class SuperAdminController extends Controller
         $model->save();
         Session::flash('message', "Data produk berhasil diubah");
         return Redirect::back();
+    }
+
+    public function Invoice($id)
+    {
+        $page_title = 'Add Category Form';
+        $page_description = 'Some description for the page';
+        $logo = "teamo/images/aisyacatering_kontak_logo.png";
+        $logoText = "teamo/images/aisya-catering-logo3.png";
+        $action = __FUNCTION__;
+
+        $pemesanan = Pemesanan::with(['products'])->where('pemesanan.id_pemesanan', $id)->get();
+        // dd($pemesanan);
+        $users = DB::table('users')->get();
+        $produk = DB::table('produk')->get();
+        // dump($barang);
+        $pdf = PDF::loadView('viewSuperAdmin.invoice', compact('pemesanan', 'users', 'produk')); 
+        $pdf->setPaper('a4',  'potrait'); 
+        return $pdf->stream(); 
+
+        //eturn view('viewSuperAdmin.invoice', compact('page_title', 'page_description','action','logo','logoText'));
+    
     }
 
     public function deleteOrder($id)
@@ -950,6 +973,49 @@ class SuperAdminController extends Controller
  
         Session::flash('message', "Semua data permintaan pemesanan berhasil dihapus permanen");
         return Redirect::back();
+    }
+
+    public function OrderCalendar(Request $request)
+    {
+        // if($request->ajax())
+    	// {
+        //     $pem = Pemesanan::with(['products'])->whereNull('pemesanan.deleted_at')->get();
+        //     return response()->json($pem);
+    	// }
+        
+        if($request->ajax()){
+            $pemesanan = Pemesanan::with(['products'])->whereNull('pemesanan.deleted_at')->get();
+            $datapem = $pemesanan->toJson();
+
+                $events = [];
+                foreach( $pemesanan as $key =>$order ){
+                    $event = [];
+                    $event['title'] = $order->nama_lengkap_pembeli;
+                    $event['start'] = $order->untuk_tanggal;
+                    $events[] = json_encode($event);
+                }
+
+                return response($datapem);
+        }
+        
+
+        // $events = [];
+        // foreach( $pemesanan as $key =>$order ){
+        //     $event = [];
+        //     $event['title'] = $order->nama_lengkap_pembeli;
+        //     $event['start'] = $order->untuk_tanggal;
+        //     $events[] = json_encode($event);
+        // }
+        
+
+
+        $page_title = 'Order Calendar';
+        $page_description = 'Some description for the page';
+        $logo = "teamo/images/aisyacatering_kontak_logo.png";
+        $logoText = "teamo/images/aisya-catering-logo3.png";
+        $action = __FUNCTION__;
+        return view('viewSuperAdmin.viewOrderCalendar', compact('page_title', 'page_description','action','logo','logoText'));
+    
     }
 
     public function loadDataUser(Request $request)
