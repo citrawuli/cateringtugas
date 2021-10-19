@@ -15,6 +15,7 @@ use App\Models\kategoriProduk;
 use App\Models\produk;
 use App\Models\galeriProduk;
 use App\Models\Pemesanan;
+use App\Models\Pembayaran;
 use Carbon\Carbon;
 use Exception;
 use Illuminate\Support\Str;
@@ -778,22 +779,22 @@ class SuperAdminController extends Controller
     }
 
     public function storePemesanan(Request $request){
-        // $validator = $request->validate([
-        //     'nama_lengkap_pembeli' => ['required', 'max:50'],
-        //     'no_hp_pembeli' => ['required', 'max:15'],
-        //     'alamat_lengkap_pembeli' => ['required', 'max:100'],
-        //     'keterangan' => ['max:200'],
-        // ],
-        // [
-        //     'nama_lengkap_pembeli.required' => 'Nama harus diisi',
-        //     'no_hp_pembeli.required' => 'Nomor ponsel harus diisi',
-        //     'alamat_lengkap_pembeli.required' => 'Alamat pengiriman harus diisi',
-        //     'nama_lengkap_pembeli.max' => 'Nama harus dibawah 50 karakter',
-        //     'no_hp_pembeli.max' => 'Nomor ponsel harus dibawah 15 karakter',
-        //     'alamat_lengkap_pembeli.max' => 'Alamat pengiriman harus dibawah 100 karakter ',
-        //     'keterangan.max' => 'Keterangan harus dibawah 200 karakter',
-        //     ]
-        // );
+        $validator = $request->validate([
+            'nama_lengkap_pembeli' => ['required', 'max:50'],
+            'no_hp_pembeli' => ['required', 'max:15'],
+            'alamat_lengkap_pembeli' => ['required', 'max:100'],
+            'keterangan' => ['max:200'],
+        ],
+        [
+            'nama_lengkap_pembeli.required' => 'Nama harus diisi',
+            'no_hp_pembeli.required' => 'Nomor ponsel harus diisi',
+            'alamat_lengkap_pembeli.required' => 'Alamat pengiriman harus diisi',
+            'nama_lengkap_pembeli.max' => 'Nama harus dibawah 50 karakter',
+            'no_hp_pembeli.max' => 'Nomor ponsel harus dibawah 15 karakter',
+            'alamat_lengkap_pembeli.max' => 'Alamat pengiriman harus dibawah 100 karakter ',
+            'keterangan.max' => 'Keterangan harus dibawah 200 karakter',
+            ]
+        );
         
         // dd($request->all());
         //why I cant save discount value huh?!!
@@ -972,6 +973,84 @@ class SuperAdminController extends Controller
         $model->forceDelete();
  
         Session::flash('message', "Semua data permintaan pemesanan berhasil dihapus permanen");
+        return Redirect::back();
+    }
+
+    public function paymentIDtable($id)
+    {
+        $pemesanan = Pemesanan::find($id);
+        $bayar = Pembayaran::where('pembayaran.id_pemesanan', $id)->whereNull('pembayaran.deleted_at')->get();
+        // dd($order_totaltransaksi);
+        $id_pemesanan=$id;
+
+        // $bayar_totalbayar=10;
+        // $bayar->each(function ($pay) {
+        //     $bayar_totalbayar=$pay->order()->sum('pivot.jumlah_bayar');
+        //     dd($bayar_totalbayar);
+        // });
+        
+        // if ($order_totaltransaksi == $bayar_totalbayar ) {
+        //     $status='LUNAS';
+        // }
+        // else{
+        //     $status='BELUM LUNAS';
+        // }
+       
+       
+        $page_title = 'Edit Order Form';
+        $page_description = 'Some description for the page';
+        $logo = "teamo/images/aisyacatering_kontak_logo.png";
+        $logoText = "teamo/images/aisya-catering-logo3.png";
+        $action = __FUNCTION__;
+
+        return view('viewSuperAdmin.tablepembayaranID',compact('bayar', 'pemesanan', "id_pemesanan", 'page_title', 'page_description','action','logo','logoText') );
+
+    }
+
+    public function addpaymentIDtable($id)
+    {
+        $pemesanan_id=$id;
+        $page_title = 'Add Category Form';
+        $page_description = 'Some description for the page';
+        $logo = "teamo/images/aisyacatering_kontak_logo.png";
+        $logoText = "teamo/images/aisya-catering-logo3.png";
+        $action = __FUNCTION__;
+        return view('viewSuperAdmin.addpembayaranID', compact('pemesanan_id', 'page_title', 'page_description','action','logo','logoText'));
+    
+    }
+
+    public function storepaymentID(Request $request){
+        //forADMIN
+        $validator = $request->validate([
+            'id_pemesanan' => ['required'],
+            'jumlah_bayar' => ['required'],
+            'optionbank' => ['required'],
+            'atas_nama' => ['max:50'],
+            'nomor_rekening' => ['max:20'],
+        ],
+        [
+            'id_pemesanan.required' => 'Mohon memilih id pemesanan',
+            'jumlah_bayar.required' => 'Mohon mengisi jumlah bayar',
+            'bank_transfer.required' => 'Mohon memilih jenis bayar',
+            'atas_nama.max' => 'Atas Nama harus dibawah 50 karakter',
+            'nomor_rekening.max' => 'Nomor Rekening harus dibawah 20 karakter',            
+        ]
+        );
+
+
+        Pembayaran::create([
+            'id_pemesanan' => $request->id_pemesanan,
+            'jumlah_bayar' => $request->jumlah_bayar,
+            'tanggal_pembayaran' => \Carbon\Carbon::now(),
+            'bank_transfer' => $request->optionbank,
+            'atas_nama' => $request->atas_nama,
+            'status_bayar' => '0',
+            'nomor_rekening' => $request->no_rek,
+            'created_at' => \Carbon\Carbon::now(), 
+            'updated_at' => \Carbon\Carbon::now(), 
+        ]);
+
+        Session::flash('message', "Data pembayaran berhasil ditambahkan");
         return Redirect::back();
     }
 

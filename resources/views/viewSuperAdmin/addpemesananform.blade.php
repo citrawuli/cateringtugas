@@ -534,6 +534,7 @@
                 table.row('.selected').remove().draw( false );
                 hitung_calc();
             });
+            
 
             
    });

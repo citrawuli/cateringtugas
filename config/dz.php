@@ -392,8 +392,19 @@ return [
 					'davur/vendor/fullcalendar/css/fullcalendarV3.min.css',
 					'davur/css/icomoon.css',
 	  			],
-				 
-				    
+				'paymentIDtable' => [
+					'davur/vendor/bootstrap-select/dist/css/bootstrap-select.min.css',
+				  	'davur/vendor/datatables/css/jquery.dataTables.min.css',
+	  			],  
+				'addpaymentIDtable' => [
+					'davur/vendor/bootstrap-select/dist/css/bootstrap-select.min.css',
+					'davur/vendor/bootstrap-daterangepicker/daterangepicker.css',
+					'davur/vendor/clockpicker/css/bootstrap-clockpicker.min.css',
+					'davur/vendor/jquery-asColorPicker/css/asColorPicker.min.css',
+					'davur/vendor/bootstrap-material-datetimepicker/css/bootstrap-material-datetimepicker.css',
+					'davur/vendor/pickadate/themes/default.css',
+					'davur/vendor/pickadate/themes/default.date.css',
+				],
 			],
 			'js' => [
 				'dashboard_1' => [
@@ -1162,6 +1173,25 @@ return [
 			        'davur/js/custom.min.js',
 			        'davur/js/deznav-init.js',
 				],
+				'paymentIDtable' => [
+					'davur/vendor/bootstrap-select/dist/js/bootstrap-select.min.js',
+				  
+					'davur/js/custom.min.js',
+					'davur/js/deznav-init.js',
+
+					'davur/vendor/datatables/js/jquery.dataTables.min.js',
+					'davur/js/plugins-init/datatables.init.js',
+	  			],
+				'addpaymentIDtable' => [
+					'davur/vendor/bootstrap-select/dist/js/bootstrap-select.min.js',
+					'davur/vendor/chart.js/Chart.bundle.min.js',
+					'davur/vendor/apexchart/apexchart.js',
+				  	'davur/vendor/jquery-validation/jquery.validate.min.js',
+				  	'davur/js/plugins-init/jquery.validate-init.js',
+					'davur/js/custom.min.js',
+					'davur/js/deznav-init.js',
+					'davur/vendor/maskk/js/jquery.mask.js',
+	  ], 
 			]
 		],
 	]

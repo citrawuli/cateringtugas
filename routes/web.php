@@ -107,6 +107,9 @@ Route::get('/DeletePermanentAllOrder', [App\Http\Controllers\SuperAdminControlle
 
 Route::get('/OrderCalendar', [App\Http\Controllers\SuperAdminController::class, 'OrderCalendar']); //lihat Kalender Pemesanan
 
+Route::get('/Payment/{id}', [App\Http\Controllers\SuperAdminController::class, 'paymentIDtable']); // lihat pembayaran per ID pemesanan
+Route::get('/AddPayment/{id}', [App\Http\Controllers\SuperAdminController::class, 'addpaymentIDtable']); 
+Route::post('/storepaymentID', [App\Http\Controllers\SuperAdminController::class, 'storepaymentID']); // store data pembayaran ke DB
 
 Route::get('/user', [App\Http\Controllers\UserController::class, 'index'])->name('homeUser');
 Route::get('/adminPemesanan', [App\Http\Controllers\AdminPemesananController::class, 'index'])->name('homeAdminPemesanan');

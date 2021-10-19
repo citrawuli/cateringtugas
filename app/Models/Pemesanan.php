@@ -44,4 +44,9 @@ class Pemesanan extends Model
     {
         return $this->belongsToMany(produk::class, detail_transaksi::class, 'id_pemesanan', 'id_produk')->withPivot(['sub_total', 'kuantitas', 'deleted_at', 'created_at', 'updated_at']);
     } 
+
+    public function payments()
+    {
+        return $this->hasMany(Pembayaran::class, 'id_pembayaran');
+    }
 }

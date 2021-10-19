@@ -101,7 +101,7 @@
         <tr>
             <td colspan="3"></td>
             <td align="right">Subtotal</td>
-            <td align="right">{{ $order->total_sub ?? '-'}}</td>
+            <td id="sub" align="right">{{ $order->total_sub ?? '-'}}</td>
         </tr>
         <tr>
             <td colspan="3"></td>
@@ -127,3 +127,7 @@
   </table>
 
 </body>
+
+<script>
+    $('#sub').mask('#.##0', {reverse: true});
+</script>

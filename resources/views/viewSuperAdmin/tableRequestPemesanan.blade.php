@@ -125,8 +125,9 @@
                                   @elseif ($order ->status_pemesanan == '2')
                                   <td><span class="badge light badge-success"><i class="fa fa-circle text-success mr-1"></i>Diterima</span>
                                     <a href="{!! url('/Invoice/'. $order->id_pemesanan); !!}" class="btn btn-success btn-xs btn-rounded">Invoice</a>
-                                    
+                                    <a href="{!! url('/Payment/'. $order->id_pemesanan); !!}" class="btn btn-info btn-xs btn-rounded">Pembayaran</a>
                                   </td>
+                                  
                                   @elseif ($order ->status_pemesanan == '3')
                                   <td><span class="badge light badge-danger"><i class="fa fa-circle text-danger mr-1"></i>Ditolak</span></td>
                                   @elseif ($order ->status_pemesanan == '4')
