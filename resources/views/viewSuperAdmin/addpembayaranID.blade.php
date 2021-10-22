@@ -11,7 +11,7 @@
         </div>
         <div class="col-sm-6 p-md-0 justify-content-sm-end mt-2 mt-sm-0 d-flex">
             <ol class="breadcrumb">
-                <li class="breadcrumb-item"><a href="{!! url('/PaymentTable'); !!}">Daftar Pembayaran</a></li>
+                <li class="breadcrumb-item"><a href="{!! url('/Payment/'. $pemesanan_id); !!}">Daftar Pembayaran <strong>{{ $pemesanan_id}}</strong></a></li>
                 <li class="breadcrumb-item active"><a href="javascript:void(0)">Formulir Pembayaran</a></li>
             </ol>
         </div>
@@ -46,9 +46,9 @@
             </div>
             <div class="card-body">
                 <div class="basic-form">
-                     <form id="form-id" method="POST" action="{{ url('/storepaymentID') }}">
+                     <form id="form-id" method="POST" action="{{ url('/storepaymentID') }}" enctype="multipart/form-data">
                         @csrf
-
+                                    
                         
                         <div class="form-group row">
                             <label for="id_pemesanan" class="col-sm-3 col-form-label">ID Pemesanan (*)</label>
@@ -105,10 +105,19 @@
                             </div>
                         </div>
 
+                        <div class="form-group row ">
+                            <label for="no_rek" class="col-sm-3 col-form-label">{{ __('Bukti Bayar (.jpg atau .jpeg)') }}</label>
+                            <div class="col-md-6 input-group">
+                                <input type="file" name="file" accept="image/jpg, image/jpeg">
+                            </div>
+                        </div>
+
+                         
+
                        
                         <div class="form-group row mb-0">
                             <div class="col-md-6 offset-md-4">
-                                <button type="submit" class="btn btn-primary">
+                                <button id="submit-all" type="submit" class="btn btn-primary">
                                     {{ __('Tambah Pembayaran') }}
                                 </button>
                             </div>
@@ -142,6 +151,7 @@ $(document).ready(function(){
         var value=$('#jumlah_bayar').cleanVal();
         $('#jumlah_bayar').val(value);
     });
+
 });
 </script>
 @endsection

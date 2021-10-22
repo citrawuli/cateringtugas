@@ -214,8 +214,8 @@
                                                                                 {{-- nullnya ga bisa jalan satu statement I wonder whyy --}}
                                                                                 <td>{{ $det_pem->pivot->id_produk ?: 'null' }}</td>
                                                                                 <td>{{ $det_pem->nama_produk ?: 'null' }}</td>
-                                                                                <td>{{ $det_pem->harga_produk ?: 'null' }}</td>
-                                                                                <td>{{ $det_pem->pivot->sub_total ?: 'null'}}</td>
+                                                                                <td>@currency($det_pem->harga_produk)</td>
+                                                                                <td>@currency($det_pem->pivot->sub_total)</td>
                                                                                 <td>{{ $det_pem->pivot->kuantitas ?:  'null'}}</td>
                                                                                
                                                                             </tr>
@@ -224,8 +224,8 @@
                                                                         {{-- {{ $order->detail_idproduk }} --}}
                                                                         </span>
                                                                     </p>
-                                                                    <p><strong>Total Subtotal Rp: <span>{{ $order->total_sub ?? 'Tidak ada'}}</span></strong></p>
-                                                                    <p><strong>Diskon Rp: <span>{{ $order->discount ?? 'Tidak ada'}}</span></strong></p>
+                                                                    <p><strong>Total Subtotal Rp: <span>@currency($order->total_sub )</span></strong></p>
+                                                                    <p><strong>Diskon Rp: <span>@currency($order->discount )</span></strong></p>
                                                                     <p><strong>Diskon % : <span>{{ $order->discount_inpercent ?? 'Tidak ada'}}</span></strong></p>
                                                                     
                                                                 </center>

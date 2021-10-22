@@ -1,6 +1,20 @@
 @extends('layouts.backAdmin.layout.defaultSuperAdmin')
 
 @section('content')
+
+<style>
+    .zoom {
+        transition: transform .08s;
+        width: 214px;
+        height: 115px;
+    }
+
+    .zoom:hover {
+        -ms-transform: scale(1.5); /* IE 9 */
+        -webkit-transform: scale(1.5); /* Safari 3-8 */
+        transform: scale(1.5); 
+    }
+</style>
 <div class="container-fluid">
     <div class="row page-titles mx-0">
         <div class="col-sm-6 p-md-0">
@@ -59,7 +73,20 @@
                 <div class="card-body mb-0">
 
                     {{-- jika pembayaran.jumlah_bayar = pemesanan.total_transaksi maka udah lunas --}}
-                    Total Harus Bayar : {!!$pemesanan->total_transaksi!!}
+                    Total Harus Bayar : @currency($pemesanan->total_transaksi)
+                    <br>
+                    Jumlah Sudah Bayar : @currency($jumlahSudahBayar)
+                    <br>
+                    @if ($pemesanan->total_transaksi != $jumlahSudahBayar)
+                        Tagihan Bayar : @currency($pemesanan->total_transaksi-$jumlahSudahBayar)
+                        <br>
+                        <strong>BELUM LUNAS</strong>
+                    @else
+                        <strong>SUDAH LUNAS</strong>
+                    @endif
+                   
+
+                    
                     
                 </div>
             </div>
@@ -86,44 +113,54 @@
                                     
                                     <th>Created At</th>
                                     <th>Updated At</th>
+                                    <th>Bukti Bayar</th>
                                     <th>Action</th>
                                 </tr>
                             </thead>
                             <tbody>
 @foreach( $bayar as $b )    
                                 <tr>
-                                  <td>{{ $b->id_pembayaran }}</td>
-                                  @if ($b->status_bayar == '0')
-                                  <td><span class="badge light badge-warning"><i class="fa fa-circle text-warning mr-1"></i>Menunggu Konfirmasi</span></td>
-                                  @else
-                                  <td><span class="badge light badge-success"><i class="fa fa-circle text-success mr-1"></i>Dikonfirmasi</span>    
-                                  @endif
-                                  
-                                  <td>{{ $b->jumlah_bayar }}</td>
-                                  <td>{{ date('d-M-Y H:i:s', strtotime($b->tanggal_pembayaran)) }}</td>
-                                  @if ($b->bank_transfer == '1')
-                                  <td>Tunai</td>
-                                  @elseif ($b->bank_transfer == '2')
-                                  <td>BRI</td>
-                                  @elseif ($b->bank_transfer == '3')
-                                  <td>BCA</td>
-                                  @endif
-                                  
-                                  
-                                  <td>{{ $b->nomor_rekening }}</td>
-                                  <td>{{ $b->atas_nama }}</td>
-                                  <td>{{ $b->created_at }}</td>
-                                  <td>{{ $b->updated_at }}</td>
-                                  <td>
-                                    <div class="d-flex">
-                                        
-                                        {{-- <a href="{{ url( '/EditPay/' . $b->id ) }}" class="btn btn-primary shadow btn-xs sharp mr-1" data-toggle="tooltip" data-placement="top" title="Edit Kategori" id="editt"><i class="fa fa-pencil"></i></a> --}}
-                                        
-                                        <a href="{{ url( '/DeletePay/' . $b->id ) }}" class="btn btn-danger shadow btn-xs sharp" data-toggle="tooltip2" data-placement="top" title="Soft Delete Pembayaran"><i class="fa fa-trash"></i></a>
-                                    </div>
+                                    <td>{{ $b->id_pembayaran }}</td>
+                                    @if ($b->status_bayar == '0')
+                                    <td><span class="badge light badge-warning"><i class="fa fa-circle text-warning mr-1"></i>Menunggu Konfirmasi</span></td>
+                                    @else
+                                    <td><span class="badge light badge-success"><i class="fa fa-circle text-success mr-1"></i>Dikonfirmasi</span>    
+                                    @endif
                                     
-                               
-                                  </td>
+                                    <td>@currency($b->jumlah_bayar)</td>
+                                    <td>{{ date('d-M-Y H:i:s', strtotime($b->tanggal_pembayaran)) }}</td>
+                                    @if ($b->bank_transfer == '1')
+                                    <td>Tunai</td>
+                                    @elseif ($b->bank_transfer == '2')
+                                    <td>BRI</td>
+                                    @elseif ($b->bank_transfer == '3')
+                                    <td>BCA</td>
+                                    @endif
+                                    
+                                    
+                                    <td>{{ $b->nomor_rekening }}</td>
+                                    <td>{{ $b->atas_nama }}</td>
+                                    <td>{{ $b->created_at }}</td>
+                                    <td>{{ $b->updated_at }}</td>
+                                    <td>
+                                        @if ($b->bukti_bayar != null)
+                                        <div class="zoom">
+                                            <img src="{{ asset($b->bukti_bayar) }}" width="200px" >
+                                            <a href='{{ asset($b->bukti_bayar) }}' target='_blank'>Lihat Gambar Full</a>
+                                        </div>
+                                        @else
+                                            Tidak Ada Gambar
+                                        @endif
+                                    </td>
+                                    <td>
+                                        <div class="d-flex">
+                                            
+                                            {{-- <a href="{{ url( '/EditPay/' . $b->id ) }}" class="btn btn-primary shadow btn-xs sharp mr-1" data-toggle="tooltip" data-placement="top" title="Edit Kategori" id="editt"><i class="fa fa-pencil"></i></a> --}}
+                                            
+                                            <a href="{{ url( '/DeletePay/' . $b->id ) }}" class="btn btn-danger shadow btn-xs sharp" data-toggle="tooltip2" data-placement="top" title="Soft Delete Pembayaran"><i class="fa fa-trash"></i></a>
+                                        </div>
+                                    </td>
+                                  
                                 </tr>
 @endforeach        
                             </tbody>

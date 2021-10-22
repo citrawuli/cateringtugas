@@ -89,8 +89,8 @@
                     <td align="center">{{ $loop->iteration }}</td>
                     <td>{{ $det_pem->nama_produk ?: 'null' }}</td>
                     <td align="center">{{ $det_pem->pivot->kuantitas ?:  'null'}}</td>
-                    <td align="center">{{ $det_pem->harga_produk }}</td>
-                    <td align="right">{{ $det_pem->pivot->sub_total }}</td>
+                    <td align="center">@currency($det_pem->harga_produk)</td>
+                    <td align="right">@currency($det_pem->pivot->sub_total)</td>
                 </tr>
             @endforeach
 
@@ -101,20 +101,29 @@
         <tr>
             <td colspan="3"></td>
             <td align="right">Subtotal</td>
-            <td id="sub" align="right">{{ $order->total_sub ?? '-'}}</td>
+            <td id="sub" align="right">@currency($order->total_sub)</td>
         </tr>
         <tr>
             <td colspan="3"></td>
             <td align="right">Diskon Rp</td>
             <td align="right">
-                {{ $order->discount ?? '-'}}
+                @if ($order->discount != null)
+                @currency($order->discount)
+                @else
+                    -
+                @endif
             </td>
         </tr>
         <tr>
             <td colspan="3"></td>
             <td align="right">Diskon %</td>
             <td align="right">
-                {{ $order->discount_inpercent ?? '-'}}
+                @if ($order->discount_inpercent != null)
+                {{ $order->discount_inpercent }}%
+                @else
+                    -
+                @endif
+                
             </td>
         </tr>
         <tr>

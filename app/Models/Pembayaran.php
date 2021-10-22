@@ -24,6 +24,7 @@ class Pembayaran extends Model
         'bank_transfer',
         'atas_nama',
         'status_bayar',
+        'bukti_bayar',
         'nomor_rekening',
         'deleted_at',
         'created_at',
@@ -38,6 +39,7 @@ class Pembayaran extends Model
 
     public function detpems()
     {
-        return $this->belongsTo(Pemesanan::class, 'id_pemesanan', 'id_pembayaran')->withPivot('jumlah_bayar');
+        //foreign key model in table pembayaran is id_pemesanan
+        return $this->belongsTo(Pemesanan::class, 'id_pemesanan');
     } 
 }

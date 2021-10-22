@@ -404,6 +404,8 @@ return [
 					'davur/vendor/bootstrap-material-datetimepicker/css/bootstrap-material-datetimepicker.css',
 					'davur/vendor/pickadate/themes/default.css',
 					'davur/vendor/pickadate/themes/default.date.css',
+					'davur/vendor/dropzone/dist/dropzone.css',
+					'davur/vendor/sweetalert2/dist/sweetalert2.min.css',
 				],
 			],
 			'js' => [
@@ -1191,6 +1193,9 @@ return [
 					'davur/js/custom.min.js',
 					'davur/js/deznav-init.js',
 					'davur/vendor/maskk/js/jquery.mask.js',
+					'davur/vendor/dropzone/dist/dropzone.js',
+					'davur/vendor/sweetalert2/dist/sweetalert2.min.js',
+					'davur/js/plugins-init/sweetalert.init.js',
 	  ], 
 			]
 		],

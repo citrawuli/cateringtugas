@@ -979,15 +979,17 @@ class SuperAdminController extends Controller
     public function paymentIDtable($id)
     {
         $pemesanan = Pemesanan::find($id);
-        $bayar = Pembayaran::where('pembayaran.id_pemesanan', $id)->whereNull('pembayaran.deleted_at')->get();
-        // dd($order_totaltransaksi);
+        //using with itu di relationshipnya malah dapet satu, tablenya pembayaran->array 1 pemesanan, SOOO KEBALIK
+        // $bayar = Pembayaran::with('detpems')->where('pembayaran.id_pemesanan', $id)->whereNull('pembayaran.deleted_at')->get();
+        $bayar = Pembayaran::with('detpems')->whereNull('pembayaran.deleted_at')->get();
+        //ganti, nggak jadi pake foreach blah blah sama code salah di atas :')
+        $jumlahSudahBayar = Pembayaran::with('detpems')->whereNull('pembayaran.deleted_at')->get()->sum('jumlah_bayar');
         $id_pemesanan=$id;
-
-        // $bayar_totalbayar=10;
-        // $bayar->each(function ($pay) {
-        //     $bayar_totalbayar=$pay->order()->sum('pivot.jumlah_bayar');
-        //     dd($bayar_totalbayar);
-        // });
+       // $totalcost=0;
+        // foreach ($bayar as $b) {
+        //         $totalcost = collect($b->jumlah_bayar)->sum();
+        // };
+        //dd($totalcost,$jumlahSudahBayar,$bayar);
         
         // if ($order_totaltransaksi == $bayar_totalbayar ) {
         //     $status='LUNAS';
@@ -1003,7 +1005,7 @@ class SuperAdminController extends Controller
         $logoText = "teamo/images/aisya-catering-logo3.png";
         $action = __FUNCTION__;
 
-        return view('viewSuperAdmin.tablepembayaranID',compact('bayar', 'pemesanan', "id_pemesanan", 'page_title', 'page_description','action','logo','logoText') );
+        return view('viewSuperAdmin.tablepembayaranID',compact('bayar', 'jumlahSudahBayar','pemesanan', "id_pemesanan", 'page_title', 'page_description','action','logo','logoText') );
 
     }
 
@@ -1027,15 +1029,23 @@ class SuperAdminController extends Controller
             'optionbank' => ['required'],
             'atas_nama' => ['max:50'],
             'nomor_rekening' => ['max:20'],
+            'file' => ['mimes:jpg,jpeg'],
         ],
         [
             'id_pemesanan.required' => 'Mohon memilih id pemesanan',
             'jumlah_bayar.required' => 'Mohon mengisi jumlah bayar',
             'bank_transfer.required' => 'Mohon memilih jenis bayar',
             'atas_nama.max' => 'Atas Nama harus dibawah 50 karakter',
-            'nomor_rekening.max' => 'Nomor Rekening harus dibawah 20 karakter',            
+            'nomor_rekening.max' => 'Nomor Rekening harus dibawah 20 karakter',  
+            'file.mimes' => 'Mohon memilih file gambar .jpg atau .png',          
         ]
         );
+
+        $bukti=$request->file('file');
+        //dd($request->all());
+        $buktiname=time(). '-'.$bukti->getClientOriginalName();
+        $bukti->move(public_path('bukti'),$buktiname);
+        $buktiPath= "/bukti/$buktiname";
 
 
         Pembayaran::create([
@@ -1045,6 +1055,7 @@ class SuperAdminController extends Controller
             'bank_transfer' => $request->optionbank,
             'atas_nama' => $request->atas_nama,
             'status_bayar' => '0',
+            'bukti_bayar' => $buktiPath,
             'nomor_rekening' => $request->no_rek,
             'created_at' => \Carbon\Carbon::now(), 
             'updated_at' => \Carbon\Carbon::now(), 
