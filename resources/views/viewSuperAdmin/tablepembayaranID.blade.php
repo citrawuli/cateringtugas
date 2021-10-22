@@ -45,7 +45,7 @@
                 <div class="card-body mb-0">
                     <!-- <button type="button" class="btn light btn-danger" data-toggle="modal" data-target="#exampleModalCenter">Add User</button> -->
                     <a href="{!! url('/AddPayment/'. $pemesanan->id_pemesanan); !!}" class="btn light btn-danger">Tambah Pembayaran</a>
-                    <a href="{{ url('/TrashedPay/'.$pemesanan->id_pemesanan)}}" class="btn btn-primary light btn-card"><i class="fa fa-trash" style="margin-right: 10px;"></i>Lihat Tong Sampah</a> 
+                    <a href="{{ url('/TrashedPayment/'.$pemesanan->id_pemesanan)}}" class="btn btn-primary light btn-card"><i class="fa fa-trash" style="margin-right: 10px;"></i>Lihat Tong Sampah</a> 
                 </div>
             </div>
         </div>
@@ -71,23 +71,18 @@
                     
                 </div>
                 <div class="card-body mb-0">
-
                     {{-- jika pembayaran.jumlah_bayar = pemesanan.total_transaksi maka udah lunas --}}
                     Total Harus Bayar : @currency($pemesanan->total_transaksi)
                     <br>
                     Jumlah Sudah Bayar : @currency($jumlahSudahBayar)
                     <br>
-                    @if ($pemesanan->total_transaksi != $jumlahSudahBayar)
+                    @if ($pemesanan->total_transaksi > $jumlahSudahBayar)
                         Tagihan Bayar : @currency($pemesanan->total_transaksi-$jumlahSudahBayar)
-                        <br>
-                        <strong>BELUM LUNAS</strong>
+                        <br><br><h1 style="background-color: rgb(224, 255, 180)" align="center">BELUM LUNAS</h1>
                     @else
-                        <strong>SUDAH LUNAS</strong>
+                        <br>Deposit Bayar : @currency(abs($jumlahSudahBayar-$pemesanan->total_transaksi))
+                        <br><h1 style="background-color: rgb(194, 255, 199)" align="center">LUNAS</h1>
                     @endif
-                   
-
-                    
-                    
                 </div>
             </div>
         </div>
@@ -157,7 +152,7 @@
                                             
                                             {{-- <a href="{{ url( '/EditPay/' . $b->id ) }}" class="btn btn-primary shadow btn-xs sharp mr-1" data-toggle="tooltip" data-placement="top" title="Edit Kategori" id="editt"><i class="fa fa-pencil"></i></a> --}}
                                             
-                                            <a href="{{ url( '/DeletePay/' . $b->id ) }}" class="btn btn-danger shadow btn-xs sharp" data-toggle="tooltip2" data-placement="top" title="Soft Delete Pembayaran"><i class="fa fa-trash"></i></a>
+                                            <a href="{{ url( '/DeletePayment/' . $b->id_pembayaran ) }}" class="btn btn-danger shadow btn-xs sharp" data-toggle="tooltip2" data-placement="top" title="Soft Delete Pembayaran"><i class="fa fa-trash"></i></a>
                                         </div>
                                     </td>
                                   

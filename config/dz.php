@@ -335,6 +335,10 @@ return [
               				'davur/vendor/bootstrap-select/dist/css/bootstrap-select.min.css',
 							'davur/vendor/datatables/css/jquery.dataTables.min.css',
 				],
+				'trashedPaymentID' => [
+					'davur/vendor/bootstrap-select/dist/css/bootstrap-select.min.css',
+				  	'davur/vendor/datatables/css/jquery.dataTables.min.css',
+	  			],
 				'viewpemesanantable' => [
               				'davur/vendor/bootstrap-select/dist/css/bootstrap-select.min.css',
 							'davur/vendor/datatables/css/jquery.dataTables.min.css',
@@ -1196,7 +1200,15 @@ return [
 					'davur/vendor/dropzone/dist/dropzone.js',
 					'davur/vendor/sweetalert2/dist/sweetalert2.min.js',
 					'davur/js/plugins-init/sweetalert.init.js',
-	  ], 
+	  			], 
+				  
+				'trashedPaymentID' => [
+					'davur/vendor/bootstrap-select/dist/js/bootstrap-select.min.js',
+				    'davur/vendor/datatables/js/jquery.dataTables.min.js',
+				    'davur/js/plugins-init/datatables.init.js',
+				    'davur/js/custom.min.js',
+				    'davur/js/deznav-init.js',
+	  			], 
 			]
 		],
 	]

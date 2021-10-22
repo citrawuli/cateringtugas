@@ -982,7 +982,7 @@ class SuperAdminController extends Controller
         //using with itu di relationshipnya malah dapet satu, tablenya pembayaran->array 1 pemesanan, SOOO KEBALIK
         // $bayar = Pembayaran::with('detpems')->where('pembayaran.id_pemesanan', $id)->whereNull('pembayaran.deleted_at')->get();
         $bayar = Pembayaran::with('detpems')->whereNull('pembayaran.deleted_at')->get();
-        //ganti, nggak jadi pake foreach blah blah sama code salah di atas :')
+        //ganti, nggak jadi pake foreach blah blah sama code di atas buat ambil sum :')
         $jumlahSudahBayar = Pembayaran::with('detpems')->whereNull('pembayaran.deleted_at')->get()->sum('jumlah_bayar');
         $id_pemesanan=$id;
        // $totalcost=0;
@@ -1064,6 +1064,50 @@ class SuperAdminController extends Controller
         Session::flash('message', "Data pembayaran berhasil ditambahkan");
         return Redirect::back();
     }
+
+    public function deletePayment($id)
+    {
+        $model = Pembayaran::find($id);
+        $model->delete();
+
+        Session::flash('message', "Data pembayaran {$model->id_pembayaran} berhasil dihapus");
+        return Redirect::back();
+    }
+
+    public function trashedPaymentID($id)
+    {
+        // mengampil data  yang sudah dihapus
+        $model = Pembayaran::onlyTrashed()->where('id_pemesanan',$id)->get();
+        $pemesanan_id=$id;
+        dd($model);
+
+        $page_title = 'Trashed Payment Table';
+        $page_description = 'Some description for the page';
+        $logo = "teamo/images/aisyacatering_kontak_logo.png";
+        $logoText = "teamo/images/aisya-catering-logo3.png";
+        $action = __FUNCTION__;
+        return view('viewSuperAdmin.tableTrashedPayment', compact('model', 'pemesanan_id', 'page_title', 'page_description','action','logo','logoText'));
+    }
+
+    public function restorePayment($id)
+    {
+        $model = Pembayaran::onlyTrashed()->where('id_pembayaran',$id);
+        $model->restore();
+
+        Session::flash('message', "Data pembayaran berhasil dikembalikan");
+        return Redirect::back();
+    }
+
+    public function restoreallPayment()
+    {
+            
+        $model = Pembayaran::onlyTrashed();
+        $model->restore();
+ 
+        Session::flash('message', "Semua data pembayaran berhasil dikembalikan");
+        return Redirect::back();
+    }
+
 
     public function OrderCalendar(Request $request)
     {

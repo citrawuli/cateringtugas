@@ -110,6 +110,11 @@ Route::get('/OrderCalendar', [App\Http\Controllers\SuperAdminController::class, 
 Route::get('/Payment/{id}', [App\Http\Controllers\SuperAdminController::class, 'paymentIDtable']); // lihat pembayaran per ID pemesanan
 Route::get('/AddPayment/{id}', [App\Http\Controllers\SuperAdminController::class, 'addpaymentIDtable']); 
 Route::post('/storepaymentID', [App\Http\Controllers\SuperAdminController::class, 'storepaymentID']); // store data pembayaran ke DB
+Route::get('/DeletePayment/{id}', [App\Http\Controllers\SuperAdminController::class, 'deletePayment']); //delete data form delete Payment ke DB
+Route::get('/TrashedPayment/{id}', [App\Http\Controllers\SuperAdminController::class, 'trashedPaymentID']); //lihat data Payment di tong sampah
+Route::get('/RestorePayment/{id}', [App\Http\Controllers\SuperAdminController::class, 'restorePayment']); //kembalikan data Payment dari tong sampah
+Route::get('/RestoreAllPayment', [App\Http\Controllers\SuperAdminController::class, 'restoreallPayment']); //kembalikan semua data Payment dari tong sampah
+
 
 Route::get('/user', [App\Http\Controllers\UserController::class, 'index'])->name('homeUser');
 Route::get('/adminPemesanan', [App\Http\Controllers\AdminPemesananController::class, 'index'])->name('homeAdminPemesanan');

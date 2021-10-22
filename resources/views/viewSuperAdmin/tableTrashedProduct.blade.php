@@ -66,8 +66,8 @@
                                     <th>Tipe</th>
                                     <th>Deskripsi</th>
                                     <th>Harga</th>
-                                    <th>Rating</th><!-- 
-                                    <th>Deleted At</th>
+                                    <th>Rating</th> 
+                                    <th>Deleted At</th><!--
                                     <th>Created At</th>
                                     <th>Updated At</th> -->
                                     <th>Action</th>
@@ -79,11 +79,11 @@
                                   <td>{{ $mod->id }}</td><!-- 
                                   <td>{{ $mod->nama_kategori }}</td> -->
                                   <td>{{ $mod->nama_produk }}</td>
-                                  <td>{{ $mod->tipe_produk }}</td>
-                                  <td>{{ $mod->deskripsi_produk }}</td>
+                                  <td>{{ $mod->tipe_produk ?? '-' }}</td>
+                                  <td>{{ $mod->deskripsi_produk ?? '-'}}</td>
                                   <td>@currency($mod->harga_produk)</td>
-                                  <td>{{ $mod->rating_produk }}</td><!-- 
-                                  <td>{{ $mod->deleted_at }}</td>
+                                  <td>{{ $mod->rating_produk ?? '-' }}</td> 
+                                  <td>{{ $mod->deleted_at }}</td><!--
                                   <td>{{ $mod->created_at }}</td>
                                   <td>{{ $mod->updated_at }}</td> -->
                                   <td>
