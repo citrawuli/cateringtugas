@@ -411,6 +411,10 @@ return [
 					'davur/vendor/dropzone/dist/dropzone.css',
 					'davur/vendor/sweetalert2/dist/sweetalert2.min.css',
 				],
+				'orderDiterimaTable' => [
+					'davur/vendor/bootstrap-select/dist/css/bootstrap-select.min.css',
+				  	'davur/vendor/datatables/css/jquery.dataTables.min.css',
+	  			],  
 			],
 			'js' => [
 				'dashboard_1' => [
@@ -1209,6 +1213,15 @@ return [
 				    'davur/js/custom.min.js',
 				    'davur/js/deznav-init.js',
 	  			], 
+				'orderDiterimaTable' => [
+					'davur/vendor/bootstrap-select/dist/js/bootstrap-select.min.js',
+				  
+					'davur/js/custom.min.js',
+					'davur/js/deznav-init.js',
+
+					'davur/vendor/datatables/js/jquery.dataTables.min.js',
+					'davur/js/plugins-init/datatables.init.js',
+	  			],
 			]
 		],
 	]

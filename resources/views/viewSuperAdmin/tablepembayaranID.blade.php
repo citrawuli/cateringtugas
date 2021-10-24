@@ -1,9 +1,11 @@
 @extends('layouts.backAdmin.layout.defaultSuperAdmin')
+
 @section('link')<link href="https://gitcdn.github.io/bootstrap-toggle/2.2.2/css/bootstrap-toggle.min.css" rel="stylesheet">
 <head>
     <meta name="csrf-token" content="{{ csrf_token() }}" />
 </head>
 @endsection
+
 @section('content')
 <style>
     .zoom {
@@ -17,6 +19,10 @@
         -webkit-transform: scale(1.5); /* Safari 3-8 */
         transform: scale(1.5); 
     }
+
+    /* .toggle-class{
+        max-height:80% !important; 
+    } */
 </style>
 <div class="container-fluid">
     <div class="row page-titles mx-0">
@@ -122,7 +128,7 @@
                                     
                                     @if ($b->status_bayar == '0')
                                         <td>
-                                            <span class="badge light badge-warning"><i class="fa fa-circle text-warning mr-1"></i>Menunggu Konfirmasi</span>
+                                            <span class="badge light badge-warning"><i class="fa fa-circle text-warning mr-1"></i>Menunggu Verifikasi</span>
                                             {{-- <input data-id="{{$b->id_pembayaran}}" class="toggle-class" type="checkbox" 
                                             data-onstyle="success" data-offstyle="danger" data-toggle="toggle" 
                                             data-on="Active" data-off="InActive" {{ $b->status_bayar ? 'checked' : '' }}> --}}
@@ -159,7 +165,7 @@
                                     <td>{{ date('d-M-Y H:i:s', strtotime($b->tanggal_pembayaran)) }}</td>
                                     
                                     
-                                    <td>{{ $b->nomor_rekening }}</td>
+                                    <td>{{ $b->nomor_rekening ?? '-'}}</td>
                                     <td>{{ $b->atas_nama }}</td>
                                     <td>{{ $b->created_at }}</td>
                                     <td>{{ $b->updated_at }}</td>

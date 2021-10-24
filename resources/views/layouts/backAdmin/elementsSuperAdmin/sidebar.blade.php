@@ -40,9 +40,8 @@
                         </a>
                         <ul aria-expanded="false">
                             <li><a href="{!! url('/PemesananTable'); !!}">Daftar Order Masuk</a></li>
-                        </ul>
-                        <ul aria-expanded="false">
                             <li><a href="{!! url('/ViewFormPemesanan'); !!}">Tambah Order Masuk</a></li>
+                            <li><a href="{!! url('/OrderDiterima'); !!}">Daftar Order Diterima</a></li>
                         </ul>
                     </li>
                     {{-- <li><a class="has-arrow ai-icon" href="javascript:void()" aria-expanded="false">
@@ -65,8 +64,8 @@
             
 				<div class="add-menu-sidebar">
 					<img src="{{ asset('davur/images/icon1.png') }}" alt=""/>
-					<p>Organize your menus through button bellow</p>
-					<a href="javascript:void(0);" class="btn btn-primary btn-block light">+ Add Menus</a>
+					<p>Organisasikan Profilmu, <strong>{{ Auth::user()->name }}</strong>. Ganti Sandi atau ubah nama.</p>
+					<a href="{{ url('uprof')}}" class="btn btn-primary btn-block light">Profilku</a>
 				</div>
 				<div class="copyright">
 					<p><strong>Davur - Restaurant Admin Dashboard</strong> © 2020 All Rights Reserved</p>

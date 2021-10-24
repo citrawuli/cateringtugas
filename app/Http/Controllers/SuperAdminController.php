@@ -981,7 +981,7 @@ class SuperAdminController extends Controller
         $pemesanan = Pemesanan::find($id);
         //using with itu di relationshipnya malah dapet satu, tablenya pembayaran->array 1 pemesanan, SOOO KEBALIK
         // $bayar = Pembayaran::with('detpems')->where('pembayaran.id_pemesanan', $id)->whereNull('pembayaran.deleted_at')->get();
-        $bayar = Pembayaran::with('detpems')->whereNull('pembayaran.deleted_at')->get();
+        $bayar = Pembayaran::with('detpems')->where('pembayaran.id_pemesanan', $id)->whereNull('pembayaran.deleted_at')->get();
         //ganti, nggak jadi pake foreach blah blah sama code di atas buat ambil sum :')
         $jumlahSudahBayar = Pembayaran::with('detpems')->where('status_bayar', '1')->whereNull('pembayaran.deleted_at')->get()->sum('jumlah_bayar');
         $id_pemesanan=$id;
@@ -1040,13 +1040,17 @@ class SuperAdminController extends Controller
             'file.mimes' => 'Mohon memilih file gambar .jpg atau .png',          
         ]
         );
+        $buktiPath="";
+        if($request->hasFile('file')){
+            $bukti=$request->file('file');
+            //dd($request->all());
+            $buktiname=time(). '-'.$bukti->getClientOriginalName();
+            $bukti->move(public_path('bukti'),$buktiname);
+            $buktiPath= "/bukti/$buktiname";
+    
+        }
 
-        $bukti=$request->file('file');
-        //dd($request->all());
-        $buktiname=time(). '-'.$bukti->getClientOriginalName();
-        $bukti->move(public_path('bukti'),$buktiname);
-        $buktiPath= "/bukti/$buktiname";
-
+        
 
         Pembayaran::create([
             'id_pemesanan' => $request->id_pemesanan,
@@ -1115,6 +1119,20 @@ class SuperAdminController extends Controller
  
         Session::flash('message', "Semua data pembayaran berhasil dikembalikan");
         return Redirect::back();
+    }
+
+    public function orderDiterimaTable()
+    {
+        $pemesanan = Pemesanan::with(['products'])->where('status_pemesanan', '2')->whereNull('pemesanan.deleted_at')->get();
+        $jumlahSudahBayar = Pembayaran::with('detpems')->where('status_bayar', '1')->whereNull('pembayaran.deleted_at')->get()->sum('jumlah_bayar');
+        
+        $page_title = 'Order Request Table';
+        $page_description = 'Some description for the page';
+        $logo = "teamo/images/aisyacatering_kontak_logo.png";
+        $logoText = "teamo/images/aisya-catering-logo3.png";
+        $action = __FUNCTION__;
+        //dump($barang);        
+        return view('viewSuperAdmin.tableAcceptedOrder', compact('pemesanan', 'jumlahSudahBayar', 'page_title', 'page_description','action','logo','logoText'));
     }
 
 

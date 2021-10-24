@@ -105,6 +105,8 @@ Route::get('/DeletePermanentOrder/{id}', [App\Http\Controllers\SuperAdminControl
 Route::get('/RestoreAllOrder', [App\Http\Controllers\SuperAdminController::class, 'restoreallOrder']); //kembalikan semua data order dari tong sampah
 Route::get('/DeletePermanentAllOrder', [App\Http\Controllers\SuperAdminController::class, 'deletepermanentallOrder']); //hapus permanen semua data order dari tong sampah
 
+Route::get('/OrderDiterima', [App\Http\Controllers\SuperAdminController::class, 'orderDiterimaTable']); //lihat Table Pemesanan
+
 Route::get('/OrderCalendar', [App\Http\Controllers\SuperAdminController::class, 'OrderCalendar']); //lihat Kalender Pemesanan
 
 Route::get('/Payment/{id}', [App\Http\Controllers\SuperAdminController::class, 'paymentIDtable']); // lihat pembayaran per ID pemesanan
