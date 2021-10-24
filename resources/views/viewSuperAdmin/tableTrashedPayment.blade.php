@@ -97,14 +97,14 @@
                                     <td>
                                     <div class="d-flex">
                                         
-                                        <a href="{{ url( '/RestoreOrder/' . $mod->id_pemesanan ) }}" class="btn btn-warning shadow btn-xs sharp mr-1" data-toggle="tooltip" data-placement="top" title="Restore Payment" id="editt"><i class="fa fa-repeat"></i></a>
+                                        <a href="{{ url( '/RestorePayment/' . $mod->id_pembayaran ) }}" class="btn btn-warning shadow btn-xs sharp mr-1" data-toggle="tooltip" data-placement="top" title="Restore Payment" id="editt"><i class="fa fa-repeat"></i></a>
                                        
 
-                                        {{-- <span data-placement="top" data-toggle="tooltip2"  title="Delete Request Order Permanent">
-                                            <a href="#exampleModalCenter{{ $mod->id_pemesanan }}" class="btn btn-danger shadow btn-xs sharp" data-toggle="modal" data-target="#exampleModalCenter{{ $mod->id_pemesanan }}" ><i class="fa fa-trash"></i></a>
+                                        {{-- <span data-placement="top" data-toggle="tooltip2"  title="Delete Payment Permanent">
+                                            <a href="#exampleModalCenter{{ $mod->id_pembayaran}}" class="btn btn-danger shadow btn-xs sharp" data-toggle="modal" data-target="#exampleModalCenter{{ $mod->id_pemesanan }}" ><i class="fa fa-trash"></i></a>
                                         </span> --}}
 
-                                            <div class="modal fade" id="exampleModalCenter{{ $mod->id_pemesanan }}">
+                                            <div class="modal fade" id="exampleModalCenter{{ $mod->id_pembayaran}}">
                                                 <div class="modal-dialog modal-dialog-centered" role="document">
                                                     <div class="modal-content">
                                                         <div class="modal-header">
@@ -117,7 +117,7 @@
                                                         </div>
                                                         <div class="modal-footer">
                                                             <button type="button" class="btn btn-secondary light" data-dismiss="modal">Close</button>
-                                                            <a href="{{ url( '/DeletePermanentOrder/' . $mod->id_pemesanan ) }}" class="btn btn-danger light">Delete</a>
+                                                            <a href="{{ url( '/DeletePermanentPayment/' . $mod->id_pembayaran ) }}" class="btn btn-danger light">Delete</a>
                                                         </div>
                                                     </div>
                                                 </div>

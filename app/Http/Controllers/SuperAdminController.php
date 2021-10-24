@@ -983,7 +983,7 @@ class SuperAdminController extends Controller
         // $bayar = Pembayaran::with('detpems')->where('pembayaran.id_pemesanan', $id)->whereNull('pembayaran.deleted_at')->get();
         $bayar = Pembayaran::with('detpems')->whereNull('pembayaran.deleted_at')->get();
         //ganti, nggak jadi pake foreach blah blah sama code di atas buat ambil sum :')
-        $jumlahSudahBayar = Pembayaran::with('detpems')->whereNull('pembayaran.deleted_at')->get()->sum('jumlah_bayar');
+        $jumlahSudahBayar = Pembayaran::with('detpems')->where('status_bayar', '1')->whereNull('pembayaran.deleted_at')->get()->sum('jumlah_bayar');
         $id_pemesanan=$id;
        // $totalcost=0;
         // foreach ($bayar as $b) {
@@ -1065,6 +1065,15 @@ class SuperAdminController extends Controller
         return Redirect::back();
     }
 
+    public function changeConfirmStatusPayment(Request $request, $id)
+    {
+        $model = Pembayaran::find($id);
+        //dd($request);
+        $model->status_bayar = $request->status;
+        $model->touch();
+        $model->save();
+    }
+
     public function deletePayment($id)
     {
         $model = Pembayaran::find($id);
@@ -1079,7 +1088,7 @@ class SuperAdminController extends Controller
         // mengampil data  yang sudah dihapus
         $model = Pembayaran::onlyTrashed()->where('id_pemesanan',$id)->get();
         $pemesanan_id=$id;
-        dd($model);
+        //dd($model);
 
         $page_title = 'Trashed Payment Table';
         $page_description = 'Some description for the page';

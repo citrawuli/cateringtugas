@@ -114,7 +114,7 @@ Route::get('/DeletePayment/{id}', [App\Http\Controllers\SuperAdminController::cl
 Route::get('/TrashedPayment/{id}', [App\Http\Controllers\SuperAdminController::class, 'trashedPaymentID']); //lihat data Payment di tong sampah
 Route::get('/RestorePayment/{id}', [App\Http\Controllers\SuperAdminController::class, 'restorePayment']); //kembalikan data Payment dari tong sampah
 Route::get('/RestoreAllPayment', [App\Http\Controllers\SuperAdminController::class, 'restoreallPayment']); //kembalikan semua data Payment dari tong sampah
-
+Route::post('/changeStatusConfirm/{id}', [App\Http\Controllers\SuperAdminController::class, 'changeConfirmStatusPayment']); //change status konfirmasi pembayaran
 
 Route::get('/user', [App\Http\Controllers\UserController::class, 'index'])->name('homeUser');
 Route::get('/adminPemesanan', [App\Http\Controllers\AdminPemesananController::class, 'index'])->name('homeAdminPemesanan');

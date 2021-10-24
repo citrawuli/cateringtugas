@@ -10,7 +10,7 @@
 	<meta name="description" content="@yield('page_description', $page_description ?? '')"/>
     <!-- Favicon icon -->
     <link rel="icon" type="image/png" sizes="16x16" href="{{ asset('teamo/images/aisyacatering_kontak_logo.png') }}">
-	
+	@yield('link')
 	
 	
 	@if(!empty(config('dz.public.pagelevel.css.'.$action))) 

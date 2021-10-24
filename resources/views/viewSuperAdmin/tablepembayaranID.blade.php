@@ -1,7 +1,10 @@
 @extends('layouts.backAdmin.layout.defaultSuperAdmin')
-
+@section('link')<link href="https://gitcdn.github.io/bootstrap-toggle/2.2.2/css/bootstrap-toggle.min.css" rel="stylesheet">
+<head>
+    <meta name="csrf-token" content="{{ csrf_token() }}" />
+</head>
+@endsection
 @section('content')
-
 <style>
     .zoom {
         transition: transform .08s;
@@ -74,7 +77,7 @@
                     {{-- jika pembayaran.jumlah_bayar = pemesanan.total_transaksi maka udah lunas --}}
                     Total Harus Bayar : @currency($pemesanan->total_transaksi)
                     <br>
-                    Jumlah Sudah Bayar : @currency($jumlahSudahBayar)
+                    Jumlah Sudah Bayar (Diverifikasi) : @currency($jumlahSudahBayar)
                     <br>
                     @if ($pemesanan->total_transaksi > $jumlahSudahBayar)
                         Tagihan Bayar : @currency($pemesanan->total_transaksi-$jumlahSudahBayar)
@@ -100,15 +103,15 @@
                                 <tr>
                                     <th>ID Pembayaran</th>
                                     <th>Status Bayar</th>
+                                    <th>Metode Bayar</th>
+                                    <th>Bukti Bayar</th>
                                     <th>Jumlah Bayar</th>
                                     <th>Tanggal Bayar</th>
-                                    <th>Bank Transfer</th>
+                                    
                                     <th>Nomor Rekening</th>
                                     <th>Atas Nama</th>
-                                    
                                     <th>Created At</th>
                                     <th>Updated At</th>
-                                    <th>Bukti Bayar</th>
                                     <th>Action</th>
                                 </tr>
                             </thead>
@@ -116,27 +119,32 @@
 @foreach( $bayar as $b )    
                                 <tr>
                                     <td>{{ $b->id_pembayaran }}</td>
+                                    
                                     @if ($b->status_bayar == '0')
-                                    <td><span class="badge light badge-warning"><i class="fa fa-circle text-warning mr-1"></i>Menunggu Konfirmasi</span></td>
+                                        <td>
+                                            <span class="badge light badge-warning"><i class="fa fa-circle text-warning mr-1"></i>Menunggu Konfirmasi</span>
+                                            {{-- <input data-id="{{$b->id_pembayaran}}" class="toggle-class" type="checkbox" 
+                                            data-onstyle="success" data-offstyle="danger" data-toggle="toggle" 
+                                            data-on="Active" data-off="InActive" {{ $b->status_bayar ? 'checked' : '' }}> --}}
+                                            <input data-id="{{$b->id_pembayaran}}" type="checkbox" data-toggle="toggle" class="toggle-class " 
+                                            data-on="Diverifikasi" data-off="Klik untuk verifikasi" data-onstyle="success" data-offstyle="danger" {{ $b->status_bayar ? 'checked' : '' }}>
+                                        </td>
                                     @else
-                                    <td><span class="badge light badge-success"><i class="fa fa-circle text-success mr-1"></i>Dikonfirmasi</span>    
+                                        <td>
+                                            <span class="badge light badge-success"><i class="fa fa-circle text-success mr-1"></i>Diverifikasi</span> 
+                                            <input data-id="{{$b->id_pembayaran}}" type="checkbox" data-toggle="toggle" class="toggle-class"
+                                            data-on="Diverifikasi" data-off="Klik untuk verifikasi" data-onstyle="success" data-offstyle="danger" {{ $b->status_bayar ? 'checked' : '' }}>  
+                                        </td> 
                                     @endif
-                                    
-                                    <td>@currency($b->jumlah_bayar)</td>
-                                    <td>{{ date('d-M-Y H:i:s', strtotime($b->tanggal_pembayaran)) }}</td>
+
                                     @if ($b->bank_transfer == '1')
-                                    <td>Tunai</td>
+                                        <td>Tunai</td>
                                     @elseif ($b->bank_transfer == '2')
-                                    <td>BRI</td>
+                                        <td>BRI</td>
                                     @elseif ($b->bank_transfer == '3')
-                                    <td>BCA</td>
+                                        <td>BCA</td>
                                     @endif
-                                    
-                                    
-                                    <td>{{ $b->nomor_rekening }}</td>
-                                    <td>{{ $b->atas_nama }}</td>
-                                    <td>{{ $b->created_at }}</td>
-                                    <td>{{ $b->updated_at }}</td>
+
                                     <td>
                                         @if ($b->bukti_bayar != null)
                                         <div class="zoom">
@@ -147,6 +155,14 @@
                                             Tidak Ada Gambar
                                         @endif
                                     </td>
+                                    <td>@currency($b->jumlah_bayar)</td>
+                                    <td>{{ date('d-M-Y H:i:s', strtotime($b->tanggal_pembayaran)) }}</td>
+                                    
+                                    
+                                    <td>{{ $b->nomor_rekening }}</td>
+                                    <td>{{ $b->atas_nama }}</td>
+                                    <td>{{ $b->created_at }}</td>
+                                    <td>{{ $b->updated_at }}</td>
                                     <td>
                                         <div class="d-flex">
                                             
@@ -170,12 +186,60 @@
 @endsection
 
 @section('script')
+<script src="https://gitcdn.github.io/bootstrap-toggle/2.2.2/js/bootstrap-toggle.min.js"></script>
 <script>
+
+
+
 $(document).ready(function(){
-  $('[data-toggle="tooltip"]').tooltip();
-});
-$(document).ready(function(){
-  $('[data-toggle="tooltip2"]').tooltip();
+    $('[data-toggle="tooltip"]').tooltip();
+    $('[data-toggle="tooltip2"]').tooltip();
+
+    // $('.toggle-class').change(function() {
+    //     var status = $(this).prop('checked') == true ? 1 : 0; 
+    //     var user_id = $(this).data('id'); 
+         
+    //     $.ajax({
+    //         type: "GET",
+    //         dataType: "json",
+    //         url: '/changeStatus',
+    //         data: {'status': status, 'user_id': user_id},
+    //         success: function(data){
+    //           console.log(data.success)
+    //         }
+    //     });
+    // });
+
+        $.ajaxSetup({ headers: { 'X-CSRF-TOKEN': jQuery('meta[name="csrf-token"]').attr('content') } });
+        $('.toggle-class').on('change', function () {
+        //its a table row, so yeah... dont do #toggle-class okayy, use more general than id so you figured the rowss
+        //I already used id but it will not be as easy as this :)
+        console.log("hai");
+            var status = $(this).prop('checked') == true ? 1 : 0; 
+            var getid = $(this).data('id');
+            console.log("getid");
+            console.log(getid);
+            
+            var a = "{{URL('/changeStatusConfirm')}}";
+            var fUrl = a+"/"+getid;
+            $.ajax({
+                url: fUrl,
+                type:'POST',
+                data: {'status': status, 'id': getid},
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                },
+                success:function(response){
+                    
+                    setTimeout(function(){window.location = window.location}, 300); 
+                    
+                                    
+                },
+                error: function() {
+                    console.log( "Ajax Not Working" );
+                }         
+            });    
+        });
 });
 
 
