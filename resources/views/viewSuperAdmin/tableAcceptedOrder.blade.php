@@ -55,7 +55,13 @@
                     <button id="sedangdiproses" class="btn light btn-warning filter">Sedang Diproses</button>
                     <button id="dalampengiriman" class="btn light btn-info filter">Dalam Pengiriman</button>
                     <button id="sudahselesai" class="btn light btn-success filter">Sudah Selesai</button>
-                    <button id="Semua" class="btn light btn-secondary filter">Semua</button>
+                    <button id="Semua" class="btn light btn-secondary filter">Semua Progress</button>
+                </div>
+                <br>
+                <div class="btn-group btn-group-sm" style="margin-left: 5%; margin-right:5%">
+                    <button id="belumlunas" class="btn light btn-dark filter">Belum Lunas</button>
+                    <button id="lunas" class="btn light btn-light filter">Lunas</button>
+                    <button id="semuatagihan" class="btn light btn-secondary filter">Semua Tagihan</button>
                 </div>
 
                 <div class="card-body">
@@ -123,7 +129,7 @@
                                         @if ($order ->total_transaksi > $jumlahSudahBayar)
                                             <span class="badge light badge-danger"><i class="fa fa-circle text-warning mr-1"></i>Belum Lunas</span>
                                         @else
-                                            <span class="badge light badge-success"><i class="fa fa-circle text-success mr-1"></i>Lunas</span>
+                                            <span class="badge light badge-success"><i class="fa fa-circle text-success mr-1"></i><span style="display: none">_</span>Lunas</span>
                                         @endif
                                     </td>
 
@@ -180,6 +186,18 @@ $(document).ready(function(){
 
     $('#Semua').on('click', function () {
         dataTable.columns(3).search("_Belum Diproses|_Sedang Diproses|_Dalam Pengiriman|_Sudah Selesai", true, false, true).draw();
+    });
+
+    $('#belumlunas').on('click', function () {
+        dataTable.columns(4).search("Belum Lunas", true, false, true).draw();
+    });
+
+    $('#lunas').on('click', function () {
+        dataTable.columns(4).search("_Lunas", true, false, true).draw();
+    });
+
+    $('#semuatagihan').on('click', function () {
+        dataTable.columns(4).search("_Lunas|Belum Lunas", true, false, true).draw();
     });
 
     $.ajaxSetup({ headers: { 'X-CSRF-TOKEN': jQuery('meta[name="csrf-token"]').attr('content') } });
