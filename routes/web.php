@@ -106,6 +106,11 @@ Route::get('/RestoreAllOrder', [App\Http\Controllers\SuperAdminController::class
 Route::get('/DeletePermanentAllOrder', [App\Http\Controllers\SuperAdminController::class, 'deletepermanentallOrder']); //hapus permanen semua data order dari tong sampah
 
 Route::get('/OrderDiterima', [App\Http\Controllers\SuperAdminController::class, 'orderDiterimaTable']); //lihat Table Pemesanan
+Route::post('/notyet/{id}', [App\Http\Controllers\SuperAdminController::class, 'notyet']); //change status order into notyet
+Route::post('/inprocess/{id}', [App\Http\Controllers\SuperAdminController::class, 'inprocess']); //change status order into inprocess
+Route::post('/insend/{id}', [App\Http\Controllers\SuperAdminController::class, 'insend']); //change status order into insend
+Route::post('/done/{id}', [App\Http\Controllers\SuperAdminController::class, 'done']); //change status order into done
+
 
 Route::get('/OrderCalendar', [App\Http\Controllers\SuperAdminController::class, 'OrderCalendar']); //lihat Kalender Pemesanan
 

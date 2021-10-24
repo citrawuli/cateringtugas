@@ -1,11 +1,12 @@
 @extends('layouts.backAdmin.layout.defaultSuperAdmin')
 
-@section('content')
-
+@section('link')
 <head>
     <meta name="csrf-token" content="{{ csrf_token() }}" />
 </head>
+@endsection
 
+@section('content')
 <div class="container-fluid">
     <div class="row page-titles mx-0">
         <div class="col-sm-6 p-md-0">
@@ -79,22 +80,50 @@
                                     <td>{{ $order->nama_lengkap_pembeli }}</td>
 
                                     <td>
-                                        @if ($order ->status_progress == null)
-                                        <span class="badge light badge-danger"><i class="fa fa-circle text-warning mr-1"></i>Belum Diproses</span>
+                                        @if ($order ->status_progress == '1')
+                                            <div class="btn-group" role="group">
+                                                <button type="button" class="btn btn-danger btn-sm dropdown-toggle" data-toggle="dropdown">Belum Diproses</button>
+                                                <div class="dropdown-menu">
+                                                    <a class="dropdown-item inprocess"  name="{{$order->id_pemesanan}}"><i class="flaticon-381-time scale5 text-warning mr-2"></i>Sedang Diproses</a>
+                                                    <a class="dropdown-item insend" name="{{$order->id_pemesanan}}"><i class="flaticon-381-route scale5 text-primary mr-2"></i>Dalam Pengiriman</a>
+                                                    <a class="dropdown-item done" name="{{$order->id_pemesanan}}"><i class="las la-check-square scale5 text-success mr-2"></i>Sudah Selesai</a>
+                                                </div>
+                                            </div>
                                         @elseif ($order ->status_progress == '2')
-                                        <span class="badge light badge-warning"><i class="fa fa-circle text-warning mr-1"></i>Sedang Diproses</span>
+                                            <div class="btn-group" role="group">
+                                                <button type="button" class="btn btn-warning btn-sm dropdown-toggle" data-toggle="dropdown">Sedang Diproses</button>
+                                                <div class="dropdown-menu">
+                                                    <a class="dropdown-item notyet"  name="{{$order->id_pemesanan}}"><i class="las la-undo scale5 text-danger mr-2"></i>Belum Diproses</a>
+                                                    <a class="dropdown-item insend" name="{{$order->id_pemesanan}}"><i class="flaticon-381-route scale5 text-primary mr-2"></i>Dalam Pengiriman</a>
+                                                    <a class="dropdown-item done" name="{{$order->id_pemesanan}}"><i class="las la-check-square scale5 text-success mr-2"></i>Sudah Selesai</a>
+                                                </div>
+                                            </div>
                                         @elseif ($order ->status_progress == '3')
-                                        <span class="badge light badge-info"><i class="fa fa-circle text-warning mr-1"></i>Dalam Pengiriman</span>
+                                            <div class="btn-group" role="group">
+                                                <button type="button" class="btn btn-info btn-sm dropdown-toggle" data-toggle="dropdown">Dalam Pengiriman</button>
+                                                <div class="dropdown-menu">
+                                                    <a class="dropdown-item notyet"  name="{{$order->id_pemesanan}}"><i class="las la-undo scale5 text-danger mr-2"></i>Belum Diproses</a>
+                                                    <a class="dropdown-item inprocess"  name="{{$order->id_pemesanan}}"><i class="flaticon-381-time scale5 text-warning mr-2"></i>Sedang Diproses</a>
+                                                    <a class="dropdown-item done" name="{{$order->id_pemesanan}}"><i class="las la-check-square scale5 text-success mr-2"></i>Sudah Selesai</a>
+                                                </div>
+                                            </div>
                                         @elseif ($order ->status_progress == '4')
-                                        <span class="badge light badge-success"><i class="fa fa-circle text-warning mr-1"></i>Sudah Selesai</span>
+                                            <div class="btn-group" role="group">
+                                                <button type="button" class="btn btn-success btn-sm dropdown-toggle" data-toggle="dropdown">Sudah Selesai</button>
+                                                <div class="dropdown-menu">
+                                                    <a class="dropdown-item notyet"  name="{{$order->id_pemesanan}}"><i class="las la-undo scale5 text-danger mr-2"></i>Belum Diproses</a>
+                                                    <a class="dropdown-item inprocess"  name="{{$order->id_pemesanan}}"><i class="flaticon-381-time scale5 text-warning mr-2"></i>Sedang Diproses</a>
+                                                    <a class="dropdown-item insend" name="{{$order->id_pemesanan}}"><i class="flaticon-381-route scale5 text-primary mr-2"></i>Dalam Pengiriman</a>
+                                                </div>
+                                            </div>
                                         @endif
                                     </td>
 
                                     <td>
                                         @if ($order ->total_transaksi > $jumlahSudahBayar)
-                                            Belum Lunas
+                                            <span class="badge light badge-danger"><i class="fa fa-circle text-warning mr-1"></i>Belum Lunas</span>
                                         @else
-                                            Lunas
+                                            <span class="badge light badge-success"><i class="fa fa-circle text-success mr-1"></i>Lunas</span>
                                         @endif
                                     </td>
 
@@ -127,51 +156,134 @@ $(document).ready(function(){
         // Bfrtip you need to add l on your dom. See this for ref: https://datatables.net/reference/option/dom.
     });
     
-
-
     $('[data-toggle="tooltip"]').tooltip();
     $('[data-toggle="tooltip2"]').tooltip();
     $('[data-toggle="tooltip3"]').tooltip();
 
+    //I used data-search in td cuz dropdown make datatable filter html cannot run. why? because the key html is not unique in blade :)
     
     $('#belumdiproses').on('click', function () {
-        dataTable.columns(4).search("Belum Diproses", true, false, true).draw();
+        dataTable.columns(3).search("Belum Diproses", true, false, true).draw();
     });
 
     $('#sedangdiproses').on('click', function () {
-        dataTable.columns(4).search("Sedang Diproses", true, false, true).draw();
+        dataTable.columns(3).search("Sedang Diproses", true, false, true).draw();
     });
 
     $('#dalampengiriman').on('click', function () {
-        dataTable.columns(4).search("Dalam Pengiriman", true, false, true).draw();
+        dataTable.columns(3).search("Dalam Pengiriman", true, false, true).draw();
     });
 
     $('#sudahselesai').on('click', function () {
-        dataTable.columns(4).search("Sudah Selesai", true, false, true).draw();
+        dataTable.columns(3).search("Sudah Selesai", true, false, true).draw();
     });
 
     $('#Semua').on('click', function () {
-        dataTable.columns(4).search("Belum Diproses|Sedang Diproses|Dalam Pengiriman|Sudah Selesai", true, false, true).draw();
+        dataTable.columns(3).search("Belum Diproses|Sedang Diproses|Dalam Pengiriman|Sudah Selesai", true, false, true).draw();
     });
 
-    // $('#diterima').on('click', function () {
-    //     dataTable.columns(6).search("Rejected|Done", true, false, true).draw();
-    // });
-   
+    $.ajaxSetup({ headers: { 'X-CSRF-TOKEN': jQuery('meta[name="csrf-token"]').attr('content') } });
+    $('.notyet').on('click', function () {
+        //its a table row, so yeah... dont do #notyet okayy, use more general than id so you figured the rowss
+        //I already used id but it will not be as easy as this :)
+        var getid=$(this).attr('name');
+        console.log("getid");
+        console.log(getid);
+        
+        var a = "{{URL('/notyet')}}";
+        var fUrl = a+"/"+getid;
+        $.ajax({
+            url: fUrl,
+            type:'POST',
+            headers: {
+			    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+			},
+            success:function(response){
+                setTimeout(function(){window.location = window.location}, 300); 
+            },
+            error: function() {
+                console.log( "Ajax Not Working" );
+            }         
+        })
+    });
+
+    $.ajaxSetup({ headers: { 'X-CSRF-TOKEN': jQuery('meta[name="csrf-token"]').attr('content') } });
+    $('.inprocess').on('click', function () {
+        //its a table row, so yeah... dont do #inprocess okayy, use more general than id so you figured the rowss
+        //I already used id but it will not be as easy as this :)
+        var getid=$(this).attr('name');
+        console.log("getid");
+        console.log(getid);
+        
+        var a = "{{URL('/inprocess')}}";
+        var fUrl = a+"/"+getid;
+        $.ajax({
+            url: fUrl,
+            type:'POST',
+            headers: {
+			    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+			},
+            success:function(response){
+                setTimeout(function(){window.location = window.location}, 300); 
+            },
+            error: function() {
+                console.log( "Ajax Not Working" );
+            }         
+        })
+    });
+
+    $.ajaxSetup({ headers: { 'X-CSRF-TOKEN': jQuery('meta[name="csrf-token"]').attr('content') } });
+    $('.insend').on('click', function () {
+        //its a table row, so yeah... dont do #insend okayy, use more general than id so you figured the rowss
+        //I already used id but it will not be as easy as this :)
+        var getid=$(this).attr('name');
+        console.log("getid");
+        console.log(getid);
+        
+        var a = "{{URL('/insend')}}";
+        var fUrl = a+"/"+getid;
+        $.ajax({
+            url: fUrl,
+            type:'POST',
+            headers: {
+			    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+			},
+            success:function(response){
+                setTimeout(function(){window.location = window.location}, 300); 
+            },
+            error: function() {
+                console.log( "Ajax Not Working" );
+            }         
+        })
+    });
+
+    $.ajaxSetup({ headers: { 'X-CSRF-TOKEN': jQuery('meta[name="csrf-token"]').attr('content') } });
+    $('.done').on('click', function () {
+        //its a table row, so yeah... dont do #done okayy, use more general than id so you figured the rowss
+        //I already used id but it will not be as easy as this :)
+        var getid=$(this).attr('name');
+        console.log("getid");
+        console.log(getid);
+        
+        var a = "{{URL('/done')}}";
+        var fUrl = a+"/"+getid;
+        $.ajax({
+            url: fUrl,
+            type:'POST',
+            headers: {
+			    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+			},
+            success:function(response){
+                setTimeout(function(){window.location = window.location}, 300); 
+            },
+            error: function() {
+                console.log( "Ajax Not Working" );
+            }         
+        })
+    });
 
 
 
 });
-
-
-
-// var buttons = document.querySelectorAll('#editt');
-
-// buttons.forEach(function(button) {
-//   if (button.value==null) {
-//     button.style.display = "none"
-//   }
-// });
-
 </script>
 @endsection

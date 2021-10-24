@@ -32,7 +32,7 @@ class Pemesanan extends Model
         'keterangan',
         'total_transaksi',
         'status_pemesanan',
-        'status_progres',
+        'status_progress',
         'created_at',
         'updated_at',
         "discount",

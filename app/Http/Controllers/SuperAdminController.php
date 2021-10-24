@@ -819,6 +819,7 @@ class SuperAdminController extends Controller
             'total_transaksi' =>  $request->product_total,
             'total_sub' =>  $request->sub_total_todb,
             'status_pemesanan' =>  "1",
+            'status_progress' =>  "1",
             'created_at' => \Carbon\Carbon::now(), 
             'updated_at' => \Carbon\Carbon::now(), 
         ]);
@@ -1135,6 +1136,37 @@ class SuperAdminController extends Controller
         return view('viewSuperAdmin.tableAcceptedOrder', compact('pemesanan', 'jumlahSudahBayar', 'page_title', 'page_description','action','logo','logoText'));
     }
 
+    public function notyet($id){
+        $model = Pemesanan::find($id);
+        //dd($model);
+        $model->status_progress = "1";
+        $model->touch();
+        $model->save();
+    }
+
+    public function inprocess($id){
+        $model = Pemesanan::find($id);
+        //dd($model);
+        $model->status_progress = "2";
+        $model->touch();
+        $model->save();
+    }
+
+    public function insend($id){
+        $model = Pemesanan::find($id);
+        //dd($model);
+        $model->status_progress = "3";
+        $model->touch();
+        $model->save();
+    }
+
+    public function done($id){
+        $model = Pemesanan::find($id);
+        //dd($model);
+        $model->status_progress = "4";
+        $model->touch();
+        $model->save();
+    }
 
     public function OrderCalendar(Request $request)
     {
