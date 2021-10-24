@@ -82,34 +82,34 @@
                                     <td>
                                         @if ($order ->status_progress == '1')
                                             <div class="btn-group" role="group">
-                                                <button type="button" class="btn btn-danger btn-sm dropdown-toggle" data-toggle="dropdown">Belum Diproses</button>
+                                                <button type="button" class="btn btn-danger btn-sm dropdown-toggle" data-toggle="dropdown"><span style="display: none">_</span>Belum Diproses</button>
                                                 <div class="dropdown-menu">
-                                                    <a class="dropdown-item inprocess"  name="{{$order->id_pemesanan}}"><i class="flaticon-381-time scale5 text-warning mr-2"></i>Sedang Diproses</a>
-                                                    <a class="dropdown-item insend" name="{{$order->id_pemesanan}}"><i class="flaticon-381-route scale5 text-primary mr-2"></i>Dalam Pengiriman</a>
-                                                    <a class="dropdown-item done" name="{{$order->id_pemesanan}}"><i class="las la-check-square scale5 text-success mr-2"></i>Sudah Selesai</a>
+                                                    <a class="dropdown-item inprocess"  name="{{$order->id_pemesanan}}"><i class="flaticon-381-time scale5 text-warning mr-2"></i>Sedang Diproses </a>
+                                                    <a class="dropdown-item insend" name="{{$order->id_pemesanan}}"><i class="flaticon-381-route scale5 text-primary mr-2"></i>Dalam Pengiriman </a>
+                                                    <a class="dropdown-item done" name="{{$order->id_pemesanan}}"><i class="las la-check-square scale5 text-success mr-2"></i>Sudah Selesai </a>
                                                 </div>
                                             </div>
                                         @elseif ($order ->status_progress == '2')
                                             <div class="btn-group" role="group">
-                                                <button type="button" class="btn btn-warning btn-sm dropdown-toggle" data-toggle="dropdown">Sedang Diproses</button>
+                                                <button type="button" class="btn btn-warning btn-sm dropdown-toggle" data-toggle="dropdown"><span style="display: none">_</span>Sedang Diproses</button>
                                                 <div class="dropdown-menu">
-                                                    <a class="dropdown-item notyet"  name="{{$order->id_pemesanan}}"><i class="las la-undo scale5 text-danger mr-2"></i>Belum Diproses</a>
-                                                    <a class="dropdown-item insend" name="{{$order->id_pemesanan}}"><i class="flaticon-381-route scale5 text-primary mr-2"></i>Dalam Pengiriman</a>
-                                                    <a class="dropdown-item done" name="{{$order->id_pemesanan}}"><i class="las la-check-square scale5 text-success mr-2"></i>Sudah Selesai</a>
+                                                    <a class="dropdown-item notyet"  name="{{$order->id_pemesanan}}"><i class="las la-undo scale5 text-danger mr-2"></i>Belum Diproses </a>
+                                                    <a class="dropdown-item insend" name="{{$order->id_pemesanan}}"><i class="flaticon-381-route scale5 text-primary mr-2"></i>Dalam Pengiriman </a>
+                                                    <a class="dropdown-item done" name="{{$order->id_pemesanan}}"><i class="las la-check-square scale5 text-success mr-2"></i>Sudah Selesai </a>
                                                 </div>
                                             </div>
                                         @elseif ($order ->status_progress == '3')
                                             <div class="btn-group" role="group">
-                                                <button type="button" class="btn btn-info btn-sm dropdown-toggle" data-toggle="dropdown">Dalam Pengiriman</button>
+                                                <button type="button" class="btn btn-info btn-sm dropdown-toggle" data-toggle="dropdown"><span style="display: none">_</span>Dalam Pengiriman</button>
                                                 <div class="dropdown-menu">
-                                                    <a class="dropdown-item notyet"  name="{{$order->id_pemesanan}}"><i class="las la-undo scale5 text-danger mr-2"></i>Belum Diproses</a>
-                                                    <a class="dropdown-item inprocess"  name="{{$order->id_pemesanan}}"><i class="flaticon-381-time scale5 text-warning mr-2"></i>Sedang Diproses</a>
-                                                    <a class="dropdown-item done" name="{{$order->id_pemesanan}}"><i class="las la-check-square scale5 text-success mr-2"></i>Sudah Selesai</a>
+                                                    <a class="dropdown-item notyet"  name="{{$order->id_pemesanan}}"><i class="las la-undo scale5 text-danger mr-2"></i>Belum Diproses </a>
+                                                    <a class="dropdown-item inprocess"  name="{{$order->id_pemesanan}}"><i class="flaticon-381-time scale5 text-warning mr-2"></i>Sedang Diproses </a>
+                                                    <a class="dropdown-item done" name="{{$order->id_pemesanan}}"><i class="las la-check-square scale5 text-success mr-2"></i>Sudah Selesai </a>
                                                 </div>
                                             </div>
                                         @elseif ($order ->status_progress == '4')
                                             <div class="btn-group" role="group">
-                                                <button type="button" class="btn btn-success btn-sm dropdown-toggle" data-toggle="dropdown">Sudah Selesai</button>
+                                                <button type="button" class="btn btn-success btn-sm dropdown-toggle" data-toggle="dropdown"><span style="display: none">_</span>Sudah Selesai</button>
                                                 <div class="dropdown-menu">
                                                     <a class="dropdown-item notyet"  name="{{$order->id_pemesanan}}"><i class="las la-undo scale5 text-danger mr-2"></i>Belum Diproses</a>
                                                     <a class="dropdown-item inprocess"  name="{{$order->id_pemesanan}}"><i class="flaticon-381-time scale5 text-warning mr-2"></i>Sedang Diproses</a>
@@ -160,26 +160,26 @@ $(document).ready(function(){
     $('[data-toggle="tooltip2"]').tooltip();
     $('[data-toggle="tooltip3"]').tooltip();
 
-    //I used data-search in td cuz dropdown make datatable filter html cannot run. why? because the key html is not unique in blade :)
+    //to trick dropdown filter in datatable im using hidden span :)
     
     $('#belumdiproses').on('click', function () {
-        dataTable.columns(3).search("Belum Diproses", true, false, true).draw();
+        dataTable.columns(3).search("_Belum Diproses", true, false, true).draw();
     });
 
     $('#sedangdiproses').on('click', function () {
-        dataTable.columns(3).search("Sedang Diproses", true, false, true).draw();
+        dataTable.columns(3).search("_Sedang Diproses", true, false, true).draw();
     });
 
     $('#dalampengiriman').on('click', function () {
-        dataTable.columns(3).search("Dalam Pengiriman", true, false, true).draw();
+        dataTable.columns(3).search("_Dalam Pengiriman", true, false, true).draw();
     });
 
     $('#sudahselesai').on('click', function () {
-        dataTable.columns(3).search("Sudah Selesai", true, false, true).draw();
+        dataTable.columns(3).search("_Sudah Selesai", true, false, true).draw();
     });
 
     $('#Semua').on('click', function () {
-        dataTable.columns(3).search("Belum Diproses|Sedang Diproses|Dalam Pengiriman|Sudah Selesai", true, false, true).draw();
+        dataTable.columns(3).search("_Belum Diproses|_Sedang Diproses|_Dalam Pengiriman|_Sudah Selesai", true, false, true).draw();
     });
 
     $.ajaxSetup({ headers: { 'X-CSRF-TOKEN': jQuery('meta[name="csrf-token"]').attr('content') } });
