@@ -110,7 +110,7 @@ Route::post('/notyet/{id}', [App\Http\Controllers\SuperAdminController::class, '
 Route::post('/inprocess/{id}', [App\Http\Controllers\SuperAdminController::class, 'inprocess']); //change status order into inprocess
 Route::post('/insend/{id}', [App\Http\Controllers\SuperAdminController::class, 'insend']); //change status order into insend
 Route::post('/done/{id}', [App\Http\Controllers\SuperAdminController::class, 'done']); //change status order into done
-
+Route::get('/LihatDetailOrder/{id}', [App\Http\Controllers\SuperAdminController::class, 'viewdetailorder']); //lihat detail order 
 
 Route::get('/OrderCalendar', [App\Http\Controllers\SuperAdminController::class, 'OrderCalendar']); //lihat Kalender Pemesanan
 

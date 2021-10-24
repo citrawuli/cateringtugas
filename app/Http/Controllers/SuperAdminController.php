@@ -1168,6 +1168,23 @@ class SuperAdminController extends Controller
         $model->save();
     }
 
+    public function viewdetailorder($id)
+    {
+        $pemesanan = Pemesanan::with(['products'])->where('pemesanan.id_pemesanan', $id)->get();
+        // dd($pemesanan);
+        $users = DB::table('users')->get();
+        $produk = DB::table('produk')->get();
+       
+        $page_title = 'Edit Order Form';
+        $page_description = 'Some description for the page';
+        $logo = "teamo/images/aisyacatering_kontak_logo.png";
+        $logoText = "teamo/images/aisya-catering-logo3.png";
+        $action = __FUNCTION__;
+
+        return view('viewSuperAdmin.viewdetailorder',compact('pemesanan', 'users', 'produk', 'page_title', 'page_description','action','logo','logoText') );
+
+    }
+
     public function OrderCalendar(Request $request)
     {
         // if($request->ajax())

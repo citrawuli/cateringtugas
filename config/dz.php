@@ -415,6 +415,10 @@ return [
 					'davur/vendor/bootstrap-select/dist/css/bootstrap-select.min.css',
 				  	'davur/vendor/datatables/css/jquery.dataTables.min.css',
 	  			],  
+				'viewdetailorder' => [
+					'davur/vendor/bootstrap-select/dist/css/bootstrap-select.min.css',
+				  	'davur/vendor/datatables/css/jquery.dataTables.min.css',
+	  			],    
 			],
 			'js' => [
 				'dashboard_1' => [
@@ -1222,6 +1226,15 @@ return [
 					'davur/vendor/datatables/js/jquery.dataTables.min.js',
 					'davur/js/plugins-init/datatables.init.js',
 	  			],
+				'viewdetailorder' => [
+					'davur/vendor/bootstrap-select/dist/js/bootstrap-select.min.js',
+				  
+					'davur/js/custom.min.js',
+					'davur/js/deznav-init.js',
+
+					'davur/vendor/datatables/js/jquery.dataTables.min.js',
+					'davur/js/plugins-init/datatables.init.js',
+	  			],  
 			]
 		],
 	]
