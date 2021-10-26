@@ -77,7 +77,7 @@
                         <div class="form-group row">
                             <label for="kontenblog" class="col-sm-3 col-form-label">{{ __('Konten Blog (*)') }}</label>
 
-                            <div class="col-md-6">
+                            <div class="col-md-8">
                                 {{-- <div class="summernote" name="summernote" id="summernote"></div> --}}
                                 <textarea class="summernote" id="summernote" name="summernote" required></textarea> 
                             </div>

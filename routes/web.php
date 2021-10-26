@@ -84,6 +84,7 @@ Route::get('/dropzoneview/{id}', [App\Http\Controllers\SuperAdminController::cla
 Route::post('/dropzone/store/{id}', [App\Http\Controllers\SuperAdminController::class, 'dropzoneStore'])->name('dropzone.upload');
 Route::get('/dropzone/fetch', [App\Http\Controllers\SuperAdminController::class, 'dropzoneFetch'])->name('dropzone.fetch');
 Route::get('/dropzone/delete', [App\Http\Controllers\SuperAdminController::class, 'dropzoneDelete'])->name('dropzone.delete');
+Route::get('/deleteImage/{id}', [App\Http\Controllers\SuperAdminController::class, 'deleteImageProduct']);
 
 Route::get('/PemesananTable', [App\Http\Controllers\SuperAdminController::class, 'viewpemesanantable']); //lihat Table Pemesanan
 Route::get('/ViewFormPemesanan', [App\Http\Controllers\SuperAdminController::class, 'viewformpemesanan']); //lihat form

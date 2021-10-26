@@ -75,7 +75,7 @@
                                   <td>{{ $u->id }}</td>
                                   <td>{{ $u->name }}</td>
                                   <td>{{ $u->email }}</td>
-                                  <td>{{ $u->role_name }}</td>
+                                  <td>{{ $u->role_name ?? 'user'}}</td>
                                   <td>{{ $u->created_at }}</td>
                                   <td>{{ $u->updated_at }}</td>
                                   <td>

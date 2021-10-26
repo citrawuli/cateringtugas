@@ -105,9 +105,35 @@
 </div>
 
 
-
-
-
+<div class="col-lg-12">
+  <div class="card">
+          <div class="card-header">
+              <h4 class="card-title">Foto</h4><br>
+          </div>
+          
+          <div class="card-body">
+             
+                @foreach ($galpro as $object)
+                                 
+                
+                <table>
+                  <tr>
+                    <td><img src="{{ asset($object->foto) }}"width="300px"></th>
+                    <td><a type='button' class='btn btn-link remove_image' href="{{url('deleteImage/'.$object->id_galeri)}}">Remove</a></td>
+                    <td><a href='{{ asset($object->foto)}}' target='_blank'>Lihat Gambar Full</a></td>
+                  </tr>
+                  <tr>
+                    
+                  </tr>
+                </table>
+                @endforeach
+                
+                {{-- <a href='{{ asset($b->bukti_bayar) }}' target='_blank'>Lihat Gambar Full</a> --}}
+           
+           
+          </div>
+  </div>
+</div>
 
 
 
@@ -198,16 +224,7 @@
 	    })
   	}
 
-  	$(document).on('click', '.remove_image', function(){
-    	var name = $(this).attr('id');
-    	$.ajax({
-      		url:"{{ route('dropzone.delete') }}",
-      		data:{name : name},
-      		success:function(data){
-        		load_images_asli();
-      		}
-    	})
-  	});
+
 
 </script>
 @endsection

@@ -27,6 +27,7 @@ class produk extends Model
         'tipe_produk',
         'deskripsi_produk',
         'harga_produk',
+        'rating_produk',
         'created_at',
         'updated_at',
     ];

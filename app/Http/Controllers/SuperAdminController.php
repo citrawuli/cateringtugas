@@ -43,12 +43,31 @@ class SuperAdminController extends Controller
     {
       
         if (request()->user()->hasRole('superAdmin')) {
+            $totalusers = DB::table('users')
+            ->leftJoin('role_users', 'users.id', '=', 'role_users.user_id')
+            ->leftJoin('roles', 'role_users.role_id', '=', 'roles.id')
+            ->where('roles.id','=',NULL)
+            ->orWhere('roles.id','=','R0001')
+            ->whereNull('users.deleted_at')->get()->count('users.id');
+
+            $totalproduk = produk::whereNull('deleted_at')->get()->count('id');
+            $totalpemesanan = Pemesanan::with(['products'])->whereNull('pemesanan.deleted_at')->get()->count('id_pemesanan');
+            $jumlahSudahBayar = Pembayaran::with('detpems')->whereNull('pembayaran.deleted_at')->get()->sum('jumlah_bayar');
+
+            $waiting = Pemesanan::with(['products'])->where('status_pemesanan', '=', '1')->whereNull('pemesanan.deleted_at')->get()->count('id_pemesanan');
+            $notyet = Pemesanan::with(['products'])->where('status_pemesanan', '=', '2')->where('status_progress', '=', '1')->whereNull('pemesanan.deleted_at')->get()->count('id_pemesanan');
+            $still = Pemesanan::with(['products'])->where('status_pemesanan', '=', '2')->where('status_progress', '=', '2')->whereNull('pemesanan.deleted_at')->get()->count('id_pemesanan');
+            $delivered = Pemesanan::with(['products'])->where('status_pemesanan', '=', '2')->where('status_progress', '=', '3')->whereNull('pemesanan.deleted_at')->get()->count('id_pemesanan');
+            $finished = Pemesanan::with(['products'])->where('status_pemesanan', '=', '2')->where('status_progress', '=', '4')->whereNull('pemesanan.deleted_at')->get()->count('id_pemesanan');
+
             $page_title = 'Dashboard';
             $page_description = 'Some description for the page';
             $logo = "teamo/images/aisyacatering_kontak_logo.png";
             $logoText = "teamo/images/aisya-catering-logo3.png";
             $action = __FUNCTION__;
-            return view('viewSuperAdmin.homeSA', compact('page_title', 'page_description','action','logo','logoText'));
+            return view('viewSuperAdmin.homeSA', compact('page_title', 'totalusers', 'totalproduk',
+            'totalpemesanan','jumlahSudahBayar','waiting','notyet','still','delivered','finished',
+            'page_description','action','logo','logoText'));
         } else {
             return redirect('/');
         } 
@@ -465,6 +484,7 @@ class SuperAdminController extends Controller
     
     public function dropzoneView($id){
         $produk = produk::find($id);
+        $galpro = DB::table('galeri_produk')->where('galeri_produk.id_produk', $id)->get();
         //$category = kategoriProduk::find($id);
         //$category = DB::table('kategori_produk')->get();
         $page_title = 'DROPZONE';
@@ -472,7 +492,7 @@ class SuperAdminController extends Controller
         $logo = "teamo/images/aisyacatering_kontak_logo.png";
         $logoText = "teamo/images/aisya-catering-logo3.png";
         $action = __FUNCTION__;
-        return view('viewSuperAdmin.addphotodropzone', compact('produk','page_title', 'page_description','action','logo','logoText'));
+        return view('viewSuperAdmin.addphotodropzone', compact('produk', 'galpro', 'page_title', 'page_description','action','logo','logoText'));
     }
 
     public function dropzoneStore(Request $request, $id){
@@ -542,6 +562,15 @@ class SuperAdminController extends Controller
             //\File::delete(public_path('images/' . $request->get('name')));
             
         }
+    }
+
+    public function deleteImageProduct($id)
+    {
+        $model = galeriProduk::where('id_galeri',$id);
+        $model->forceDelete();
+ 
+        Session::flash('message', "Foto produk berhasil dihapus");
+        return Redirect::back();
     }
 
     public function getModalPhotoProduct($id){
@@ -780,18 +809,18 @@ class SuperAdminController extends Controller
 
     public function storePemesanan(Request $request){
         $validator = $request->validate([
-            'nama_lengkap_pembeli' => ['required', 'max:50'],
-            'no_hp_pembeli' => ['required', 'max:15'],
-            'alamat_lengkap_pembeli' => ['required', 'max:100'],
+            'nama_lengkap' => ['required', 'max:50'],
+            'nomor_telp' => ['required', 'max:15'],
+            'alamat_lengkap' => ['required', 'max:100'],
             'keterangan' => ['max:200'],
         ],
         [
-            'nama_lengkap_pembeli.required' => 'Nama harus diisi',
-            'no_hp_pembeli.required' => 'Nomor ponsel harus diisi',
-            'alamat_lengkap_pembeli.required' => 'Alamat pengiriman harus diisi',
-            'nama_lengkap_pembeli.max' => 'Nama harus dibawah 50 karakter',
-            'no_hp_pembeli.max' => 'Nomor ponsel harus dibawah 15 karakter',
-            'alamat_lengkap_pembeli.max' => 'Alamat pengiriman harus dibawah 100 karakter ',
+            'nama_lengkap.required' => 'Nama harus diisi',
+            'nomor_telp.required' => 'Nomor ponsel harus diisi',
+            'alamat_lengkap.required' => 'Alamat pengiriman harus diisi',
+            'nama_lengkap.max' => 'Nama harus dibawah 50 karakter',
+            'nomor_telp.max' => 'Nomor ponsel harus dibawah 15 karakter',
+            'alamat_lengkap.max' => 'Alamat pengiriman harus dibawah 100 karakter ',
             'keterangan.max' => 'Keterangan harus dibawah 200 karakter',
             ]
         );
@@ -1172,8 +1201,17 @@ class SuperAdminController extends Controller
     {
         $pemesanan = Pemesanan::with(['products'])->where('pemesanan.id_pemesanan', $id)->get();
         // dd($pemesanan);
-        $users = DB::table('users')->get();
+        $user = DB::table('users')->get();
         $produk = DB::table('produk')->get();
+
+        $users = DB::table('users')
+            ->leftJoin('role_users', 'users.id', '=', 'role_users.user_id')
+            ->leftJoin('roles', 'role_users.role_id', '=', 'roles.id')
+            ->select('users.id', 'users.name','role_name')
+            ->whereNull('users.deleted_at')->get();
+        $category = DB::table('kategori_produk')->get();
+        $roles = DB::table('roles')->get();
+        $galpro = DB::table('galeri_produk')->get();
        
         $page_title = 'Edit Order Form';
         $page_description = 'Some description for the page';
@@ -1181,7 +1219,7 @@ class SuperAdminController extends Controller
         $logoText = "teamo/images/aisya-catering-logo3.png";
         $action = __FUNCTION__;
 
-        return view('viewSuperAdmin.viewdetailorder',compact('pemesanan', 'users', 'produk', 'page_title', 'page_description','action','logo','logoText') );
+        return view('viewSuperAdmin.viewdetailorder',compact('pemesanan', 'galpro', 'category','users','roles', 'produk', 'page_title', 'page_description','action','logo','logoText') );
 
     }
 

@@ -86,10 +86,10 @@
                                   <td>{{ $prod->id }}</td>
                                   <td>{{ $prod->nama_kategori }}</td>
                                   <td>{{ $prod->nama_produk }}</td>
-                                  <td>{{ $prod->tipe_produk }}</td>
-                                  <td>{{ $prod->deskripsi_produk }}</td>
+                                  <td>{{ $prod->tipe_produk ?? '-'}}</td>
+                                  <td>{{ $prod->deskripsi_produk ?? '-' }}</td>
                                   <td>@currency($prod->harga_produk)</td>
-                                  <td>{{ $prod->rating_produk }}</td><!-- 
+                                  <td>{{ $prod->rating_produk ?? '-'}}</td><!-- 
                                   <td>{{ $prod->deleted_at }}</td>
                                   <td>{{ $prod->created_at }}</td>
                                   <td>{{ $prod->updated_at }}</td> -->
@@ -97,7 +97,7 @@
                                     
                                     <div class="d-flex">
                                         
-                                        <span data-placement="top" title="Show More Detail" data-toggle="tooltip3" >
+                                        {{-- <span data-placement="top" title="Show More Detail" data-toggle="tooltip3" >
                                         <a href=".bd-example-modal-lg"
                                             data-toggle="modal" 
                                             data-target="#modaldetail{{ $prod->id }}"
@@ -105,7 +105,7 @@
                                             class="btn btn-info shadow btn-xs sharp mr-1">
                                             <i class="fa fa-eye"></i>
                                         </a>
-                                        </span>
+                                        </span> --}}
                                        
                                         <div id="modaldetail{{ $prod->id }}" class="modal fade bd-example-modal-lg" tabindex="-1" role="dialog" aria-hidden="true">
                                             <div class="modal-dialog modal-lg">
@@ -132,14 +132,14 @@
                                                                     <p><strong>ID Produk : </strong><span>{{ $prod->id }}</span></p>
                                                                     <p><span>{{ $prod->nama_kategori }}</span></p>
                                                                     <p><span>{{ $prod->nama_produk }}</span></p><br>
-                                                                    <p><a href="#collapseExample" name="{{ $prod->id }}" id="lihat" data-toggle="collapse" role="button" class="lihat">---Lihat Foto Produk---</a></p>
+                                                                    <p><a href="#collapseExample" name="{{ $prod->id }}" id="lihat{{ $prod->id }}" data-toggle="collapse" role="button" class="lihat">---Lihat Foto Produk---</a></p>
                                                                     
                                                                     
                                                                     <p><a href="#" name="" id="kosong">---Tidak Ada Foto Produk---</a></p>
                                                                     <!-- bawah ini bikin uncaught bolak balik pake public path hmmm ayo ngakali yang atas!!!-->
                                                                     <!-- <p><a href="#" onclick="get_images('{{ $prod->id }}');" id="lihat">---Lihat Foto Produk---</a></p> -->
                                                                     <div class="collapse" id="collapseExample">
-                                                                        <div id="galeri" class="card card-body">
+                                                                        <div id="galeri{{ $prod->id }}" class="card card-body">
                                                                         </div>
                                                                     </div>
                                                                 </center>
@@ -242,7 +242,7 @@ $(document).ready(function(){
                     });
                 }
                 
-                $("#galeri").css("display","block");
+                $("#galeri"+idpro).css("display","block");
                 
                 //$("#galeri").html(data);
                 $.each(response, function(index, obj){
@@ -260,7 +260,7 @@ $(document).ready(function(){
                     img.height ='200';
 
                     //add the newly created image to an existing div on the page
-                    var targetDiv = document.getElementById("galeri"); 
+                    var targetDiv = document.getElementById("galeri"+idpro); 
                     console.log(targetDiv);
                     targetDiv.append(img); 
 
@@ -276,7 +276,7 @@ $(document).ready(function(){
                     //CONTOH
                     // tr.append("<td>"+ obj.first_name +"</td>");
                     // tr.append("<td>"+ obj.last_name +"</td>");
-                    $("#galeri").append(tr);
+                    $("#galeri"+idpro).append(tr);
                     //$("#galeri").html(img);
                 });
                 
@@ -290,10 +290,6 @@ $(document).ready(function(){
     // $(".ignore-click").click(function(){
     //     return false;
     // })
-
-    function showgal(response){
-                
-    }
 
     
     //gak jadi pake onclick getimage, ada masalah uncaught error

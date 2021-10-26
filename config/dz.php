@@ -369,7 +369,8 @@ return [
 	  			],
 				'blogForm' => [
 					'davur/vendor/bootstrap-select/dist/css/bootstrap-select.min.css',
-					'davur/vendor/summernote/summernote.css',
+					'davur/vendor/summernote/new/summernote.css',
+					
 	  			],
 				'trashedOrder' => [
 					'davur/vendor/bootstrap-select/dist/css/bootstrap-select.min.css',
@@ -1127,8 +1128,8 @@ return [
 				'blogForm' => [
 					'davur/vendor/bootstrap-select/dist/js/bootstrap-select.min.js',
 					'davur/vendor/jquery-validation/jquery.validate.min.js',
-					'davur/vendor/summernote/js/summernote.min.js',
-					'davur/js/plugins-init/summernote-init.js',
+					'davur/vendor/summernote/new/summernote.js',
+					// 'davur/js/plugins-init/summernote-init.js',
 					'davur/js/plugins-init/jquery.validate-init.js',
 					'davur/js/custom.min.js',
 					'davur/js/deznav-init.js',
