@@ -117,7 +117,7 @@
                                                         </div>
                                                         <div class="modal-footer">
                                                             <button type="button" class="btn btn-secondary light" data-dismiss="modal">Close</button>
-                                                            <a href="{{ url( '/DeletePermanentPayment/' . $mod->id_pembayaran ) }}" class="btn btn-danger light">Delete</a>
+                                                            {{-- <a href="{{ url( '/DeletePermanentPayment/' . $mod->id_pembayaran ) }}" class="btn btn-danger light">Delete</a> --}}
                                                         </div>
                                                     </div>
                                                 </div>

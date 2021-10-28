@@ -33,7 +33,7 @@
                 <div class="card-body mb-0">
                     <!-- <button type="button" class="btn light btn-danger" data-toggle="modal" data-target="#exampleModalCenter">Add User</button> -->
                     <a href="{!! url('/RestoreAllCategory'); !!}" class="btn light btn-danger">Kembalikan Semua</a>
-                    <a href="{{ url('/DeletePermanentAllCategory')}}" class="btn btn-primary light btn-card">Hapus Permanen Semua</a> 
+                    {{-- <a href="{{ url('/DeletePermanentAllCategory')}}" class="btn btn-primary light btn-card">Hapus Permanen Semua</a>  --}}
                 </div>
             </div>
         </div>
@@ -96,7 +96,7 @@
                                                         </div>
                                                         <div class="modal-footer">
                                                             <button type="button" class="btn btn-secondary light" data-dismiss="modal">Close</button>
-                                                            <a href="{{ url( '/DeletePermanentCategory/' . $mod->id ) }}" class="btn btn-danger light">Delete</a>
+                                                            {{-- <a href="{{ url( '/DeletePermanentCategory/' . $mod->id ) }}" class="btn btn-danger light">Delete</a> --}}
                                                         </div>
                                                     </div>
                                                 </div>

@@ -4,6 +4,8 @@
 <head>
     <meta name="csrf-token" content="{{ csrf_token() }}" />
 </head>
+
+<link rel="stylesheet" href="https://cdn.datatables.net/datetime/1.1.1/css/dataTables.dateTime.min.css">
 @endsection
 
 @section('content')
@@ -63,6 +65,15 @@
                     <button id="lunas" class="btn light btn-light filter">Lunas</button>
                     <button id="semuatagihan" class="btn light btn-secondary filter">Semua Tagihan</button>
                 </div>
+                <br> 
+                <table border="0" cellspacing="5" cellpadding="5" style="margin-left: 5%; margin-right:5%">
+                    <tbody>
+                        <tr>
+                            <td> <strong>Untuk tanggal antara  :</strong>   <input type="text" id="min" name="min"> <strong>-</strong> <input type="text" id="max" name="max"></tr>
+                                {{-- <button id="semuatgl" class="btn light btn-secondary filter">Semua</button> --}}
+                        </tr>
+                    </tbody>
+                </table>
 
                 <div class="card-body">
                     <div class="table-responsive">
@@ -152,7 +163,8 @@
 @endsection
 
 @section('script')
-
+<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.18.1/moment.min.js"></script>
+<script src="https://cdn.datatables.net/datetime/1.1.1/js/dataTables.dateTime.min.js"></script>
 <script>
     
 $(document).ready(function(){
@@ -299,6 +311,40 @@ $(document).ready(function(){
             }         
         })
     });
+
+    var minDate, maxDate;
+    //Custom filtering function which will search data in column four between two values
+    $.fn.dataTable.ext.search.push(
+        function( settings, data, dataIndex ) {
+            var min = minDate.val();
+            var max = maxDate.val();
+            var date = new Date( data[1] );
+    
+            if (
+                (min == null && max == null) ||
+                (min == null && date <= max) ||
+                (max == null && date >=  min) ||
+                (date <= max && date >= min)
+            ) {
+                return true;
+            }
+            return false;
+        }
+    );
+    // Create date inputs
+    minDate = new DateTime($('#min'), {
+        format: 'DD-MMM-YYYY'
+    });
+    maxDate = new DateTime($('#max'), {
+        format: 'DD-MMM-YYYY'
+    });
+ 
+    // Refilter the table
+    $('#min, #max').on('change', function () {
+        // table.draw();
+        dataTable.draw();
+    });
+
 
 
 

@@ -77,7 +77,7 @@
                                   <td>{{ $u->email }}</td>
                                   <td>{{ $u->role_name ?? 'user'}}</td>
                                   <td>{{ $u->created_at }}</td>
-                                  <td>{{ $u->updated_at }}</td>
+                                  <td>{{ $u->updated_at ?? '-'}}</td>
                                   <td>
                                     <div class="d-flex">
                                         @if ($u ->role_name != '')

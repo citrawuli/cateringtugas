@@ -1,5 +1,8 @@
 @extends('layouts.backAdmin.layout.defaultSuperAdmin')
 
+@section('link')
+<link rel="stylesheet" href="https://cdn.datatables.net/datetime/1.1.1/css/dataTables.dateTime.min.css">
+@endsection
 @section('content')
 
 <head>
@@ -79,6 +82,19 @@
                     <button id="dibatalkan" class="btn light btn-info filter">Dibatalkan</button>
                     <button id="semua" class="btn light btn-secondary filter">Semua</button>
                 </div>
+                <br>
+
+                <table border="0" cellspacing="5" cellpadding="5" style="margin-left: 5%; margin-right:5%">
+                    <tbody>
+                        <tr>
+                            <td> <strong>Untuk tanggal antara  :</strong>   <input type="text" id="min" name="min"> 
+                                <strong>-</strong> <input type="text" id="max" name="max">
+                                
+                                {{-- <button id="semuatgl" class="btn btn-secondary filter btn-xs">Refresh</button> --}}
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
 
                 <div class="card-body">
                     <div class="table-responsive">
@@ -320,7 +336,8 @@
 @endsection
 
 @section('script')
-
+<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.18.1/moment.min.js"></script>
+<script src="https://cdn.datatables.net/datetime/1.1.1/js/dataTables.dateTime.min.js"></script>
 <script>
     
 $(document).ready(function(){
@@ -437,10 +454,59 @@ $(document).ready(function(){
     $('#semua').on('click', function () {
         dataTable.columns(6).search("Menunggu Konfirmasi|Ditolak|Diterima", true, false, true).draw();
     });
+    
+    $('#semuatgl').on('click', function () {
+        dataTable.draw();
+    });
 
     // $('#diterima').on('click', function () {
     //     dataTable.columns(6).search("Rejected|Done", true, false, true).draw();
     // });
+
+    var minDate, maxDate;
+    //Custom filtering function which will search data in column four between two values
+    $.fn.dataTable.ext.search.push(
+        function( settings, data, dataIndex ) {
+            var min = minDate.val();
+            var max = maxDate.val();
+            var date = new Date( data[2] );
+            // alert(min);
+            // date.setDate(date.getDate()-1);
+            // min=date;
+    
+            if (
+                (min == null && max == null) ||
+                (min == null && date <= max) ||
+                (max == null && date >=  min) ||
+                (date <= max && date >= min)
+            ) {
+                return true;
+            }
+            return false;
+
+            
+        }
+    );
+    // Create date inputs
+    minDate = new DateTime($('#min'), {
+        format: 'DD-MMM-YYYY'
+    });
+    maxDate = new DateTime($('#max'), {
+        format: 'DD-MMM-YYYY'
+    });
+ 
+    // Refilter the table
+    $('#min, #max').on('change', function () {
+        // table.draw();
+        dataTable.draw();
+    });
+    
+    $('#semuatgl').on('click', function () {
+        // table.draw();
+        $('#min, #max').val('');
+        // dataTable.fnDraw();
+        dataTable.column(2).search('').draw();
+    });
    
 
 
