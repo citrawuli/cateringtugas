@@ -1,6 +1,8 @@
 @extends('layouts.backAdmin.layout.defaultSuperAdmin')
 
-@section('link')<link href="https://gitcdn.github.io/bootstrap-toggle/2.2.2/css/bootstrap-toggle.min.css" rel="stylesheet">
+@section('link')
+<link href="https://gitcdn.github.io/bootstrap-toggle/2.2.2/css/bootstrap-toggle.min.css" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.datatables.net/datetime/1.1.1/css/dataTables.dateTime.min.css">
 <head>
     <meta name="csrf-token" content="{{ csrf_token() }}" />
 </head>
@@ -73,15 +75,37 @@
             @endif
         </div>
 
+        
+
         <div class="col-12">
             <br>
             <div class="card">
                 <div class="card-header text-white bg-danger">
                     <h4 class="card-title">Daftar Pembayaran</h4>
                 </div>
+                <br>
+                <div class="btn-group btn-group-sm" style="margin-left: 5%; margin-right:5%">
+                    <button id="menunggu" class="btn light btn-warning filter">Menunggu Verifikasi</button>
+                    <button id="diverif" class="btn light btn-success filter">Diverifikasi</button>
+                </div>
+                <br>
+        
+                <table border="0" cellspacing="5" cellpadding="5" style="margin-left: 5%; margin-right:5%">
+                    <tbody>
+                        <tr>
+                            <td> <strong>Untuk tanggal antara  :</strong>   <input type="text" id="min" name="min"> 
+                                <strong>-</strong> <input type="text" id="max" name="max">
+                                
+                                {{-- <button id="semuatgl" class="btn btn-secondary filter btn-xs">Refresh</button> --}}
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+
+
                 <div class="card-body">
                     <div class="table-responsive">
-                        <table id="example3" class="display" style="min-width: 845px">
+                        <table id="pymntalltable" class="display" style="min-width: 845px">
                             <thead>
                                 <tr>
                                     <th>ID Pemesanan</th>
@@ -172,10 +196,9 @@
 
 @section('script')
 <script src="https://gitcdn.github.io/bootstrap-toggle/2.2.2/js/bootstrap-toggle.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.18.1/moment.min.js"></script>
+<script src="https://cdn.datatables.net/datetime/1.1.1/js/dataTables.dateTime.min.js"></script>
 <script>
-
-
-
 $(document).ready(function(){
     $('[data-toggle="tooltip"]').tooltip();
     $('[data-toggle="tooltip2"]').tooltip();
@@ -194,6 +217,20 @@ $(document).ready(function(){
     //         }
     //     });
     // });
+
+    var dataTable= $('#pymntalltable').DataTable( {
+        dom: 'lBfrtip',
+        
+        // Bfrtip you need to add l on your dom. See this for ref: https://datatables.net/reference/option/dom.
+    });
+
+    $('#menunggu').on('click', function () {
+        dataTable.columns(2).search("Menunggu Verifikasi", true, false, true).draw();
+    });
+
+    $('#diverif').on('click', function () {
+        dataTable.columns(2).search("Diverifikasi", true, false, true).draw();
+    });
 
         $.ajaxSetup({ headers: { 'X-CSRF-TOKEN': jQuery('meta[name="csrf-token"]').attr('content') } });
         $('.toggle-class').on('change', function () {
@@ -225,6 +262,40 @@ $(document).ready(function(){
                 }         
             });    
         });
+
+        var minDate, maxDate;
+        //Custom filtering function which will search data in column four between two values
+        $.fn.dataTable.ext.search.push(
+        function( settings, data, dataIndex ) {
+            var min = minDate.val();
+            var max = maxDate.val();
+            var date = new Date( data[6] );
+    
+            if (
+                (min == null && max == null) ||
+                (min == null && date <= max) ||
+                (max == null && date >=  min) ||
+                (date <= max && date >= min)
+            ) {
+                return true;
+            }
+            return false;
+        }
+    );
+    // Create date inputs
+    minDate = new DateTime($('#min'), {
+        format: 'DD-MMM-YYYY'
+    });
+    maxDate = new DateTime($('#max'), {
+        format: 'DD-MMM-YYYY'
+    });
+ 
+    // Refilter the table
+    $('#min, #max').on('change', function () {
+        // table.draw();
+        dataTable.draw();
+    });
+
 });
 
 

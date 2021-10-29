@@ -60,6 +60,7 @@
                         <table id="example3" class="display" style="min-width: 845px">
                             <thead>
                                 <tr>
+                                    <th>ID Pemesanan</th>
                                     <th>ID Pembayaran</th>
                                     <th>Status Bayar</th>
                                     <th>Jumlah Bayar</th>
@@ -74,6 +75,7 @@
                             <tbody>
                                 @foreach( $model as $mod )
                                 <tr>
+                                    <td>{{ $mod->id_pemesanan }}</td>
                                     <td>{{ $mod->id_pembayaran }}</td>
                                     @if ($mod->status_bayar == '0')
                                         <td><span class="badge light badge-warning"><i class="fa fa-circle text-warning mr-1"></i>Menunggu Konfirmasi</span></td>
