@@ -11,7 +11,7 @@
         </div>
         <div class="col-sm-6 p-md-0 justify-content-sm-end mt-2 mt-sm-0 d-flex">
             <ol class="breadcrumb">
-                <li class="breadcrumb-item"><a href="{!! url('/Payment/'. $pemesanan_id); !!}">Daftar Pembayaran <strong>{{ $pemesanan_id}}</strong></a></li>
+                <li class="breadcrumb-item"><a href="{!! url('/PaymentTable'); !!}">Daftar Pembayaran</a></li>
                 <li class="breadcrumb-item active"><a href="javascript:void(0)">Tong Sampah Pembayaran</a></li>
             </ol>
         </div>
@@ -32,7 +32,7 @@
                 </div>
                 <div class="card-body mb-0">
                     <!-- <button type="button" class="btn light btn-danger" data-toggle="modal" data-target="#exampleModalCenter">Add User</button> -->
-                    <a href="{!! url('/RestoreAllPaymentSPO/'. $pemesanan_id); !!}" class="btn light btn-danger">Kembalikan Semua</a>
+                    <a href="{!! url('/RestoreAllPayment'); !!}" class="btn light btn-danger">Kembalikan Semua</a>
                     {{-- <a href="{{ url('/')}}" class="btn btn-primary light btn-card">Hapus Permanen Semua</a>  --}}
                 </div>
             </div>

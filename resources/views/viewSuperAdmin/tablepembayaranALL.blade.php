@@ -35,7 +35,7 @@
         <div class="col-sm-6 p-md-0 justify-content-sm-end mt-2 mt-sm-0 d-flex">
             <ol class="breadcrumb">
                 <li class="breadcrumb-item"><a href="javascript:void(0)">Tabel</a></li>
-                <li class="breadcrumb-item active"><a href="javascript:void(0)">Daftar Pembayaran <strong>{{$id_pemesanan}}</strong> </a></li>
+                <li class="breadcrumb-item active"><a href="javascript:void(0)">Daftar Pembayaran</a></li>
             </ol>
         </div>
     </div>
@@ -53,8 +53,8 @@
                 </div>
                 <div class="card-body mb-0">
                     <!-- <button type="button" class="btn light btn-danger" data-toggle="modal" data-target="#exampleModalCenter">Add User</button> -->
-                    <a href="{!! url('/AddPayment/'. $pemesanan->id_pemesanan); !!}" class="btn light btn-danger">Tambah Pembayaran</a>
-                    <a href="{{ url('/TrashedPayment/'.$pemesanan->id_pemesanan)}}" class="btn btn-primary light btn-card"><i class="fa fa-trash" style="margin-right: 10px;"></i>Lihat Tong Sampah</a> 
+                    <a href="{!! url('/AddPayment'); !!}" class="btn light btn-danger">Tambah Pembayaran</a>
+                    <a href="{{ url('/TrashedPayment')}}" class="btn btn-primary light btn-card"><i class="fa fa-trash" style="margin-right: 10px;"></i>Lihat Tong Sampah</a> 
                 </div>
             </div>
         </div>
@@ -73,29 +73,6 @@
             @endif
         </div>
 
-        <div class="col-6">
-            <div class="card text-white bg-primary">
-                <div class="card-header">
-                    <h5 class="card-title text-white">Detail Pembayaran</h5>
-                    
-                </div>
-                <div class="card-body mb-0">
-                    {{-- jika pembayaran.jumlah_bayar = pemesanan.total_transaksi maka udah lunas --}}
-                    Total Harus Bayar : @currency($pemesanan->total_transaksi)
-                    <br>
-                    Jumlah Sudah Bayar (Diverifikasi) : @currency($jumlahSudahBayar)
-                    <br>
-                    @if ($pemesanan->total_transaksi > $jumlahSudahBayar)
-                        Tagihan Bayar : @currency($pemesanan->total_transaksi-$jumlahSudahBayar)
-                        <br><br><h1 style="background-color: rgb(224, 255, 180)" align="center">BELUM LUNAS</h1>
-                    @else
-                        {{-- <br>Deposit Bayar : @currency(abs($jumlahSudahBayar-$pemesanan->total_transaksi)) --}}
-                        <br><h1 style="background-color: rgb(194, 255, 199)" align="center">LUNAS</h1>
-                    @endif
-                </div>
-            </div>
-        </div>
-
         <div class="col-12">
             <br>
             <div class="card">
@@ -107,6 +84,7 @@
                         <table id="example3" class="display" style="min-width: 845px">
                             <thead>
                                 <tr>
+                                    <th>ID Pemesanan</th>
                                     <th>ID Pembayaran</th>
                                     <th>Status Bayar</th>
                                     <th>Metode Bayar</th>
@@ -122,8 +100,9 @@
                                 </tr>
                             </thead>
                             <tbody>
-@foreach( $bayar as $b )    
+@foreach( $pembayaran as $b )    
                                 <tr>
+                                    <td>{{ $b->id_pemesanan }}</td>
                                     <td>{{ $b->id_pembayaran }}</td>
                                     
                                     @if ($b->status_bayar == '0')

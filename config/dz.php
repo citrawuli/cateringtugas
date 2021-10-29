@@ -420,6 +420,26 @@ return [
 					'davur/vendor/bootstrap-select/dist/css/bootstrap-select.min.css',
 				  	'davur/vendor/datatables/css/jquery.dataTables.min.css',
 	  			],    
+				'tablePembayaranAll' => [
+					'davur/vendor/bootstrap-select/dist/css/bootstrap-select.min.css',
+				  	'davur/vendor/datatables/css/jquery.dataTables.min.css',
+	  			], 
+				'addpaymentinAll' => [
+					'davur/vendor/bootstrap-select/dist/css/bootstrap-select.min.css',
+					'davur/vendor/bootstrap-daterangepicker/daterangepicker.css',
+					'davur/vendor/clockpicker/css/bootstrap-clockpicker.min.css',
+					'davur/vendor/jquery-asColorPicker/css/asColorPicker.min.css',
+					'davur/vendor/bootstrap-material-datetimepicker/css/bootstrap-material-datetimepicker.css',
+					'davur/vendor/pickadate/themes/default.css',
+					'davur/vendor/pickadate/themes/default.date.css',
+					'davur/vendor/dropzone/dist/dropzone.css',
+					'davur/vendor/sweetalert2/dist/sweetalert2.min.css',
+				],
+				'trashedPaymentinAll' => [
+					'davur/vendor/bootstrap-select/dist/css/bootstrap-select.min.css',
+				  	'davur/vendor/datatables/css/jquery.dataTables.min.css',
+	  			],
+				   
 			],
 			'js' => [
 				'dashboard_1' => [
@@ -1236,6 +1256,35 @@ return [
 					'davur/vendor/datatables/js/jquery.dataTables.min.js',
 					'davur/js/plugins-init/datatables.init.js',
 	  			],  
+				'tablePembayaranAll' => [
+					'davur/vendor/bootstrap-select/dist/js/bootstrap-select.min.js',
+				  
+					'davur/js/custom.min.js',
+					'davur/js/deznav-init.js',
+
+					'davur/vendor/datatables/js/jquery.dataTables.min.js',
+					'davur/js/plugins-init/datatables.init.js',
+	  			],    
+				'addpaymentinAll' => [
+					'davur/vendor/bootstrap-select/dist/js/bootstrap-select.min.js',
+					'davur/vendor/chart.js/Chart.bundle.min.js',
+					'davur/vendor/apexchart/apexchart.js',
+				  	'davur/vendor/jquery-validation/jquery.validate.min.js',
+				  	'davur/js/plugins-init/jquery.validate-init.js',
+					'davur/js/custom.min.js',
+					'davur/js/deznav-init.js',
+					'davur/vendor/maskk/js/jquery.mask.js',
+					'davur/vendor/dropzone/dist/dropzone.js',
+					'davur/vendor/sweetalert2/dist/sweetalert2.min.js',
+					'davur/js/plugins-init/sweetalert.init.js',
+	  			],
+				'trashedPaymentinAll' => [
+					'davur/vendor/bootstrap-select/dist/js/bootstrap-select.min.js',
+				    'davur/vendor/datatables/js/jquery.dataTables.min.js',
+				    'davur/js/plugins-init/datatables.init.js',
+				    'davur/js/custom.min.js',
+				    'davur/js/deznav-init.js',
+	  			], 
 			]
 		],
 	]

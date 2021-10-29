@@ -1013,7 +1013,7 @@ class SuperAdminController extends Controller
         // $bayar = Pembayaran::with('detpems')->where('pembayaran.id_pemesanan', $id)->whereNull('pembayaran.deleted_at')->get();
         $bayar = Pembayaran::with('detpems')->where('pembayaran.id_pemesanan', $id)->whereNull('pembayaran.deleted_at')->get();
         //ganti, nggak jadi pake foreach blah blah sama code di atas buat ambil sum :')
-        $jumlahSudahBayar = Pembayaran::with('detpems')->where('status_bayar', '1')->whereNull('pembayaran.deleted_at')->get()->sum('jumlah_bayar');
+        $jumlahSudahBayar = Pembayaran::with('detpems')->where('pembayaran.id_pemesanan', $id)->where('status_bayar', '1')->whereNull('pembayaran.deleted_at')->get()->sum('jumlah_bayar');
         $id_pemesanan=$id;
        // $totalcost=0;
         // foreach ($bayar as $b) {
@@ -1151,6 +1151,18 @@ class SuperAdminController extends Controller
         return Redirect::back();
     }
 
+    public function restoreallPaymentSPO($id)
+    {
+            
+        $model = Pembayaran::onlyTrashed()->where('id_pemesanan',$id);;
+        $model->restore();
+ 
+        Session::flash('message', "Semua data pembayaran berhasil dikembalikan");
+        return Redirect::back();
+    }
+
+    
+
     public function orderDiterimaTable()
     {
         $pemesanan = Pemesanan::with(['products'])->where('status_pemesanan', '2')->whereNull('pemesanan.deleted_at')->get();
@@ -1225,7 +1237,7 @@ class SuperAdminController extends Controller
 
     public function tablePembayaranAll()
     {
-        $pembayaran = Pembayaran::with('detpems')->where('pembayaran.id_pemesanan', $id)->whereNull('pembayaran.deleted_at')->get();
+        $pembayaran = Pembayaran::with('detpems')->whereNull('pembayaran.deleted_at')->get();
         $page_title = 'Payment Table';
         $page_description = 'Some description for the page';
         $logo = "teamo/images/aisyacatering_kontak_logo.png";
@@ -1236,6 +1248,30 @@ class SuperAdminController extends Controller
 
     }
 
+    public function trashedPaymentinAll()
+    {
+        // mengampil data  yang sudah dihapus
+        $model = Pembayaran::onlyTrashed()->get();
+        //dd($model);
+
+        $page_title = 'Trashed Payment Table';
+        $page_description = 'Some description for the page';
+        $logo = "teamo/images/aisyacatering_kontak_logo.png";
+        $logoText = "teamo/images/aisya-catering-logo3.png";
+        $action = __FUNCTION__;
+        return view('viewSuperAdmin.tableTrashedPaymentALL', compact('model', 'page_title', 'page_description','action','logo','logoText'));
+    }
+
+    public function addpaymentinAll()
+    {
+        $page_title = 'Add Category Form';
+        $page_description = 'Some description for the page';
+        $logo = "teamo/images/aisyacatering_kontak_logo.png";
+        $logoText = "teamo/images/aisya-catering-logo3.png";
+        $action = __FUNCTION__;
+        return view('viewSuperAdmin.addpembayaranALL', compact('page_title', 'page_description','action','logo','logoText'));
+    
+    }
     
 
     public function OrderCalendar(Request $request)

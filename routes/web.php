@@ -122,13 +122,20 @@ Route::get('/DeletePayment/{id}', [App\Http\Controllers\SuperAdminController::cl
 Route::get('/TrashedPayment/{id}', [App\Http\Controllers\SuperAdminController::class, 'trashedPaymentID']); //lihat data Payment di tong sampah
 Route::get('/RestorePayment/{id}', [App\Http\Controllers\SuperAdminController::class, 'restorePayment']); //kembalikan data Payment dari tong sampah
 Route::get('/RestoreAllPayment', [App\Http\Controllers\SuperAdminController::class, 'restoreallPayment']); //kembalikan semua data Payment dari tong sampah
+Route::get('/RestoreAllPaymentSPO/{id}', [App\Http\Controllers\SuperAdminController::class, 'restoreallPaymentSPO']); //kembalikan semua data Payment spesifik id pemesanan dari tong sampah
+
 Route::post('/changeStatusConfirm/{id}', [App\Http\Controllers\SuperAdminController::class, 'changeConfirmStatusPayment']); //change status konfirmasi pembayaran
 
+Route::get('/PaymentTable', [App\Http\Controllers\SuperAdminController::class, 'tablePembayaranAll']);
+Route::get('/AddPayment', [App\Http\Controllers\SuperAdminController::class, 'addpaymentinAll']); 
+Route::get('/TrashedPayment', [App\Http\Controllers\SuperAdminController::class, 'trashedPaymentinAll']); //lihat data Payment all di tong sampah
 
 Route::get('/user', [App\Http\Controllers\UserController::class, 'index'])->name('homeUser');
 Route::get('/adminPemesanan', [App\Http\Controllers\AdminPemesananController::class, 'index'])->name('homeAdminPemesanan');
 Route::get('/adminPembayaran', [App\Http\Controllers\AdminPembayaranController::class, 'index'])->name('homeAdminPembayaran');
 Route::get('/getdataproduk/{id}', [App\Http\Controllers\SuperAdminController::class,'getdataproduk']);
+
+
 
 Route::get('/BlogTable', [App\Http\Controllers\SuperAdminController::class, 'blogTable']);
 Route::get('/blogForm', [App\Http\Controllers\SuperAdminController::class, 'blogForm']);

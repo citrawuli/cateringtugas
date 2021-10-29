@@ -42,6 +42,7 @@
                             <li><a href="{!! url('/PemesananTable'); !!}">Daftar Order Masuk</a></li>
                             <li><a href="{!! url('/ViewFormPemesanan'); !!}">Tambah Order Masuk</a></li>
                             <li><a href="{!! url('/OrderDiterima'); !!}">Daftar Order Diterima</a></li>
+                            <li><a href="{!! url('/PaymentTable'); !!}">Daftar Pembayaran</a></li>
                         </ul>
                     </li>
                     {{-- <li><a class="has-arrow ai-icon" href="javascript:void()" aria-expanded="false">
