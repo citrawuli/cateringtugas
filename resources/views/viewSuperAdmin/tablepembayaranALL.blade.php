@@ -131,7 +131,7 @@
                                     
                                     @if ($b->status_bayar == '0')
                                         <td>
-                                            <span class="badge light badge-warning"><i class="fa fa-circle text-warning mr-1"></i>Menunggu Verifikasi</span>
+                                            <span class="badge light badge-warning"><i class="fa fa-circle text-warning mr-1"></i><span style="display:none;">_</span>Menunggu Verifikasi</span>
                                             {{-- <input data-id="{{$b->id_pembayaran}}" class="toggle-class" type="checkbox" 
                                             data-onstyle="success" data-offstyle="danger" data-toggle="toggle" 
                                             data-on="Active" data-off="InActive" {{ $b->status_bayar ? 'checked' : '' }}> --}}
@@ -140,7 +140,7 @@
                                         </td>
                                     @else
                                         <td>
-                                            <span class="badge light badge-success"><i class="fa fa-circle text-success mr-1"></i>Diverifikasi</span> 
+                                            <span class="badge light badge-success"><i class="fa fa-circle text-success mr-1"></i><span style="display:none;">_</span>Diverifikasi</span> 
                                             <input data-id="{{$b->id_pembayaran}}" type="checkbox" data-toggle="toggle" class="toggle-class"
                                             data-on="Diverifikasi" data-off="Klik untuk verifikasi" data-onstyle="success" data-offstyle="danger" {{ $b->status_bayar ? 'checked' : '' }}>  
                                         </td> 
@@ -225,11 +225,11 @@ $(document).ready(function(){
     });
 
     $('#menunggu').on('click', function () {
-        dataTable.columns(2).search("Menunggu Verifikasi", true, false, true).draw();
+        dataTable.columns(2).search("_Menunggu Verifikasi", true, false, true).draw();
     });
 
     $('#diverif').on('click', function () {
-        dataTable.columns(2).search("Diverifikasi", true, false, true).draw();
+        dataTable.columns(2).search("_Diverifikasi", true, false, true).draw();
     });
 
         $.ajaxSetup({ headers: { 'X-CSRF-TOKEN': jQuery('meta[name="csrf-token"]').attr('content') } });

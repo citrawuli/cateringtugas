@@ -403,14 +403,6 @@ return [
 	  			],  
 				'addpaymentIDtable' => [
 					'davur/vendor/bootstrap-select/dist/css/bootstrap-select.min.css',
-					'davur/vendor/bootstrap-daterangepicker/daterangepicker.css',
-					'davur/vendor/clockpicker/css/bootstrap-clockpicker.min.css',
-					'davur/vendor/jquery-asColorPicker/css/asColorPicker.min.css',
-					'davur/vendor/bootstrap-material-datetimepicker/css/bootstrap-material-datetimepicker.css',
-					'davur/vendor/pickadate/themes/default.css',
-					'davur/vendor/pickadate/themes/default.date.css',
-					'davur/vendor/dropzone/dist/dropzone.css',
-					'davur/vendor/sweetalert2/dist/sweetalert2.min.css',
 				],
 				'orderDiterimaTable' => [
 					'davur/vendor/bootstrap-select/dist/css/bootstrap-select.min.css',
@@ -426,14 +418,7 @@ return [
 	  			], 
 				'addpaymentinAll' => [
 					'davur/vendor/bootstrap-select/dist/css/bootstrap-select.min.css',
-					'davur/vendor/bootstrap-daterangepicker/daterangepicker.css',
-					'davur/vendor/clockpicker/css/bootstrap-clockpicker.min.css',
-					'davur/vendor/jquery-asColorPicker/css/asColorPicker.min.css',
-					'davur/vendor/bootstrap-material-datetimepicker/css/bootstrap-material-datetimepicker.css',
-					'davur/vendor/pickadate/themes/default.css',
-					'davur/vendor/pickadate/themes/default.date.css',
-					'davur/vendor/dropzone/dist/dropzone.css',
-					'davur/vendor/sweetalert2/dist/sweetalert2.min.css',
+					'davur/vendor/select2/css/select2.min.css',
 				],
 				'trashedPaymentinAll' => [
 					'davur/vendor/bootstrap-select/dist/css/bootstrap-select.min.css',
@@ -1219,16 +1204,11 @@ return [
 	  			],
 				'addpaymentIDtable' => [
 					'davur/vendor/bootstrap-select/dist/js/bootstrap-select.min.js',
-					'davur/vendor/chart.js/Chart.bundle.min.js',
-					'davur/vendor/apexchart/apexchart.js',
 				  	'davur/vendor/jquery-validation/jquery.validate.min.js',
 				  	'davur/js/plugins-init/jquery.validate-init.js',
 					'davur/js/custom.min.js',
 					'davur/js/deznav-init.js',
 					'davur/vendor/maskk/js/jquery.mask.js',
-					'davur/vendor/dropzone/dist/dropzone.js',
-					'davur/vendor/sweetalert2/dist/sweetalert2.min.js',
-					'davur/js/plugins-init/sweetalert.init.js',
 	  			], 
 				  
 				'trashedPaymentID' => [
@@ -1267,16 +1247,13 @@ return [
 	  			],    
 				'addpaymentinAll' => [
 					'davur/vendor/bootstrap-select/dist/js/bootstrap-select.min.js',
-					'davur/vendor/chart.js/Chart.bundle.min.js',
-					'davur/vendor/apexchart/apexchart.js',
 				  	'davur/vendor/jquery-validation/jquery.validate.min.js',
 				  	'davur/js/plugins-init/jquery.validate-init.js',
 					'davur/js/custom.min.js',
 					'davur/js/deznav-init.js',
 					'davur/vendor/maskk/js/jquery.mask.js',
-					'davur/vendor/dropzone/dist/dropzone.js',
-					'davur/vendor/sweetalert2/dist/sweetalert2.min.js',
-					'davur/js/plugins-init/sweetalert.init.js',
+					'davur/vendor/select2/js/select2.full.min.js',
+				    'davur/js/plugins-init/select2-init.js',
 	  			],
 				'trashedPaymentinAll' => [
 					'davur/vendor/bootstrap-select/dist/js/bootstrap-select.min.js',

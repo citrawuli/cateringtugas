@@ -1264,12 +1264,13 @@ class SuperAdminController extends Controller
 
     public function addpaymentinAll()
     {
+        $pemesanan=Pemesanan::whereNull('pemesanan.deleted_at')->get();
         $page_title = 'Add Category Form';
         $page_description = 'Some description for the page';
         $logo = "teamo/images/aisyacatering_kontak_logo.png";
         $logoText = "teamo/images/aisya-catering-logo3.png";
         $action = __FUNCTION__;
-        return view('viewSuperAdmin.addpembayaranALL', compact('page_title', 'page_description','action','logo','logoText'));
+        return view('viewSuperAdmin.addpembayaranALL', compact('pemesanan', 'page_title', 'page_description','action','logo','logoText'));
     
     }
     
