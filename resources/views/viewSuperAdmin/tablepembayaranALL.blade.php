@@ -132,7 +132,7 @@
                                     
                                     @if ($b->status_bayar == '0')
                                         <td>
-                                            <span class="badge light badge-warning"><i class="fa fa-circle text-warning mr-1"></i><span style="display:none;">_</span>Menunggu Verifikasi</span>
+                                            <span class="badge light badge-warning"><i class="fa fa-circle text-warning mr-1"></i>Menunggu Verifikasi</span>
                                             {{-- <input data-id="{{$b->id_pembayaran}}" class="toggle-class" type="checkbox" 
                                             data-onstyle="success" data-offstyle="danger" data-toggle="toggle" 
                                             data-on="Active" data-off="InActive" {{ $b->status_bayar ? 'checked' : '' }}> --}}
@@ -141,7 +141,7 @@
                                         </td>
                                     @else
                                         <td>
-                                            <span class="badge light badge-success"><i class="fa fa-circle text-success mr-1"></i><span style="display:none;">_</span>Diverifikasi</span> 
+                                            <span class="badge light badge-success"><i class="fa fa-circle text-success mr-1"></i>Diverifikasi</span> 
                                             {{-- <input data-id="{{$b->id_pembayaran}}" type="checkbox" data-toggle="toggle" class="toggle-class"
                                             data-on="Diverifikasi" data-off="Klik untuk verifikasi" data-onstyle="success" data-offstyle="danger" {{ $b->status_bayar ? 'checked' : '' }}>   --}}
                                         </td> 
@@ -238,8 +238,18 @@ $(document).ready(function(){
         // Bfrtip you need to add l on your dom. See this for ref: https://datatables.net/reference/option/dom.
         buttons: [
             'copyHtml5',
-            'excelHtml5',
-            'csvHtml5',
+            {
+                extend: 'excelHtml5',
+                exportOptions: {
+                    columns: [ 0, 1, 2, 3,4,5,6,7,8,9,10]
+                },
+            },
+            {
+                extend: 'csvHtml5',
+                exportOptions: {
+                    columns: [ 0, 1, 2, 3,4,5,6,7,8,9,10]
+                },
+            },
             // 'pdfHtml5',
             {
                 extend: 'pdfHtml5',
@@ -247,18 +257,60 @@ $(document).ready(function(){
                 pageSize: 'A4',
                 exportOptions: {
                     columns: [ 0, 1, 2, 3,4,5,6,7,8,9,10]
-                }
+                },
+                footer: true,
+                // messageBottom: function() {
+                //     return '\r\n Total pembayaran' 
+                //         // +   '\r\n this is the second line' + '\r\n \r\n this is the third line preceeded by an empty line'
+                //         ;
+                // },
             },
             'colvis'
-        ]
+        ],
+        "footerCallback": function ( row, data, start, end, display ) {
+            var api = this.api(), data;
+ 
+            // Remove the formatting to get integer data for summation
+            var intVal = function ( i ) {
+                return typeof i === 'string' ?
+                    i.replace(/[\Rp,]/g, '')*1 :
+                    typeof i === 'number' ?
+                        i : 0;
+            };
+ 
+            // Total over all pages
+            total = api
+                .column( 5 )
+                .data()
+                .reduce( function (a, b) {
+                    return intVal(a) + intVal(b);
+                }, 0 );
+ 
+            // Total over this page
+            pageTotal = api
+                .column( 5, { page: 'current'} )
+                .data()
+                .reduce( function (a, b) {
+                    return intVal(a) + intVal(b);
+                }, 0 );
+ 
+            // Update footer
+            $( api.column( 5 ).footer() ).html(
+                'Rp'+pageTotal +' ( Rp'+ total +' total)'
+            );
+        },
+        fixedHeader: {
+            header: true,
+            footer: true
+        }
     });
 
     $('#menunggu').on('click', function () {
-        dataTable.columns(2).search("_Menunggu Verifikasi", true, false, true).draw();
+        dataTable.columns(2).search("Menunggu Verifikasi", true, false, true).draw();
     });
 
     $('#diverif').on('click', function () {
-        dataTable.columns(2).search("_Diverifikasi", true, false, true).draw();
+        dataTable.columns(2).search("Diverifikasi", true, false, true).draw();
     });
 
         $.ajaxSetup({ headers: { 'X-CSRF-TOKEN': jQuery('meta[name="csrf-token"]').attr('content') } });

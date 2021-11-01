@@ -60,6 +60,13 @@ class SuperAdminController extends Controller
             $delivered = Pemesanan::with(['products'])->where('status_pemesanan', '=', '2')->where('status_progress', '=', '3')->whereNull('pemesanan.deleted_at')->get()->count('id_pemesanan');
             $finished = Pemesanan::with(['products'])->where('status_pemesanan', '=', '2')->where('status_progress', '=', '4')->whereNull('pemesanan.deleted_at')->get()->count('id_pemesanan');
 
+            
+            $notverif = Pembayaran::with('detpems')->where('status_bayar', '=', '0')->whereNull('pembayaran.deleted_at')->get()->count('id_pembayaran');
+            $JMLnotverif = Pembayaran::with('detpems')->where('status_bayar', '=', '0')->whereNull('pembayaran.deleted_at')->get()->sum('jumlah_bayar');
+            $verified = Pembayaran::with('detpems')->where('status_bayar', '=', '1')->whereNull('pembayaran.deleted_at')->get()->count('id_pembayaran');
+            $JMLverified = Pembayaran::with('detpems')->where('status_bayar', '=', '1')->whereNull('pembayaran.deleted_at')->get()->sum('jumlah_bayar');
+            $pycount = Pembayaran::with('detpems')->whereNull('pembayaran.deleted_at')->get()->count('id_pembayaran');
+
             $page_title = 'Dashboard';
             $page_description = 'Some description for the page';
             $logo = "teamo/images/aisyacatering_kontak_logo.png";
@@ -67,6 +74,7 @@ class SuperAdminController extends Controller
             $action = __FUNCTION__;
             return view('viewSuperAdmin.homeSA', compact('page_title', 'totalusers', 'totalproduk',
             'totalpemesanan','jumlahSudahBayar','waiting','notyet','still','delivered','finished',
+            'notverif', 'verified', 'pycount', 'JMLnotverif', 'JMLverified',
             'page_description','action','logo','logoText'));
         } else {
             return redirect('/');

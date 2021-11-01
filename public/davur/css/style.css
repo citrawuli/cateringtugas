@@ -27263,6 +27263,12 @@ span#counter {
   border-radius: 12px; }
 
 /*
+/* payment manage */
+.payment-manage {
+  background: #7bb1d8;
+  border-radius: 12px; }
+
+/*
 ===================================
     Product detail
 ===================================*/

@@ -184,6 +184,47 @@
 						</div>
 					</div>
 					
+					<div class="col-xl-6 col-xxl-6 col-lg-12 col-md-12">
+						<div class="card">
+							<div class="card-header border-0 pb-0 d-sm-flex d-block">
+								<div>
+									<h4 class="card-title mb-1">Ringkasan Pembayaran</h4>
+									<small class="mb-0"></small>
+								</div>
+							</div>
+							<div class="card-body orders-summary">
+								<div class="d-flex payment-manage p-3 align-items-center mb-4">
+									<a href="javascript:void(0);" class="btn fs-22 py-1 btn-warning px-4 mr-3">{{$notverif}}</a>
+									<h4 class="mb-0">Menunggu Verifikasi<i class="fa fa-circle text-warning ml-1 fs-15"></i></h4>
+									<a href="{{url('/PaymentTable')}}" class="ml-auto text-primary font-w500">Lihat pembayaran<i class="ti-angle-right ml-1"></i></a>
+								</div>
+								<div class="row">
+									<div class="col-sm-4 mb-4">
+										<div class="border px-3 py-3 rounded-xl">
+											<h2 class="fs-32 font-w600 counter">{{$notverif}}</h2>
+											<small>@currency($JMLnotverif)</small>
+											<p class="fs-16 mb-0">Menunggu Verifikasi</p>
+										</div>
+									</div>
+									<div class="col-sm-4 mb-4">
+										<div class="border px-3 py-3 rounded-xl">
+											<h2 class="fs-32 font-w600 counter">{{$verified}}</h2>
+											<small>@currency($JMLverified)</small>
+											<p class="fs-16 mb-0">Diverifikasi</p>
+										</div>
+									</div>
+									<div class="col-sm-4 mb-4">
+										<div class="border px-3 py-3 rounded-xl">
+											<h2 class="fs-32 font-w600 counter">{{$pycount}}</h2>
+											<small>kali</small>
+											<p class="fs-16 mb-0">Pembayaran</p>
+										</div>
+									</div>
+								</div>
+								
+							</div>
+						</div>
+					</div>
 					
 				 </div>
             </div>
