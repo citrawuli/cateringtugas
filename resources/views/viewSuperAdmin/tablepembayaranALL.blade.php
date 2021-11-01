@@ -3,6 +3,7 @@
 @section('link')
 <link href="https://gitcdn.github.io/bootstrap-toggle/2.2.2/css/bootstrap-toggle.min.css" rel="stylesheet">
 <link rel="stylesheet" href="https://cdn.datatables.net/datetime/1.1.1/css/dataTables.dateTime.min.css">
+<link rel="stylesheet" href="https://cdn.datatables.net/buttons/2.0.1/css/buttons.dataTables.min.css">
 <head>
     <meta name="csrf-token" content="{{ csrf_token() }}" />
 </head>
@@ -135,14 +136,14 @@
                                             {{-- <input data-id="{{$b->id_pembayaran}}" class="toggle-class" type="checkbox" 
                                             data-onstyle="success" data-offstyle="danger" data-toggle="toggle" 
                                             data-on="Active" data-off="InActive" {{ $b->status_bayar ? 'checked' : '' }}> --}}
-                                            <input data-id="{{$b->id_pembayaran}}" type="checkbox" data-toggle="toggle" class="toggle-class " 
-                                            data-on="Diverifikasi" data-off="Klik untuk verifikasi" data-onstyle="success" data-offstyle="danger" {{ $b->status_bayar ? 'checked' : '' }}>
+                                            {{-- <input data-id="{{$b->id_pembayaran}}" type="checkbox" data-toggle="toggle" class="toggle-class " 
+                                            data-on="Diverifikasi" data-off="Klik untuk verifikasi" data-onstyle="success" data-offstyle="danger" {{ $b->status_bayar ? 'checked' : '' }}> --}}
                                         </td>
                                     @else
                                         <td>
                                             <span class="badge light badge-success"><i class="fa fa-circle text-success mr-1"></i><span style="display:none;">_</span>Diverifikasi</span> 
-                                            <input data-id="{{$b->id_pembayaran}}" type="checkbox" data-toggle="toggle" class="toggle-class"
-                                            data-on="Diverifikasi" data-off="Klik untuk verifikasi" data-onstyle="success" data-offstyle="danger" {{ $b->status_bayar ? 'checked' : '' }}>  
+                                            {{-- <input data-id="{{$b->id_pembayaran}}" type="checkbox" data-toggle="toggle" class="toggle-class"
+                                            data-on="Diverifikasi" data-off="Klik untuk verifikasi" data-onstyle="success" data-offstyle="danger" {{ $b->status_bayar ? 'checked' : '' }}>   --}}
                                         </td> 
                                     @endif
 
@@ -178,6 +179,13 @@
                                             {{-- <a href="{{ url( '/EditPay/' . $b->id ) }}" class="btn btn-primary shadow btn-xs sharp mr-1" data-toggle="tooltip" data-placement="top" title="Edit Kategori" id="editt"><i class="fa fa-pencil"></i></a> --}}
                                             
                                             <a href="{{ url( '/DeletePayment/' . $b->id_pembayaran ) }}" class="btn btn-danger shadow btn-xs sharp" data-toggle="tooltip2" data-placement="top" title="Soft Delete Pembayaran"><i class="fa fa-trash"></i></a>
+                                            @if ($b->status_bayar == '0')
+                                            <input data-id="{{$b->id_pembayaran}}" type="checkbox" data-toggle="toggle" class="toggle-class" 
+                                            data-on="Diverifikasi" data-off="Klik untuk verifikasi" data-onstyle="success" data-offstyle="danger" {{ $b->status_bayar ? 'checked' : '' }}>
+                                            @else
+                                            <input data-id="{{$b->id_pembayaran}}" type="checkbox" data-toggle="toggle" class="toggle-class"
+                                            data-on="Diverifikasi" data-off="Klik untuk verifikasi" data-onstyle="success" data-offstyle="danger" {{ $b->status_bayar ? 'checked' : '' }}>  
+                                            @endif
                                         </div>
                                     </td>
                                   
@@ -198,6 +206,13 @@
 <script src="https://gitcdn.github.io/bootstrap-toggle/2.2.2/js/bootstrap-toggle.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.18.1/moment.min.js"></script>
 <script src="https://cdn.datatables.net/datetime/1.1.1/js/dataTables.dateTime.min.js"></script>
+
+<script src="https://cdn.datatables.net/buttons/2.0.1/js/dataTables.buttons.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.1.3/jszip.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/pdfmake.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/vfs_fonts.js"></script>
+<script src="https://cdn.datatables.net/buttons/2.0.1/js/buttons.html5.min.js"></script>
+<script src="https://cdn.datatables.net/buttons/2.0.1/js/buttons.colVis.min.js"></script>
 <script>
 $(document).ready(function(){
     $('[data-toggle="tooltip"]').tooltip();
@@ -220,8 +235,22 @@ $(document).ready(function(){
 
     var dataTable= $('#pymntalltable').DataTable( {
         dom: 'lBfrtip',
-        
         // Bfrtip you need to add l on your dom. See this for ref: https://datatables.net/reference/option/dom.
+        buttons: [
+            'copyHtml5',
+            'excelHtml5',
+            'csvHtml5',
+            // 'pdfHtml5',
+            {
+                extend: 'pdfHtml5',
+                orientation: 'landscape',
+                pageSize: 'A4',
+                exportOptions: {
+                    columns: [ 0, 1, 2, 3,4,5,6,7,8,9,10]
+                }
+            },
+            'colvis'
+        ]
     });
 
     $('#menunggu').on('click', function () {
