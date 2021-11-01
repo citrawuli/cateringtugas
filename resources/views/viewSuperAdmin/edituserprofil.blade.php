@@ -12,7 +12,7 @@
         <div class="col-sm-6 p-md-0 justify-content-sm-end mt-2 mt-sm-0 d-flex">
             <ol class="breadcrumb">
                 <li class="breadcrumb-item"><a href="{!! url('/UserTable'); !!}">Tabel Pengguna</a></li>
-                <li class="breadcrumb-item active"><a href="javascript:void(0)">Formulir Pengguna</a></li>
+                <li class="breadcrumb-item active"><a href="javascript:void(0)">Profil Pengguna</a></li>
             </ol>
         </div>
     </div>
@@ -46,14 +46,14 @@
             </div>
             <div class="card-body">
                 <div class="basic-form">
-                     <form method="POST" action="{{ url('/AddUser') }}">
+                     <form method="POST" action="{{ url('/uprofupdate/'.Auth::user()->id) }}">
                         @csrf
 
                         <div class="form-group row">
-                            <label for="name" class="col-sm-3 col-form-label">{{ __('Nama (*)') }}</label>
+                            <label for="name" class="col-sm-3 col-form-label">{{ __('Nama') }}</label>
 
                             <div class="col-md-6">
-                                <input id="name" type="text" class="form-control @error('name') is-invalid @enderror" name="name" value="{{ old('name') }}" required autocomplete="name" autofocus placeholder="Name">
+                                <input id="name" type="text" class="form-control @error('name') is-invalid @enderror" name="name" value="{{ Auth::user()->name }}"  autocomplete="name" autofocus placeholder="Name">
 
                                 <!-- @error('name')
                                     <span class="invalid-feedback" role="alert">
@@ -64,10 +64,10 @@
                         </div>
 
                         <div class="form-group row">
-                            <label for="email" class="col-sm-3 col-form-label">{{ __('Alamat E-mail (*)') }}</label>
+                            <label for="email" class="col-sm-3 col-form-label">{{ __('Alamat E-mail') }}</label>
 
                             <div class="col-md-6">
-                                <input id="email" type="email" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}" required autocomplete="email" placeholder="Email">
+                                <input id="email" type="email" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ Auth::user()->email }}"  autocomplete="email" placeholder="Email">
 
                                 <!-- @error('email')
                                     <span class="invalid-feedback" role="alert">
@@ -78,12 +78,12 @@
                         </div>
 
                         <div class="form-group row">
-                            <label for="password" class="col-sm-3 col-form-label">{{ __('Password (*)') }}</label>
+                            <label for="current_password" class="col-sm-3 col-form-label">{{ __('Password Lama') }}</label>
 
                             <div class="col-md-6">
-                                <input id="password" type="password" class="form-control @error('password') is-invalid @enderror" name="password" required autocomplete="new-password" placeholder="Password">
+                                <input id="current_password" type="password" class="form-control @error('current_password') is-invalid @enderror" name="current_password" autocomplete="current_password" placeholder="Current Password">
 
-                                <!-- @error('password')
+                                <!-- @error('current_password')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
                                     </span>
@@ -92,17 +92,17 @@
                         </div>
 
                         <div class="form-group row">
-                            <label for="password-confirm" class="col-sm-3 col-form-label">{{ __('Konfirmasi Password (*)') }}</label>
+                            <label for="new_password" class="col-sm-3 col-form-label">{{ __('Password Baru') }}</label>
 
                             <div class="col-md-6">
-                                <input id="password-confirm" type="password" class="form-control" name="password_confirmation" required autocomplete="new-password" placeholder="Confirm Password">
+                                <input id="new_password" type="password" class="form-control" name="new_password" autocomplete="new_password" placeholder="New Password">
                             </div>
                         </div>
 
                         <div class="form-group row mb-0">
                             <div class="col-md-6 offset-md-4">
                                 <button type="submit" class="btn btn-primary">
-                                    {{ __('Tambah Pengguna') }}
+                                    {{ __('Update Profil') }}
                                 </button>
                             </div>
                         </div>

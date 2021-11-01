@@ -108,8 +108,8 @@ class SuperAdminController extends Controller
 
     public function storeuser(Request $request){
         $validator = $request->validate([
-            'name' => ['required', 'string', 'max:255'],
-            'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
+            'name' => ['required', 'string', 'max:50'],
+            'email' => ['required', 'string', 'email', 'max:50', 'unique:users'],
             'password' => ['required', 'string', 'min:8', 'confirmed'],
         ],
         [
@@ -1280,6 +1280,55 @@ class SuperAdminController extends Controller
         $action = __FUNCTION__;
         return view('viewSuperAdmin.addpembayaranALL', compact('pemesanan', 'page_title', 'page_description','action','logo','logoText'));
     
+    }
+
+    public function edituprof(){
+        $page_title = 'Edit User Form';
+        $page_description = 'Some description for the page';
+        $logo = "teamo/images/aisyacatering_kontak_logo.png";
+        $logoText = "teamo/images/aisya-catering-logo3.png";
+        $action = __FUNCTION__;
+        return view('viewSuperAdmin.edituserprofil', compact('page_title', 'page_description','action','logo','logoText'));
+    }
+    
+    public function updateuprof(Request $request, $id)
+    {
+        $user = auth()->user();
+        
+        $validated = $request->validate([
+            'current_password' => [    
+                'sometimes', 'nullable',           
+                function ($attribute, $value, $fail) use ($user) {
+                    if (!Hash::check($value, $user->password)) {
+                        $fail('Mohon memasukkan password lama yang benar');
+                    }
+                }
+            ],
+            'new_password' => [
+                'sometimes', 'nullable', 'min:8', 'different:current_password','required_with:current_password'
+            ],
+            'name' => ['sometimes','nullable', 'string', 'max:50'],
+            'email' => ['sometimes','nullable', 'string', 'email', 'max:50', 'unique:users,email,'.$user->id.',id'],
+        ],
+        [
+            'new_password.different' => 'Password baru harus berbeda dengan password lama',
+            'new_password.min' => 'Password baru harus memiliki 8 karakter',
+            'new_password.required_with' => 'Anda perlu mengisi kolom Password Baru jika mengisi kolom Password Lama',
+            'name.max' => 'Nama makasimal 50 karakter',
+            'email.unique' => 'Email ini sudah ada',
+        ]
+        );
+
+        $model = user::find($id);
+        $model->name = $request->input('name');
+        $model->email = $request->input('email');
+        $model->password = Hash::make($validated['new_password']);
+        // $model->alamat_user = $request->input('role');
+        // $model->ponsel_user = $request->input('role');
+        $model->touch();
+        $model->save();
+        Session::flash('message', "Data profil pengguna berhasil diubah");
+        return Redirect::back();
     }
     
 

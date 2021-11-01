@@ -142,6 +142,8 @@ Route::get('/blogForm', [App\Http\Controllers\SuperAdminController::class, 'blog
 Route::post('/StoreBlog', [App\Http\Controllers\SuperAdminController::class, 'storeBlog']);
 Route::get('/blog/{id}', [App\Http\Controllers\SuperAdminController::class, 'showBlog']);
 
+Route::get('/uprof', [App\Http\Controllers\SuperAdminController::class, 'edituprof']); //lihat form edit profil
+Route::post('/uprofupdate/{id}', [App\Http\Controllers\SuperAdminController::class, 'updateuprof']); //update data form edit produk ke DB
 
 
 Route::get('/davurdash', [App\Http\Controllers\DavuradminController::class, 'dashboard_1']);

@@ -424,6 +424,9 @@ return [
 					'davur/vendor/bootstrap-select/dist/css/bootstrap-select.min.css',
 				  	'davur/vendor/datatables/css/jquery.dataTables.min.css',
 	  			],
+				'edituprof' => [
+					'davur/vendor/bootstrap-select/dist/css/bootstrap-select.min.css',
+				],
 				   
 			],
 			'js' => [
@@ -1262,6 +1265,13 @@ return [
 				    'davur/js/custom.min.js',
 				    'davur/js/deznav-init.js',
 	  			], 
+				'edituprof' => [
+				  	'davur/vendor/bootstrap-select/dist/js/bootstrap-select.min.js',
+					'davur/vendor/jquery-validation/jquery.validate.min.js',
+					'davur/js/plugins-init/jquery.validate-init.js',
+			        'davur/js/custom.min.js',
+			        'davur/js/deznav-init.js',
+				],
 			]
 		],
 	]
