@@ -81,14 +81,14 @@
                     </div>
                 </div>
             </div>
-            <div class="card-body p-0">
+            <div class="card-body ">
                 @foreach( $blog as $b )
                     <div class="media review-box">
                         {{-- <img class="mr-3 img-fluid btn-rounded" width="55" 
                         src="http://localhost/cathering/public/davur/images/avatar/1.jpg" alt="DexignZone"> --}}
                         <div class="media-body">
                             <h4 class="mt-0 mb-0 text-black">{{$b->judul_blog}}</h4>
-                            <ul class="review-meta mb-3 d-block d-sm-flex align-items-center">
+                            <ul class="review-meta mb-3 d-block d-lg-flex align-items-center">
                                 <li class="mr-3"><small>{{$b->name}}</small></li>
                                 <li class="mr-3"><small>{{$b->role_name}}</small></li>
                                 <li class="mr-3"><small>{{$b->updated_at}}</small></li>
@@ -129,11 +129,18 @@
                             </div>
                         </div> --}}
                     </div>       
-                @endforeach        
+                @endforeach  
+                
+                <div class="d-flex justify-content-center">
+                    {!! $blog->links() !!}
+                </div>
             </div>
-            <div class="card-footer border-0 text-center py-4">
-                <a href="javascript:void(0);" class="btn btn-primary">Read More <i class="fa fa-angle-double-down scale2 ml-2"></i></a>
-            </div>
+
+            
+            
+            {{-- <div class="card-footer border-0 text-center py-4">
+                <a href="javascript:void(0);" class="btn btn-primary see-more" data-page="2" data-link="localhost:8000/post?page=" data-div="#posts">Read More <i class="fa fa-angle-double-down scale2 ml-2"></i></a>
+            </div> --}}
         </div>
 
         
@@ -186,6 +193,7 @@ function myFunction() {
     }
 }
             
+
 
 </script>
 @endsection

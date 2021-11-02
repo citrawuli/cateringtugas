@@ -1404,12 +1404,20 @@ class SuperAdminController extends Controller
     public function blogTable(){
         // $blog = DB::table('blogs')
         //     ->whereNull('blogs.deleted_at')->get();
+        // $blog = DB::table('blogs')
+        //     ->join('users', 'blogs.user_id', '=', 'users.id')
+        //     ->leftJoin('role_users', 'users.id', '=', 'role_users.user_id')
+        //     ->leftJoin('roles', 'role_users.role_id', '=', 'roles.id')
+        //     ->select('blogs.*', 'users.name','role_name')
+        //     ->whereNull('blogs.deleted_at')->get();
+
         $blog = DB::table('blogs')
-            ->join('users', 'blogs.user_id', '=', 'users.id')
-            ->leftJoin('role_users', 'users.id', '=', 'role_users.user_id')
-            ->leftJoin('roles', 'role_users.role_id', '=', 'roles.id')
-            ->select('blogs.*', 'users.name','role_name')
-            ->whereNull('blogs.deleted_at')->get();
+        ->join('users', 'blogs.user_id', '=', 'users.id')
+        ->leftJoin('role_users', 'users.id', '=', 'role_users.user_id')
+        ->leftJoin('roles', 'role_users.role_id', '=', 'roles.id')
+        ->select('blogs.*', 'users.name','role_name')
+        ->whereNull('blogs.deleted_at')->orderBy('created_at', 'DESC')->paginate(2);
+
         $page_title = 'Blog Table';
         $page_description = 'Some description for the page';
         $logo = "teamo/images/aisyacatering_kontak_logo.png";
