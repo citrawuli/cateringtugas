@@ -1295,12 +1295,14 @@ class SuperAdminController extends Controller
     {
         $user = auth()->user();
         
+        // dd($request->all(),$user->password);
         $validated = $request->validate([
             'current_password' => [    
                 'sometimes', 'nullable',           
                 function ($attribute, $value, $fail) use ($user) {
                     if (!Hash::check($value, $user->password)) {
                         $fail('Mohon memasukkan password lama yang benar');
+                        dd($request->all(),$user->password);
                     }
                 }
             ],
@@ -1322,7 +1324,7 @@ class SuperAdminController extends Controller
         $model = user::find($id);
         $model->name = $request->input('name');
         $model->email = $request->input('email');
-        $model->password = Hash::make($validated['new_password']);
+        $model->password = Hash::make($request->input('new_password'));
         // $model->alamat_user = $request->input('role');
         // $model->ponsel_user = $request->input('role');
         $model->touch();
