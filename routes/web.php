@@ -138,6 +138,7 @@ Route::get('/getdataproduk/{id}', [App\Http\Controllers\SuperAdminController::cl
 
 
 Route::get('/BlogTable', [App\Http\Controllers\SuperAdminController::class, 'blogTable']);
+Route::get('/BlogTableASC', [App\Http\Controllers\SuperAdminController::class, 'blogTableASC']);
 Route::get('/blogForm', [App\Http\Controllers\SuperAdminController::class, 'blogForm']);
 Route::post('/StoreBlog', [App\Http\Controllers\SuperAdminController::class, 'storeBlog']);
 Route::get('/blog/{id}', [App\Http\Controllers\SuperAdminController::class, 'showBlog']);

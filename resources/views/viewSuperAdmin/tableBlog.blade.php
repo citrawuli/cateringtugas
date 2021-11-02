@@ -15,7 +15,7 @@
       display: none;
     }
 
-    #more  {display:  none;}
+   
 </style>
 
 <div class="container-fluid">
@@ -72,12 +72,19 @@
                     <p class="mb-0">Berikut ini adalah tulisan yang akan dimuat pada blog</p>
                 </div>
                 <div class="dropdown">
+                    @if ($orderby == "DESC")
                     <button type="button" class="btn btn-primary dropdown-toggle light fs-14" data-toggle="dropdown" aria-expanded="false">
                         Latest
                     </button>
+                    @else
+                    <button type="button" class="btn btn-primary dropdown-toggle light fs-14" data-toggle="dropdown" aria-expanded="false">
+                        OLD
+                    </button>
+                    @endif
+                    
                     <div class="dropdown-menu">
-                        <a class="dropdown-item" href="#">Latest</a>
-                        <a class="dropdown-item" href="#">OLD</a>
+                        <a class="dropdown-item" href="{{url('BlogTable')}}">Latest</a>
+                        <a class="dropdown-item" href="{{url('BlogTableASC')}}">OLD</a>
                     </div>
                 </div>
             </div>
@@ -97,24 +104,24 @@
 
                             {{-- {!!Str::limit($b->konten_blog, 300, '....')!!} <a href='#' class='read-more-show'>Read More</a> --}}
 
-                            {!! Str::limit($b->konten_blog, 100, '') !!}
+                            {{-- {!! Str::limit($b->konten_blog, 100, '...') !!}
                             @if (strlen($b->konten_blog) > 100)
-                                <span id="dots">...</span>
-                                <span id="more">{!! substr($b->konten_blog, 100) !!}</span>
+                                <span id="dots{{$b->id_blog}}" name="{{$b->id_blog}}">...</span>
+                                <span id="more{{$b->id_blog}}" name="{{$b->id_blog}}" style="display:block">{!! substr($b->konten_blog, 100) !!}</span>
                             @endif
-                            <a onclick="myFunction()" id="myBtn">Read more</button>
+                            <a onclick="myFunction()" id="myBtn{{$b->id_blog}}">Read more</button> --}}
                             {{-- {!!substr($b->konten_blog,10,strlen($b->konten_blog))!!}     <a href='#' class="read-more-show">...ReadMore</a>  --}}
                            
 
-                            {{-- @if(strlen($b->konten_blog) > 100) --}}
+                            @if(strlen($b->konten_blog) > 100)
                                 {{-- {!!substr($b->konten_blog,0,100)!!} --}}
-                                {{-- {{substr($b->konten_blog,0,100)}} --}}
-                                {{-- <span class="read-more-show hide_content">More<i class="fa fa-angle-down"></i></span>
+                                {{ substr($b->konten_blog,0,100) }}
+                                <span class="read-more-show hide_content">More<i class="fa fa-angle-down"></i></span>
                                 <span class="read-more-content"> {!!substr($b->konten_blog,100,strlen($b->konten_blog))!!} 
-                                <span class="read-more-hide hide_content">Less<i class="fa fa-angle-up"></i></span></span> --}}
-                            {{-- @else
+                                <span class="read-more-hide hide_content">Less<i class="fa fa-angle-up"></i></span></span>
+                            @else
                                 {!! $b->konten_blog !!}
-                            @endif --}}
+                            @endif
 
                             
                         </div>
@@ -178,16 +185,17 @@ $(document).ready(function(){
 });
 
 function myFunction() {
-    var dots = document.getElementById("dots");
-    var moreText = document.getElementById("more");
-    var btnText = document.getElementById("myBtn");
+    var getid=$(this).attr('name');
+    var dots = document.getElementById("dots"+getid);
+    var moreText = document.getElementById("more"+getid);
+    var btnText = document.getElementById("myBtn"+getid);
 
-    if (dots.style.display === "none") {
+    if (dots.style.display === "block") {
         dots.style.display = "inline";
         btnText.innerHTML = "Read more";
-        moreText.style.display = "none";
+        moreText.style.display = "block";
     } else {
-        dots.style.display = "none";
+        dots.style.display = "block";
         btnText.innerHTML = "Read less";
         moreText.style.display = "inline";
     }

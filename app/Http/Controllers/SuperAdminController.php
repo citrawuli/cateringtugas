@@ -1417,14 +1417,31 @@ class SuperAdminController extends Controller
         ->leftJoin('roles', 'role_users.role_id', '=', 'roles.id')
         ->select('blogs.*', 'users.name','role_name')
         ->whereNull('blogs.deleted_at')->orderBy('created_at', 'DESC')->paginate(2);
-
+        $orderby="DESC";
         $page_title = 'Blog Table';
         $page_description = 'Some description for the page';
         $logo = "teamo/images/aisyacatering_kontak_logo.png";
         $logoText = "teamo/images/aisya-catering-logo3.png";
         $action = __FUNCTION__;
         //dump($barang);        
-        return view('viewSuperAdmin.tableBlog', compact('blog', 'page_title', 'page_description','action','logo','logoText'));
+        return view('viewSuperAdmin.tableBlog', compact('blog','orderby', 'page_title', 'page_description','action','logo','logoText'));
+    }
+
+    public function blogTableASC(){
+        $blog = DB::table('blogs')
+        ->join('users', 'blogs.user_id', '=', 'users.id')
+        ->leftJoin('role_users', 'users.id', '=', 'role_users.user_id')
+        ->leftJoin('roles', 'role_users.role_id', '=', 'roles.id')
+        ->select('blogs.*', 'users.name','role_name')
+        ->whereNull('blogs.deleted_at')->oldest()->paginate(2);
+        $orderby="ASC";
+        $page_title = 'Blog Table';
+        $page_description = 'Some description for the page';
+        $logo = "teamo/images/aisyacatering_kontak_logo.png";
+        $logoText = "teamo/images/aisya-catering-logo3.png";
+        $action = __FUNCTION__;
+        //dump($barang);        
+        return view('viewSuperAdmin.tableBlog', compact('blog', 'orderby', 'page_title', 'page_description','action','logo','logoText'));
     }
 
     public function blogForm(){

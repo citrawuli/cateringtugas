@@ -367,6 +367,10 @@ return [
 					'davur/vendor/bootstrap-select/dist/css/bootstrap-select.min.css',
 				  	'davur/vendor/datatables/css/jquery.dataTables.min.css',
 	  			],
+				'blogTableASC' => [
+					'davur/vendor/bootstrap-select/dist/css/bootstrap-select.min.css',
+				  	'davur/vendor/datatables/css/jquery.dataTables.min.css',
+	  			],
 				'blogForm' => [
 					'davur/vendor/bootstrap-select/dist/css/bootstrap-select.min.css',
 					'davur/vendor/summernote/new/summernote.css',
@@ -1129,9 +1133,12 @@ return [
 				  
 					'davur/js/custom.min.js',
 					'davur/js/deznav-init.js',
-
-					'davur/vendor/datatables/js/jquery.dataTables.min.js',
-					'davur/js/plugins-init/datatables.init.js',
+	  			],
+				'blogTableASC' => [
+					'davur/vendor/bootstrap-select/dist/js/bootstrap-select.min.js',
+				  
+					'davur/js/custom.min.js',
+					'davur/js/deznav-init.js',
 	  			],
 				'blogForm' => [
 					'davur/vendor/bootstrap-select/dist/js/bootstrap-select.min.js',
