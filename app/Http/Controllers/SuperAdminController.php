@@ -1472,17 +1472,6 @@ class SuperAdminController extends Controller
         ]
         );
 
-        // $model = produk::find($id);
-        // $model->id_kategori = $request->input('category_name');
-        // $model->nama_produk = $request->input('product_name');
-        // $model->tipe_produk = $request->input('product_type');
-        // $model->deskripsi_produk = $request->input('product_desc');
-        // $model->harga_produk = $request->input('product_price');
-        // $model->touch();
-        // $model->save();
-        // Session::flash('message', "Data produk berhasil diubah");
-        // return Redirect::back();
-
         //dd($request->all()); 
         Blog::create([
             'user_id' => $request->cariuser,
@@ -1494,6 +1483,46 @@ class SuperAdminController extends Controller
         return Redirect::back();
     }
 
+    public function deleteBlog($id)
+    {
+        $model = Blog::find($id);
+        $model->delete();
+
+        Session::flash('message', "Data Blog {$model->judul_blog} berhasil dihapus");
+        return Redirect::back();
+    }
+
+    public function trashedBlog()
+    {
+        // mengampil data  yang sudah dihapus
+        $model = Blog::onlyTrashed()->get();
+
+        $page_title = 'Trashed Blog Table';
+        $page_description = 'Some description for the page';
+        $logo = "teamo/images/aisyacatering_kontak_logo.png";
+        $logoText = "teamo/images/aisya-catering-logo3.png";
+        $action = __FUNCTION__;
+        return view('viewSuperAdmin.tableTrashedBlog', compact('model', 'page_title', 'page_description','action','logo','logoText'));
+    }
+
+    public function restoreBlog($id)
+    {
+        $model = Blog::onlyTrashed()->where('id_blog',$id);
+        $model->restore();
+
+        Session::flash('message', "Data Blog berhasil dikembalikan");
+        return Redirect::back();
+    }
+
+    public function restoreallBlog()
+    {
+            
+        $model = Blog::onlyTrashed();
+        $model->restore();
+ 
+        Session::flash('message', "Semua data Blog berhasil dikembalikan");
+        return Redirect::back();
+    }
 
 
 }

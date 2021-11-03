@@ -142,6 +142,11 @@ Route::get('/BlogTableASC', [App\Http\Controllers\SuperAdminController::class, '
 Route::get('/blogForm', [App\Http\Controllers\SuperAdminController::class, 'blogForm']);
 Route::post('/StoreBlog', [App\Http\Controllers\SuperAdminController::class, 'storeBlog']);
 Route::get('/blog/{id}', [App\Http\Controllers\SuperAdminController::class, 'showBlog']);
+Route::get('/DeleteBlog/{id}', [App\Http\Controllers\SuperAdminController::class, 'deleteBlog']); //delete data form delete blog ke DB
+Route::get('/TrashedBlog', [App\Http\Controllers\SuperAdminController::class, 'trashedBlog']); //lihat data blog di tong sampah
+Route::get('/RestoreBlog/{id}', [App\Http\Controllers\SuperAdminController::class, 'restoreBlog']); //kembalikan data blog dari tong sampah
+Route::get('/RestoreAllBlog', [App\Http\Controllers\SuperAdminController::class, 'restoreallBlog']); //kembalikan semua data blog dari tong sampah
+
 
 Route::get('/uprof', [App\Http\Controllers\SuperAdminController::class, 'edituprof']); //lihat form edit profil
 Route::post('/uprofupdate/{id}', [App\Http\Controllers\SuperAdminController::class, 'updateuprof']); //update data form edit produk ke DB
