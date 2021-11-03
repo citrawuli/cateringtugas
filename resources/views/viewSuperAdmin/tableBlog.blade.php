@@ -98,8 +98,11 @@
                             <ul class="review-meta mb-3 d-block d-lg-flex align-items-center">
                                 <li class="mr-3"><small>{{$b->name}}</small></li>
                                 <li class="mr-3"><small>{{$b->role_name}}</small></li>
-                                <li class="mr-3"><small>{{$b->updated_at}}</small></li>
+                                <li class="mr-3"><small>{{ date('d M Y, H:i:s', strtotime($b->updated_at)) }}</small></li>
                                 {{-- <li class="ml-auto"><span class="badge badge-rounded badge-warning light font-w500">Excelent</span></li> --}}
+                                <li class="ml-auto"><a href="{{ url( '/EditBlog/' . $b->id_blog ) }}" class="btn btn-primary shadow btn-xs sharp mr-1" data-toggle="tooltip" data-placement="top" title="Edit Blog" id="editt"><i class="fa fa-pencil"></i></a>
+                                    <a href="{{ url( '/DeleteBlog/' . $b->id_blog ) }}" class="btn btn-danger shadow btn-xs sharp" data-toggle="tooltip2" data-placement="top" title="Soft Delete Blog"><i class="fa fa-trash"></i></a>
+                                </li>
                             </ul>
 
                             {{-- {!!Str::limit($b->konten_blog, 300, '....')!!} <a href='#' class='read-more-show'>Read More</a> --}}
@@ -113,11 +116,11 @@
                             {{-- {!!substr($b->konten_blog,10,strlen($b->konten_blog))!!}     <a href='#' class="read-more-show">...ReadMore</a>  --}}
                            
 
-                            @if(strlen($b->konten_blog) > 100)
+                            @if(strlen($b->konten_blog) > 300)
                                 {{-- {!!substr($b->konten_blog,0,100)!!} --}}
-                                {{ substr($b->konten_blog,0,100) }}
+                                {{ substr($b->konten_blog,0,300) }}
                                 <span class="read-more-show hide_content">More<i class="fa fa-angle-down"></i></span>
-                                <span class="read-more-content"> {!!substr($b->konten_blog,100,strlen($b->konten_blog))!!} 
+                                <span class="read-more-content"> {!!substr($b->konten_blog,300,strlen($b->konten_blog))!!} 
                                 <span class="read-more-hide hide_content">Less<i class="fa fa-angle-up"></i></span></span>
                             @else
                                 {!! $b->konten_blog !!}

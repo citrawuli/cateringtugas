@@ -1483,6 +1483,47 @@ class SuperAdminController extends Controller
         return Redirect::back();
     }
 
+    public function editBlog($id)
+    {
+        $blog = Blog::where('id_blog', $id)
+                ->first();
+
+        $users = User::get();
+       
+        $page_title = 'Edit Blog Form';
+        $page_description = 'Some description for the page';
+        $logo = "teamo/images/aisyacatering_kontak_logo.png";
+        $logoText = "teamo/images/aisya-catering-logo3.png";
+        $action = __FUNCTION__;
+
+        return view('viewSuperAdmin.userformeditBlog',compact('blog', 'users', 'page_title', 'page_description','action','logo','logoText') );
+
+    }
+
+    public function updateBlog(Request $request, $id)
+    {
+        $validator = $request->validate([
+            'judulblog' => ['required', 'max:100'],
+            'summernote' => ['required'],
+        ],
+        [
+            'judulblog.required' => 'Mohon mengisi judul blog',
+            'summernote.required' => 'Mohon mengisi konten blog',
+            'judulblog.max' => 'Judul blog harus dibawah 100 karakter',
+            'summernote.max' => 'Konten blog harus dibawah 65.535 karakter',
+        ]
+        );
+
+        $model = Blog::find($id);
+        $model->user_id = $request->input('cariuser');
+        $model->judul_blog = $request->input('judulblog');
+        $model->konten_blog = $request->input('summernote');
+        $model->touch();
+        $model->save();
+        Session::flash('message', "Data blog berhasil diubah");
+        return Redirect::back();
+    }
+
     public function deleteBlog($id)
     {
         $model = Blog::find($id);

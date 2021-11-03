@@ -4,13 +4,18 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 class blog extends Model
 {
-    use HasFactory;
+    use HasFactory, SoftDeletes;
 
     protected $table = 'blogs';
+    protected $primaryKey = 'id_blog';
+    protected $dates = ['deleted_at'];
 
+    public $incrementing = false;//so it doesnt return 0
+    
     /**
      * The attributes that are mass assignable.
      *

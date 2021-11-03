@@ -339,6 +339,10 @@ return [
 					'davur/vendor/bootstrap-select/dist/css/bootstrap-select.min.css',
 				  	'davur/vendor/datatables/css/jquery.dataTables.min.css',
 	  			],
+				'trashedBlog' => [
+					'davur/vendor/bootstrap-select/dist/css/bootstrap-select.min.css',
+				  'davur/vendor/datatables/css/jquery.dataTables.min.css',
+	  			],
 				'viewpemesanantable' => [
               				'davur/vendor/bootstrap-select/dist/css/bootstrap-select.min.css',
 							'davur/vendor/datatables/css/jquery.dataTables.min.css',
@@ -372,6 +376,11 @@ return [
 				  	'davur/vendor/datatables/css/jquery.dataTables.min.css',
 	  			],
 				'blogForm' => [
+					'davur/vendor/bootstrap-select/dist/css/bootstrap-select.min.css',
+					'davur/vendor/summernote/new/summernote.css',
+					
+	  			],
+				'editBlog' => [
 					'davur/vendor/bootstrap-select/dist/css/bootstrap-select.min.css',
 					'davur/vendor/summernote/new/summernote.css',
 					
@@ -1149,6 +1158,24 @@ return [
 					'davur/js/custom.min.js',
 					'davur/js/deznav-init.js',
 	  			], 
+				'editBlog' => [
+					'davur/vendor/bootstrap-select/dist/js/bootstrap-select.min.js',
+					'davur/vendor/jquery-validation/jquery.validate.min.js',
+					'davur/vendor/summernote/new/summernote.js',
+					// 'davur/js/plugins-init/summernote-init.js',
+					'davur/js/plugins-init/jquery.validate-init.js',
+					'davur/js/custom.min.js',
+					'davur/js/deznav-init.js',
+	  			], 
+				'trashedBlog' => [
+					'davur/vendor/bootstrap-select/dist/js/bootstrap-select.min.js',
+				  
+					'davur/js/custom.min.js',
+					'davur/js/deznav-init.js',
+
+					'davur/vendor/datatables/js/jquery.dataTables.min.js',
+					'davur/js/plugins-init/datatables.init.js',
+	  			],
 				'trashedOrder' => [
 					'davur/vendor/bootstrap-select/dist/js/bootstrap-select.min.js',
 				  
