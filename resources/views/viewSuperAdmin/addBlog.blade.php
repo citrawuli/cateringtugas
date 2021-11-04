@@ -15,7 +15,7 @@
         <div class="col-sm-6 p-md-0 justify-content-sm-end mt-2 mt-sm-0 d-flex">
             <ol class="breadcrumb">
                 <li class="breadcrumb-item"><a href="{!! url('/BlogTable'); !!}">Daftar Blog</a></li>
-                <li class="breadcrumb-item active"><a href="javascript:void(0)">Formulir Tambah Kategori</a></li>
+                <li class="breadcrumb-item active"><a href="javascript:void(0)">Formulir Blog</a></li>
             </ol>
         </div>
     </div>
@@ -45,7 +45,7 @@
 	<div class="col-lg-12">
 		<div class="card">
             <div class="card-header">
-                <h4 class="card-title">Blog</h4>
+                <h4 class="card-title">Tambah Blog</h4>
             </div>
             <div class="card-body">
                 <div class="basic-form">

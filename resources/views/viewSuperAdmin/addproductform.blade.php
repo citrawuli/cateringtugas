@@ -53,7 +53,7 @@
                         <div class="form-group row">
                             <label for="category_name" class="col-sm-3 col-form-label">Kategori (*)</label>
                             <div class="col-md-6">
-                              <select class="form-control "  id="single-select" required=""  name="category_name" autofocus>
+                              <select class="form-control select2"  id="single-select" required=""  name="category_name" autofocus>
                               <option disabled selected="" autofocus>Select Category</option>
                               @foreach($category as $cat)
                               <option value="{{ $cat->id }}">{{$cat->nama_kategori}}</option>
@@ -138,6 +138,8 @@ $(document).ready(function(){
         var value=$('#hproduct').cleanVal();
         $('#hproduct').val(value);
     });
+
+    $('.select2').select2();
 });
 </script>
 @endsection

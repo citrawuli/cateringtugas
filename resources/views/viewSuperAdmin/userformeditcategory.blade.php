@@ -11,8 +11,8 @@
         </div>
         <div class="col-sm-6 p-md-0 justify-content-sm-end mt-2 mt-sm-0 d-flex">
             <ol class="breadcrumb">
-                <li class="breadcrumb-item"><a href="{!! url('/CategoryTable'); !!}">Category Table</a></li>
-                <li class="breadcrumb-item active"><a href="javascript:void(0)">Category Form</a></li>
+                <li class="breadcrumb-item"><a href="{!! url('/CategoryTable'); !!}">Daftar Kategori</a></li>
+                <li class="breadcrumb-item active"><a href="javascript:void(0)">Formulir Kategori</a></li>
             </ol>
         </div>
     </div>
@@ -42,7 +42,7 @@
 	<div class="col-lg-12">
 		<div class="card">
             <div class="card-header">
-                <h4 class="card-title">Edit Category</h4>
+                <h4 class="card-title">Edit Kategori</h4>
             </div>
             <div class="card-body">
                 <div class="basic-form">
@@ -50,10 +50,10 @@
                         @csrf
 
                         <div class="form-group row">
-                            <label for="category_name" class="col-sm-3 col-form-label">{{ __('Category Name') }}</label>
+                            <label for="category_name" class="col-sm-3 col-form-label">{{ __('Nama Kategori (*)') }}</label>
 
                             <div class="col-md-6">
-                                <input id="category_name" type="text" class="form-control @error('category_name') is-invalid @enderror" name="category_name" value="{{ $category->nama_kategori }}" required autofocus placeholder="Name" >
+                                <input id="category_name" type="text" class="form-control @error('category_name') is-invalid @enderror" name="category_name" value="{{ $category->nama_kategori }}" required autofocus placeholder="Category Name" >
 
                                 
                             </div>
@@ -66,7 +66,7 @@
                         <div class="form-group row mb-0">
                             <div class="col-md-6 offset-md-4">
                                 <button type="submit" class="btn btn-primary">
-                                    {{ __('Edit Category') }}
+                                    {{ __('Edit Kategori') }}
                                 </button>
                             </div>
                         </div>

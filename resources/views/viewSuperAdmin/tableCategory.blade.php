@@ -72,9 +72,9 @@
                                   <td>
                                     <div class="d-flex">
                                         
-                                        <a href="{{ url( '/EditCategory/' . $cat->id ) }}" class="btn btn-primary shadow btn-xs sharp mr-1" data-toggle="tooltip" data-placement="top" title="Edit Kategori" id="editt"><i class="fa fa-pencil"></i></a>
+                                        <a href="{{ url( '/EditCategory/' . $cat->id ) }}" class="btn btn-primary shadow btn-xs sharp mr-1" data-toggle="tooltip" data-placement="top" title="Edit Category" id="editt"><i class="fa fa-pencil"></i></a>
                                         
-                                        <a href="{{ url( '/DeleteCategory/' . $cat->id ) }}" class="btn btn-danger shadow btn-xs sharp" data-toggle="tooltip2" data-placement="top" title="Soft Delete Kategori"><i class="fa fa-trash"></i></a>
+                                        <a href="{{ url( '/DeleteCategory/' . $cat->id ) }}" class="btn btn-danger shadow btn-xs sharp" data-toggle="tooltip2" data-placement="top" title="Soft Delete Category"><i class="fa fa-trash"></i></a>
                                     </div>
                                     
                                

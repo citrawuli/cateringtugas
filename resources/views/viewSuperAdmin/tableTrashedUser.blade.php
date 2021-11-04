@@ -11,8 +11,8 @@
         </div>
         <div class="col-sm-6 p-md-0 justify-content-sm-end mt-2 mt-sm-0 d-flex">
             <ol class="breadcrumb">
-                <li class="breadcrumb-item"><a href="{{ url('/UserTable')}}">User Table</a></li>
-                <li class="breadcrumb-item active"><a href="javascript:void(0)">Trashed User Table</a></li>
+                <li class="breadcrumb-item"><a href="{{ url('/UserTable')}}">Daftar Pengguna</a></li>
+                <li class="breadcrumb-item active"><a href="javascript:void(0)">Tong Sampah Pengguna</a></li>
             </ol>
         </div>
     </div>
@@ -53,7 +53,7 @@
             <br>
             <div class="card">
                 <div class="card-header text-white bg-danger">
-                    <h4 class="card-title">Trashed User Table</h4>
+                    <h4 class="card-title">Daftar Pengguna yang Dibuang</h4>
                 </div>
                 <div class="card-body">
                     <div class="table-responsive">
@@ -89,7 +89,7 @@
                                         <!-- <a href="{{ url( '/DeletePermanent/' . $mod->id ) }}" class="btn btn-danger shadow btn-xs sharp" data-toggle="tooltip2" data-placement="top" title="Delete User Permanent"><i class="fa fa-trash"></i></a> -->
 
                                         <span data-placement="top" data-toggle="tooltip2"  title="Delete User Permanent">
-                                            <a href="#exampleModalCenter{{ $mod->id }}" class="btn btn-danger shadow btn-xs sharp" data-toggle="modal" data-target="#exampleModalCenter{{ $mod->id }}" ><i class="fa fa-trash"></i></a>
+                                            {{-- <a href="#exampleModalCenter{{ $mod->id }}" class="btn btn-danger shadow btn-xs sharp" data-toggle="modal" data-target="#exampleModalCenter{{ $mod->id }}" ><i class="fa fa-trash"></i></a> --}}
                                         </span>
 
                                             <div class="modal fade" id="exampleModalCenter{{ $mod->id }}">

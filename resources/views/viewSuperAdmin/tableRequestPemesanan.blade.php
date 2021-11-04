@@ -41,7 +41,7 @@
                 <div class="card-body mb-0">
                     <!-- <button type="button" class="btn light btn-danger" data-toggle="modal" data-target="#exampleModalCenter">Add User</button> -->
                     <a href="{!! url('/ViewFormPemesanan'); !!}" class="btn light btn-danger">Tambah Pemesanan</a>
-                    <a href="{{ url('/TrashedOrder')}}" class="btn btn-primary light btn-card"><i class="fa fa-trash"></i>Lihat Tong Sampah Permintaan</a> 
+                    <a href="{{ url('/TrashedOrder')}}" class="btn btn-primary light btn-card"><i class="fa fa-trash" style="margin-right: 10px;"></i>Lihat Tong Sampah</a> 
                 </div>
             </div>
         </div>

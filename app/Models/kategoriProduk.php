@@ -14,6 +14,7 @@ class kategoriProduk extends Model
     public $timestamps = false;
     protected $dates = ['deleted_at'];
 
+    public $incrementing = false;//so it doesnt return 0
     /**
      * The attributes that are mass assignable.
      *

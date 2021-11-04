@@ -80,7 +80,7 @@
                                      <div class="input-group-prepend">
                                         <span class="input-group-text">Rp</span>
                                     </div>
-                                    <input id="jumlah_bayar" type="text" min="0" class="form-control @error('jumlah_bayar') is-invalid @enderror" required  placeholder="Jumlah Bayar" autofocus name="jumlah_bayar">
+                                    <input id="jumlah_bayar" type="text" min="0" class="form-control @error('jumlah_bayar') is-invalid @enderror" required  placeholder="Pay Amount" autofocus name="jumlah_bayar">
                                     <!-- <input id="hiddenrp" hidden="" type="text" min="0" name="product_price"placeholder="Product Price"> -->
                                 </div>
                             </div>
@@ -90,7 +90,7 @@
                             <label for="atas_nama" class="col-sm-3 col-form-label">{{ __('Atas Nama Pembayar') }}</label>
 
                             <div class="col-md-6">
-                                <input id="atas_nama" type="text" class="form-control @error('atas_nama') is-invalid @enderror" name="atas_nama" placeholder="atas nama">
+                                <input id="atas_nama" type="text" class="form-control @error('atas_nama') is-invalid @enderror" name="atas_nama" placeholder="Paid By">
                             </div>
                         </div>
 

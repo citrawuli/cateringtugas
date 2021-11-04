@@ -14,8 +14,8 @@
         </div>
         <div class="col-sm-6 p-md-0 justify-content-sm-end mt-2 mt-sm-0 d-flex">
             <ol class="breadcrumb">
-                <li class="breadcrumb-item"><a href="{!! url('/PemesananTable'); !!}">Order Request Table</a></li>
-                <li class="breadcrumb-item active"><a href="javascript:void(0)">Order Form</a></li>
+                <li class="breadcrumb-item"><a href="{!! url('/PemesananTable'); !!}">Daftar Order Masuk</a></li>
+                <li class="breadcrumb-item active"><a href="javascript:void(0)">Formulir Order</a></li>
             </ol>
         </div>
     </div>
@@ -46,7 +46,7 @@
         <div class="col-lg-12">
             <div class="card">
                 <div class="card-header">
-                    <h4 class="card-title">Add Order</h4>
+                    <h4 class="card-title">Tambah Order</h4>
                 </div>
                 <div class="card-body">
                     <form method="POST" action="{{ url('/StorePemesanan') }}" class="step-form-horizontal">
@@ -55,7 +55,7 @@
                             <section>
                                     
                                     <div class="row">
-                                        <label for="cariuser" class="col-sm-3 col-form-label">User(Pegawai)*</label>
+                                        <label for="cariuser" class="col-sm-3 col-form-label">User Pegawai (*)</label>
                                         <div class="col-md-6">
                                         <select class="form-control cariuser"  id="single-select" required=""  name="cariuser" autofocus>
                                         <!-- <option disabled selected="" autofocus>Select User</option>
@@ -70,10 +70,10 @@
                                     <br><h4>Data Pembeli untuk Dihubungi</h4>
 
                                     <div class="form-group row">
-                                        <label for="nama_lengkap" class="col-sm-3 col-form-label">{{ __('Nama lengkap*') }}</label>
+                                        <label for="nama_lengkap" class="col-sm-3 col-form-label">{{ __('Nama lengkap (*)') }}</label>
 
                                         <div class="col-md-6">
-                                            <input id="nama_lengkap" type="text" class="form-control @error('nama_lengkap') is-invalid @enderror" name="nama_lengkap" required  placeholder="Nama lengkap">
+                                            <input id="nama_lengkap" type="text" class="form-control @error('nama_lengkap') is-invalid @enderror" name="nama_lengkap" required  placeholder="Customer Full Name">
                                             
                                                 {{-- <select class="form-control cariuser"  id="nama_lengkap" required=""  name="cariuser"> --}}
                                                 
@@ -85,7 +85,7 @@
 
                                     <div class="form-group row">
                                         
-                                        <label for="nomor_telp" class="col-sm-3 col-form-label">{{ __('Nomor telepon*') }}</label>
+                                        <label for="nomor_telp" class="col-sm-3 col-form-label">{{ __('Nomor telepon (*)') }}</label>
 
                                         <div class="col-md-6">
                                             <input id="nomor_telp" type="number" class="form-control @error('nomor_telp') is-invalid @enderror" name="nomor_telp"  placeholder="081xxx">
@@ -93,19 +93,19 @@
                                     </div>
 
                                     <div class="form-group row">
-                                        <label for="alamat_lengkap" class="col-sm-3 col-form-label">{{ __('Alamat lengkap*') }}</label>
+                                        <label for="alamat_lengkap" class="col-sm-3 col-form-label">{{ __('Alamat lengkap (*)') }}</label>
 
                                         <div class="col-md-6">
-                                            <textarea rows="5" class="form-control @error('alamat_lengkap') is-invalid @enderror" name="alamat_lengkap"  placeholder="Alamat Lengkap"></textarea>
+                                            <textarea rows="5" class="form-control @error('alamat_lengkap') is-invalid @enderror" name="alamat_lengkap"  placeholder="Delivery Full Address"></textarea>
                                         </div>
                                         
                                     </div>
 
                                     <div class="form-group row">
-                                        <label for="product" class="col-sm-3 col-form-label">{{ __('Untuk tanggal*') }}</label>
+                                        <label for="product" class="col-sm-3 col-form-label">{{ __('Untuk tanggal (*)') }}</label>
 
                                         <div class="col-md-6">
-                                            <input class="datepicker-default form-control @error('untuk_tanggal') is-invalid @enderror" id="datepicker" name="untuk_tanggal" placeholder="Pilih Tanggal" required>
+                                            <input class="datepicker-default form-control @error('untuk_tanggal') is-invalid @enderror" id="datepicker" name="untuk_tanggal" placeholder="Select Date" required>
                                         </div>
                                         
                                     </div>
@@ -115,7 +115,7 @@
 
                                         <div class="col-md-6">
                                             <div class="input-group clockpicker" data-placement="bottom" data-align="top" data-autoclose="true">
-                                                <input type="text" class="form-control @error('untuk_jam') is-invalid @enderror" value="" name="untuk_jam" placeholder="Pilih Jam (opsional)"> 
+                                                <input type="text" class="form-control @error('untuk_jam') is-invalid @enderror" value="" name="untuk_jam" placeholder="Select Hour (opsional)"> 
                                                 <span class="input-group-append">
                                                     <span class="input-group-text">
                                                         <i class="fa fa-clock-o"></i>
@@ -138,7 +138,7 @@
                                         <label for="product" class="col-sm-3 col-form-label">{{ __('Keterangan') }}</label>
 
                                         <div class="col-md-6">
-                                            <textarea rows="5" class="form-control @error('keterangan') is-invalid @enderror" name="keterangan"  placeholder="Keterangan(opsional)"></textarea>
+                                            <textarea rows="5" class="form-control @error('keterangan') is-invalid @enderror" name="keterangan"  placeholder="Additional Note (opsional)"></textarea>
                                         </div>
                                         
                                     </div>
@@ -248,7 +248,7 @@
                             <div class="form-group row mb-0">
                                     <div class="col-md-6 offset-md-4">
                                         <button type="submit" class="btn btn-primary">
-                                            {{ __('Add Order') }}
+                                            {{ __('Tambah Order') }}
                                         </button>
                                     </div>
                             </div>
@@ -302,8 +302,8 @@
                 html += '</tr>';
 
                 table.row.add($(html)).draw(false);
+                $('.selected_product').select2(); //initialize select2 after draw every add row, so it will work(the only way for it to work!! Semangat!)
                 counter++;
-                
                 hitung(id);
                 
             });

@@ -11,7 +11,7 @@
         </div>
         <div class="col-sm-6 p-md-0 justify-content-sm-end mt-2 mt-sm-0 d-flex">
             <ol class="breadcrumb">
-                <li class="breadcrumb-item"><a href="{!! url('/UserTable'); !!}">Tabel Pengguna</a></li>
+                <li class="breadcrumb-item"><a href="{!! url('/UserTable'); !!}">Daftar Pengguna</a></li>
                 <li class="breadcrumb-item active"><a href="javascript:void(0)">Formulir Pengguna</a></li>
             </ol>
         </div>
@@ -52,7 +52,7 @@
                         <div class="form-group">
                             <label for="user_id">Pengguna (*)</label>
                             <div class="">
-                              <select class="form-control "  id="single-select" required=""  name="user_id" >
+                              <select class="form-control select2" required=""  name="user_id" >
                               <option disabled selected="">Select User</option>
                               @foreach($users as $u)
                               <option value="{{ $u->id }}">{{$u->name}}</option>
@@ -64,7 +64,7 @@
                         <div class="form-group">
                             <label for="role_id">Hak Akses (*)</label>
                             <div class="">
-                              <select class="form-control "  id="single-select" required=""  name="role_id" >
+                              <select class="form-control select2"  required=""  name="role_id" >
                               <option disabled selected="">Select User Role</option>
                               @foreach($roles as $r)
                               <option value="{{ $r->id }}">{{$r->role_name}}</option>
@@ -92,4 +92,12 @@
         </div>
     </div>
 </div>
+@endsection
+
+@section('script')
+<script>
+$(document).ready(function(){
+    $('.select2').select2();
+});
+</script>
 @endsection

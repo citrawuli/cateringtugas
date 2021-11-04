@@ -11,7 +11,7 @@
         </div>
         <div class="col-sm-6 p-md-0 justify-content-sm-end mt-2 mt-sm-0 d-flex">
             <ol class="breadcrumb">
-                <li class="breadcrumb-item"><a href="{!! url('/UserTable'); !!}">Tabel Pengguna</a></li>
+                <li class="breadcrumb-item"><a href="{!! url('/UserTable'); !!}">Daftar Pengguna</a></li>
                 <li class="breadcrumb-item active"><a href="javascript:void(0)">Profil Pengguna</a></li>
             </ol>
         </div>
@@ -53,7 +53,7 @@
                             <label for="name" class="col-sm-3 col-form-label">{{ __('Nama') }}</label>
 
                             <div class="col-md-6">
-                                <input id="name" type="text" class="form-control @error('name') is-invalid @enderror" name="name" value="{{ Auth::user()->name }}"  autocomplete="name" autofocus placeholder="Name">
+                                <input id="name" type="text" class="form-control @error('name') is-invalid @enderror" name="name" value="{{ Auth::user()->name }}"  autocomplete="name" autofocus placeholder="My Name">
 
                                 <!-- @error('name')
                                     <span class="invalid-feedback" role="alert">
@@ -67,7 +67,7 @@
                             <label for="email" class="col-sm-3 col-form-label">{{ __('Alamat E-mail') }}</label>
 
                             <div class="col-md-6">
-                                <input id="email" type="email" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ Auth::user()->email }}"  autocomplete="email" placeholder="Email">
+                                <input id="email" type="email" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ Auth::user()->email }}"  autocomplete="email" placeholder="My Email">
 
                                 <!-- @error('email')
                                     <span class="invalid-feedback" role="alert">
@@ -81,7 +81,7 @@
                             <label for="current_password" class="col-sm-3 col-form-label">{{ __('Password Lama') }}</label>
 
                             <div class="col-md-6">
-                                <input id="current_password" type="password" class="form-control @error('current_password') is-invalid @enderror" name="current_password" autocomplete="current_password" placeholder="Current Password">
+                                <input id="current_password" type="password" class="form-control @error('current_password') is-invalid @enderror" name="current_password" autocomplete="current_password" placeholder="My Current Password">
 
                                 <!-- @error('current_password')
                                     <span class="invalid-feedback" role="alert">
@@ -95,7 +95,7 @@
                             <label for="new_password" class="col-sm-3 col-form-label">{{ __('Password Baru') }}</label>
 
                             <div class="col-md-6">
-                                <input id="new_password" type="password" class="form-control" name="new_password" autocomplete="new_password" placeholder="New Password">
+                                <input id="new_password" type="password" class="form-control" name="new_password" autocomplete="new_password" placeholder="My New Password">
                             </div>
                         </div>
 

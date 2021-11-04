@@ -11,8 +11,8 @@
         </div>
         <div class="col-sm-6 p-md-0 justify-content-sm-end mt-2 mt-sm-0 d-flex">
             <ol class="breadcrumb">
-                <li class="breadcrumb-item"><a href="{{ url('/PemesananTable')}}">Daftar Permintaan Pemesanaan</a></li>
-                <li class="breadcrumb-item active"><a href="javascript:void(0)">Tong Sampah Permintaan Pemesanaan</a></li>
+                <li class="breadcrumb-item"><a href="{{ url('/PemesananTable')}}">Daftar Order Masuk</a></li>
+                <li class="breadcrumb-item active"><a href="javascript:void(0)">Tong Sampah Order Masuk</a></li>
             </ol>
         </div>
     </div>
@@ -53,7 +53,7 @@
             <br>
             <div class="card">
                 <div class="card-header text-white bg-danger">
-                    <h4 class="card-title">Daftar Perminaan Pemesanan yang Dibuang</h4>
+                    <h4 class="card-title">Daftar Order Masuk yang Dibuang</h4>
                 </div>
                 <div class="card-body">
                     <div class="table-responsive">
@@ -86,7 +86,7 @@
                                        
 
                                         <span data-placement="top" data-toggle="tooltip2"  title="Delete Request Order Permanent">
-                                            <a href="#exampleModalCenter{{ $mod->id_pemesanan }}" class="btn btn-danger shadow btn-xs sharp" data-toggle="modal" data-target="#exampleModalCenter{{ $mod->id_pemesanan }}" ><i class="fa fa-trash"></i></a>
+                                            {{-- <a href="#exampleModalCenter{{ $mod->id_pemesanan }}" class="btn btn-danger shadow btn-xs sharp" data-toggle="modal" data-target="#exampleModalCenter{{ $mod->id_pemesanan }}" ><i class="fa fa-trash"></i></a> --}}
                                         </span>
 
                                             <div class="modal fade" id="exampleModalCenter{{ $mod->id_pemesanan }}">

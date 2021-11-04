@@ -80,7 +80,7 @@
                                        
 
                                         <span data-placement="top" data-toggle="tooltip2"  title="Delete Category Permanent">
-                                            <a href="#exampleModalCenter{{ $mod->id }}" class="btn btn-danger shadow btn-xs sharp" data-toggle="modal" data-target="#exampleModalCenter{{ $mod->id }}" ><i class="fa fa-trash"></i></a>
+                                            {{-- <a href="#exampleModalCenter{{ $mod->id }}" class="btn btn-danger shadow btn-xs sharp" data-toggle="modal" data-target="#exampleModalCenter{{ $mod->id }}" ><i class="fa fa-trash"></i></a> --}}
                                         </span>
 
                                             <div class="modal fade" id="exampleModalCenter{{ $mod->id }}">

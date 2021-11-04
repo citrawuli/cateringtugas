@@ -125,6 +125,10 @@
             tabsize: 2,
             height: 100
         }).summernote('code', value);
+
+        
+        $('#single-select').select2();
+        
     });
 </script>
 @endsection

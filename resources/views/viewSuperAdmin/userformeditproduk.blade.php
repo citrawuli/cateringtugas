@@ -12,7 +12,7 @@
         <div class="col-sm-6 p-md-0 justify-content-sm-end mt-2 mt-sm-0 d-flex">
             <ol class="breadcrumb">
                 <li class="breadcrumb-item"><a href="{!! url('/ProductTable'); !!}">Daftar Produk</a></li>
-                <li class="breadcrumb-item active"><a href="javascript:void(0)">Formulir Edit Produk</a></li>
+                <li class="breadcrumb-item active"><a href="javascript:void(0)">Formulir Produk</a></li>
             </ol>
         </div>
     </div>
@@ -42,7 +42,7 @@
 	<div class="col-lg-12">
 		<div class="card">
             <div class="card-header">
-                <h4 class="card-title">Edit Product</h4>
+                <h4 class="card-title">Edit Produk</h4>
             </div>
             <div class="card-body">
                 <div class="basic-form">
@@ -50,9 +50,9 @@
                         @csrf
 
                         <div class="form-group row">
-                            <label for="category_name" class="col-sm-3 col-form-label">Category*</label>
+                            <label for="category_name" class="col-sm-3 col-form-label">Kategori (*)</label>
                             <div class="col-md-6">
-                              <select class="form-control "  id="single-select" required=""  name="category_name" autofocus>
+                              <select class="form-control select2"  id="single-select" required=""  name="category_name" autofocus>
                 
                                 @foreach($category as $cat)
                                     @if ($produk->id_kategori == $cat->id)
@@ -66,7 +66,7 @@
                         </div>
 
                         <div class="form-group row">
-                            <label for="product" class="col-sm-3 col-form-label">{{ __('Product Name*') }}</label>
+                            <label for="product" class="col-sm-3 col-form-label">{{ __('Nama Produk (*)') }}</label>
 
                             <div class="col-md-6">
                                 <input id="product" type="text" class="form-control @error('product_name') is-invalid @enderror" name="product_name" required  placeholder="Product Name" value="{{ $produk->nama_produk }}">
@@ -74,7 +74,7 @@
                         </div>
 
                         <div class="form-group row">
-                            <label for="product" class="col-sm-3 col-form-label">{{ __('Product Type') }}</label>
+                            <label for="product" class="col-sm-3 col-form-label">{{ __('Tipe Produk') }}</label>
 
                             <div class="col-md-6">
                                 <input id="product" type="text" class="form-control @error('product_type') is-invalid @enderror" name="product_type"  placeholder="Product Type (optional)" value="{{ $produk->tipe_produk }}">
@@ -82,7 +82,7 @@
                         </div>
 
                         <div class="form-group row">
-                            <label for="product" class="col-sm-3 col-form-label">{{ __('Product Description') }}</label>
+                            <label for="product" class="col-sm-3 col-form-label">{{ __('Deskripsi Produk') }}</label>
 
                             <div class="col-md-6">
                                 <textarea rows="5" class="form-control @error('product_desc') is-invalid @enderror" name="product_desc"  placeholder="Type your description here (optional)" value="{{ $produk->deskripsi_produk }}"></textarea>
@@ -91,7 +91,7 @@
                         </div>
 
                         <div class="form-group row">
-                            <label for="product" class="col-sm-3 col-form-label">{{ __('Product Price*') }}</label>
+                            <label for="product" class="col-sm-3 col-form-label">{{ __('Harga Produk (*)') }}</label>
 
                             <div class="col-md-6">
                                 <div class="input-group mb-3">
@@ -109,7 +109,7 @@
                         <div class="form-group row mb-0">
                             <div class="col-md-6 offset-md-4">
                                 <button type="submit" class="btn btn-primary">
-                                    {{ __('Edit Product') }}
+                                    {{ __('Edit Produk') }}
                                 </button>
                             </div>
                         </div>
@@ -142,6 +142,8 @@ $(document).ready(function(){
         var value=$('#hproduct').cleanVal();
         $('#hproduct').val(value);
     });
+
+    $('.select2').select2();
 });
 </script>
 @endsection

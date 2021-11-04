@@ -1302,15 +1302,15 @@ class SuperAdminController extends Controller
                 function ($attribute, $value, $fail) use ($user) {
                     if (!Hash::check($value, $user->password)) {
                         $fail('Mohon memasukkan password lama yang benar');
-                        dd($request->all(),$user->password);
+                        // dd($request->all(),$user->password);
                     }
                 }
             ],
             'new_password' => [
                 'sometimes', 'nullable', 'min:8', 'different:current_password','required_with:current_password'
             ],
-            'name' => ['sometimes','nullable', 'string', 'max:50'],
-            'email' => ['sometimes','nullable', 'string', 'email', 'max:50', 'unique:users,email,'.$user->id.',id'],
+            'name' => ['required','nullable', 'string', 'max:50'],
+            'email' => ['required','nullable', 'string', 'email', 'max:50', 'unique:users,email,'.$user->id.',id'],
         ],
         [
             'new_password.different' => 'Password baru harus berbeda dengan password lama',
@@ -1325,8 +1325,6 @@ class SuperAdminController extends Controller
         $model->name = $request->input('name');
         $model->email = $request->input('email');
         $model->password = Hash::make($request->input('new_password'));
-        // $model->alamat_user = $request->input('role');
-        // $model->ponsel_user = $request->input('role');
         $model->touch();
         $model->save();
         Session::flash('message', "Data profil pengguna berhasil diubah");
