@@ -61,8 +61,8 @@
                 </div>
                 <br>
                 <div class="btn-group btn-group-sm" style="margin-left: 5%; margin-right:5%">
-                    <button id="belumlunas" class="btn light btn-dark filter">Belum Lunas</button>
-                    <button id="lunas" class="btn light btn-light filter">Lunas</button>
+                    <button id="belumlunas" class="btn light btn-dark filter">Belum Bayar Penuh</button>
+                    <button id="lunas" class="btn light btn-light filter">Bayar Penuh</button>
                     <button id="semuatagihan" class="btn light btn-secondary filter">Semua Tagihan</button>
                     <button id="notverified" class="btn light btn-warning filter">Belum Diverifikasi!!!</button>
                     <button id="verified" class="btn light btn-info filter">Diverifikasi</button>
@@ -151,7 +151,7 @@
                                         @endforeach
                                         {{-- <p>Total {{ $total }}</p>                  --}}
                                         @if ($order->total_transaksi > $total)
-                                            <span class="badge light badge-danger"><i class="fa fa-circle text-danger mr-1"></i>Belum Lunas</span>
+                                            <span class="badge light badge-danger"><i class="fa fa-circle text-danger mr-1"></i>Belum Bayar Penuh</span>
                                             @foreach ($order->payments as $payid  )
                                             @if ($payid->status_bayar == '1' )
                                                 <span class="badge light badge-info"><i class="fa text-info mr-1"></i><span style="display: none">_</span>Diverifikasi </span>
@@ -160,7 +160,7 @@
                                             @endif                
                                         @endforeach
                                         @elseif($total >= $order->total_transaksi )
-                                            <span class="badge light badge-success"><i class="fa fa-circle text-success mr-1"></i><span style="display: none">_</span>Lunas</span>
+                                            <span class="badge light badge-success"><i class="fa fa-circle text-success mr-1"></i>Bayar Penuh</span>
                                             @foreach ($order->payments as $payid  )
                                                 @if ($payid->status_bayar == '1' )
                                                     <span class="badge light badge-info"><i class="fa text-info mr-1"></i><span style="display: none">_</span>Diverifikasi </span>
@@ -229,15 +229,15 @@ $(document).ready(function(){
     });
 
     $('#belumlunas').on('click', function () {
-        dataTable.columns(4).search("Belum Lunas", true, false, true).draw();
+        dataTable.columns(4).search("Belum Bayar Penuh", true, false, true).draw();
     });
 
     $('#lunas').on('click', function () {
-        dataTable.columns(4).search("_Lunas", true, false, true).draw();
+        dataTable.columns(4).search("Bayar Penuh", true, false, true).draw();
     });
 
     $('#semuatagihan').on('click', function () {
-        dataTable.columns(4).search("_Lunas|Belum Lunas", true, false, true).draw();
+        dataTable.columns(4).search("Bayar Penuh|Belum Bayar Penuh", true, false, true).draw();
     });
 
     $('#notverified').on('click', function () {
