@@ -1173,16 +1173,24 @@ class SuperAdminController extends Controller
 
     public function orderDiterimaTable()
     {
-        $pemesanan = Pemesanan::with(['products'])->where('status_pemesanan', '2')->whereNull('pemesanan.deleted_at')->get();
-        $jumlahSudahBayar = Pembayaran::with('detpems')->where('status_bayar', '1')->whereNull('pembayaran.deleted_at')->get()->sum('jumlah_bayar');
+        $pemesanan = Pemesanan::where('status_pemesanan', '2')->whereNull('pemesanan.deleted_at')->get();
+        $jumlahSudahBayar = Pembayaran::with('detpems')->where('status_bayar', '1')->whereNull('pembayaran.deleted_at')->get();
+        $caristatus=Pemesanan::with(['payments'])->whereNull('pemesanan.deleted_at')->get();
+
+        // $jumlahSudahBayarID = DB::table('pembayaran')
+        //     ->leftJoin('pemesanan', 'pembayaran.id_pemesanan', '=', 'pemesanan.id_pemesanan')
+        //     ->where('status_bayar', '1')
+        //     ->groupBy('pembayaran.id_pemesanan')
+        //     ->whereNull('pembayaran.deleted_at')->get()->sum('jumlah_bayar');;
         
+           
         $page_title = 'Order Request Table';
         $page_description = 'Some description for the page';
         $logo = "teamo/images/aisyacatering_kontak_logo.png";
         $logoText = "teamo/images/aisya-catering-logo3.png";
         $action = __FUNCTION__;
         //dump($barang);        
-        return view('viewSuperAdmin.tableAcceptedOrder', compact('pemesanan', 'jumlahSudahBayar', 'page_title', 'page_description','action','logo','logoText'));
+        return view('viewSuperAdmin.tableAcceptedOrder', compact('pemesanan', 'caristatus', 'jumlahSudahBayar', 'page_title', 'page_description','action','logo','logoText'));
     }
 
     public function notyet($id){

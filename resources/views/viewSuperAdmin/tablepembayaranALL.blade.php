@@ -192,6 +192,17 @@
                                 </tr>
 @endforeach        
                             </tbody>
+                            <tfoot>
+                                <tr>
+                                    <th></th>
+                                    <th></th>
+                                    <th></th>
+                                    <th></th>
+                                    <th></th>
+                                    <th style="text-align:right">Jumlah Bayar:</th>
+                                    <th></th>
+                                </tr>
+                            </tfoot>
                         </table>
                     </div>
                 </div>  
@@ -295,9 +306,16 @@ $(document).ready(function(){
                 }, 0 );
  
             // Update footer
+            var numFormat = $.fn.dataTable.render.number( '\,', '.', 3, 'Rp' ).display;
             $( api.column( 5 ).footer() ).html(
-                'Rp'+pageTotal +' ( Rp'+ total +' total)'
+                // 'Laman Ini: '+numFormat(pageTotal) +'\r\n Seluruh Laman: '+ numFormat(total) +''
+                
+                'Total Pembayaran: '+ numFormat(total) +''
+                // 'Due '+ numFormat(total)
             );
+            // $( api.column( 5 ).footer() ).html(
+            //     'Laman Ini : Rp'+pageTotal +' ( Seluruh Laman : Rp'+ total +')'
+            // );
         },
         fixedHeader: {
             header: true,

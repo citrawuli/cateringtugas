@@ -64,6 +64,8 @@
                     <button id="belumlunas" class="btn light btn-dark filter">Belum Lunas</button>
                     <button id="lunas" class="btn light btn-light filter">Lunas</button>
                     <button id="semuatagihan" class="btn light btn-secondary filter">Semua Tagihan</button>
+                    <button id="notverified" class="btn light btn-warning filter">Belum Diverifikasi!!!</button>
+                    <button id="verified" class="btn light btn-info filter">Diverifikasi</button>
                 </div>
                 <br> 
                 <table border="0" cellspacing="5" cellpadding="5" style="margin-left: 5%; margin-right:5%">
@@ -137,10 +139,35 @@
                                     </td>
 
                                     <td>
-                                        @if ($order ->total_transaksi > $jumlahSudahBayar)
-                                            <span class="badge light badge-danger"><i class="fa fa-circle text-warning mr-1"></i>Belum Lunas</span>
-                                        @else
+                                        @php
+                                        $total = 0;
+                                        @endphp  
+
+                                        @foreach ($order->payments as $payid  )
+                                            {{-- {{ $payid->jumlah_bayar }} --}}
+                                            @php
+                                                $total += $payid->jumlah_bayar;
+                                            @endphp                            
+                                        @endforeach
+                                        {{-- <p>Total {{ $total }}</p>                  --}}
+                                        @if ($order->total_transaksi > $total)
+                                            <span class="badge light badge-danger"><i class="fa fa-circle text-danger mr-1"></i>Belum Lunas</span>
+                                            @foreach ($order->payments as $payid  )
+                                            @if ($payid->status_bayar == '1' )
+                                                <span class="badge light badge-info"><i class="fa text-info mr-1"></i><span style="display: none">_</span>Diverifikasi </span>
+                                            @elseif ($payid->status_bayar == '0' )
+                                                <span class="badge light badge-warning"><i class="fa text-warning mr-1"></i><span style="display: none">_</span>Belum diverifikasi!!! </span>
+                                            @endif                
+                                        @endforeach
+                                        @elseif($total >= $order->total_transaksi )
                                             <span class="badge light badge-success"><i class="fa fa-circle text-success mr-1"></i><span style="display: none">_</span>Lunas</span>
+                                            @foreach ($order->payments as $payid  )
+                                                @if ($payid->status_bayar == '1' )
+                                                    <span class="badge light badge-info"><i class="fa text-info mr-1"></i><span style="display: none">_</span>Diverifikasi </span>
+                                                @elseif ($payid->status_bayar == '0' )
+                                                    <span class="badge light badge-warning"><i class="fa text-warning mr-1"></i><span style="display: none">_</span>Belum Diverifikasi!!! </span>
+                                                @endif                
+                                            @endforeach
                                         @endif
                                     </td>
 
@@ -150,6 +177,7 @@
                                         <a href="{!! url('/LihatDetailOrder/'. $order->id_pemesanan); !!}" class="btn btn-secondary btn-xs btn-rounded">Lihat detail</a>
                                     </td>
                                 </tr>
+                                
                                 @endforeach        
                             </tbody>
                         </table>
@@ -211,6 +239,15 @@ $(document).ready(function(){
     $('#semuatagihan').on('click', function () {
         dataTable.columns(4).search("_Lunas|Belum Lunas", true, false, true).draw();
     });
+
+    $('#notverified').on('click', function () {
+        dataTable.columns(4).search("_Belum Diverifikasi!!!", true, false, true).draw();
+    });
+
+    $('#verified').on('click', function () {
+        dataTable.columns(4).search("_Diverifikasi", true, false, true).draw();
+    });
+
 
     $.ajaxSetup({ headers: { 'X-CSRF-TOKEN': jQuery('meta[name="csrf-token"]').attr('content') } });
     $('.notyet').on('click', function () {
