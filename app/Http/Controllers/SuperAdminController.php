@@ -1174,8 +1174,8 @@ class SuperAdminController extends Controller
     public function orderDiterimaTable()
     {
         $pemesanan = Pemesanan::where('status_pemesanan', '2')->whereNull('pemesanan.deleted_at')->get();
-        $jumlahSudahBayar = Pembayaran::with('detpems')->where('status_bayar', '1')->whereNull('pembayaran.deleted_at')->get();
-        $caristatus=Pemesanan::with(['payments'])->whereNull('pemesanan.deleted_at')->get();
+        // $jumlahSudahBayar = Pembayaran::with('detpems')->where('status_bayar', '1')->whereNull('pembayaran.deleted_at')->get();
+        // $caristatus=Pemesanan::with(['payments'])->whereNull('pemesanan.deleted_at')->get();
 
         // $jumlahSudahBayarID = DB::table('pembayaran')
         //     ->leftJoin('pemesanan', 'pembayaran.id_pemesanan', '=', 'pemesanan.id_pemesanan')
@@ -1190,7 +1190,7 @@ class SuperAdminController extends Controller
         $logoText = "teamo/images/aisya-catering-logo3.png";
         $action = __FUNCTION__;
         //dump($barang);        
-        return view('viewSuperAdmin.tableAcceptedOrder', compact('pemesanan', 'caristatus', 'jumlahSudahBayar', 'page_title', 'page_description','action','logo','logoText'));
+        return view('viewSuperAdmin.tableAcceptedOrder', compact('pemesanan', 'page_title', 'page_description','action','logo','logoText'));
     }
 
     public function notyet($id){
