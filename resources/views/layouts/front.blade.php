@@ -341,12 +341,12 @@
                                 <a href="{{url('/')}}" class="teamo-menu-item-title" title="Home">Home</a>
                                 <span class="toggle-submenu"></span>
                             </li>
-                            <li class="menu-item menu-item-has-children">
-                                <a href="gridproducts.html" class="teamo-menu-item-title" title="Shop">Shop</a>
-                                <span class="toggle-submenu"></span>
+                            <li class="menu-item">
+                                <a href="{{url('/catalogproduct')}}" class="teamo-menu-item-title" title="Shop">Shop</a>
+                                {{-- <span class="toggle-submenu"></span>
                                 <ul class="submenu">
                                     <li class="menu-item">
-                                        <a href="gridproducts.html">Grid Fullwidth</a>
+                                        <a href="{{url('gridprodTable')}}">Grid Fullwidth</a>
                                     </li>
                                     <li class="menu-item">
                                         <a href="gridproducts_leftsidebar.html">Grid Left sidebar</a>
@@ -357,7 +357,7 @@
                                     <li class="menu-item">
                                         <a href="listproducts.html">List</a>
                                     </li>
-                                </ul>
+                                </ul> --}}
                             </li>
                             <li class="menu-item  menu-item-has-children item-megamenu">
                                 <a href="#" class="teamo-menu-item-title" title="Paket">Paket</a>

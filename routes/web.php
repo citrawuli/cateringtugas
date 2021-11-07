@@ -31,6 +31,8 @@ Route::get('/kontak', [App\Http\Controllers\CatalogController::class, 'kontak'])
 Route::get('/tentangkami', function () {
     return view('layouts.tentangkami'); 
 }); //tentangkami
+Route::get('/catalogproduct', [App\Http\Controllers\HomeController::class, 'gridprodTable']); //katalog produk grid
+
 
 Auth::routes();
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home'); 

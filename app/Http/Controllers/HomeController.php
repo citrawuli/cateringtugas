@@ -72,12 +72,21 @@ class HomeController extends Controller
         ->get();
         // dd($bestpro);
         
-        $newarrival = DB::table('produk')->latest()->take(8)->get();
-        $produk = DB::table('produk')->get();
-        $galpro = DB::table('galeri_produk')->get();
+        $newarrival = DB::table('produk')->whereNull('produk.deleted_at')->latest()->take(8)->get();
+        $produk = DB::table('produk')->whereNull('produk.deleted_at')->get();
+        $galpro = DB::table('galeri_produk')->whereNull('galeri_produk.deleted_at')->get();
 
 
         return view('viewUser.mainCatalogue', compact('blog', 'bestpro', 'produk', 'galpro','newarrival')); 
+    }
+
+    public function gridprodTable()
+    {
+        $produk = DB::table('produk')->whereNull('produk.deleted_at')->latest()->paginate(12);
+        $galpro = DB::table('galeri_produk')->whereNull('galeri_produk.deleted_at')->get();
+        $newarrival = DB::table('produk')->whereNull('produk.deleted_at')->latest()->take(8)->get();
+
+        return view('layouts.gridproducttable', compact('produk', 'galpro', 'newarrival')); 
     }
 
    
