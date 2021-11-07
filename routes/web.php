@@ -17,10 +17,13 @@ use Illuminate\Support\Facades\Route;
 //     return view('welcome'); 
 // }); //home KATALOG
 
-Route::get('/', function () {
-    return view('viewUser.mainCatalogue'); 
-}); //home KATALOG
+// Route::get('/', function () {
 
+//     return view('viewUser.mainCatalogue'); 
+// }); //home KATALOG
+
+
+Route::get('/', [App\Http\Controllers\HomeController::class, 'mainCatalogue'])->name('mainCatalogue'); 
 // Route::get('/kontak', function () {
 //     return view('layouts.kontak'); 
 // }); //kontak
