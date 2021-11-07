@@ -151,7 +151,7 @@
                                         @endforeach
                                         {{-- <p>Total {{ $total }}</p>                  --}}
                                         @if ($order->total_transaksi > $total)
-                                            <span class="badge light badge-danger"><i class="fa fa-circle text-danger mr-1"></i>Belum Bayar Penuh</span>
+                                            <span class="badge light badge-danger"><i class="fa fa-circle text-danger mr-1"></i><span style="display: none">_</span>Belum Bayar Penuh</span>
                                             @foreach ($order->payments as $payid  )
                                             @if ($payid->status_bayar == '1' )
                                                 <span class="badge light badge-info"><i class="fa text-info mr-1"></i><span style="display: none">_</span>Diverifikasi </span>
@@ -160,7 +160,7 @@
                                             @endif                
                                         @endforeach
                                         @elseif($total >= $order->total_transaksi )
-                                            <span class="badge light badge-success"><i class="fa fa-circle text-success mr-1"></i>Bayar Penuh</span>
+                                            <span class="badge light badge-success"><i class="fa fa-circle text-success mr-1"><span style="display: none">_</span></i>Bayar Penuh</span>
                                             @foreach ($order->payments as $payid  )
                                                 @if ($payid->status_bayar == '1' )
                                                     <span class="badge light badge-info"><i class="fa text-info mr-1"></i><span style="display: none">_</span>Diverifikasi </span>
@@ -229,15 +229,15 @@ $(document).ready(function(){
     });
 
     $('#belumlunas').on('click', function () {
-        dataTable.columns(4).search("Belum Bayar Penuh", true, false, true).draw();
+        dataTable.columns(4).search("_Belum Bayar Penuh", true, false, true).draw();
     });
 
     $('#lunas').on('click', function () {
-        dataTable.columns(4).search("Bayar Penuh", true, false, true).draw();
+        dataTable.columns(4).search("_Bayar Penuh", true, false, true).draw();
     });
 
     $('#semuatagihan').on('click', function () {
-        dataTable.columns(4).search("Bayar Penuh|Belum Bayar Penuh", true, false, true).draw();
+        dataTable.columns(4).search("_Bayar Penuh|_Belum Bayar Penuh", true, false, true).draw();
     });
 
     $('#notverified').on('click', function () {
