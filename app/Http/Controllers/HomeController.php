@@ -11,13 +11,17 @@ class HomeController extends Controller
 {
     /**
      * Create a new controller instance.
-     *
+     * ini digunakan supaya langsung diarahkan ke login page
+     * jadi semua fungsi di bawah ini kalau mau dijalankan wajib ke middleware dulu
+     * kalau nggak mau gitu, ya dicomment aja okay :)
+     * jadi kalau beli produk, mending pakai... constructor baru... hmmm correct :)
      * @return void
      */
-    public function __construct()
-    {
-        $this->middleware('auth');
-    }
+    
+    // public function __construct()
+    // {
+    //     $this->middleware('auth');
+    // }
 
     /**
      * Show the application dashboard.
@@ -82,7 +86,9 @@ class HomeController extends Controller
 
     public function gridprodTable()
     {
-        $produk = DB::table('produk')->whereNull('produk.deleted_at')->latest()->paginate(12);
+        $produk = produk::with(['produks'])
+        ->whereNull('produk.deleted_at')->latest()->paginate(12);
+        
         $galpro = DB::table('galeri_produk')->whereNull('galeri_produk.deleted_at')->get();
         $newarrival = DB::table('produk')->whereNull('produk.deleted_at')->latest()->take(8)->get();
 

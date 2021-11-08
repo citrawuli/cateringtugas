@@ -33,9 +33,15 @@ Route::get('/tentangkami', function () {
 }); //tentangkami
 Route::get('/catalogproduct', [App\Http\Controllers\HomeController::class, 'gridprodTable']); //katalog produk grid
 
-
+//MIDDLEWARE NEED LOGIN
 Auth::routes();
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home'); 
+
+//CART NEED LOGIN
+Route::get('cart', [App\Http\Controllers\CartController::class, 'cart'])->name('cart');
+Route::get('add-to-cart/{id}', [App\Http\Controllers\CartController::class, 'addToCart'])->name('add.to.cart');
+Route::patch('update-cart', [App\Http\Controllers\CartController::class, 'update'])->name('update.cart');
+Route::delete('remove-from-cart', [App\Http\Controllers\CartController::class, 'remove'])->name('remove.from.cart');
 
 //COBA ROUTE
 Route::get('/coba', [App\Http\Controllers\SuperAdminController::class, 'dashboard_1']);

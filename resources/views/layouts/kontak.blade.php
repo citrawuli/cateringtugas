@@ -32,9 +32,10 @@
                                     <div class="form-contact">
                                         <div class="col-lg-8 no-padding">
                                             <div class="form-message">
-                                                <h2 class="title">
-                                                    Anda dapat melakukan pemesanan melalui...
-                                                </h2>
+                                                <mark>
+                                                    Punya pertanyaan sebelum melakukan pemesanan?<br>
+                                                    Anda dapat menghubungi kami melalui:
+                                                </mark><br>
                                                 
                                                 <a href="http://wa.me/6282123522472" target="_blank"class="btn light btn-success"><span class="btn-icon-right"><i
                                                     class="fa fa-whatsapp" style="margin-right: 10px;"></i></span>Whatsapp Business</a> 
@@ -44,11 +45,11 @@
                                                 
                                                 <a href="http://wa.me/6281235770707" target="_blank"class="btn light btn-success"><span class="btn-icon-right"><i
                                                     class="fa fa-whatsapp" style="margin-right: 10px;"></i></span>Whatsapp 2</a> 
-                                                
+                                                <br><p>Customer Service kami siap melayani Anda.</p> 
                                                 <div class="mapouter">
                                                     <br>
                                                     <div class="gmap_canvas">
-                                                        <iframe width="600" height="500" id="gmap_canvas" src="https://maps.google.com/maps?q=Jl.%20Kebonsari%20III%20No.28,%20Kebonsari,%20Kec.%20Jambangan,%20Kota%20Surabaya,%20Jawa%20Timur%2060233&t=k&z=13&ie=UTF8&iwloc=&output=embed" 
+                                                        <iframe width="600" height="400" id="gmap_canvas" src="https://maps.google.com/maps?q=Jl.%20Kebonsari%20III%20No.28,%20Kebonsari,%20Kec.%20Jambangan,%20Kota%20Surabaya,%20Jawa%20Timur%2060233&t=k&z=13&ie=UTF8&iwloc=&output=embed" 
                                                             frameborder="0" scrolling="no" marginheight="0" marginwidth="0"></iframe>
                                                         <a href="https://getasearch.com/fmovies"></a><br><style>.mapouter{position:relative;text-align:right;height:500px;width:600px;}</style>
                                                         <a href="https://www.embedgooglemap.net"></a><style>.gmap_canvas {overflow:hidden;background:none!important;height:500px;width:600px;}</style>
@@ -60,7 +61,7 @@
                                             <div class="form-contact-information">
                                                 <form action="#" class="teamo-contact-info">
                                                     <h2 class="title">
-                                                        Contact information
+                                                        Informasi Kontak
                                                     </h2>
                                                     <div class="info">
                                                         <div class="item address">
@@ -79,14 +80,14 @@
                                                                 (031) 828 1065
                                                                 </span>
                                                         </div>
-                                                        <div class="item email">
+                                                        {{-- <div class="item email">
                                                                 <span class="icon">
                                                                     
                                                                 </span>
                                                             <span class="text">
                                                                     info@teamooutfit.co.uk
                                                                 </span>
-                                                        </div>
+                                                        </div> --}}
                                                     </div>
                                                     <div class="socials">
                                                         <a  href="https://web.facebook.com/cateringaisyasby/" class="social-item" target="_blank">

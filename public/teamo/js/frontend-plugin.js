@@ -26,10 +26,10 @@ jQuery(document).ready(function ($) {
                 var $styles = [
                     {
                         stylers: [
-                            {hue: $hue},
-                            {invert_lightness: false},
-                            {saturation: $saturation},
-                            {lightness: 1},
+                            { hue: $hue },
+                            { invert_lightness: false },
+                            { saturation: $saturation },
+                            { lightness: 1 },
                             {
                                 featureType: "landscape.man_made",
                                 stylers: [{
@@ -40,55 +40,55 @@ jQuery(document).ready(function ($) {
                     }, {
                         "featureType": "all",
                         "elementType": "labels.text.fill",
-                        "stylers": [{"saturation": 36}, {"color": "#000000"}, {"lightness": 40}]
+                        "stylers": [{ "saturation": 36 }, { "color": "#000000" }, { "lightness": 40 }]
                     }, {
                         "featureType": "all",
                         "elementType": "labels.text.stroke",
-                        "stylers": [{"visibility": "on"}, {"color": "#000000"}, {"lightness": 16}]
+                        "stylers": [{ "visibility": "on" }, { "color": "#000000" }, { "lightness": 16 }]
                     }, {
                         "featureType": "all",
                         "elementType": "labels.icon",
-                        "stylers": [{"visibility": "off"}]
+                        "stylers": [{ "visibility": "off" }]
                     }, {
                         "featureType": "administrative",
                         "elementType": "geometry.fill",
-                        "stylers": [{"color": "#000000"}, {"lightness": 20}]
+                        "stylers": [{ "color": "#000000" }, { "lightness": 20 }]
                     }, {
                         "featureType": "administrative",
                         "elementType": "geometry.stroke",
-                        "stylers": [{"color": "#000000"}, {"lightness": 17}, {"weight": 1.2}]
+                        "stylers": [{ "color": "#000000" }, { "lightness": 17 }, { "weight": 1.2 }]
                     }, {
                         "featureType": "landscape",
                         "elementType": "geometry",
-                        "stylers": [{"color": "#000000"}, {"lightness": 20}]
+                        "stylers": [{ "color": "#000000" }, { "lightness": 20 }]
                     }, {
                         "featureType": "poi",
                         "elementType": "geometry",
-                        "stylers": [{"color": "#000000"}, {"lightness": 21}]
+                        "stylers": [{ "color": "#000000" }, { "lightness": 21 }]
                     }, {
                         "featureType": "road.highway",
                         "elementType": "geometry.fill",
-                        "stylers": [{"color": "#000000"}, {"lightness": 17}]
+                        "stylers": [{ "color": "#000000" }, { "lightness": 17 }]
                     }, {
                         "featureType": "road.highway",
                         "elementType": "geometry.stroke",
-                        "stylers": [{"color": "#000000"}, {"lightness": 29}, {"weight": 0.2}]
+                        "stylers": [{ "color": "#000000" }, { "lightness": 29 }, { "weight": 0.2 }]
                     }, {
                         "featureType": "road.arterial",
                         "elementType": "geometry",
-                        "stylers": [{"color": "#000000"}, {"lightness": 18}]
+                        "stylers": [{ "color": "#000000" }, { "lightness": 18 }]
                     }, {
                         "featureType": "road.local",
                         "elementType": "geometry",
-                        "stylers": [{"color": "#000000"}, {"lightness": 16}]
+                        "stylers": [{ "color": "#000000" }, { "lightness": 16 }]
                     }, {
                         "featureType": "transit",
                         "elementType": "geometry",
-                        "stylers": [{"color": "#000000"}, {"lightness": 19}]
+                        "stylers": [{ "color": "#000000" }, { "lightness": 19 }]
                     }, {
                         "featureType": "water",
                         "elementType": "geometry",
-                        "stylers": [{"color": "#000000"}, {"lightness": 17}]
+                        "stylers": [{ "color": "#000000" }, { "lightness": 17 }]
                     }
                 ];
             }
@@ -322,7 +322,7 @@ jQuery(document).ready(function ($) {
 
     // -------chosen----------------------------------------------------
 
-    $(".chosen-select").chosen({disable_search_threshold: 10});
+    $(".chosen-select").chosen({ disable_search_threshold: 10 });
     // ====================isotop========================
     function teamo_masonry() {
         var masonry = $('.masonry-grid').isotope({
@@ -428,7 +428,7 @@ jQuery(document).ready(function ($) {
             var tab_id = $(this).attr('href');
             var tab_animated = $(this).data('animate');
 
-            tab_animated = ( tab_animated == undefined || tab_animated == "" ) ? '' : tab_animated;
+            tab_animated = (tab_animated == undefined || tab_animated == "") ? '' : tab_animated;
             if (tab_animated == "") {
                 return false;
             }
@@ -437,7 +437,7 @@ jQuery(document).ready(function ($) {
 
                 var t = $(this);
                 var style = $(this).attr("style");
-                style = ( style == undefined ) ? '' : style;
+                style = (style == undefined) ? '' : style;
                 var delay = i * 400;
                 t.attr("style", style +
                     ";-webkit-animation-delay:" + delay + "ms;"
@@ -469,43 +469,8 @@ jQuery(document).ready(function ($) {
         }
     }
 
-    // ------------------------Quick view----------------------------------------
-    function quickview_popup() {
-        var window_size = parseFloat(jQuery('body').innerWidth());
-        window_size += kt_get_scrollbar_width();
-        if (window_size > 992) {
-            $(document).on('click', '.quick-wiew-button', function () {
-                $.magnificPopup.open({
-                    items: {
-                        src: '<div class="kt-popup-quickview "><div class="details-thumb"><div class="slider-product slider-for"><div class="details-item"><img src="assets/images/popup-quickview-item-1.jpg" alt="img"></div><div class="details-item"><img src="assets/images/popup-quickview-item-1.jpg" alt="img"></div><div class="details-item"><img src="assets/images/popup-quickview-item-1.jpg" alt="img"></div><div class="details-item"><img src="assets/images/popup-quickview-item-1.jpg" alt="img"></div></div><div class="slider-product-button slider-nav nav-center"><div class="details-item"><img src="assets/images/popup-quickview-item-1.jpg" alt="img"></div><div class="details-item"><img src="assets/images/popup-quickview-item-1.jpg" alt="img"></div><div class="details-item"><img src="assets/images/popup-quickview-item-1.jpg" alt="img"></div><div class="details-item"><img src="assets/images/popup-quickview-item-1.jpg" alt="img"></div></div></div><div class="details-infor"><h1 class="product-title">Areca palm</h1><div class="stars-rating"><div class="star-rating"><span class="star-5"></span></div><div class="count-star">(7)</div></div><div class="availability">availability:<a href="#">in Stock</a></div><div class="price"><span>€45</span></div><div class="product-details-description"><ul><li>Vestibulum tortor quam</li><li>Imported</li><li>Art.No. 06-7680</li></ul></div><div class="variations"><div class="attribute attribute_color"><div class="color-text text-attribute">Color:<span>White/</span><span>Black/</span><span>Teal/</span><span>Brown</span></div><div class="list-color list-item"><a href="#" class="color1"></a><a href="#" class="color2"></a><a href="#" class="color3 active"></a><a href="#" class="color4"></a></div></div><div class="attribute attribute_size"><div class="size-text text-attribute">Pots Size:</div><div class="list-size list-item"><a href="#" class="">xs</a><a href="#" class="">s</a><a href="#" class="active">m</a><a href="#" class="">l</a><a href="#" class="">xl</a><a href="#" class="">xxl</a></div></div></div><div class="group-button"><div class="yith-wcwl-add-to-wishlist"><div class="yith-wcwl-add-button"><a href="#">Add to Wishlist</a></div></div><div class="size-chart-wrapp"><div class="btn-size-chart"><a id="size_chart" href="assets/images/size-chart.jpg" class="fancybox"  target="_blank">View Size Chart</a></div></div><div class="quantity-add-to-cart"><div class="quantity"><div class="control"><a class="btn-number qtyminus quantity-minus" href="#">-</a><input type="text" data-step="1" data-min="0" value="1" title="Qty" class="input-qty qty" size="4"><a href="#" class="btn-number qtyplus quantity-plus">+</a></div></div><button class="single_add_to_cart_button button">Add to cart</button></div></div></div></div>',
-                        type: 'inline'
-                    }
-                });
-                slick_quickview_popup();
-                return false;
-            });
-        }
-    }
+    // // ------------------------Quick view----------------------------------------
 
-    function slick_quickview_popup() {
-        $('.slider-for').slick({
-            slidesToShow: 1,
-            slidesToScroll: 1,
-            arrows: false,
-            fade: true,
-            asNavFor: '.slider-nav'
-        });
-        $('.slider-nav').slick({
-            slidesToShow: 3,
-            slidesToScroll: 1,
-            asNavFor: '.slider-for',
-            dots: false,
-            focusOnSelect: true,
-            infinite: true,
-            prevArrow: '<i class="fa fa-angle-left" aria-hidden="true"></i>',
-            nextArrow: '<i class="fa fa-angle-right " aria-hidden="true"></i>',
-        });
-    }
 
     // --------------------------------BACK TO TOP-----------------------------
     $(window).on('scroll', function () {
@@ -517,7 +482,7 @@ jQuery(document).ready(function ($) {
         }
     });
     $(document).on('click', 'a.backtotop', function () {
-        $('html, body').animate({scrollTop: 0}, 800);
+        $('html, body').animate({ scrollTop: 0 }, 800);
     });
     //---------------------------Price filter----------------------
     $('.slider-range-price').each(function () {
@@ -555,13 +520,13 @@ jQuery(document).ready(function ($) {
         if (step === 'any' || step === '' || step === undefined || parseFloat(step) === 'NaN') step = 1;
         // Change the value
         if ($(this).is('.quantity-plus')) {
-            if (max && ( max == currentVal || currentVal > max )) {
+            if (max && (max == currentVal || currentVal > max)) {
                 $qty.val(max);
             } else {
                 $qty.val(currentVal + parseFloat(step));
             }
         } else {
-            if (min && ( min == currentVal || currentVal < min )) {
+            if (min && (min == currentVal || currentVal < min)) {
                 $qty.val(min);
             } else if (currentVal > 0) {
                 $qty.val(currentVal - parseFloat(step));
@@ -571,7 +536,7 @@ jQuery(document).ready(function ($) {
         $qty.trigger('change');
         e.preventDefault();
     });
-//------------------------EQUAL ELEM----------------------------
+    //------------------------EQUAL ELEM----------------------------
     function better_equal_elems() {
         setTimeout(function () {
             $('.equal-container').each(function () {
@@ -599,7 +564,7 @@ jQuery(document).ready(function ($) {
     $(window).on("resize", function () {
         better_equal_elems();
     });
-// ------------------owl-thumbs-----------------------------------------------
+    // ------------------owl-thumbs-----------------------------------------------
     init_carousel();
     function init_carousel() {
         //owl has thumbs 
@@ -739,10 +704,10 @@ jQuery(document).ready(function ($) {
                     container_offset = container.offset();
                     setTimeout(function () {
                         $('.main-menu .menu-item-has-children').each(function (index, element) {
-                            $(element).children('.mega-menu').css({'width': container_width + 'px'});
+                            $(element).children('.mega-menu').css({ 'width': container_width + 'px' });
                             var sub_menu_width = parseFloat($(element).children('.mega-menu').outerWidth());
                             var item_width = parseFloat($(element).outerWidth());
-                            $(element).children('.mega-menu').css({'left': '-' + (sub_menu_width / 2 - item_width / 2) + 'px'});
+                            $(element).children('.mega-menu').css({ 'left': '-' + (sub_menu_width / 2 - item_width / 2) + 'px' });
                             var container_left = container_offset.left;
                             var container_right = (container_left + container_width);
                             var item_left = $(element).offset().left;
@@ -750,12 +715,12 @@ jQuery(document).ready(function ($) {
                             var overflow_right = ((sub_menu_width / 2 + item_left) > container_right);
                             if (overflow_left) {
                                 var left = (item_left - container_left);
-                                $(element).children('.mega-menu').css({'left': -left + 'px'});
+                                $(element).children('.mega-menu').css({ 'left': -left + 'px' });
                             }
                             if (overflow_right && !overflow_left) {
                                 var left = (item_left - container_left);
-                                left = left - ( container_width - sub_menu_width );
-                                $(element).children('.mega-menu').css({'left': -left + 'px'});
+                                left = left - (container_width - sub_menu_width);
+                                $(element).children('.mega-menu').css({ 'left': -left + 'px' });
                             }
                         })
                     }, 100);
@@ -810,4 +775,4 @@ jQuery(document).ready(function ($) {
     teamo_countdown();
     teamo_init_menu_toggle();
     teamo_custom_scrollbar_header_nav();
-}); 
+});

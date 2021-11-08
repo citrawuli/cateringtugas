@@ -85,7 +85,7 @@
             <div class="row">
                 <div class="col-lg-3 col-sm-4 col-md-3 col-xs-7 col-ts-12 header-element">
                     <div class="logo">
-                        <a href="index.html">
+                        <a href="{{url('/')}}">
                             <img src="{{ asset('teamo/images/aisya-catering-logo2.png') }}" alt="img">
                         </a>
                     </div>
@@ -120,109 +120,61 @@
                             <a href="javascript:void(0);" class="shopcart-icon" data-teamo="teamo-dropdown">
                                 Cart
                                 <span class="count">
-										0
+                                    {{ count((array) session('cart')) }}
 										</span>
                             </a>
                             <div class="shopcart-description teamo-submenu">
                                 <div class="content-wrap">
-                                    <h3 class="title">Shopping Cart</h3>
+                                    <h3 class="title">Keranjang</h3>
                                     <ul class="minicart-items">
-                                        <li class="product-cart mini_cart_item">
-                                            <a href="#" class="product-media">
-                                                <img src="{{ asset('teamo/images/item-minicart-1.jpg') }}" alt="img">
-                                            </a>
-                                            <div class="product-details">
-                                                <h5 class="product-name">
-                                                    <a href="#">European Pan Palm</a>
-                                                </h5>
-                                                <div class="variations">
-															<span class="attribute_color">
-																<a href="#">Black</a>
-															</span>
-                                                    ,
-                                                    <span class="attribute_size">
-																<a href="#">300ml</a>
-															</span>
-                                                </div>
-                                                <span class="product-price">
-															<span class="price">
-																<span>$45</span>
-															</span>
-														</span>
-                                                <span class="product-quantity">
-															(x1)
-														</span>
-                                                <div class="product-remove">
-                                                    <a href=""><i class="fa fa-trash-o" aria-hidden="true"></i></a>
-                                                </div>
-                                            </div>
-                                        </li>
-                                        <li class="product-cart mini_cart_item">
-                                            <a href="#" class="product-media">
-                                                <img src="{{ asset('teamo/images/item-minicart-2.jpg')}}" alt="img">
-                                            </a>
-                                            <div class="product-details">
-                                                <h5 class="product-name">
-                                                    <a href="#">Soap Ferns Solutions</a>
-                                                </h5>
-                                                <div class="variations">
-															<span class="attribute_color">
-																<a href="#">Black</a>
-															</span>
-                                                    ,
-                                                    <span class="attribute_size">
-																<a href="#">300ml</a>
-															</span>
-                                                </div>
-                                                <span class="product-price">
-															<span class="price">
-																<span>$45</span>
-															</span>
-														</span>
-                                                <span class="product-quantity">
-															(x1)
-														</span>
-                                                <div class="product-remove">
-                                                    <a href=""><i class="fa fa-trash-o" aria-hidden="true"></i></a>
-                                                </div>
-                                            </div>
-                                        </li>
-                                        <li class="product-cart mini_cart_item">
-                                            <a href="#" class="product-media">
-                                                <img src="{{ asset('teamo/images/item-minicart-3.jpg')}}" alt="img">
-                                            </a>
-                                            <div class="product-details">
-                                                <h5 class="product-name">
-                                                    <a href="#">Ferns Solutions Soap</a>
-                                                </h5>
-                                                <div class="variations">
-															<span class="attribute_color">
-																<a href="#">Black</a>
-															</span>
-                                                    ,
-                                                    <span class="attribute_size">
-																<a href="#">300ml</a>
-															</span>
-                                                </div>
-                                                <span class="product-price">
-															<span class="price">
-																<span>$45</span>
-															</span>
-														</span>
-                                                <span class="product-quantity">
-															(x1)
-														</span>
-                                                <div class="product-remove">
-                                                    <a href=""><i class="fa fa-trash-o" aria-hidden="true"></i></a>
-                                                </div>
-                                            </div>
-                                        </li>
+                                        @php 
+                                            $total = 0 
+                                        @endphp
+                                        @foreach((array) session('cart') as $id => $details)
+                                            @php $total += $details['price'] * $details['quantity'] @endphp
+                                        @endforeach
+
+                                        @if(session('cart'))
+                                            @foreach(session('cart') as $id => $details)
+                                                <li class="product-cart mini_cart_item" data-id="{{ $id }}">
+                                                    <a href="#" class="product-media">
+                                                        <img src="{{ asset('teamo/images/item-minicart-1.jpg') }}" alt="img">
+                                                    </a>
+                                                    <div class="product-details">
+                                                        <h5 class="product-name">
+                                                            <a href="#">{{ $details['name'] }}</a>
+                                                        </h5>
+                                                        <div class="variations">
+                                                                    <span class="attribute_color">
+                                                                        <a href="#">Black</a>
+                                                                    </span>
+                                                            ,
+                                                            <span class="attribute_size">
+                                                                        <a href="#">300ml</a>
+                                                                    </span>
+                                                        </div>
+                                                        <span class="product-price">
+                                                                    <span class="price">
+                                                                        <span>@currency($details['price'])</span>
+                                                                    </span>
+                                                                </span>
+                                                        <span class="product-quantity">
+                                                                    (x{{ $details['quantity']}})
+                                                                </span>
+                                                        <div class="product-remove">
+                                                            <a href="" class="remove-from-cart"><i class="fa fa-trash-o " aria-hidden="true"></i></a>
+                                                        </div>
+                                                    </div>
+                                                
+                                                </li>
+                                            @endforeach
+                                        @endif
                                     </ul>
                                     <div class="subtotal">
                                         <span class="total-title">Subtotal: </span>
                                         <span class="total-price">
 													<span class="Price-amount">
-														$135
+														@currency($total)
 													</span>
 												</span>
                                     </div>
@@ -312,7 +264,7 @@
 								<span></span>
 								<span></span>
 							</span>
-                        <span class="text">SEE MORE</span>
+                        <span class="text">LIHAT LAINNYA</span>
                     </div>
                     <div class="block-content verticalmenu-content">
                         <ul class="teamo-nav-vertical vertical-menu teamo-clone-mobile-menu">
@@ -338,11 +290,11 @@
                     <div class="container-wapper">
                         <ul class="teamo-clone-mobile-menu teamo-nav main-menu " id="menu-main-menu">
                             <li class="menu-item">
-                                <a href="{{url('/')}}" class="teamo-menu-item-title" title="Home">Home</a>
+                                <a href="{{url('/')}}" class="teamo-menu-item-title" title="Home">Beranda</a>
                                 <span class="toggle-submenu"></span>
                             </li>
                             <li class="menu-item">
-                                <a href="{{url('/catalogproduct')}}" class="teamo-menu-item-title" title="Shop">Shop</a>
+                                <a href="{{url('/catalogproduct')}}" class="teamo-menu-item-title" title="Shop">Belanja</a>
                                 {{-- <span class="toggle-submenu"></span>
                                 <ul class="submenu">
                                     <li class="menu-item">
@@ -458,7 +410,7 @@
                             </li>
                             <li class="menu-item  menu-item-has-children">
                                 <a href="inblog_right-siderbar.html" class="teamo-menu-item-title"
-                                   title="Blogs">Blogs</a>
+                                   title="Blogs">Blog</a>
                                 <span class="toggle-submenu"></span>
                                 <ul class="submenu">
                                     <li class="menu-item menu-item-has-children">
@@ -745,6 +697,29 @@
 <script src="{{ asset('teamo/js/jquery.scrollbar.min.js') }}"></script>
 {{-- <script src='https://maps.googleapis.com/maps/api/js?key=AIzaSyC3nDHy1dARR-Pa_2jjPCjvsOR4bcILYsM'></script> --}}
 <script src="{{ asset('teamo/js/frontend-plugin.js') }}"></script>
+
+<script>
+    $(".remove-from-cart").click(function (e) {
+        e.preventDefault();
+  
+        var ele = $(this);
+  
+        if(confirm("Are you sure want to remove?")) {
+            $.ajax({
+                url: '{{ route('remove.from.cart') }}',
+                method: "DELETE",
+                data: {
+                    _token: '{{ csrf_token() }}', 
+                    id: ele.parents("li").attr("data-id")
+                },
+                success: function (response) {
+                    window.location.reload();
+                }
+            });
+        }
+    });
+  
+</script>
 @yield('script')
 </body>
 </html>
