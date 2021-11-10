@@ -204,7 +204,7 @@
                                         </div>
                                         <div class="product-thumb">
                                             <div class="thumb-inner">
-                                                <a href="#">
+                                                <a href="{{url('/viewproduct/'.$bestps->id)}}">
                                                     @foreach ($galpro->slice(0, 1) as $gal)
                                                         @if ($bestps->id == $gal->id_produk)
                                                         <span href="{!! url('/ecom-product-detail'); !!}">
@@ -304,7 +304,7 @@
                                         </div>
                                         <div class="product-thumb">
                                             <div class="thumb-inner">
-                                                <a href="#">
+                                                <a href="{{url('/viewproduct/'.$newarr->id)}}">
                                                     @foreach ($galpro->slice(0, 1) as $gal)
                                                         @if ($newarr->id == $gal->id_produk)
                                                         <span href="{!! url('/ecom-product-detail'); !!}">

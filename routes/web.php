@@ -44,6 +44,8 @@ Route::patch('update-cart', [App\Http\Controllers\CartController::class, 'update
 Route::delete('remove-from-cart', [App\Http\Controllers\CartController::class, 'remove'])->name('remove.from.cart');
 
 Route::get('/keranjangBelanja', [App\Http\Controllers\CartController::class, 'keranjangBelanja']);
+Route::get('/viewproduct/{id}', [App\Http\Controllers\HomeController::class, 'lihatproduk']);
+
 
 //COBA ROUTE
 Route::get('/coba', [App\Http\Controllers\SuperAdminController::class, 'dashboard_1']);

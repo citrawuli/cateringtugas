@@ -6,7 +6,7 @@
             <div class="breadcrumb-trail breadcrumbs">
                 <ul class="trail-items breadcrumb">
                     <li class="trail-item trail-begin">
-                        <a href="">
+                        <a href="{{url('/')}}">
 								<span>
 									Home
 								</span>
@@ -109,12 +109,12 @@
                                 </table>
                             </form>
                             <div class="control-cart">
-                                <button class="button btn-continue-shopping">
-                                    Continue Shopping
-                                </button>
-                                <button class="button btn-cart-to-checkout">
+                                <a class="button btn-continue-shopping" href="{{ URL::previous() }}">
+                                    Kembali Belanja
+                                </a>
+                                <a class="button btn-cart-to-checkout" href="{{url('/checkout')}}">
                                     Checkout
-                                </button>
+                                </a>
                             </div>
                         </div>
                     </div>

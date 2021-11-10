@@ -91,7 +91,7 @@ class HomeController extends Controller
     {
         $produk = produk::
         join('kategori_produk','kategori_produk.id','=','produk.id_kategori')
-        ->select('kategori_produk.*','produk.*')
+        ->select('kategori_produk.nama_kategori','produk.*')
         ->whereNull('produk.deleted_at')->orderBy('produk.created_at', 'desc')->paginate(12);
         
         
@@ -101,5 +101,15 @@ class HomeController extends Controller
         return view('layouts.gridproducttable', compact('produk', 'galpro', 'newarrival')); 
     }
 
+    public function lihatproduk($id)
+    {
+        $produk = produk::
+        join('kategori_produk','kategori_produk.id','=','produk.id_kategori')
+        ->select('kategori_produk.nama_kategori','produk.*')
+        ->where('produk.id',$id)->get();
+        
+        $galpro = DB::table('galeri_produk')->whereNull('galeri_produk.deleted_at')->get();
+        return view('layouts.viewproduct', compact('produk', 'galpro')); 
+    }
    
 }
