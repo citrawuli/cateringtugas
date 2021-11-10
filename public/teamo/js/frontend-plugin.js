@@ -749,7 +749,7 @@ jQuery(document).ready(function ($) {
         teamo_custom_scrollbar();
     });
     $(window).resize(function () {
-        quickview_popup();
+        // quickview_popup();
         teamo_masonry()
         kt_resizeMegamenu();
         teamo_remove_class_review();
@@ -758,7 +758,7 @@ jQuery(document).ready(function ($) {
     });
     $(window).load(function () {
         newletter_popup();
-        quickview_popup();
+        // quickview_popup();
         teamo_mobile_block();
         teamo_remove_class_review();
         teamo_custom_scrollbar()

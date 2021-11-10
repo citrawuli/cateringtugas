@@ -121,8 +121,9 @@
                                 Cart
                                 <span class="count">
                                     {{ count((array) session('cart')) }}
-										</span>
+                                </span>
                             </a>
+                            
                             <div class="shopcart-description teamo-submenu">
                                 <div class="content-wrap">
                                     <h3 class="title">Keranjang</h3>
@@ -146,11 +147,11 @@
                                                         </h5>
                                                         <div class="variations">
                                                                     <span class="attribute_color">
-                                                                        <a href="#">Black</a>
+                                                                        {{-- <a href="#">{{ $details['categoryname'] }}</a> --}}
                                                                     </span>
-                                                            ,
+                                                            {{-- , --}}
                                                             <span class="attribute_size">
-                                                                        <a href="#">300ml</a>
+                                                                        {{-- <a href="#">300ml</a> --}}
                                                                     </span>
                                                         </div>
                                                         <span class="product-price">
@@ -179,7 +180,7 @@
 												</span>
                                     </div>
                                     <div class="actions">
-                                        <a class="button button-viewcart" href="shoppingcart.html">
+                                        <a class="button button-viewcart" href="{{url('/keranjangBelanja')}}">
                                             <span>View Bag</span>
                                         </a>
                                         <a href="checkout.html" class="button button-checkout">
@@ -648,7 +649,7 @@
             </a>
         </div> --}}
         <div class="footer-device-mobile-item device-home device-cart">
-            <a href="#">
+            <a href="{{url('/keranjangBelanja')}}">
 					<span class="icon">
 						<i class="fa fa-shopping-basket" aria-hidden="true"></i>
 						<span class="count-icon">

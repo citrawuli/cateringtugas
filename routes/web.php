@@ -43,6 +43,8 @@ Route::get('add-to-cart/{id}', [App\Http\Controllers\CartController::class, 'add
 Route::patch('update-cart', [App\Http\Controllers\CartController::class, 'update'])->name('update.cart');
 Route::delete('remove-from-cart', [App\Http\Controllers\CartController::class, 'remove'])->name('remove.from.cart');
 
+Route::get('/keranjangBelanja', [App\Http\Controllers\CartController::class, 'keranjangBelanja']);
+
 //COBA ROUTE
 Route::get('/coba', [App\Http\Controllers\SuperAdminController::class, 'dashboard_1']);
 

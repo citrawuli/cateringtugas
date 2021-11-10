@@ -116,7 +116,7 @@
                                                     <a href="#">Add to Wishlist</a>
                                                 </div>
                                             </div> --}}
-                                            <a href="#" class="button quick-wiew-button">Quick View</a>
+                                            <a href="#" class="button quick-wiew-button" >Quick View</a>
                                             {{-- selengkapnya lihat di file frontend-plugin.js --}}
                                             <div class="loop-form-add-to-cart">
                                                 <a class="single_add_to_cart_button button" href="{{ route('add.to.cart', $prod->id) }}">Add to cart
@@ -138,6 +138,9 @@
                                                 (3)
                                             </div>
                                         </div> --}}
+                                        <div>
+                                            Menu:{{$prod->nama_kategori}}
+                                        </div>
                                         <div class="price">
                                             {{-- <del>
                                                 $65
@@ -146,6 +149,7 @@
                                                 @currency($prod->harga_produk)
                                             </ins>
                                         </div>
+                                        
                                     </div>
                                 </div>
                             </div>
@@ -180,11 +184,9 @@
 
  // ------------------------Quick view----------------------------------------
 //  var produk = <?php echo json_encode($produk);?>;
- function quickview_popup() {
-        var window_size = parseFloat(jQuery('body').innerWidth());
-        window_size += kt_get_scrollbar_width();
-        if (window_size > 992) {
+
             $(document).on('click', '.quick-wiew-button', function () {
+                alert('hai')
                 $.magnificPopup.open({
                     items: {
                         src: 
@@ -251,7 +253,7 @@
                 return false;
             });
         }
-    }
+    
 
     function slick_quickview_popup() {
         $('.slider-for').slick({

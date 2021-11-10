@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\blog;
 use App\Models\produk;
+use App\Models\kategoriProduk;
 use Illuminate\Support\Facades\DB;
 
 class HomeController extends Controller
@@ -75,19 +76,24 @@ class HomeController extends Controller
         ->take(8) // 8 best-selling products
         ->get();
         // dd($bestpro);
+        $kategori=kategoriProduk::get();
         
-        $newarrival = DB::table('produk')->whereNull('produk.deleted_at')->latest()->take(8)->get();
+        $newarrival = produk::join('kategori_produk','kategori_produk.id','=','produk.id_kategori')
+        ->select('kategori_produk.*','produk.*')->whereNull('produk.deleted_at')->orderBy('produk.created_at', 'desc')->take(8)->get();
         $produk = DB::table('produk')->whereNull('produk.deleted_at')->get();
         $galpro = DB::table('galeri_produk')->whereNull('galeri_produk.deleted_at')->get();
 
 
-        return view('viewUser.mainCatalogue', compact('blog', 'bestpro', 'produk', 'galpro','newarrival')); 
+        return view('viewUser.mainCatalogue', compact('blog', 'bestpro', 'produk', 'galpro','newarrival','kategori')); 
     }
 
     public function gridprodTable()
     {
-        $produk = produk::with(['produks'])
-        ->whereNull('produk.deleted_at')->latest()->paginate(12);
+        $produk = produk::
+        join('kategori_produk','kategori_produk.id','=','produk.id_kategori')
+        ->select('kategori_produk.*','produk.*')
+        ->whereNull('produk.deleted_at')->orderBy('produk.created_at', 'desc')->paginate(12);
+        
         
         $galpro = DB::table('galeri_produk')->whereNull('galeri_produk.deleted_at')->get();
         $newarrival = DB::table('produk')->whereNull('produk.deleted_at')->latest()->take(8)->get();

@@ -28,7 +28,7 @@ class CartController extends Controller
     public function addToCart($id)
     {
         $produk = produk::findOrFail($id);
-          
+        
         $cart = session()->get('cart', []);
   
         if(isset($cart[$id])) {
@@ -38,7 +38,6 @@ class CartController extends Controller
                 "name" => $produk->nama_produk,
                 "quantity" => 1,
                 "price" => $produk->harga_produk,
-                "image" => $produk->image
             ];
         }
           
@@ -53,7 +52,7 @@ class CartController extends Controller
             $cart = session()->get('cart');
             $cart[$request->id]["quantity"] = $request->quantity;
             session()->put('cart', $cart);
-            session()->flash('success', 'Cart updated successfully');
+            session()->flash('success', 'Keranjang belanja sukses diperbarui');
         }
     }
   
@@ -65,8 +64,13 @@ class CartController extends Controller
                 unset($cart[$request->id]);
                 session()->put('cart', $cart);
             }
-            session()->flash('success', 'Product removed successfully');
+            session()->flash('success', 'Produk berhasil dihapus');
         }
+    }
+
+    public function keranjangBelanja()
+    {
+        return view('layouts.cartpage');
     }
 
 
