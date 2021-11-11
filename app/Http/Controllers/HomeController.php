@@ -111,5 +111,27 @@ class HomeController extends Controller
         $galpro = DB::table('galeri_produk')->whereNull('galeri_produk.deleted_at')->get();
         return view('layouts.viewproduct', compact('produk', 'galpro')); 
     }
+
+    public function blog()
+    {
+        $blog = DB::table('blogs')
+        ->join('users', 'blogs.user_id', '=', 'users.id')
+        ->leftJoin('role_users', 'users.id', '=', 'role_users.user_id')
+        ->leftJoin('roles', 'role_users.role_id', '=', 'roles.id')
+        ->select('blogs.*', 'users.name','role_name')
+        ->whereNull('blogs.deleted_at')->orderBy('created_at', 'DESC')->paginate(6);
+        return view('layouts.gridblogtable', compact('blog')); 
+    }
+
+    public function readmoreblog($id)
+    {
+        $blogid = DB::table('blogs')
+        ->join('users', 'blogs.user_id', '=', 'users.id')
+        ->leftJoin('role_users', 'users.id', '=', 'role_users.user_id')
+        ->leftJoin('roles', 'role_users.role_id', '=', 'roles.id')
+        ->select('blogs.*', 'users.name','role_name')
+        ->where('id_blog','=', $id)->get();
+        return view('layouts.viewblogmore', compact('blogid')); 
+    }
    
 }

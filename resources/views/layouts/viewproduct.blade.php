@@ -10,12 +10,14 @@
                         <li class="trail-item trail-begin">
                             <a href="{{url('/')}}">Home</a>
                         </li>
+                        @foreach ( $produk as $prod)
                         <li class="trail-item">
-                            <a href="#">Cacti</a>
+                            <a href="#">{{$prod->nama_kategori}}</a>
                         </li>
                         <li class="trail-item trail-end active">
-                            Areca palm
+                            {{$prod->nama_produk}}
                         </li>
+                        @endforeach
                     </ul>
                 </div>
             </div>
@@ -45,17 +47,15 @@
                                     
                                     @foreach ($galpro->slice(1, 3) as $gal)
                                         @if ($prod->id == $gal->id_produk)
-                                            <img id="img_zoom" data-zoom-image="{{ asset($gal->foto) }}"
-                                            src="{{ asset($gal->foto) }}" alt="img">
                                             <a href="#" data-image="{{ asset($gal->foto) }}"
                                             data-zoom-image="{{ asset($gal->foto) }}" class="active">
-                                             <img src="{{ asset($gal->foto) }}"
-                                                  data-large-image="{{ asset($gal->foto) }}" alt="img">
-                                         </a>
+                                                <img src="{{ asset($gal->foto) }}"
+                                                data-large-image="{{ asset($gal->foto) }}" alt="img">
+                                            </a>
                                         @else
                                             <img src="{{ asset('teamo/images/details-item-1.jpg')}}" alt="img">
                                         @endif
-                                        <a href="#" class="btn-zoom open_qv"><i class="fa fa-search" aria-hidden="true"></i></a>
+                                        
                                     @endforeach
                                 </div>
                             </div>
@@ -128,7 +128,7 @@
                                 </div> --}}
                                 <div class="quantity-add-to-cart">
                                     @foreach((array) session('cart') as $id => $details)
-                                    {{-- {{dd($details)}} --}}
+                                    {{dd($prod->id, $id, session())}}
                                     <div class="quantity">
                                         <div class="control" data-id="{{$id}}">
                                             <a class="btn-number qtyminus quantity-minus" href="#">-</a>
@@ -137,7 +137,7 @@
                                             <a href="#" class="btn-number qtyplus quantity-plus">+</a>
                                         </div>
                                     </div>
-                                    <a class="single_add_to_cart_button button" href="{{ route('add.to.cart', $prod->id) }}">Tambah ke Keranjang</a>
+                                    <a class="single_add_to_cart_button button" href="{{ route('add.to.cart', $id) }}">Tambah ke Keranjang</a>
                                     @endforeach
                                 </div>
                             </div>
@@ -164,14 +164,14 @@
                                                 <td>Menu</td>
                                                 <td> {{$prod->nama_kategori}}</td>
                                             </tr>
-                                            <tr>
+                                            {{-- <tr>
                                                 <td>Color</td>
                                                 <td>White/ Black/ Teal/ Brown</td>
                                             </tr>
                                             <tr>
                                                 <td>Properties</td>
                                                 <td>Colorful Dress</td>
-                                            </tr>
+                                            </tr> --}}
                                         </table>
                                     </div>
                                     
@@ -181,7 +181,7 @@
                     </div>
                     
                     <div style="clear: left;"></div>
-                    <div class="related products product-grid">
+                    {{-- <div class="related products product-grid">
                         <h2 class="product-grid-title">You may also like</h2>
                         <div class="owl-products owl-slick equal-container nav-center"  data-slick ='{"autoplay":false, "autoplaySpeed":1000, "arrows":true, "dots":false, "infinite":true, "speed":800, "rows":1}' data-responsive='[{"breakpoint":"2000","settings":{"slidesToShow":3}},{"breakpoint":"1200","settings":{"slidesToShow":2}},{"breakpoint":"992","settings":{"slidesToShow":2}},{"breakpoint":"480","settings":{"slidesToShow":1}}]'>
                             <div class="product-item style-1">
@@ -198,7 +198,7 @@
                                     <div class="product-thumb">
                                         <div class="thumb-inner">
                                             <a href="#">
-                                                <img src="assets/images/product-item-1.jpg" alt="img">
+                                                <img src="{{asset('teamo/images/product-item-1.jpg')}}" alt="img">
                                             </a>
                                             <div class="thumb-group">
                                                 <div class="yith-wcwl-add-to-wishlist">
@@ -253,7 +253,7 @@
                                     <div class="product-thumb">
                                         <div class="thumb-inner">
                                             <a href="#">
-                                                <img src="assets/images/product-item-2.jpg" alt="img">
+                                                <img src="{{asset('teamo/images/product-item-2.jpg')}}" alt="img">
                                             </a>
                                             <div class="thumb-group">
                                                 <div class="yith-wcwl-add-to-wishlist">
@@ -308,7 +308,7 @@
                                     <div class="product-thumb">
                                         <div class="thumb-inner">
                                             <a href="#">
-                                                <img src="assets/images/product-item-3.jpg" alt="img">
+                                                <img src="{{asset('teamo/images/product-item-3.jpg')}}" alt="img">
                                             </a>
                                             <div class="thumb-group">
                                                 <div class="yith-wcwl-add-to-wishlist">
@@ -363,7 +363,7 @@
                                     <div class="product-thumb">
                                         <div class="thumb-inner">
                                             <a href="#">
-                                                <img src="assets/images/product-item-4.jpg" alt="img">
+                                                <img src="{{asset('teamo/images/product-item-4.jpg')}}" alt="img">
                                             </a>
                                             <div class="thumb-group">
                                                 <div class="yith-wcwl-add-to-wishlist">
@@ -405,7 +405,7 @@
                                 </div>
                             </div>
                         </div>
-                    </div>
+                    </div> --}}
                 </div>
                 @endforeach
             </div>

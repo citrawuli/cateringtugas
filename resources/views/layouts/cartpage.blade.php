@@ -56,8 +56,8 @@
                                             </td>
                                             <td class="product-name" data-title="Product">
                                                 <a href="#" class="title">{{ $details['name'] }}</a>
-                                                <span class="attributes-select attributes-color">Black,</span>
-                                                <span class="attributes-select attributes-size">XXL</span>
+                                                {{-- <span class="attributes-select attributes-color">Black,</span>
+                                                <span class="attributes-select attributes-size">XXL</span> --}}
                                             </td>
                                             <td class="product-quantity" data-title="Quantity">
                                                 <div class="quantity">

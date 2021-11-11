@@ -46,6 +46,8 @@ Route::delete('remove-from-cart', [App\Http\Controllers\CartController::class, '
 Route::get('/keranjangBelanja', [App\Http\Controllers\CartController::class, 'keranjangBelanja']);
 Route::get('/viewproduct/{id}', [App\Http\Controllers\HomeController::class, 'lihatproduk']);
 
+Route::get('/gridblog', [App\Http\Controllers\HomeController::class, 'blog']);
+Route::get('/readmoreblog', [App\Http\Controllers\HomeController::class, 'readmoreblog']);
 
 //COBA ROUTE
 Route::get('/coba', [App\Http\Controllers\SuperAdminController::class, 'dashboard_1']);

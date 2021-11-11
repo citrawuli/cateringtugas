@@ -409,39 +409,10 @@
                                     </div>
                                 </div>
                             </li>
-                            <li class="menu-item  menu-item-has-children">
-                                <a href="inblog_right-siderbar.html" class="teamo-menu-item-title"
+                            <li class="menu-item">
+                                <a href="{{ url('/gridblog')}}" class="teamo-menu-item-title"
                                    title="Blogs">Blog</a>
-                                <span class="toggle-submenu"></span>
-                                <ul class="submenu">
-                                    <li class="menu-item menu-item-has-children">
-                                        <a href="#" class="teamo-menu-item-title" title="Blog Style">Blog Style</a>
-                                        <span class="toggle-submenu"></span>
-                                        <ul class="submenu">
-                                            <li class="menu-item">
-                                                <a href="bloggrid.html">Grid</a>
-                                            </li>
-                                            <li class="menu-item">
-                                                <a href="bloglist.html">List</a>
-                                            </li>
-                                            <li class="menu-item">
-                                                <a href="bloglist-leftsidebar.html">List Sidebar</a>
-                                            </li>
-                                        </ul>
-                                    </li>
-                                    <li class="menu-item menu-item-has-children">
-                                        <a href="#" class="teamo-menu-item-title" title="Post Layout">Post Layout</a>
-                                        <span class="toggle-submenu"></span>
-                                        <ul class="submenu">
-                                            <li class="menu-item">
-                                                <a href="inblog_left-siderbar.html">Left Sidebar</a>
-                                            </li>
-                                            <li class="menu-item">
-                                                <a href="inblog_right-siderbar.html">Right Sidebar</a>
-                                            </li>
-                                        </ul>
-                                    </li>
-                                </ul>
+                                
                             </li>
                             <li class="menu-item">
                                 <a href=" {{ url('/kontak') }} " class="teamo-menu-item-title " title="About">Kontak</a>

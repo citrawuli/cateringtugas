@@ -118,7 +118,7 @@
 
                             @if(strlen($b->konten_blog) > 300)
                                 {{-- {!!substr($b->konten_blog,0,100)!!} --}}
-                                {{ substr($b->konten_blog,0,300) }}
+                                {!!substr($b->konten_blog,0,150) !!}
                                 <span class="read-more-show hide_content">More<i class="fa fa-angle-down"></i></span>
                                 <span class="read-more-content"> {!!substr($b->konten_blog,300,strlen($b->konten_blog))!!} 
                                 <span class="read-more-hide hide_content">Less<i class="fa fa-angle-up"></i></span></span>
