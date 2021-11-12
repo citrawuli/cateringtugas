@@ -47,8 +47,8 @@
                                                 @if(strlen($b->konten_blog) > 200)
                                                     {{-- {!!substr($b->konten_blog,0,100)!!} --}}
                                                     {{-- {!! substr($b->konten_blog,0,200) !!} --}}
-                                                    <span class="read-more-content"> {!!substr($b->konten_blog,200,strlen($b->konten_blog))!!} 
-                                                        <a href="{{url('/readmoreblog/'.$b->id_blog}}"> Read More...</a>
+                                                    <span class="read-more-content"> {!!substr($b->konten_blog,200,strlen($b->konten_blog))!!}</span>
+                                                    <a href="{{url('/readmoreblog').$b->id_blog}}">Read More... </a>
                                                 @else
                                                     {!! $b->konten_blog !!}
                                                 @endif
