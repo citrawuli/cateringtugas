@@ -143,7 +143,7 @@
                                                     </a>
                                                     <div class="product-details">
                                                         <h5 class="product-name">
-                                                            <a href="#">{{ $details['name'] }}</a>
+                                                            <a href="{{url('/viewproduct/'.$id)}}">{{ $details['name'] }}</a>
                                                         </h5>
                                                         <div class="variations">
                                                                     <span class="attribute_color">
