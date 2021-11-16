@@ -145,7 +145,7 @@ $(".update-cart").change(function (e) {
             }
         });
     });
-  
+    //override from front blade but yeah :D
     $(".remove-from-cart").click(function (e) {
         e.preventDefault();
         var ele = $(this);

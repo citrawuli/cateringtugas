@@ -52,7 +52,7 @@ class CartController extends Controller
             $cart = session()->get('cart');
             $cart[$request->id]["quantity"] = $request->quantity;
             session()->put('cart', $cart);
-            session()->flash('message', 'Keranjang belanja sukses diperbarui');
+            session()->flash('message', "Keranjang belanja sukses diperbarui Qty: $request->quantity");
         }
     }
   

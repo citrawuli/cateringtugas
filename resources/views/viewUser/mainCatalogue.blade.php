@@ -243,7 +243,7 @@
                                                             <a href="#">Add to Wishlist</a>
                                                         </div>
                                                     </div> --}}
-                                                    <a href="#" class="button quick-wiew-button">Quick View</a>
+                                                    <a href="{{url('/viewproduct/'.$bestps->id)}}" class="button quick-wiew-button">Quick View</a>
                                                     <div class="loop-form-add-to-cart">
                                                         <a class="single_add_to_cart_button button" href="{{ route('add.to.cart', $bestps->id) }}">Add to cart
                                                         </a>
@@ -343,7 +343,7 @@
                                                             <a href="#">Add to Wishlist</a>
                                                         </div>
                                                     </div> --}}
-                                                    <a href="#" class="button quick-wiew-button">Quick View</a>
+                                                    <a href="{{url('/viewproduct/'.$newarr->id)}}" class="button quick-wiew-button">Quick View</a>
                                                     <div class="loop-form-add-to-cart">
                                                         <a class="single_add_to_cart_button button" href="{{ route('add.to.cart', $newarr->id) }}">Add to cart
                                                         </a>

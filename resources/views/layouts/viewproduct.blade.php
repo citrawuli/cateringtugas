@@ -45,7 +45,7 @@
                                      data-autoplay="false" data-dots="false" data-loop="false" data-margin="10"
                                      data-responsive='{"0":{"items":3},"480":{"items":3},"600":{"items":3},"1000":{"items":3}}'>
                                     
-                                    @foreach ($galpro->slice(1,4) as $gal)
+                                    @foreach ($galpro->slice(0,4) as $gal)
                                         @if ($prod->id == $gal->id_produk)
                                             <a href="#" data-image="{{ asset($gal->foto) }}"
                                             data-zoom-image="{{ asset($gal->foto) }}" class="active">
@@ -53,7 +53,7 @@
                                                 data-large-image="{{ asset($gal->foto) }}" alt="img">
                                             </a>
                                         @else
-                                            <img src="{{ asset('teamo/images/details-item-1.jpg')}}" alt="img">
+                                            
                                         @endif
                                         
                                     @endforeach
@@ -114,6 +114,28 @@
                                     </div>
                                 </div>
                             </div> --}}
+
+                            @if (Session::has('message'))
+                            <div class="alert alert-success alert-dismissible show">                                   
+                                
+                                <strong>Success! </strong>{{ Session::get('message') }}
+                                <button type="button" class="close h-100" data-dismiss="alert" aria-label="Close"><span><i class="mdi mdi-close"></i></span>
+                                </button>
+                            </div>
+                            @endif
+                        
+                            @if ($errors->any())
+                                <div class="alert alert-danger alert-dismissible show">
+                                    <ul>
+                                        @foreach ($errors->all() as $error)
+                                            <li>{{ $error }}</li>
+                                        @endforeach
+                                    </ul>
+                                    <button type="button" class="close h-100" data-dismiss="alert" aria-label="Close"><span><i class="mdi mdi-close"></i></span>
+                                    </button>
+                                </div>
+                            @endif
+
                             <div class="group-button">
                                 {{-- <div class="yith-wcwl-add-to-wishlist">
                                     <div class="yith-wcwl-add-button">
@@ -138,7 +160,7 @@
                                                     <a href="#" class="btn-number qtyplus quantity-plus">+</a>
                                                 </div>
                                             </div>
-                                            <a class="single_add_to_cart_button button" href="{{ route('add.to.cart', $id) }}">Tambah ke Keranjang</a>
+                                            {{-- <a class="single_add_to_cart_button button" href="{{ route('add.to.cart', $id) }}">Tambah ke Keranjang</a> --}}
                                     
                                             
                                         @endif
@@ -157,9 +179,10 @@
                                                 <a href="#" class="btn-number qtyplus quantity-plus">+</a>
                                             </div>
                                         </div>
-                                        <a class="single_add_to_cart_button button" href="{{ route('add.to.cart', $prod->id) }}">Tambah ke Keranjang</a>
-                                    
+                                        
                                     @endif
+                                    <a class="single_add_to_cart_button button" href="{{ route('add.to.cart', $prod->id) }}">Tambah ke Keranjang</a>
+                                    
                                 </div>
                             </div>
 
