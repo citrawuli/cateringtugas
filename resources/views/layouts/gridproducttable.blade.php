@@ -59,7 +59,7 @@
                     </div>
 
                     @if (Session::has('message'))
-                    <div class="alert alert-success alert-dismissible fade show">                                   
+                    <div class="alert alert-success alert-dismissible show">                                   
                         
                         <strong>Success! </strong>{{ Session::get('message') }}
                         <button type="button" class="close h-100" data-dismiss="alert" aria-label="Close"><span><i class="mdi mdi-close"></i></span>
@@ -68,7 +68,7 @@
                     @endif
                 
                     @if ($errors->any())
-                        <div class="alert alert-danger alert-dismissible fade show">
+                        <div class="alert alert-danger alert-dismissible show">
                             <ul>
                                 @foreach ($errors->all() as $error)
                                     <li>{{ $error }}</li>

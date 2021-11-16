@@ -45,7 +45,7 @@
                                      data-autoplay="false" data-dots="false" data-loop="false" data-margin="10"
                                      data-responsive='{"0":{"items":3},"480":{"items":3},"600":{"items":3},"1000":{"items":3}}'>
                                     
-                                    @foreach ($galpro->slice(1, 3) as $gal)
+                                    @foreach ($galpro->slice(1,4) as $gal)
                                         @if ($prod->id == $gal->id_produk)
                                             <a href="#" data-image="{{ asset($gal->foto) }}"
                                             data-zoom-image="{{ asset($gal->foto) }}" class="active">
@@ -128,17 +128,38 @@
                                 </div> --}}
                                 <div class="quantity-add-to-cart">
                                     @foreach((array) session('cart') as $id => $details)
-                                    {{dd($prod->id, $id, session())}}
-                                    <div class="quantity">
-                                        <div class="control" data-id="{{$id}}">
-                                            <a class="btn-number qtyminus quantity-minus" href="#">-</a>
-                                            <input type="text" data-step="1" data-min="0" value="{{ $details['quantity'] }}" title="Qty"
-                                                   class="input-qty qty update-cart" id="update-cart"size="4" >
-                                            <a href="#" class="btn-number qtyplus quantity-plus">+</a>
-                                        </div>
-                                    </div>
-                                    <a class="single_add_to_cart_button button" href="{{ route('add.to.cart', $id) }}">Tambah ke Keranjang</a>
+                                        {{-- {{dd($prod->id, $id, session()->get('cart'))}} --}}
+                                        @if ($id==$prod->id) 
+                                            <div class="quantity">
+                                                <div class="control" data-id="{{$id}}">
+                                                    <a class="btn-number qtyminus quantity-minus" href="#">-</a>
+                                                    <input type="text" data-step="1" data-min="0" value="{{ $details['quantity'] }}" title="Qty"
+                                                        class="input-qty qty update-cart" id="update-cart"size="4" >
+                                                    <a href="#" class="btn-number qtyplus quantity-plus">+</a>
+                                                </div>
+                                            </div>
+                                            <a class="single_add_to_cart_button button" href="{{ route('add.to.cart', $id) }}">Tambah ke Keranjang</a>
+                                    
+                                            
+                                        @endif
+
+                                       
                                     @endforeach
+
+                                    @if (isset($cart[$prod->id]) == false && empty($cart[$prod->id]) == "")
+                                    {{-- Harus pakai empty, kalau gak gitu jadi nambah satu, why... kata stackoverflow-> 
+                                        Null and/or empty strings are still set if the variable is declared. --}}
+                                        <div class="quantity">
+                                            <div class="control" data-id="{{$prod->id}}">
+                                                <a class="btn-number qtyminus quantity-minus" href="#">-</a>
+                                                <input type="text" data-step="1" data-min="0" value="1" title="Qty"
+                                                    class="input-qty qty update-cart" id="update-cart"size="4" >
+                                                <a href="#" class="btn-number qtyplus quantity-plus">+</a>
+                                            </div>
+                                        </div>
+                                        <a class="single_add_to_cart_button button" href="{{ route('add.to.cart', $prod->id) }}">Tambah ke Keranjang</a>
+                                    
+                                    @endif
                                 </div>
                             </div>
 

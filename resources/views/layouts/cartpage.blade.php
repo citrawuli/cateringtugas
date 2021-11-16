@@ -147,8 +147,7 @@ $(".update-cart").change(function (e) {
     });
   
     $(".remove-from-cart").click(function (e) {
-    
-  
+        e.preventDefault();
         var ele = $(this);
             $.ajax({
                 url: '{{ route('remove.from.cart') }}',

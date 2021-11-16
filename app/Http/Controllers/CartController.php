@@ -42,7 +42,7 @@ class CartController extends Controller
         }
           
         session()->put('cart', $cart);
-        Session::flash('message', "Produk sukses ditambahkan ke keranjang!");
+        Session::flash('message', "Produk $produk->nama_produk sukses ditambahkan ke keranjang!");
         return Redirect::back();
     }
 
@@ -52,7 +52,7 @@ class CartController extends Controller
             $cart = session()->get('cart');
             $cart[$request->id]["quantity"] = $request->quantity;
             session()->put('cart', $cart);
-            session()->flash('success', 'Keranjang belanja sukses diperbarui');
+            session()->flash('message', 'Keranjang belanja sukses diperbarui');
         }
     }
   
@@ -64,7 +64,7 @@ class CartController extends Controller
                 unset($cart[$request->id]);
                 session()->put('cart', $cart);
             }
-            session()->flash('success', 'Produk berhasil dihapus');
+            session()->flash('message', 'Produk berhasil dihapus');
         }
     }
 

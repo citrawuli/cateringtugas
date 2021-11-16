@@ -676,7 +676,7 @@
   
         var ele = $(this);
   
-        if(confirm("Are you sure want to remove?")) {
+        // if(confirm("Are you sure want to remove?")) {
             $.ajax({
                 url: '{{ route('remove.from.cart') }}',
                 method: "DELETE",
@@ -688,7 +688,7 @@
                     window.location.reload();
                 }
             });
-        }
+        // }
     });
   
 </script>

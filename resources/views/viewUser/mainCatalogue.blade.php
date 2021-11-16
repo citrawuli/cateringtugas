@@ -166,6 +166,28 @@
                 </div>
             </div>
         </div>
+
+                    @if (Session::has('message'))
+                    <div class="alert alert-success alert-dismissible show">                                   
+                        
+                        <strong>Success! </strong>{{ Session::get('message') }}
+                        <button type="button" class="close h-100" data-dismiss="alert" aria-label="Close"><span><i class="mdi mdi-close"></i></span>
+                        </button>
+                    </div>
+                    @endif
+                
+                    @if ($errors->any())
+                        <div class="alert alert-danger alert-dismissible show">
+                            <ul>
+                                @foreach ($errors->all() as $error)
+                                    <li>{{ $error }}</li>
+                                @endforeach
+                            </ul>
+                            <button type="button" class="close h-100" data-dismiss="alert" aria-label="Close"><span><i class="mdi mdi-close"></i></span>
+                            </button>
+                        </div>
+                    @endif
+
         <div class="teamo-tabs  default rows-space-40">
             <div class="container">
                 <div class="tab-head">
