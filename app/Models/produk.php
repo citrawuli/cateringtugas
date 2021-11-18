@@ -39,7 +39,7 @@ class produk extends Model
 
     public function images()
     {
-        return $this->hasMany(galeriProduk::class);
+        return $this->hasMany(galeriProduk::class,  'id_produk');
     }
 
     public function pemesanans()

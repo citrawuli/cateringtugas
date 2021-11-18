@@ -108,7 +108,10 @@ class HomeController extends Controller
         ->select('kategori_produk.nama_kategori','produk.*')
         ->where('produk.id',$id)->get();
         
-        $galpro = DB::table('galeri_produk')->whereNull('galeri_produk.deleted_at')->get();
+        $galpro = DB::table('galeri_produk')
+        ->leftJoin('produk','galeri_produk.id_produk', '=','produk.id')
+        ->whereNull('galeri_produk.deleted_at')->get();
+
         return view('layouts.viewproduct', compact('produk', 'galpro')); 
     }
 

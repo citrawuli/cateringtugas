@@ -32,6 +32,6 @@ class galeriProduk extends Model
 
     public function product()
     {
-        return $this->belongsTo(produk::class);
+        return $this->belongsTo(produk::class, 'id');
     } 
 }

@@ -48,14 +48,43 @@
                                             <td class="product-remove remove-from-cart">
                                                 <a href="#" class="remove"></a>
                                             </td>
-                                            <td class="product-thumbnail">
+                                            <td class="product-thumbnail" style="max-width: 650px">
                                                 <a href="#">
-                                                    <img src="{{asset('teamo/images/cart-item-2.jpg')}}" alt="img"
-                                                        class="attachment-shop_thumbnail size-shop_thumbnail wp-post-image">
+                                                    @foreach ($produk as $prod)
+                                                    @if ($id == $prod->id)
+                                                        @if($prod->images()->exists())
+                                                            @foreach ($prod->images->slice(0,1) as  $gal)
+                                                                <img id="img_zoom" data-zoom-image="{{ asset($gal->foto) }}"
+                                                                src="{{ asset($gal->foto) }}" alt="img">
+                                                            {{-- <a href="#" class="btn-zoom open_qv"><i class="fa fa-search" aria-hidden="true"></i></a> --}}
+                                                            @endforeach
+                                                        @else
+                                                            <img src="{{asset('teamo/images/cart-item-2.jpg')}}" alt="img"
+                                                                class="attachment-shop_thumbnail size-shop_thumbnail wp-post-image">
+                                                        @endif
+                                                    @endif
+                                                    @endforeach
+
+                                                    {{-- ini salah@foreach ($galpro->slice(0, 1) as $gal)
+                                                        @if ($id == $gal->id_produk)
+                                                            <span href="{!! url('/ecom-product-detail'); !!}">
+                                                                <img class="mr-3 img-fluid rounded"  style="width: 650px;"  src="{{ asset($gal->foto) }}" alt="Gamber Produk">
+                                                            </span>
+                                                            @else
+                                                            <img src="{{asset('teamo/images/cart-item-2.jpg')}}" alt="img"
+                                                            class="attachment-shop_thumbnail size-shop_thumbnail wp-post-image">
+                                                        @endif
+                                                    @endforeach --}}
+                                                    
                                                 </a>
                                             </td>
                                             <td class="product-name" data-title="Product">
-                                                <a href="#" class="title">{{ $details['name'] }}</a>
+                                                <a href="{{url('/viewproduct/'.$id)}}" class="title">{{ $details['name'] }}</a>
+                                                @foreach ($produk as $prod)
+                                                    @if ($id == $prod->id)
+                                                    <span class="attributes-select attributes-color">{{$prod->nama_kategori}}</span>
+                                                    @endif
+                                                @endforeach
                                                 {{-- <span class="attributes-select attributes-color">Black,</span>
                                                 <span class="attributes-select attributes-size">XXL</span> --}}
                                             </td>

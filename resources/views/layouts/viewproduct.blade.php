@@ -24,21 +24,23 @@
         </div>
         <div class="row">
             <div class="content-area content-details full-width col-lg-9 col-md-8 col-sm-12 col-xs-12">
-                @foreach ( $produk as $prod)
+                @foreach ( $produk as $key=>$prod)
                 <div class="site-main">
                     <div class="details-product">
                         <div class="details-thumd">
                             <div class="image-preview-container image-thick-box image_preview_container">
+                                {{-- {{dd($prod)}} --}}
+                                @if($prod->images()->exists())
+                                @foreach ($prod->images->slice(0,1) as  $gal)
                                 
-                                @foreach ($galpro->slice(0, 1) as $gal)
-                                    @if ($prod->id == $gal->id_produk)
-                                        <img id="img_zoom" data-zoom-image="{{ asset($gal->foto) }}"
-                                        src="{{ asset($gal->foto) }}" alt="img">
-                                    @else
-                                        <img src="{{ asset('teamo/images/details-item-1.jpg')}}" alt="img">
-                                    @endif
+                                    <img id="img_zoom" data-zoom-image="{{ asset($gal->foto) }}"
+                                    src="{{ asset($gal->foto) }}" alt="img">
+                                    
                                     <a href="#" class="btn-zoom open_qv"><i class="fa fa-search" aria-hidden="true"></i></a>
                                 @endforeach
+                                @else
+                                <img src="{{ asset('teamo/images/details-item-1.jpg') }}" alt="img">
+                                @endif
                             </div>
                             <div class="product-preview image-small product_preview">
                                 <div id="thumbnails" class="thumbnails_carousel owl-carousel" data-nav="true"

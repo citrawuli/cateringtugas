@@ -66,16 +66,26 @@
                         </ul>
                     </div>
                 </div> -->
-                <ul class="header-user-links">
-                    <li>
-                        <a href="{{route('login')}}">Login</a>
-                    </li>
-                </ul>
-                <ul class="header-user-links">
-                    <li>
-                        <a href="{{route('register')}}">Register</a>
-                    </li>
-                </ul>
+
+                @if (Auth::check())
+                    <ul class="header-user-links">
+                        <li>
+                            <a href="{{route('login')}}"><span class="flaticon-user"></span> Akun</a>
+                        </li>
+                    </ul>
+                @else
+                    <ul class="header-user-links">
+                        <li>
+                            <a href="{{route('login')}}">Login</a>
+                        </li>
+                    </ul>
+                    <ul class="header-user-links">
+                        <li>
+                            <a href="{{route('register')}}">Daftar</a>
+                        </li>
+                    </ul>
+                @endif
+                
             </div>
         </div>
     </div>
@@ -141,6 +151,7 @@
                                                     <a href="#" class="product-media">
                                                         <img src="{{ asset('teamo/images/item-minicart-1.jpg') }}" alt="img">
                                                     </a>
+
                                                     <div class="product-details">
                                                         <h5 class="product-name">
                                                             <a href="{{url('/viewproduct/'.$id)}}">{{ $details['name'] }}</a>
@@ -183,7 +194,7 @@
                                         <a class="button button-viewcart" href="{{url('/keranjangBelanja')}}">
                                             <span>View Bag</span>
                                         </a>
-                                        <a href="checkout.html" class="button button-checkout">
+                                        <a href="{{url('/checkout')}}" class="button button-checkout">
                                             <span>Checkout</span>
                                         </a>
                                     </div>
@@ -191,9 +202,10 @@
                             </div>
                         </div>
                         <div class="block-account block-header teamo-dropdown">
-                            <a href="javascript:void(0);" data-teamo="teamo-dropdown">
+                           
+                            {{-- <a href="{{route('home')}}" data-teamo="teamo-dropdown">
                                 <span class="flaticon-user"></span>
-                            </a>
+                            </a> --}}
                             <div class="header-account teamo-submenu">
                                 <!-- <div class="header-user-form-tabs">
                                     <ul class="tab-link">

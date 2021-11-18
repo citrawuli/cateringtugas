@@ -100,7 +100,19 @@
                                 <div class="product-thumb">
                                     <div class="thumb-inner">
                                         <a href="{{url('/viewproduct/'.$prod->id)}}">
-                                            @foreach ($galpro->slice(0, 1) as $gal)
+                                            @if($prod->images()->exists())
+                                            @foreach ($prod->images->slice(0,1) as  $gal)
+                                
+                                                <img id="img_zoom" data-zoom-image="{{ asset($gal->foto) }}"
+                                                src="{{ asset($gal->foto) }}" alt="img">
+                                                
+                                                {{-- <a href="#" class="btn-zoom open_qv"><i class="fa fa-search" aria-hidden="true"></i></a> --}}
+                                            @endforeach
+                                            @else
+                                            <img src="{{ asset('teamo/images/product-item-1.jpg')}}" alt="img">
+                                            @endif
+
+                                            {{-- ini salah@foreach ($galpro->slice(0, 1) as $gal)
                                                 @if ($prod->id == $gal->id_produk)
                                                 <span href="{!! url('/ecom-product-detail'); !!}">
                                                     <img class="mr-3 img-fluid rounded"  style="max-width: 300px" src="{{ asset($gal->foto) }}" alt="Gamber Produk">
@@ -108,7 +120,7 @@
                                                 @else
                                                 <img src="{{ asset('teamo/images/product-item-1.jpg')}}" alt="img">
                                                 @endif
-                                            @endforeach
+                                            @endforeach --}}
                                         </a>
                                         <div class="thumb-group">
                                             {{-- <div class="yith-wcwl-add-to-wishlist">

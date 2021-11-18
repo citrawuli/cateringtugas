@@ -38,6 +38,7 @@ class CartController extends Controller
                 "name" => $produk->nama_produk,
                 "quantity" => 1,
                 "price" => $produk->harga_produk,
+                "image" => $produk->images,
             ];
         }
           
@@ -64,13 +65,28 @@ class CartController extends Controller
                 unset($cart[$request->id]);
                 session()->put('cart', $cart);
             }
-            session()->flash('message', 'Produk berhasil dihapus');
+            session()->flash('message', 'Produk berhasil dihapus dari keranjang!');
         }
     }
 
     public function keranjangBelanja()
     {
-        return view('layouts.cartpage');
+        $produk = produk::
+        join('kategori_produk','kategori_produk.id','=','produk.id_kategori')
+        ->select('kategori_produk.nama_kategori','produk.*')
+        ->whereNull('produk.deleted_at')->get();
+        // $galpro = DB::table('galeri_produk')->whereNull('galeri_produk.deleted_at')->get();
+        return view('layouts.cartpage', compact('produk'));
+    }
+
+    public function checkoutprod()
+    {
+        $produk = produk::
+        join('kategori_produk','kategori_produk.id','=','produk.id_kategori')
+        ->select('kategori_produk.nama_kategori','produk.*')
+        ->whereNull('produk.deleted_at')->get();
+        $galpro = DB::table('galeri_produk')->whereNull('galeri_produk.deleted_at')->get();
+        return view('layouts.checkoutpage',compact('galpro','produk'));
     }
 
 
