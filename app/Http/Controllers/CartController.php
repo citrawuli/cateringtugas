@@ -85,8 +85,7 @@ class CartController extends Controller
         join('kategori_produk','kategori_produk.id','=','produk.id_kategori')
         ->select('kategori_produk.nama_kategori','produk.*')
         ->whereNull('produk.deleted_at')->get();
-        $galpro = DB::table('galeri_produk')->whereNull('galeri_produk.deleted_at')->get();
-        return view('layouts.checkoutpage',compact('galpro','produk'));
+        return view('layouts.checkoutpage',compact('produk'));
     }
 
 

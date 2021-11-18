@@ -1,4 +1,10 @@
 @extends('layouts.front')
+@section('link')
+    <link rel="stylesheet" href="{{ asset('davur/vendor/bootstrap-daterangepicker/daterangepicker.css') }}">
+    <link rel="stylesheet" href="{{ asset('davur/vendor/clockpicker/css/bootstrap-clockpicker.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('davur/vendor/pickadate/themes/default.css') }}">
+    <link rel="stylesheet" href="{{ asset('davur/vendor/pickadate/themes/default.date.css') }}">
+@endsection
 
 @section('container')
 <div class="main-content main-content-checkout">
@@ -27,107 +33,52 @@
                         <div class="shipping-address">
                             <h3 class="title-form">
                                 Data Pemesan
+                                <small>(untuk dihubungi)</small>
                             </h3>
-                            <p class="form-row form-row-first">
-                                <label class="text">Nama Pemesan</label>
-                                {{-- <select title="country" data-placeholder="United Kingdom" class="chosen-select"
-                                tabindex="1">
-                                    <option value="{{ Auth::user()->id }}" selected readonly>{{ Auth::user()->name }}</option>
-                                </select> --}}
-                                <input id="nama_lengkap" type="text" class="input-text" readonly name="cariuser" value="{{ Auth::user()->name }}">
+                            <p>
+                                <small>(*) harus diisi</small>
                             </p>
+                            <p class="form-row form-row-first">
+                                <label class="text">Nama Pemesan (*)</label>
+                                <input id="nama_lengkap" type="text" class="input-text" name="cariuser" required value="{{ Auth::user()->name }}">
+                            </p>
+
+                            <p class="form-row form-row-last">
+                                <label class="text">Nomor Telepon (*)</label>
+                                <input id="nomor_telp" type="number" class="input-text @error('nomor_telp') is-invalid @enderror" required name="nomor_telp" placeholder="081xxx" value="{{ Auth::user()->ponsel_user }}">
+                            </p>
+
+                            <p class="form-row form-row-first">
+                                <label class="text">Untuk tanggal (*)</label>
+                                <input type="text"class="input-text datepicker-default @error('untuk_tanggal') is-invalid @enderror" required id="datepicker" name="untuk_tanggal" placeholder="pilih tanggal">
+                            </p>
+
+                            <p class="form-row form-row-last">
+                                <label class="text">Untuk jam</label>
+                                <span style="width: 100%;" class="input-group clockpicker" data-placement="bottom" data-align="top" data-autoclose="true">
+                                    <input type="text" class="input-text @error('untuk_jam') is-invalid @enderror" value="" name="untuk_jam" placeholder="pilih jam (opsional)"> 
+                                </span>
+                            </p>
+
+                            <p class="form-row form-row-col forn-row-col-1">
+                                <label class="text">Alamat Pengantaran (*)</label>
+                                <textarea rows="3" class="input-text @error('alamat_lengkap') is-invalid @enderror" name="alamat_lengkap" required value="{{ Auth::user()->alamat_user }}" placeholder="{{ Auth::user()->alamat_user }}"></textarea>
+                            </p>
+
+                            <p class="form-row forn-row-first">
+                                <label class="text">Pengambilan</label>
+                                <label class="radio-inline mr-3"><input type="radio" value="1" name="optionkirim"> Diambil</label>
+                                <label class="radio-inline mr-3"><input type="radio" value="2" name="optionkirim"> Dikirim Go-Car</label>
+                            </p>
+
+                            <div class="form-row forn-row-first">
+                                <label for="product" class="text">{{ ('Keterangan') }}</label>
+                                <textarea rows="3" class="input-text @error('keterangan') is-invalid @enderror" name="keterangan"  placeholder="Catatan tambahan untuk penjual (opsional)"></textarea>
+                                
+                            </div>
 
                             
-                            <p class="form-row form-row-last">
-                                <label class="text">Nomor Telepon</label>
-                                <input id="nomor_telp" type="number" class="input-text" name="nomor_telp" placeholder="081xxx">
-                                <small> nomor untuk dihubungi</small>
-                            </p>
 
-                            <p class="form-row form-row-first">
-                                <label class="text">Zip code</label>
-                                <input title="zip" type="text" class="input-text">
-                            </p>
-                            <p class="form-row forn-row-col forn-row-col-1">
-                                <label class="text">Country</label>
-                                <select title="country" data-placeholder="United Kingdom" class="chosen-select"
-                                        tabindex="1">
-                                    <option value="United States">United States</option>
-                                    <option value="United Kingdom">United Kingdom</option>
-                                    <option value="Afghanistan">Afghanistan</option>
-                                    <option value="Aland Islands">Aland Islands</option>
-                                    <option value="Albania">Albania</option>
-                                    <option value="Algeria">Algeria</option>
-                                    <option value="American Samoa">American Samoa</option>
-                                    <option value="Andorra">Andorra</option>
-                                    <option value="Angola">Angola</option>
-                                    <option value="Anguilla">Anguilla</option>
-                                    <option value="Antarctica">Antarctica</option>
-                                    <option value="Antigua and Barbuda">Antigua and Barbuda</option>
-                                    <option value="Argentina">Argentina</option>
-                                    <option value="Armenia">Armenia</option>
-                                    <option value="Aruba">Aruba</option>
-                                    <option value="Australia">Australia</option>
-                                    <option value="Austria">Austria</option>
-                                    <option value="Azerbaijan">Azerbaijan</option>
-                                    <option value="Bahamas">Bahamas</option>
-                                    <option value="Bahrain">Bahrain</option>
-                                    <option value="Bangladesh">Bangladesh</option>
-                                    <option value="Barbados">Barbados</option>
-                                    <option value="Belarus">Belarus</option>
-                                    <option value="Belgium">Belgium</option>
-                                    <option value="Belize">Belize</option>
-                                    <option value="Benin">Benin</option>
-                                    <option value="Bermuda">Bermuda</option>
-                                    <option value="Bhutan">Bhutan</option>
-                                </select>
-                            </p>
-                            <p class="form-row forn-row-col forn-row-col-2">
-                                <label class="text">State</label>
-                                <select title="state" data-placeholder="London" class="chosen-select" tabindex="1">
-                                    <option value="United States">London</option>
-                                    <option value="United Kingdom">tokyo</option>
-                                    <option value="Afghanistan">Seoul</option>
-                                    <option value="Aland Islands">Mexico city</option>
-                                    <option value="Albania">Mumbai</option>
-                                    <option value="Algeria">Delhi</option>
-                                    <option value="American Samoa">New York</option>
-                                    <option value="Andorra">Jakarta</option>
-                                    <option value="Angola">Sao Paulo</option>
-                                    <option value="Anguilla">Osaka</option>
-                                    <option value="Antarctica">Karachi</option>
-                                    <option value="Antigua and Barbuda">Matx-cơ-va</option>
-                                    <option value="Argentina">Toronto</option>
-                                    <option value="Armenia">Boston</option>
-                                </select>
-                            </p>
-                            <p class="form-row forn-row-col forn-row-col-3">
-                                <label class="text">City</label>
-                                <select title="city" data-placeholder="London" class="chosen-select" tabindex="1">
-                                    <option value="United States">London</option>
-                                    <option value="United Kingdom">tokyo</option>
-                                    <option value="Afghanistan">Seoul</option>
-                                    <option value="Aland Islands">Mexico city</option>
-                                    <option value="Albania">Mumbai</option>
-                                    <option value="Algeria">Delhi</option>
-                                    <option value="American Samoa">New York</option>
-                                    <option value="Andorra">Jakarta</option>
-                                    <option value="Angola">Sao Paulo</option>
-                                    <option value="Anguilla">Osaka</option>
-                                    <option value="Antarctica">Karachi</option>
-                                    <option value="Antigua and Barbuda">Matx-cơ-va</option>
-                                    <option value="Argentina">Toronto</option>
-                                    <option value="Armenia">Boston</option>
-                                </select>
-                            </p>
-                            <p class="form-row form-row-first">
-                                <label class="text">Zip code</label>
-                                <input title="zip" type="text" class="input-text">
-                            </p>
-                            <p class="form-row form-row-last">
-                                <label class="text">Address</label>
-                                <input title="address" type="text" class="input-text">
-                            </p>
                         </div>
                     </div>
                     <div class="row-col-2 row-col">
@@ -147,7 +98,22 @@
                                     <li class="product-item-order">
                                         <div class="product-thumb">
                                             <a href="#">
-                                                    @foreach ($galpro->slice(0, 1) as $gal)
+
+                                                @foreach ($produk as $prod)
+                                                    @if ($id == $prod->id)
+                                                        @if($prod->images()->exists())
+                                                            @foreach ($prod->images->slice(0,1) as  $gal)
+                                                                <img id="img_zoom" data-zoom-image="{{ asset($gal->foto) }}"
+                                                                src="{{ asset($gal->foto) }}" alt="img">
+                                                            {{-- <a href="#" class="btn-zoom open_qv"><i class="fa fa-search" aria-hidden="true"></i></a> --}}
+                                                            @endforeach
+                                                        @else
+                                                            <img src="{{asset('teamo/images/cart-item-2.jpg')}}" alt="img"
+                                                                class="attachment-shop_thumbnail size-shop_thumbnail wp-post-image">
+                                                        @endif
+                                                    @endif
+                                                    @endforeach
+                                                    {{-- @foreach ($galpro->slice(0, 1) as $gal)
                                                         @if ($id == $gal->id_produk)
                                                         <span href="{!! url('/ecom-product-detail'); !!}">
                                                             <img class="mr-3 img-fluid rounded"  style="width: 100px"  src="{{ asset($gal->foto) }}" alt="Gamber Produk">
@@ -156,7 +122,7 @@
                                                         <img src="{{asset('teamo/images/item-order1.jpg')}}" alt="img"
                                                         class="attachment-shop_thumbnail size-shop_thumbnail wp-post-image">
                                                         @endif
-                                                    @endforeach
+                                                    @endforeach --}}
                                             </a>
                                         </div>
                                         <div class="product-order-inner">
@@ -192,11 +158,24 @@
                 </div>
                 <div class="button-control">
                     <a href="{{url('/keranjangBelanja')}}" class="button btn-back-to-shipping">Kembali ke Keranjang</a>
-                    <a href="#" class="button button-payment">Pembayaran</a>
+                    <a href="#" class="button button-payment">Ya, Buat Pemesanan</a>
                 </div>
             </div>
            
         </div>
     </div>
 </div>
+@endsection
+
+
+@section('script')
+    <script src="{{ asset('davur/vendor/moment/moment.min.js') }}" defer="" type="text/javascript"></script>
+    <script src="{{ asset('davur/vendor/bootstrap-daterangepicker/daterangepicker.js') }}" defer="" type="text/javascript"></script>
+    <script src="{{ asset('davur/vendor/clockpicker/js/bootstrap-clockpicker.min.js') }}" defer="" type="text/javascript"></script>
+    <script src="{{ asset('davur/vendor/pickadate/picker.js') }}" defer="" type="text/javascript"></script>
+    <script src="{{ asset('davur/vendor/pickadate/picker.time.js') }}" defer="" type="text/javascript"></script>
+    <script src="{{ asset('davur/vendor/pickadate/picker.date.js') }}" defer="" type="text/javascript"></script>
+    <script src="{{ asset('davur/js/plugins-init/bs-daterange-picker-init.js') }}" defer="" type="text/javascript"></script>
+    <script src="{{ asset('davur/js/plugins-init/clock-picker-init.js') }}" defer="" type="text/javascript"></script>
+    <script src="{{ asset('davur/js/plugins-init/pickadate-init.js') }}" defer="" type="text/javascript"></script>
 @endsection

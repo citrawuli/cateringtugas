@@ -131,6 +131,7 @@ blockquote::before {
 	overflow: hidden;
 }
 input[type="text"],
+input[type="number"],
 input[type="email"],
 input[type="password"],
 input[type="tel"],
@@ -10308,7 +10309,7 @@ iframe {
 		height: 44px;
 		line-height: 44px;
 	}
-	input[type="text"], input[type="email"], input[type="password"], input[type="tel"], input[type="search"], input[type="url"], textarea, select {
+	input[type="text"], input[type="email"], input[type="password"], input[type="number"], input[type="tel"], input[type="search"], input[type="url"], textarea, select {
 		padding: 7px 10px;
 	}
 	.button, button, input[type="submit"] {
