@@ -5,9 +5,13 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\blog;
 use App\Models\produk;
+use App\Models\Pemesanan;
+use App\Models\detail_transaksi;
 use Illuminate\Support\Facades\DB;
 use Session;
 use Redirect;
+use Auth;
+use Carbon\Carbon;
 
 class CartController extends Controller
 {
@@ -35,6 +39,7 @@ class CartController extends Controller
             $cart[$id]['quantity']++;
         } else {
             $cart[$id] = [
+                "idpro" => $produk->id,
                 "name" => $produk->nama_produk,
                 "quantity" => 1,
                 "price" => $produk->harga_produk,
@@ -86,6 +91,77 @@ class CartController extends Controller
         ->select('kategori_produk.nama_kategori','produk.*')
         ->whereNull('produk.deleted_at')->get();
         return view('layouts.checkoutpage',compact('produk'));
+    }
+
+    public function storecheckout(Request $request)
+    {
+        
+        $validator = $request->validate([
+            'cariuser' => ['required', 'max:50'],
+            'nomor_telp' => ['required', 'max:15'],
+            'optionkirim' => ['required'],
+            'untuk_tanggal' => ['required'],
+            'alamat_lengkap' => ['max:100'],
+            'keterangan' => ['max:200'],
+        ],
+        [
+            'cariuser.required' => 'Nama harus diisi',
+            'nomor_telp.required' => 'Nomor ponsel harus diisi',
+            'optionkirim.required' => 'Metode pengambilan harus diisi',
+            'untuk_tanggal.required' => 'Untuk tanggal harus diisi',
+            'cariuser.max' => 'Nama harus dibawah 50 karakter',
+            'nomor_telp.max' => 'Nomor ponsel harus dibawah 15 karakter',
+            'alamat_lengkap.max' => 'Alamat pengiriman harus dibawah 100 karakter ',
+            'keterangan.max' => 'Keterangan harus dibawah 200 karakter',
+            ]
+        );
+        
+        // // dd($request->all());
+        
+        $a=Carbon::parse($request->input('untuk_tanggal'));
+
+        $ord = Pemesanan::create([
+            'user_id' =>  Auth::user()->id,
+            'nama_lengkap_pembeli'  =>  $request->cariuser,
+            'no_hp_pembeli' =>  $request->nomor_telp,
+            'alamat_lengkap_pembeli' =>  $request->alamat_lengkap,
+            'untuk_tanggal' =>  $a,
+            'untuk_jam' =>  $request->untuk_jam,
+            'pengambilan' =>  $request->optionkirim,
+            'keterangan' =>  $request->keterangan,
+            // 'discount' =>  $b,
+            // 'discount_inpercent' =>  $request->percent_off,
+            'total_transaksi' =>  $request->product_total,
+            'total_sub' =>  $request->sub_total_todb,
+            'status_pemesanan' =>  "1",
+            'status_progress' =>  "1",
+            'created_at' => \Carbon\Carbon::now(), 
+            'updated_at' => \Carbon\Carbon::now(), 
+        ]);
+        // // dd($request->all());
+        $lastId = Pemesanan::latest()->first()->id_pemesanan;
+
+        $cart = session()->get('cart');
+        foreach ($cart as $carts) {
+            $sub_totals = $carts['price'] * $carts['quantity'];
+            $qty = $carts['quantity'];
+            $idpro = $carts['idpro'];
+            if ($carts!= '') {
+                $detail = new detail_transaksi;
+                $detail->id_pemesanan = $lastId;
+                $detail->id_produk = $idpro; 
+                $detail->kuantitas = $qty;
+                $detail->sub_total = $sub_totals;
+                $detail->touch();
+                $detail->save();
+            }
+        }
+        session()->forget('cart');
+       
+        Session::flash('message', "Terimakasih, data orderan berhasil ditambahkan! 
+        Mohon mengecek histori pemesanan pada akun Anda untuk melihat status pemesanan. 
+        Admin kami akan menghubungi Anda pada nomor ponsel tertera untuk mengkonfirmasi pemesanan.");
+        return Redirect::back();
     }
 
 

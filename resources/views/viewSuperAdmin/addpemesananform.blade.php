@@ -93,7 +93,7 @@
                                     </div>
 
                                     <div class="form-group row">
-                                        <label for="alamat_lengkap" class="col-sm-3 col-form-label">{{ __('Alamat lengkap (*)') }}</label>
+                                        <label for="alamat_lengkap" class="col-sm-3 col-form-label">{{ __('Alamat lengkap') }}</label>
 
                                         <div class="col-md-6">
                                             <textarea rows="5" class="form-control @error('alamat_lengkap') is-invalid @enderror" name="alamat_lengkap"  placeholder="Delivery Full Address"></textarea>

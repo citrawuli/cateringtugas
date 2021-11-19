@@ -880,7 +880,7 @@ class SuperAdminController extends Controller
         }
     
         Session::flash('message', "Data orderan berhasil ditambahkan");
-        return Redirect::back();
+        return Redirect::back()->withInput($request->input());
     } 
 
     public function EditOrder($id)
