@@ -48,6 +48,18 @@ Route::get('/viewproduct/{id}', [App\Http\Controllers\HomeController::class, 'li
 Route::get('/checkout', [App\Http\Controllers\CartController::class, 'checkoutprod']);
 Route::post('/StoreCheckout', [App\Http\Controllers\CartController::class, 'storecheckout']); 
 
+Route::get('/Paket/COVID19', [App\Http\Controllers\HomeController::class, 'viewCOVID19']);
+Route::get('/Paket/Wedding', [App\Http\Controllers\HomeController::class, 'viewWedding']);
+Route::get('/Paket/Pemerintahan', [App\Http\Controllers\HomeController::class, 'viewPemerintahan']);
+Route::get('/Paket/Pabrik', [App\Http\Controllers\HomeController::class, 'viewPabrik']);
+Route::get('/Paket/TumpengHantaran', [App\Http\Controllers\HomeController::class, 'viewTumpengHantaran']);
+Route::get('/Paket/SnackBox', [App\Http\Controllers\HomeController::class, 'viewSnackBox']);
+Route::get('/Paket/RiceBox', [App\Http\Controllers\HomeController::class, 'viewRiceBox']);
+Route::get('/Paket/Aqiqah', [App\Http\Controllers\HomeController::class, 'viewAqiqah']);
+Route::get('/Paket/Ramadhan', [App\Http\Controllers\HomeController::class, 'viewRamadhan']);
+Route::get('/Paket/Lebaran', [App\Http\Controllers\HomeController::class, 'viewLebaran']);
+Route::get('/Brosur', [App\Http\Controllers\HomeController::class, '']);
+
 
 Route::get('/gridblog', [App\Http\Controllers\HomeController::class, 'blog']);
 Route::get('/readmoreblog/{id}', [App\Http\Controllers\HomeController::class, 'readmoreblog']);

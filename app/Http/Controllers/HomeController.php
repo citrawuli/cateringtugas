@@ -136,5 +136,26 @@ class HomeController extends Controller
         ->where('id_blog','=', $id)->get();
         return view('layouts.viewblogmore', compact('ablog')); 
     }
+
+    public function viewCOVID19()
+    {
+        $thiskategori=kategoriProduk::
+        join('produk','kategori_produk.id','=','produk.id_kategori')
+        ->where('kategori_produk.id', '=','K0007')
+        ->whereNull('produk.deleted_at')->orderBy('produk.created_at', 'desc')->paginate(12);
+        $newarrival = DB::table('produk')->whereNull('produk.deleted_at')->latest()->take(8)->get();
+        dd($thiskategori);
+        return view('layouts.viewCOVID19', compact('thiskategori','newarrival')); 
+    }
+    public function viewWedding()
+    {
+        $thiskategori=kategoriProduk::
+        join('produk','kategori_produk.id','=','produk.id_kategori')
+        ->where('kategori_produk.id', '=','K0010')
+        ->whereNull('produk.deleted_at')->orderBy('produk.created_at', 'desc')->paginate(12);
+        $newarrival = DB::table('produk')->whereNull('produk.deleted_at')->latest()->take(8)->get();
+        dd($thiskategori);
+        return view('layouts.viewWedding', compact('thiskategori','newarrival')); 
+    }
    
 }

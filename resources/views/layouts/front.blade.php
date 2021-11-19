@@ -334,16 +334,16 @@
                                                 <h2 class="widgettitle">Paket</h2>
                                                 <ul class="menu">
                                                     <li class="menu-item">
-                                                        <a href="shoppingcart.html">Paket COVID-19</a>
+                                                        <a href="{{url('/Paket/COVID19')}}">Paket COVID-19</a>
                                                     </li>
                                                     <li class="menu-item">
-                                                        <a href="checkout.html">Paket Wedding</a>
+                                                        <a href="{{url('/Paket/Wedding')}}">Paket Wedding</a>
                                                     </li>
                                                     <li class="menu-item">
-                                                        <a href="contact.html">Paket Pemerintahan</a>
+                                                        <a href="{{url('/Paket/Pemerintahan')}}">Paket Pemerintahan</a>
                                                     </li>
                                                     <li class="menu-item">
-                                                        <a href="404page.html">Paket Catering Pabrik</a>
+                                                        <a href="{{url('/Paket/Pabrik')}}">Paket Catering Pabrik</a>
                                                     </li>
                                                 </ul>
                                             </div>
@@ -355,13 +355,13 @@
                                                 <ul class="menu">
                                                     
                                                     <li class="menu-item">
-                                                        <a href="404page.html">Paket Tumpeng Hantaran</a>
+                                                        <a href="{{url('/Paket/TumpengHantaran')}}">Paket Tumpeng Hantaran</a>
                                                     </li>
                                                     <li class="menu-item">
-                                                        <a href="404page.html">Paket Snack Box</a>
+                                                        <a href="{{url('/Paket/SnackBox')}}">Paket Snack Box</a>
                                                     </li>
                                                     <li class="menu-item">
-                                                        <a href="404page.html">Paket Rice Box</a>
+                                                        <a href="{{url('/Paket/RiceBox')}}">Paket Rice Box</a>
                                                     </li>
                                                 </ul>
                                             </div>
@@ -372,32 +372,13 @@
                                                 <h2 class="widgettitle">Paket</h2>
                                                 <ul class="menu">
                                                     <li class="menu-item">
-                                                        <a href="404page.html">Paket Aqiqah</a>
+                                                        <a href="{{url('/Paket/Aqiqah')}}">Paket Aqiqah</a>
                                                     </li>
                                                     <li class="menu-item">
-                                                        <a href="404page.html">Paket Ramadhan</a>
+                                                        <a href="{{url('/Paket/Ramadhan')}}">Paket Ramadhan</a>
                                                     </li>
                                                     <li class="menu-item">
-                                                        <a href="404page.html">Paket Lebaran</a>
-                                                    </li>
-                                                </ul>
-                                            </div>
-                                        </div>
-
-                                        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-3 menu-page-item">
-                                            <div class="teamo-custommenu default">
-                                                <h2 class="widgettitle">Paket Khusus</h2>
-                                                <ul class="menu">
-                                                    <li class="menu-item">
-                                                        <a href="productdetails-fullwidth.html">Product Fullwidth</a>
-                                                    </li>
-                                                    <li class="menu-item">
-                                                        <a href="productdetails-leftsidebar.html">Product left
-                                                            sidebar</a>
-                                                    </li>
-                                                    <li class="menu-item">
-                                                        <a href="productdetails-rightsidebar.html">Product right
-                                                            sidebar</a>
+                                                        <a href="{{url('/Paket/Lebaran')}}">Paket Lebaran</a>
                                                     </li>
                                                 </ul>
                                             </div>
@@ -408,7 +389,7 @@
                                                 <h2 class="widgettitle">Brosur</h2>
                                                 <ul class="menu">
                                                     <li class="menu-item">
-                                                        <a href="productdetails-fullwidth.html">Download Brosur Disini</a>
+                                                        <a href="{{url('/Brosur')}}">Download Brosur Disini</a>
                                                     </li>
                                                 </ul>
                                             </div>
