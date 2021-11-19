@@ -128,13 +128,13 @@ class HomeController extends Controller
 
     public function readmoreblog($id)
     {
-        $blogid = DB::table('blogs')
+        $ablog = DB::table('blogs')
         ->join('users', 'blogs.user_id', '=', 'users.id')
         ->leftJoin('role_users', 'users.id', '=', 'role_users.user_id')
         ->leftJoin('roles', 'role_users.role_id', '=', 'roles.id')
         ->select('blogs.*', 'users.name','role_name')
         ->where('id_blog','=', $id)->get();
-        return view('layouts.viewblogmore', compact('blogid')); 
+        return view('layouts.viewblogmore', compact('ablog')); 
     }
    
 }

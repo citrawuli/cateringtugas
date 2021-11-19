@@ -39,7 +39,7 @@
                                         </div> --}}
                                         
                                         <h3 class="post-title">
-                                            <a href="#">{{$b->judul_blog}}</a>
+                                            <a href="{{url('/readmoreblog/'.$b->id_blog)}}">{{$b->judul_blog}}</a>
                                         </h3>
                                         <small>{{ date('d M Y, H:i:s', strtotime($b->updated_at)) }} - oleh {{$b->name}}</small>
                                         <div class="main-info-post">
@@ -48,7 +48,7 @@
                                                     {{-- {!!substr($b->konten_blog,0,100)!!} --}}
                                                     {{-- {!! substr($b->konten_blog,0,200) !!} --}}
                                                     <span class="read-more-content"> {!!substr($b->konten_blog,200,strlen($b->konten_blog))!!}</span>
-                                                    <a href="{{url('/readmoreblog').$b->id_blog}}">Read More... </a>
+                                                    <a href="{{url('/readmoreblog/'.$b->id_blog)}}">Read More... </a>
                                                 @else
                                                     {!! $b->konten_blog !!}
                                                 @endif

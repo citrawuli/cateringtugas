@@ -527,13 +527,13 @@
 										</span>
                                 </div>
                                 <h2 class="blog-title">
-                                    <a href="#">{{ $thisb->judul_blog}} </a>
+                                    <a href="{{url('/readmoreblog/'.$thisb->id_blog)}}">{{ $thisb->judul_blog}} </a>
                                 </h2>
                                 <div class="main-info-post">
                                     <p class="des">
                                         {{-- {!! substr($thisb->konten_blog,0,150) !!} --}}
                                     </p>
-                                    <a class="readmore" href="#">Read more</a>
+                                    <a class="readmore" href="{{url('/readmoreblog/'.$thisb->id_blog)}}">Read more</a>
                                 </div>
                             </div>
                         </div>
