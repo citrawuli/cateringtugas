@@ -64,6 +64,10 @@ Route::get('/Brosur', [App\Http\Controllers\HomeController::class, '']);
 Route::get('/gridblog', [App\Http\Controllers\HomeController::class, 'blog']);
 Route::get('/readmoreblog/{id}', [App\Http\Controllers\HomeController::class, 'readmoreblog']);
 
+Route::get('/edityourprofile', [App\Http\Controllers\UserController::class, 'edityourprofile']);
+Route::get('/seeyourorder', [App\Http\Controllers\UserController::class, 'seeyourorder']);
+Route::get('/seeyourpayment', [App\Http\Controllers\UserController::class, 'seeyourpayment']);
+
 //COBA ROUTE
 Route::get('/coba', [App\Http\Controllers\SuperAdminController::class, 'dashboard_1']);
 

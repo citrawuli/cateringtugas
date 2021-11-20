@@ -6427,7 +6427,7 @@ ul.list-products {
 	margin-top: 0;
 }
 .top-bar .header-language .teamo-language::after {
-	content: '|';
+	content: '';
 }
 .top-bar .header-user-links a {
 	line-height: 48px;
