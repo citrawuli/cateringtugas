@@ -98,7 +98,7 @@
                                 <p class="form-row form-row-col forn-row-col-1" >
                                     <span id="alamatsect">
                                         <label class="text">Alamat Pengantaran</label>
-                                        <small>Mohon menuliskan alamat pengantaran dengan jelas</small>
+                                        <small>Mohon menuliskan alamat pengantaran dengan jelas. Pengantaran akan dikenakan biaya tambahan terpisah.</small>
                                         <textarea rows="3" class="input-text @error('alamat_lengkap') is-invalid @enderror" name="alamat_lengkap" value="{{ Auth::user()->alamat_user }}" placeholder="">{{ Auth::user()->alamat_user }}</textarea>
                                     </span>
                                 </p>

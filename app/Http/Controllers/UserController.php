@@ -90,7 +90,30 @@ class UserController extends Controller
         $totalpemesanan = Pemesanan::with(['products'])->where('user_id', '=', $id)
             ->whereNull('pemesanan.deleted_at')->get()->count('id_pemesanan');
         $pemesanan = Pemesanan::with(['products'])->where('user_id', '=', $id)
-            ->whereNull('pemesanan.deleted_at')->get();
+            ->whereNull('pemesanan.deleted_at')->latest()->get();
+        $newpemesanan = Pemesanan::with(['products'])->where('user_id', '=', $id)->whereNull('pemesanan.deleted_at')
+            ->orderBy('pemesanan.created_at', 'desc')->take(1)->get();
+        return view('viewUser.seeyourorder', compact('totalpemesanan', 'pemesanan','newpemesanan'));
+    }
+
+    public function seeyourorderdetail($id)
+    {
+        $pemesanan = Pemesanan::with(['products'])
+            ->where('pemesanan.id_pemesanan', '=', $id)->whereNull('pemesanan.deleted_at')->get();
+        $bayar = Pembayaran::with('detpems')
+            ->where('pembayaran.id_pemesanan', $id)->whereNull('pembayaran.deleted_at')->get();
+        $jumlahSudahBayar = Pembayaran::with('detpems')
+            ->where('pembayaran.id_pemesanan', $id)->where('status_bayar', '1')->whereNull('pembayaran.deleted_at')->get()->sum('jumlah_bayar');
+        
+        $produk = DB::table('produk')->get();
+        $category = DB::table('kategori_produk')->get();
+        $galpro = DB::table('galeri_produk')->get();
+           
+
+
+
+        
+        return view('viewUser.seeyourorderdetail', compact('pemesanan', 'bayar', 'jumlahSudahBayar', 'produk', 'category', 'galpro'));
     }
 
     public function seeyourpayment()

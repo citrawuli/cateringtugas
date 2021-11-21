@@ -33,7 +33,7 @@
                                         <div class="col-lg-8 no-padding">
                                             <div class="form-message">
                                                 <mark>
-                                                    Punya pertanyaan sebelum melakukan pemesanan?<br>
+                                                    Punya pertanyaan dalam melakukan pemesanan?<br>
                                                     Anda dapat menghubungi kami melalui:
                                                 </mark><br>
                                                 
