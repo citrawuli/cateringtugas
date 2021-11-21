@@ -90,13 +90,13 @@ class UserController extends Controller
         $totalpemesanan = Pemesanan::with(['products'])->where('user_id', '=', $id)
             ->whereNull('pemesanan.deleted_at')->get()->count('id_pemesanan');
         $pemesanan = Pemesanan::with(['products'])->where('user_id', '=', $id)
-            ->whereNull('pemesanan.deleted_at')->latest()->get();
+            ->whereNull('pemesanan.deleted_at')->latest()->paginate(12);
         $newpemesanan = Pemesanan::with(['products'])->where('user_id', '=', $id)->whereNull('pemesanan.deleted_at')
             ->orderBy('pemesanan.created_at', 'desc')->take(1)->get();
         return view('viewUser.seeyourorder', compact('totalpemesanan', 'pemesanan','newpemesanan'));
     }
 
-    public function seeyourorderdetail($id)
+    public function seeyourdetailorder($id)
     {
         $pemesanan = Pemesanan::with(['products'])
             ->where('pemesanan.id_pemesanan', '=', $id)->whereNull('pemesanan.deleted_at')->get();
@@ -108,16 +108,28 @@ class UserController extends Controller
         $produk = DB::table('produk')->get();
         $category = DB::table('kategori_produk')->get();
         $galpro = DB::table('galeri_produk')->get();
-           
-
-
-
-        
         return view('viewUser.seeyourorderdetail', compact('pemesanan', 'bayar', 'jumlahSudahBayar', 'produk', 'category', 'galpro'));
+    }
+
+    public function edityourdetailorder($id)
+    {
+        $pemesanan = Pemesanan::with(['products'])
+            ->where('pemesanan.id_pemesanan', '=', $id)->whereNull('pemesanan.deleted_at')->get();
+        return view('viewUser.edityourdetailorder', compact('pemesanan'));
+    }
+
+    public function updateyourdetailorder(Request $request, $id)
+    {
+        # code...
     }
 
     public function seeyourpayment()
     {
-        # code...
+        $id=Auth::user()->id;
+        $bayar = User::rightJoin('pemesanan', 'pemesanan.user_id', '=', 'users.id')
+        ->rightJoin('pembayaran','pemesanan.id_pemesanan', '=', 'pembayaran.id_pemesanan')
+        ->whereNull('pembayaran.deleted_at')
+        ->where('users.id', '=', $id)->orderBy('pembayaran.created_at', 'desc')->paginate(12);
+        return view('viewUser.seeyourpayment', compact('bayar'));
     }
 }
