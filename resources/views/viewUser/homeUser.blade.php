@@ -38,6 +38,10 @@
                 <td style="width:25%"><strong>Tanggal terdaftar</strong></td>
                 <td> {{ date('d M Y, H:i:s', strtotime(Auth::user()->created_at)) ?? '-' }} </td>
             </tr>
+            <tr>
+                <td style="width:25%"><strong>Tanggal terakhir diedit</strong></td>
+                <td> {{ date('d M Y, H:i:s', strtotime(Auth::user()->updated_at)) ?? '-' }} </td>
+            </tr>
         </table>
         <br><br>
         <h4>RECORD</h4>

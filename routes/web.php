@@ -67,6 +67,8 @@ Route::get('/readmoreblog/{id}', [App\Http\Controllers\HomeController::class, 'r
 Route::get('/edityourprofile', [App\Http\Controllers\UserController::class, 'edityourprofile']);
 Route::get('/seeyourorder', [App\Http\Controllers\UserController::class, 'seeyourorder']);
 Route::get('/seeyourpayment', [App\Http\Controllers\UserController::class, 'seeyourpayment']);
+Route::post('/updateyouruprofile', [App\Http\Controllers\UserController::class, 'updateyouruprofile']);
+
 
 //COBA ROUTE
 Route::get('/coba', [App\Http\Controllers\SuperAdminController::class, 'dashboard_1']);
