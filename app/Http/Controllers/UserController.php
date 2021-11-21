@@ -31,9 +31,9 @@ class UserController extends Controller
 
     public function edityourprofile()
     {
-        $id = auth()->user()->id;
-        $user = DB::table('users')->where('users.id', $id)
-                ->whereNull('deleted_at')->first();
+        // $id = auth()->user()->id;
+        // $user = DB::table('users')->where('users.id', $id)
+        //         ->whereNull('deleted_at')->first();
         return view('viewUser.editUserProfile');
                 
     }
@@ -89,6 +89,8 @@ class UserController extends Controller
         $id=Auth::user()->id;
         $totalpemesanan = Pemesanan::with(['products'])->where('user_id', '=', $id)
             ->whereNull('pemesanan.deleted_at')->get()->count('id_pemesanan');
+        $pemesanan = Pemesanan::with(['products'])->where('user_id', '=', $id)
+            ->whereNull('pemesanan.deleted_at')->get();
     }
 
     public function seeyourpayment()

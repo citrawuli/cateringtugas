@@ -99,7 +99,7 @@
                                     <span id="alamatsect">
                                         <label class="text">Alamat Pengantaran</label>
                                         <small>Mohon menuliskan alamat pengantaran dengan jelas</small>
-                                        <textarea rows="3" class="input-text @error('alamat_lengkap') is-invalid @enderror" name="alamat_lengkap" value="{{ Auth::user()->alamat_user }}" placeholder="{{ Auth::user()->alamat_user }}"></textarea>
+                                        <textarea rows="3" class="input-text @error('alamat_lengkap') is-invalid @enderror" name="alamat_lengkap" value="{{ Auth::user()->alamat_user }}" placeholder="">{{ Auth::user()->alamat_user }}</textarea>
                                     </span>
                                 </p>
 

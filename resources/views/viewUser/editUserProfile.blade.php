@@ -76,7 +76,7 @@
                     
                     <div class="col-md-6">
                         <small>Mohon memasukkan alamat pengantaran dengan jelas. Alamat ini akan muncul setiap kali Anda melakukan checkout.</small>
-                        <textarea rows="3" class="form-control @error('alamat_lengkap') is-invalid @enderror" name="alamat_lengkap" value="{{ Auth::user()->alamat_user }}" placeholder="{{ Auth::user()->alamat_user }}"></textarea>
+                        <textarea rows="3" class="form-control @error('alamat_lengkap') is-invalid @enderror" name="alamat_lengkap" value="{{ Auth::user()->alamat_user }}" placeholder="">{{ Auth::user()->alamat_user }}</textarea>
                         <!-- @error('alamat_lengkap')
                             <span class="invalid-feedback" role="alert">
                                 <strong>{{ $message }}</strong>
