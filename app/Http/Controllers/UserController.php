@@ -9,6 +9,7 @@ use Illuminate\Support\Facades\Validator;
 use Session;
 use Redirect;
 use Auth;
+use Carbon\Carbon;
 use App\Models\User;
 use App\Models\Pemesanan;
 use App\Models\Pembayaran;
@@ -114,12 +115,25 @@ class UserController extends Controller
     {
         $pemesanan = Pemesanan::with(['products'])
             ->where('pemesanan.id_pemesanan', '=', $id)->whereNull('pemesanan.deleted_at')->get();
-        return view('viewUser.edityourdetailorder', compact('pemesanan'));
+        $pemid=$id;
+        return view('viewUser.edityourdetailorder', compact('pemesanan','pemid'));
     }
 
     public function updateyourdetailorder(Request $request, $id)
     {
-        # code...
+        $a=Carbon::parse($request->input('untuk_tanggal'));
+        $model = Pemesanan::find($id);
+        $model->nama_lengkap_pembeli = $request->input('cariuser');
+        $model->no_hp_pembeli = $request->input('nomor_telp');
+        $model->alamat_lengkap_pembeli = $request->input('alamat_lengkap');
+        $model->untuk_tanggal = $a;
+        $model->untuk_jam = $request->input('untuk_jam');
+        $model->pengambilan = $request->input('optionkirim');
+        $model->keterangan = $request->input('keterangan');
+        $model->touch();
+        $model->save();
+        Session::flash('message', "Data Pemesanan pengguna berhasil diubah");
+        return Redirect::back();
     }
 
     public function seeyourpayment()

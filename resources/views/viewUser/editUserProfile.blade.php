@@ -37,6 +37,7 @@
                             <button type="button" class="close h-100" data-dismiss="alert" aria-label="Close"><span><i class="mdi mdi-close"></i></span>
                             </button>
                         </div>
+                        
                     @endif
         <br><br>
         <div class="basic-form">
