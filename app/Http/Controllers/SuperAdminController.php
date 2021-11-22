@@ -1066,15 +1066,15 @@ class SuperAdminController extends Controller
             'jumlah_bayar' => ['required'],
             'optionbank' => ['required'],
             'atas_nama' => ['max:50'],
-            'nomor_rekening' => ['max:20'],
+            'no_rek' => ['max:20'],
             'file' => ['mimes:jpg,jpeg'],
         ],
         [
             'id_pemesanan.required' => 'Mohon memilih id pemesanan',
             'jumlah_bayar.required' => 'Mohon mengisi jumlah bayar',
-            'bank_transfer.required' => 'Mohon memilih jenis bayar',
+            'optionbank.required' => 'Mohon memilih jenis bayar',
             'atas_nama.max' => 'Atas Nama harus dibawah 50 karakter',
-            'nomor_rekening.max' => 'Nomor Rekening harus dibawah 20 karakter',  
+            'no_rek.max' => 'Nomor Rekening harus dibawah 20 karakter',  
             'file.mimes' => 'Mohon memilih file gambar .jpg atau .png',          
         ]
         );

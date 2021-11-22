@@ -133,7 +133,7 @@ class UserController extends Controller
         $model->keterangan = $request->input('keterangan');
         $model->touch();
         $model->save();
-        Session::flash('message', "Data Pemesanan pengguna berhasil diubah");
+        Session::flash('message', "Data Pemesanan berhasil diubah");
         return Redirect::back();
     }
 
@@ -155,6 +155,63 @@ class UserController extends Controller
         $model->touch();
         $model->save();
         Session::flash('message', "Anda sudah membatalkan pemesanan ini");
+        return Redirect::back();
+    }
+
+    public function addyourpayment($id)
+    {
+        $pemesanan = Pemesanan::find($id);
+        $pemesanan_id=$id;
+        return view('viewUser.addyourpayment', compact('pemesanan','pemesanan_id'));
+    }
+
+    public function storeyourpayment(Request $request, $id)
+    {
+        $validator = $request->validate([
+            'id_pemesanan' => ['required'],
+            'jumlah_bayar' => ['required'],
+            'optionbank' => ['required'],
+            'tanggal_bayar' => ['required'],
+            'atas_nama' => ['required','max:50'],
+            'no_rek' => ['required','max:20'],
+            'file' => ['required','mimes:jpg,jpeg'],
+        ],
+        [
+            'id_pemesanan.required' => 'Mohon memilih id pemesanan',
+            'jumlah_bayar.required' => 'Mohon mengisi jumlah bayar',
+            'optionbank.required' => 'Mohon memilih bank transfer',
+            'nomor_rekening.required' => 'Mohon mengisi nomor rekening',
+            'tanggal_bayar.required' => 'Mohon mengisi tanggal bayar tertera pada bukti bayar',
+            'file.required' => 'Mohon melampirkan bukti bayar',
+            'atas_nama.max' => 'Atas Nama harus dibawah 50 karakter',
+            'no_rek.max' => 'Nomor Rekening harus dibawah 20 karakter',  
+            'file.mimes' => 'Mohon memilih file gambar .jpg atau .png',          
+        ]
+        );
+        $buktiPath="";
+        if($request->hasFile('file')){
+            $bukti=$request->file('file');
+            //dd($request->all());
+            $buktiname=time(). '-'.$bukti->getClientOriginalName();
+            $bukti->move(public_path('bukti'),$buktiname);
+            $buktiPath= "/bukti/$buktiname";
+    
+        }
+        $tgl=Carbon::parse($request->input('tanggal_bayar'));
+        Pembayaran::create([
+            'id_pemesanan' => $request->id_pemesanan,
+            'jumlah_bayar' => $request->jumlah_bayar,
+            'tanggal_pembayaran' => $tgl,
+            'bank_transfer' => $request->optionbank,
+            'atas_nama' => $request->atas_nama,
+            'status_bayar' => '0',
+            'bukti_bayar' => $buktiPath,
+            'nomor_rekening' => $request->no_rek,
+            'created_at' => \Carbon\Carbon::now(), 
+            'updated_at' => \Carbon\Carbon::now(), 
+        ]);
+
+        Session::flash('message', "Data pembayaran berhasil ditambahkan");
         return Redirect::back();
     }
 }

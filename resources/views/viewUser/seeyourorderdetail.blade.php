@@ -41,6 +41,8 @@
                 @elseif ($pem ->status_pemesanan == '2')
                     Status Pemesanan : <button style="background-color: green"> <strong>DITERIMA</strong></button>
                     <div class="dropdown mb-md-3 mb-2 ml-auto">
+                        <br>
+                        Status Progress :
                         @if ($pem->status_progress == '1')
                         <div class="btn btn-danger">
                             <svg width="22" class="mr-2" height="28" viewBox="0 0 22 28" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M9.16647 27.9558C9.25682 27.9856 9.34946 28.0001 9.44106 28.0001C9.71269 28.0001 9.97541 27.8732 10.1437 27.6467L21.5954 12.2248C21.7926 11.9594 21.8232 11.6055 21.6746 11.31C21.526 11.0146 21.2236 10.8282 20.893 10.8282H13.1053V0.874999C13.1053 0.495358 12.8606 0.15903 12.4993 0.042327C12.1381 -0.0743215 11.7428 0.0551786 11.5207 0.363124L0.397278 15.7849C0.205106 16.0514 0.178364 16.403 0.327989 16.6954C0.477614 16.9878 0.77845 17.1718 1.10696 17.1718H8.56622V27.125C8.56622 27.5024 8.80816 27.8373 9.16647 27.9558ZM2.81693 15.4218L11.3553 3.58389V11.7032C11.3553 12.1865 11.7471 12.5782 12.2303 12.5782H19.1533L10.3162 24.479V16.2968C10.3162 15.8136 9.92444 15.4218 9.44122 15.4218H2.81693Z" fill="#fff"/></svg>
@@ -63,7 +65,11 @@
                         </div>
                         @endif
     
-                        <small>*Status progress: 1)Belum Diproses, 2)Sedang Diproses, 3)Dalam Pengiriman, 4)Selesai</small>
+                        <small>*Status progress: 
+                            1) <strong>Belum Diproses</strong> atau menunggu untuk dimasak, 
+                            2) <strong>Sedang Diproses</strong> dalam hal ini menu yang sudah dipesan tidak dapat diganti karena sudah dimasak atau dipacking, 
+                            3) <strong>Dalam Pengiriman</strong>, 
+                            4) <strong>Selesai</strong> </small>
                         
                     </div>
                 {{-- ditolak --}}
@@ -222,14 +228,17 @@
                 <br>
                 @if ($pem ->status_pemesanan == '1' || $pem ->status_pemesanan == '2')
                 <h4>PEMBAYARAN {{$pem->id_pemesanan}}</h4>
-                <br>
                 
-                <a href="{{url('/addyourpayment/'.$pem->id_pemesanan)}}">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-plus-square text-success" viewBox="0 0 16 16">
-                        <path d="M14 1a1 1 0 0 1 1 1v12a1 1 0 0 1-1 1H2a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1h12zM2 0a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2H2z"/>
-                        <path d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4z"/>
-                    </svg> Tambah Pembayaran
-                </a>
+                
+                @if ($pem->total_transaksi > $jumlahSudahBayar)
+                    <a href="{{url('/addyourpayment/'.$pem->id_pemesanan)}}">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-plus-square text-success" viewBox="0 0 16 16">
+                            <path d="M14 1a1 1 0 0 1 1 1v12a1 1 0 0 1-1 1H2a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1h12zM2 0a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2H2z"/>
+                            <path d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4z"/>
+                        </svg> Tambah Pembayaran
+                    </a>
+                @endif
+                
                 
                 <br><br>
                 {{-- tabel tagihan --}}
@@ -258,14 +267,14 @@
                 </table>
 
                 {{-- list pembayaran --}}
-                <br><br><br>
+                <br><br>
                 <div class="row">
                     <div class="content-area  shop-grid-content full-width col-lg-12 col-md-12 col-sm-12 col-xs-12">
                         <div class="site-main">
                             <h3 class="custom_blog_title">
-                                Daftar Pembayaran Anda
+                                Histori Pembayaran Anda
                             </h3>
-                            @if (empty($bcountbayar)) 
+                            @if (empty($countbayar)) 
                                 Tidak ada data pembayaran
                             @endif
 
@@ -368,7 +377,7 @@
                                                     @if ($pay->bukti_bayar != null)
                                                     <div class="zoom">
                                                         <img src="{{ asset($pay->bukti_bayar) }}" width="150px" >
-                                                       <small><a href='{{ asset($pay->bukti_bayar) }}' target='_blank'>Lihat Gambar Full</a></small> 
+                                                       <small><a href='{{ asset($pay->bukti_bayar) }}' target='_blank'>Lihat Bukti Bayar Full</a></small> 
                                                     </div>
                                                     @else
                                                         <small>Tidak Ada Gambar</small>

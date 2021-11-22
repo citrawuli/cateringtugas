@@ -74,7 +74,7 @@ Route::get('/edityourdetailorder/{id}', [App\Http\Controllers\UserController::cl
 Route::get('/updateyourdetailorder/{id}', [App\Http\Controllers\UserController::class, 'updateyourdetailorder']);
 Route::get('/cancelyourorder/{id}', [App\Http\Controllers\UserController::class, 'cancelyourorder']); 
 Route::get('/addyourpayment/{id}', [App\Http\Controllers\UserController::class, 'addyourpayment']); 
-Route::get('/storeyourpayment/{id}', [App\Http\Controllers\UserController::class, 'storeyourpayment']); 
+Route::post('/storeyourpayment/{id}', [App\Http\Controllers\UserController::class, 'storeyourpayment']); 
 
 
 //COBA ROUTE

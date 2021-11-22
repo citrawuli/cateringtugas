@@ -38,7 +38,7 @@
                     <h3 class="custom_blog_title">
                         Daftar Pembayaran Anda
                     </h3>
-                            @if (empty($bcountbayar)) 
+                            @if (empty($countbayar)) 
                                 Tidak ada data pembayaran
                             @endif
                     <ul class="row list-products auto-clear equal-container product-list">
