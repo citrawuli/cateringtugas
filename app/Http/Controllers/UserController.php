@@ -38,10 +38,9 @@ class UserController extends Controller
                 
     }
 
-    public function updateyouruprofile(Request $request)
+    public function updateyouruprofile(Request $request,$id)
     {
         $user = auth()->user();
-        $id=Auth::user()->id;
         // dd($request->all(),$user->password);
         $validated = $request->validate([
             'current_password' => [    
@@ -57,9 +56,9 @@ class UserController extends Controller
                 'sometimes', 'nullable', 'min:8', 'different:current_password','required_with:current_password'
             ],
             'name' => ['required','nullable', 'string', 'max:50'],
-            'alamat_lengkap' => ['required','nullable', 'string', 'max:100'],
-            'nomor_telp' => ['required','nullable', 'string', 'max:15'],
-            'email' => ['required','nullable', 'string', 'email', 'max:50', 'unique:users,email,'.$id.',id'],
+            'alamat_lengkap' => ['sometimes','nullable', 'string', 'max:100'],
+            'nomor_telp' => ['sometimes','nullable', 'string', 'max:15'],
+            'email' => ['required','nullable', 'string', 'email', 'max:50', 'unique:users,email,'.$user->id.',id'],
         ],
         [
             'new_password.different' => 'Password baru harus berbeda dengan password lama',

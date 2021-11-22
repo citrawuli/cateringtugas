@@ -1301,6 +1301,10 @@ class SuperAdminController extends Controller
     
     public function updateuprof(Request $request, $id)
     {
+        //catatan: awalnya mau beda dari yg super admin. gak pakai parameter id dari url tapi di dalam function ada var id dari auth::user()->id, 
+        //tapi ternyata bisa update password tapi gak bener, hashnya salah mulu, 
+        //dan baruuuuu aja inget kalau pernah baca di forum, jangan pakai var auth di dalam function buat ganti password
+        //bakal gak bisa. jadi harus dijadikan parameter aja. small but important :)
         $user = auth()->user();
         
         // dd($request->all(),$user->password);

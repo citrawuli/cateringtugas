@@ -67,7 +67,7 @@ Route::get('/readmoreblog/{id}', [App\Http\Controllers\HomeController::class, 'r
 Route::get('/edityourprofile', [App\Http\Controllers\UserController::class, 'edityourprofile']);
 Route::get('/seeyourorder', [App\Http\Controllers\UserController::class, 'seeyourorder']);
 Route::get('/seeyourpayment', [App\Http\Controllers\UserController::class, 'seeyourpayment']);
-Route::post('/updateyouruprofile', [App\Http\Controllers\UserController::class, 'updateyouruprofile']);
+Route::post('/updateyouruprofile/{id}', [App\Http\Controllers\UserController::class, 'updateyouruprofile']);
 
 Route::get('/seeyourdetailorder/{id}', [App\Http\Controllers\UserController::class, 'seeyourdetailorder']);
 Route::get('/edityourdetailorder/{id}', [App\Http\Controllers\UserController::class, 'edityourdetailorder']);

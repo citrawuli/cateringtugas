@@ -40,7 +40,7 @@
                     @endif
         <br><br>
         <div class="basic-form">
-            <form method="POST" action="{{ url('/updateyouruprofile') }}">
+            <form method="POST" action="{{ url('/updateyouruprofile/'.Auth::user()->id) }}">
                @csrf
 
                <div class="form-group row">
@@ -90,7 +90,7 @@
                     
                     <div class="col-md-6">
                         <small>Mohon memasukkan nomor yang dapat dihubungi melalui Whatsapp atau telepon biasa.</small>
-                        <input id="nomor_telp" type="number" class="form-control @error('nomor_telp') is-invalid @enderror" required name="nomor_telp" placeholder="081xxx" value="{{ Auth::user()->ponsel_user }}">
+                        <input id="nomor_telp" type="number" class="form-control @error('nomor_telp') is-invalid @enderror" name="nomor_telp" placeholder="081xxx" value="{{ Auth::user()->ponsel_user }}">
                                 
                         <!-- @error('nomor_telp')
                             <span class="invalid-feedback" role="alert">
