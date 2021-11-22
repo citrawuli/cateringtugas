@@ -38,6 +38,9 @@
                     <h3 class="custom_blog_title">
                         Daftar Pembayaran Anda
                     </h3>
+                            @if (empty($bcountbayar)) 
+                                Tidak ada data pembayaran
+                            @endif
                     <ul class="row list-products auto-clear equal-container product-list">
                         @foreach ( $bayar as $pay)
                         <li class="product-item style-list col-lg-12 col-lg-12 col-md-12 col-sm-12 col-xs-12 col-ts-12">

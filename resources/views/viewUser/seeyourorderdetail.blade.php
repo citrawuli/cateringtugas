@@ -31,7 +31,7 @@
                 <h4>PEMESANAN</h4>
 
                 @if ($pem ->status_pemesanan == '1')
-                    Status Pemesanan : <button style="background-color: green"> <strong>MENUNGGU KONFIRMASI</strong></button>
+                    Status Pemesanan : <button style="background-color: orange"> <strong>MENUNGGU KONFIRMASI</strong></button>
                     <br> 
                     <small>*Mohon menunggu 1x24 jam. Admin kami akan menghubungi Anda untuk melakukan konfirmasi pemesanan pada jam kerja.
                             <br>Kontak kami dengan <a href="{{url('/kontak')}}"> klik di sini</a>.
@@ -68,33 +68,56 @@
                     </div>
                 {{-- ditolak --}}
                 @elseif ($pem ->status_pemesanan == '3')   
-                    Status Pemesanan : <button style="background-color: green"> <strong>DITOLAK</strong></button>
+                    Status Pemesanan : <button style="background-color: brown"> <strong>DITOLAK</strong></button>
                 {{-- dibatalkan --}}
                 @elseif ($pem ->status_pemesanan == '4') 
-                    Status Pemesanan : <button style="background-color: green"> <strong>DIBATALKAN OLEH ANDA</strong></button>
+                    Status Pemesanan : <button style="background-color: black"> <strong>DIBATALKAN OLEH ANDA</strong></button>
                 @endif
                 
                 
 
                 <br><br>
-                <a href="{{url('/edityourdetailorder/'.$pem->id_pemesanan)}}">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-pencil-square text-info" viewBox="0 0 16 16">
-                        <path d="M15.502 1.94a.5.5 0 0 1 0 .706L14.459 3.69l-2-2L13.502.646a.5.5 0 0 1 .707 0l1.293 1.293zm-1.75 2.456-2-2L4.939 9.21a.5.5 0 0 0-.121.196l-.805 2.414a.25.25 0 0 0 .316.316l2.414-.805a.5.5 0 0 0 .196-.12l6.813-6.814z"/>
-                        <path fill-rule="evenodd" d="M1 13.5A1.5 1.5 0 0 0 2.5 15h11a1.5 1.5 0 0 0 1.5-1.5v-6a.5.5 0 0 0-1 0v6a.5.5 0 0 1-.5.5h-11a.5.5 0 0 1-.5-.5v-11a.5.5 0 0 1 .5-.5H9a.5.5 0 0 0 0-1H2.5A1.5 1.5 0 0 0 1 2.5v11z"/>
-                    </svg>
-                    <span class="blog-title">Edit Pemesanan</span>
-                </a>
+                @if ($pem ->status_pemesanan == '1' || $pem ->status_pemesanan == '2')
+                    <a href="{{url('/edityourdetailorder/'.$pem->id_pemesanan)}}">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-pencil-square text-info" viewBox="0 0 16 16">
+                            <path d="M15.502 1.94a.5.5 0 0 1 0 .706L14.459 3.69l-2-2L13.502.646a.5.5 0 0 1 .707 0l1.293 1.293zm-1.75 2.456-2-2L4.939 9.21a.5.5 0 0 0-.121.196l-.805 2.414a.25.25 0 0 0 .316.316l2.414-.805a.5.5 0 0 0 .196-.12l6.813-6.814z"/>
+                            <path fill-rule="evenodd" d="M1 13.5A1.5 1.5 0 0 0 2.5 15h11a1.5 1.5 0 0 0 1.5-1.5v-6a.5.5 0 0 0-1 0v6a.5.5 0 0 1-.5.5h-11a.5.5 0 0 1-.5-.5v-11a.5.5 0 0 1 .5-.5H9a.5.5 0 0 0 0-1H2.5A1.5 1.5 0 0 0 1 2.5v11z"/>
+                        </svg>
+                        <span class="blog-title">Edit Pemesanan</span>
+                    </a>
+                @endif
                 @if ($pem ->status_pemesanan == '1')
-                    <a href="{{url('/cancelyourorder'.$pem->id_pemesanan)}}">
+                    <a  data-toggle="modal" data-target="#modalCancel{{$pem->id_pemesanan}}">
                         <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-x-circle text-danger" viewBox="0 0 16 16">
                             <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"/>
                             <path d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708z"/>
                           </svg>
                         <span class="blog-title">Batalkan Pemesanan</span>
                     </a>
-
+                   
+                    <div class="modal fade" id="modalCancel{{$pem->id_pemesanan}}" tabindex="-1" role="dialog" aria-labelledby="modalCancel{{$pem->id_pemesanan}}" aria-hidden="true">
+                        <div class="modal-dialog" role="document">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title" id="modalCancel{{$pem->id_pemesanan}}">Pembatalan
+                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close" style="font-size: 40px;">
+                                            <span aria-hidden="true">&times;</span>
+                                        </button>
+                                    </h5>
+                                </div>
+                                <div class="modal-body">
+                                    Apakah anda yakin membatalkan pemesanan ini <strong>{{$pem->id_pemesanan}}</strong> ?
+                                </div>
+                                <div class="modal-footer">
+                                    <a href="{{url('/cancelyourorder/'.$pem->id_pemesanan)}}" type="button" class="btn btn-warning" style="float:left;">BATALKAN PEMESANAN</a>
+                                    <button type="button" class="btn btn-danger" data-dismiss="modal">Tidak Jadi</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 @endif
 
+                <br><br>
                 <table class="table table-bordered">
                     <tr>
                         <td style="width:25%"><strong> Nama Pemesan:</strong></td>
@@ -197,16 +220,19 @@
                 </div>
 
                 <br>
+                @if ($pem ->status_pemesanan == '1' || $pem ->status_pemesanan == '2')
                 <h4>PEMBAYARAN {{$pem->id_pemesanan}}</h4>
                 <br>
-                <a href="{{url('/addpayment/'.$pem->id_pemesanan)}}">
+                
+                <a href="{{url('/addyourpayment/'.$pem->id_pemesanan)}}">
                     <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-plus-square text-success" viewBox="0 0 16 16">
                         <path d="M14 1a1 1 0 0 1 1 1v12a1 1 0 0 1-1 1H2a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1h12zM2 0a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2H2z"/>
                         <path d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4z"/>
                     </svg> Tambah Pembayaran
                 </a>
                 
-
+                <br><br>
+                {{-- tabel tagihan --}}
                 <table class="table table-bordered">
                     <tr>
                         <td style="width:25%"><strong> Total Harus Bayar:</strong></td>
@@ -231,9 +257,135 @@
                     
                 </table>
 
+                {{-- list pembayaran --}}
+                <br><br><br>
+                <div class="row">
+                    <div class="content-area  shop-grid-content full-width col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                        <div class="site-main">
+                            <h3 class="custom_blog_title">
+                                Daftar Pembayaran Anda
+                            </h3>
+                            @if (empty($bcountbayar)) 
+                                Tidak ada data pembayaran
+                            @endif
+
+                            <ul class="row list-products auto-clear equal-container product-list">
+                                @foreach ( $bayar as $pay)
+                                <li class="product-item style-list col-lg-12 col-lg-12 col-md-12 col-sm-12 col-xs-12 col-ts-12">
+                                    <div class="product-inner equal-element">
+                                        <div class="products-bottom-content">
+                                            
+                                            <div class="product-info-left">
+                                                <br>
+                                                <h5 class="product-name product_title">
+                                                    <a href="#">{{$pay->id_pembayaran}}</a>
+                                                </h5>
+                                                
+                                                
+                                                <ul class="attributes-display">
+                                                    <li class="swatch-color">
+                                                        ID Pemesanan:
+                                                    </li>
+                                                    <li class="swatch-color">
+                                                        <a href="#">{{$pay->id_pemesanan ?? '-'}}</a>
+                                                    </li>
+                                                </ul>
+        
+                                                <ul class="attributes-display">
+                                                    <li class="swatch-color">
+                                                        Jumlah Bayar:
+                                                    </li>
+                                                    <li class="swatch-color">
+                                                        <a href="#">@currency($pay->jumlah_bayar)</a>
+                                                    </li>
+                                                </ul>
+        
+                                                <ul class="attributes-display">
+                                                    <li class="swatch-color">
+                                                        Tanggal Bayar:
+                                                    </li>
+                                                    <li class="swatch-color">
+                                                        <a href="#">{{ date('d M Y', strtotime($pay->tanggal_pembayaran)) ?? '-' }}</a>
+                                                    </li>
+                                                </ul>
+        
+                                                <ul class="attributes-display">
+                                                    <li class="swatch-color">
+                                                        Bank Transfer:
+                                                    </li>
+                                                    <li class="swatch-color">
+        
+                                                        @if ($pay->bank_transfer == '1')
+                                                            <a>Tunai</a>
+                                                        @elseif ($pay->bank_transfer == '2')
+                                                            <a>BRI</a>
+                                                        @elseif ($pay->bank_transfer == '3')
+                                                            <a>BCA</a>
+                                                        @endif
+                                                    </li>
+                                                </ul>
+        
+                                                <ul class="attributes-display">
+                                                    <li class="swatch-color">
+                                                        Nomor Rekening:
+                                                    </li>
+                                                    <li class="swatch-color">
+                                                        <a href="#">{{$pay->nomor_rekening ?? '-'}}</a>
+                                                    </li>
+                                                </ul>
+        
+                                                <ul class="attributes-display">
+                                                    <li class="swatch-color">
+                                                        Atas Nama:
+                                                    </li>
+                                                    <li class="swatch-color">
+                                                        <a href="#">{{$pay->atas_nama ?? '-'}}</a>
+                                                    </li>
+                                                </ul>
+        
+                                                <ul class="attributes-display">
+                                                    <li class="swatch-color">
+                                                        Tanggal input ke sistem:
+                                                    </li>
+                                                    <li class="swatch-color">
+                                                        <a href="#">{{ date('d M Y, H:i:s', strtotime($pay->created_at)) ?? '-' }}</a>
+                                                    </li>
+                                                </ul>
+                                                <ul>
+                                                    <div class="single_variation_wrap">
+                                                        @if ($pay->status_bayar == '0')
+                                                            <a class="single_add_to_cart_button button" href="#">Menunggu Verifikasi</a>
+                                                        @else
+                                                            <a class="single_add_to_cart_button button" href="#">Diverifikasi</a>
+                                                        @endif
+                                                    </div>
+                                                </ul>
+                                                
+                                            </div>
+                                            <div class="product-info-right">
+                                                <br>
+                                                <div class="price">
+                                                    @if ($pay->bukti_bayar != null)
+                                                    <div class="zoom">
+                                                        <img src="{{ asset($pay->bukti_bayar) }}" width="150px" >
+                                                       <small><a href='{{ asset($pay->bukti_bayar) }}' target='_blank'>Lihat Gambar Full</a></small> 
+                                                    </div>
+                                                    @else
+                                                        <small>Tidak Ada Gambar</small>
+                                                    @endif
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </li>
+                                @endforeach
+                            </ul>
+                        </div>
+                    </div>
+                </div>
 
                 <br><br><br>
-                <div class="table-responsive">
+                {{-- <div class="table-responsive">
                     <table id="example3" class="display" style="min-width: 845px">
                         <thead>
                             <tr>
@@ -292,8 +444,9 @@
                             @endforeach        
                         </tbody>
                     </table>
-                </div>
+                </div> --}}
 
+                @endif
 
                
         

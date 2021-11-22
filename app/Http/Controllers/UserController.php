@@ -104,11 +104,12 @@ class UserController extends Controller
             ->where('pembayaran.id_pemesanan', $id)->whereNull('pembayaran.deleted_at')->get();
         $jumlahSudahBayar = Pembayaran::with('detpems')
             ->where('pembayaran.id_pemesanan', $id)->where('status_bayar', '1')->whereNull('pembayaran.deleted_at')->get()->sum('jumlah_bayar');
-        
+        $countbayar = Pembayaran::with('detpems')
+            ->where('pembayaran.id_pemesanan', $id)->whereNull('pembayaran.deleted_at')->get()->count('id_pembayaran');
         $produk = DB::table('produk')->get();
         $category = DB::table('kategori_produk')->get();
         $galpro = DB::table('galeri_produk')->get();
-        return view('viewUser.seeyourorderdetail', compact('pemesanan', 'bayar', 'jumlahSudahBayar', 'produk', 'category', 'galpro'));
+        return view('viewUser.seeyourorderdetail', compact('pemesanan', 'bayar', 'jumlahSudahBayar', 'produk', 'category', 'galpro','countbayar'));
     }
 
     public function edityourdetailorder($id)
@@ -143,6 +144,17 @@ class UserController extends Controller
         ->rightJoin('pembayaran','pemesanan.id_pemesanan', '=', 'pembayaran.id_pemesanan')
         ->whereNull('pembayaran.deleted_at')
         ->where('users.id', '=', $id)->orderBy('pembayaran.created_at', 'desc')->paginate(12);
-        return view('viewUser.seeyourpayment', compact('bayar'));
+        $countbayar = $bayar->count('id_pembayaran');
+        return view('viewUser.seeyourpayment', compact('bayar', 'countbayar'));
+    }
+
+    public function cancelyourorder($id)
+    {
+        $model = Pemesanan::find($id);
+        $model->status_pemesanan=4;
+        $model->touch();
+        $model->save();
+        Session::flash('message', "Anda sudah membatalkan pemesanan ini");
+        return Redirect::back();
     }
 }
