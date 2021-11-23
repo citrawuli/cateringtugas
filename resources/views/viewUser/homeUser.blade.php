@@ -8,7 +8,9 @@
             Halo, {{ Auth::user()->name }}
         </h3>
         <p>Selamat datang di laman akunmu.</p>
-        <br>
+        
+
+        <a href="{{URL::previous()}}" type="button" class="btn btn-default" style="background-color: rgb(0, 128, 0); color:whitesmoke">Kembali Berbelanja</a><br><br>
         <h4>PROFIL</h4>
         <a href="{{url('/edityourprofile')}}">
             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-person-lines-fill text-info" viewBox="0 0 16 16">

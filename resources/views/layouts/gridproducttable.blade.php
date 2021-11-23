@@ -25,23 +25,26 @@
                         Katalog Produk
                     </h3>
                     <div class="shop-top-control">
-                        <form class="select-item select-form">
+                        {{-- <form class="select-item select-form">
                             <span class="title">Sort</span>
                             <select title="sort" data-placeholder="12 Produk/Laman" class="chosen-select">
                                 <option value="12">12 Produk/Laman</option>
                                 <option value="24">24 Produk/Laman</option>
                                 <option value="36">36 Produk/Laman</option>
                             </select>
-                        </form>
-                        <form class="filter-choice select-form">
+                        </form> --}}
+                        <form class="filter-choice select-form" action="{{url('/filterproduct')}}" method="get">
                             <span class="title">Sort by</span>
-                            <select title="sort-by" data-placeholder="Harga: Rendah -> Tinggi" class="chosen-select">
-                                <option value="1">Harga: Rendah -> Tinggi</option>
-                                <option value="1">Harga: Tinggi -> Rendah</option>
-                                <option value="2">Urutkan: paling baru</option>
-                                <option value="2">Urutkan: paling populer</option>
+                            <select title="sort-by" data-placeholder="Harga: Rendah -> Tinggi" class="chosen-select" name="filter">
+                                <option value="renting">Harga: Rendah -> Tinggi</option>
+                                <option value="tingren">Harga: Tinggi -> Rendah</option>
+                                <option value="newarr">Urutkan: paling baru</option>
+                                {{-- <option value="bestsell">Urutkan: paling populer</option> --}}
                             </select>
+
+                            <input class="btn btn-default btn-block" name="submit" type="submit" value="Filter"/>
                         </form>
+                        
                         <div class="grid-view-mode">
                             <div class="inner">
                                 {{-- <a href="listproducts.html" class="modes-mode mode-list">
@@ -187,4 +190,3 @@
 
 
 @endsection
-

@@ -101,6 +101,40 @@ class HomeController extends Controller
         return view('layouts.gridproducttable', compact('produk', 'galpro', 'newarrival')); 
     }
 
+    public function filterproduct(Request $request)
+    {
+        // dd($request->all());
+
+        if($request->filter=='renting'){
+            $produk = produk::
+            join('kategori_produk','kategori_produk.id','=','produk.id_kategori')
+            ->select('kategori_produk.nama_kategori','produk.*')
+            ->whereNull('produk.deleted_at')->orderBy('produk.harga_produk', 'asc')->paginate(12);
+            
+        }
+        elseif($request->filter=='tingren'){
+            $produk = produk::
+            join('kategori_produk','kategori_produk.id','=','produk.id_kategori')
+            ->select('kategori_produk.nama_kategori','produk.*')
+            ->whereNull('produk.deleted_at')->orderBy('produk.harga_produk', 'desc')->paginate(12);
+            
+        }
+        elseif($request->filter=='newarr'){
+            $produk = produk::
+            join('kategori_produk','kategori_produk.id','=','produk.id_kategori')
+            ->select('kategori_produk.nama_kategori','produk.*')
+            ->whereNull('produk.deleted_at')->orderBy('produk.created_at', 'desc')->paginate(12);
+            
+        }
+       
+       
+        
+        $galpro = DB::table('galeri_produk')->whereNull('galeri_produk.deleted_at')->get();
+        $newarrival = DB::table('produk')->whereNull('produk.deleted_at')->latest()->take(8)->get();
+
+        return view('layouts.gridproducttable', compact('produk', 'galpro', 'newarrival')); 
+    }
+
     public function lihatproduk($id)
     {
         $produk = produk::

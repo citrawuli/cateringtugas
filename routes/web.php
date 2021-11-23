@@ -32,6 +32,7 @@ Route::get('/tentangkami', function () {
     return view('layouts.tentangkami'); 
 }); //tentangkami
 Route::get('/catalogproduct', [App\Http\Controllers\HomeController::class, 'gridprodTable']); //katalog produk grid
+Route::get('/filterproduct', [App\Http\Controllers\HomeController::class, 'filterproduct']);
 
 //MIDDLEWARE NEED LOGIN
 Auth::routes();
