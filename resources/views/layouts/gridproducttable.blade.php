@@ -35,14 +35,15 @@
                         </form> --}}
                         <form class="filter-choice select-form" action="{{url('/filterproduct')}}" method="get">
                             <span class="title">Sort by</span>
-                            <select title="sort-by" data-placeholder="Harga: Rendah -> Tinggi" class="chosen-select" name="filter">
+                            <select title="sort-by" data-placeholder="Harga: Rendah -> Tinggi" class="chosen-select" name="filter" onchange="this.form.submit()"s>
+                                <option value="">--Filter--</option>
                                 <option value="renting">Harga: Rendah -> Tinggi</option>
                                 <option value="tingren">Harga: Tinggi -> Rendah</option>
                                 <option value="newarr">Urutkan: paling baru</option>
                                 {{-- <option value="bestsell">Urutkan: paling populer</option> --}}
                             </select>
 
-                            <input class="btn btn-default btn-block" name="submit" type="submit" value="Filter"/>
+                            {{-- <input class="btn btn-default btn-block" name="submit" type="submit" value="Filter"/> --}}
                         </form>
                         
                         <div class="grid-view-mode">
