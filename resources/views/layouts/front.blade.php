@@ -125,20 +125,10 @@
                 </div>
                 <div class="col-lg-7 col-sm-8 col-md-6 col-xs-5 col-ts-12">
                     <div class="block-search-block">
-                        <form class="form-search form-search-width-category">
+                        <form class="form-search form-search-width-category" action="{{url('/searchproduct')}}" method="GET">
                             <div class="form-content">
-                                <div class="category">
-                                    <select title="cate" data-placeholder="All Categories" class="chosen-select" tabindex="1">
-                                        <option value="United States">Accessories</option>
-                                        <option value="United Kingdom">Cacti</option>
-                                        <option value="Afghanistan">Succulents</option>
-                                        <option value="Aland Islands">Sofas</option>
-                                        <option value="Albania">New Arrivals</option>
-                                        <option value="Algeria">Storage</option>
-                                    </select>
-                                </div>
                                 <div class="inner">
-                                    <input type="text" class="input" name="s" value="" placeholder="Search here">
+                                    <input type="text" class="input" name="cari" value="{{ old('cari') }}" placeholder="Cari disini">
                                 </div>
                                 <button class="btn-search" type="submit">
                                     <span class="icon-search"></span>

@@ -127,12 +127,28 @@ class HomeController extends Controller
             
         }
        
-       
-        
         $galpro = DB::table('galeri_produk')->whereNull('galeri_produk.deleted_at')->get();
         $newarrival = DB::table('produk')->whereNull('produk.deleted_at')->latest()->take(8)->get();
 
         return view('layouts.gridproducttable', compact('produk', 'galpro', 'newarrival')); 
+    }
+
+    public function searchproduct(Request $request)
+    {
+        // menangkap data pencarian
+        $cari = $request->cari;
+        
+        $produk = produk::
+        join('kategori_produk','kategori_produk.id','=','produk.id_kategori')
+        ->select('kategori_produk.nama_kategori','produk.*')
+        ->where('nama_produk','like',"%".$cari."%")// mengambil data dari table produk sesuai pencarian data
+        ->whereNull('produk.deleted_at')->orderBy('produk.created_at', 'desc')
+        ->paginate(12);        
+        
+        $galpro = DB::table('galeri_produk')->whereNull('galeri_produk.deleted_at')->get();
+        $newarrival = DB::table('produk')->whereNull('produk.deleted_at')->latest()->take(8)->get();
+
+        return view('layouts.searchproduct', compact('produk', 'galpro', 'newarrival')); 
     }
 
     public function lihatproduk($id)
