@@ -93,6 +93,15 @@
                                     </div>
 
                                     <div class="form-group row">
+                                        <label for="product" class="col-sm-3 col-form-label">{{ __('Pengambilan (*)') }}</label>
+
+                                        <div class="col-md-6">
+                                            <label class="radio-inline mr-3"><input type="radio" value="1" name="optionkirim" id="diambilsendiri"> Diambil</label>
+                                            <label class="radio-inline mr-3"><input type="radio" value="2" name="optionkirim" id="bygocar"> Dikirim Go-Car</label>
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group row" id="alamatsect">
                                         <label for="alamat_lengkap" class="col-sm-3 col-form-label">{{ __('Alamat lengkap') }}</label>
 
                                         <div class="col-md-6">
@@ -122,15 +131,6 @@
                                                     </span>
                                                 </span>
                                             </div>
-                                        </div>
-                                    </div>
-
-                                    <div class="form-group row">
-                                        <label for="product" class="col-sm-3 col-form-label">{{ __('Pengambilan') }}</label>
-
-                                        <div class="col-md-6">
-                                            <label class="radio-inline mr-3"><input type="radio" value="1" name="optionkirim"> Diambil</label>
-                                            <label class="radio-inline mr-3"><input type="radio" value="2" name="optionkirim"> Dikirim Go-Car</label>
                                         </div>
                                     </div>
 
@@ -533,6 +533,14 @@
             $('#deleteRow').click( function () {
                 table.row('.selected').remove().draw( false );
                 hitung_calc();
+            });
+        
+        //SLIDEUP AND DOWN
+            $('#bygocar').click(function() {
+                $('#alamatsect').slideDown();
+            });
+            $('#diambilsendiri').click(function() {
+                $('#alamatsect').slideUp();
             });
             
 
