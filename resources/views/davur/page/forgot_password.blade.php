@@ -1,10 +1,12 @@
 {{-- Extends layout --}}
-@extends('davur.layout.fullwidth')
+{{-- @extends('davur.layout.fullwidth') --}}
+@extends('layouts.front')
+
 
 
 
 {{-- Content --}}
-@section('content')
+@section('container')
 	<div class="col-md-6">
       <div class="authincation-content">
           <div class="row no-gutters">
@@ -25,4 +27,9 @@
           </div>
       </div>
   </div>
+
+
+
+
+
 @endsection

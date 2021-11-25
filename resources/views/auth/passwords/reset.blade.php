@@ -1,6 +1,6 @@
-@extends('layouts.app')
+@extends('layouts.front')
 
-@section('content')
+@section('container')
 <div class="container">
     <div class="row justify-content-center">
         <div class="col-md-8">
@@ -64,6 +64,13 @@
 </div>
 
 
+<div class="main-content main-content-checkout">
+    <div class="container">
+        <div class="row">
+            aaaaaaaaaaaaaaa
+        </div>
+    </div>
+</div>
 
 
 @endsection
