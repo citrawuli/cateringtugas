@@ -1,6 +1,32 @@
 @extends('layouts.front')
 
 @section('container')
+<style>
+    @-webkit-keyframes glow {
+    from {
+        text-shadow:
+        0 0 7px #fff,
+        0 0 10px #fff,
+        0 0 21px #fff,
+        0 0 42px rgb(246, 250, 213),
+        0 0 82px rgb(246, 250, 213),
+        0 0 92px rgb(246, 250, 213),
+        0 0 102px rgb(246, 250, 213),
+        0 0 151px rgb(246, 250, 213);
+    }
+    to {
+        text-shadow:
+        0 0 7px #fff,
+        0 0 10px #fff,
+        0 0 21px #fff,
+        0 0 42px rgb(246, 250, 213),
+        0 0 82px rgb(246, 250, 213),
+        0 0 92px rgb(246, 250, 213),
+        0 0 102px rgb(246, 250, 213),
+        0 0 151px rgb(246, 250, 213);
+    }
+}
+</style>
 <div>
     <div class="fullwidth-template">
         <div class="home-slider-banner">
@@ -11,22 +37,21 @@
                             <div class="slider-owl owl-slick equal-container nav-center"
                                  data-slick='{"autoplay":true, "autoplaySpeed":9000, "arrows":false, "dots":true, "infinite":true, "speed":1000, "rows":1}'
                                  data-responsive='[{"breakpoint":"2000","settings":{"slidesToShow":1}}]'>
-                                <div class="slider-item style7">
+                                <div class="slider-item style7" style="">
                                     <div class="slider-inner equal-element">
-                                        <div class="slider-infor">
-                                            <h5 class="title-small">
-                                                Sale up to 40% off!
+                                        <div class="slider-infor" >
+                                            <h5 class="title-small" style="animation: glow 1s ease-in-out infinite alternate; color:darkgreen" >
+                                                Aisya Catering
                                             </h5>
-                                            <h3 class="title-big">
-                                                Plants For Health
+                                            <h3 class="title-big" style="animation: glow 1s ease-in-out infinite alternate;">
+                                                Amanah | Mewah
                                             </h3>
-                                            <div class="price">
-                                                New Price:
+                                            <div class="price" style="color: white">
+                                                <a href="{{url('/kontak')}}" style="text-shadow: 0 0 32px black;"> <strong> Klik untuk konsultasi</strong></a>
                                                 <span class="number-price">
-														$270.00
-													</span>
+												</span>
                                             </div>
-                                            <a href="#" class="button btn-shop-the-look bgroud-style">Shop now</a>
+                                            <a href="{{url('/Paket/Wedding')}}" class="button btn-shop-the-look bgroud-style">Lihat Katalog Wedding</a>
                                         </div>
                                     </div>
                                 </div>
@@ -34,37 +59,38 @@
                                     <div class="slider-inner equal-element">
                                         <div class="slider-infor">
                                             <h5 class="title-small">
-                                                Take A Plant
+                                                {{-- Take A Plant --}}
                                             </h5>
-                                            <h3 class="title-big">
-                                                Get 20% off order now
-                                            </h3>
-                                            <div class="price">
-                                                Save Price:
+                                            <h3 class="title-big"style="animation: glow 1s ease-in-out infinite alternate;">
+                                                Konsultasikan acaramu pada kami
+                                            </h3><br>
+                                            <a href="{{url('/kontak')}}" class="button btn-shop-the-look bgroud-style" style="background-color: black">Klik untuk konsultasi</a>
                                                 <span class="number-price">
-														$170.00
-													</span>
-                                            </div>
-                                            <a href="#" class="button btn-shop-product">Shop now</a>
+												</span><br><br>
+                                             <a href="{{url('/Paket/Wedding')}}" class="button btn-shop-the-look bgroud-style" style="background-color: black">Lihat Katalog Wedding</a>
                                         </div>
                                     </div>
                                 </div>
                                 <div class="slider-item style9">
                                     <div class="slider-inner equal-element">
                                         <div class="slider-infor">
-                                            <h5 class="title-small">
-                                                Teamo Best Collection
-                                            </h5>
-                                            <h3 class="title-big">
-                                                inspiration Plants
-                                            </h3>
-                                            <div class="price">
+                                            {{-- <h5 class="title-small">
+                                                Solusi katering
+                                            </h5> --}}
+                                            <h3 class="title-big"style="animation: glow 1s ease-in-out infinite alternate;">
+                                                Aisya Handal dan Terpercaya
+                                            </h3><br>
+                                            {{-- <div class="price">
                                                 New Price:
                                                 <span class="number-price">
 														$250.00
 													</span>
-                                            </div>
-                                            <a href="#" class="button btn-chekout">Shop now</a>
+                                            </div> --}}
+                                            <a href="{{url('/kontak')}}" class="button btn-shop-the-look bgroud-style" style="background-color: black">Klik untuk konsultasi</a>
+                                                <span class="number-price">
+												</span><br><br>
+                                             <a href="{{url('/Paket/Wedding')}}" class="button btn-shop-the-look bgroud-style" style="background-color: black">Lihat Katalog Wedding</a>
+                                        
                                         </div>
                                     </div>
                                 </div>
@@ -76,11 +102,11 @@
                             <div class="item-banner style7">
                                 <div class="inner">
                                     <div class="banner-content">
-                                        <h3 class="title">Hanging <br/>Plants</h3>
-                                        <div class="description">
-                                            Adipiscing elit curabitur senectus sem
+                                        <h3 class="title" style="animation: glow 1s ease-in-out infinite alternate;">Nasi <br/>Kotak</h3>
+                                        <div class="description" style="color: white;text-shadow: 0 0 32px black;">
+                                            <strong> Halal, enak, terbukti laik higienis</strong>
                                         </div>
-                                        <a href="#" class="button btn-lets-do-it">Shop now</a>
+                                        <a href="{{url('/Paket/RiceBox')}}" class="button btn-lets-do-it">Lihat Katalog</a>
                                     </div>
                                 </div>
                             </div>
@@ -89,11 +115,11 @@
                             <div class="item-banner style8">
                                 <div class="inner">
                                     <div class="banner-content">
-                                        <h3 class="title">Grow <br/> Orchid</h3>
-                                        <div class="description">
-                                            Cras pulvinar lorem ipsum dolor conse
+                                        <h3 class="title"  style="animation: glow 1s ease-in-out infinite alternate;">Kue <br/> Kotak</h3>
+                                        <div class="description" style="color: white;text-shadow: 0 0 32px black;">
+                                            <strong>Tersedia berbagai macam varian kue</strong>
                                         </div>
-                                        <span class="price">$379.00</span>
+                                        <a href="{{url('/Paket/SnackBox')}}" class="button btn-lets-do-it">Lihat Katalog</a>
                                     </div>
                                 </div>
                             </div>
@@ -111,12 +137,15 @@
                             <div class="item-banner style4">
                                 <div class="inner">
                                     <div class="banner-content">
-                                        <h4 class="teamo-subtitle">TOP STAFF PICK</h4>
-                                        <h3 class="title">Shop Cactus</h3>
-                                        <div class="description">
-                                            Proin interdum magna primis id consequat dictum
+                                        {{-- <h4 class="teamo-subtitle">TOP STAFF PICK</h4> --}} <br>
+                                        <h3 class="title" style="animation: glow 1s ease-in-out infinite alternate;">Tumpeng Kue</h3>
+                                        <div class="description"  style="color: white;text-shadow: 0 0 32px black;">
+                                            <strong>
+                                                Dibuat dengan bahan-bahan berkualitas dan dimasak dengan bersih di dapur yang sangat rapi dan bersih.
+                                            </strong>
                                         </div>
-                                        <a href="#" class="button btn-shop-now">Shop now</a>
+                                        <br>
+                                        {{-- <a href="#" class="button btn-shop-now">Shop now</a> --}}
                                     </div>
                                 </div>
                             </div>
@@ -126,16 +155,17 @@
                         <div class="banner">
                             <div class="item-banner style5">
                                 <div class="inner">
-                                    <div class="banner-content">
-                                        <h3 class="title">Indoor Life<br/>Plants</h3>
-                                        <span class="code">
-												Use code:
-												<span>
-													TEAMO
-												</span>
-												Get 25% Off for all Accessories items!
-											</span>
-                                        <a href="#" class="button btn-shop-now">Shop now</a>
+                                    <div class="banner-content"><br>
+                                        <h3 class="title" style="animation: glow 1s ease-in-out infinite alternate;">Tumpeng</h3>
+                                        <div class="description"  style="color: white;text-shadow: 0 0 32px black;">
+                                            <strong>
+                                                Kualitas terjamin <br>
+                                                Bergizi <br>
+                                                Murah <br>
+                                                Tepat Waktu <br>
+                                                Termasuk Ongkos Kirim <br>
+                                            </strong>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
@@ -149,17 +179,23 @@
                 <div class="banner">
                     <div class="item-banner style17">
                         <div class="inner">
-                            <div class="banner-content">
-                                <h3 class="title">Living thing grows</h3>
-                                <div class="description">
-                                    You have no car & Are you <br/>ready to grow? come & shop with us!
-                                </div>
-                                <div class="banner-price">
+                            <div class="banner-content" >
+                                {{-- <h3 class="title"  style="animation: glow 1s ease-in-out infinite alternate;">Pencapaian Aisya</h3> --}}
+                                <br>
+                                
+                                <small style="color: white"> <strong>Dyandra Convention Hall Surabaya, 22 November 2021</strong> </small><br>
+                                <h3 class="description"  style="animation: glow 1s ease-in-out infinite alternate;">
+                                    Serah terima penghargaan Gubernur Jatim kepada Aisya Catering pada program JATIM BEJO 2021<br/> Vendor usaha  mikro dengan transaksi terbanyak pada kategori makanan dan minuman
+                                    <br>
+                                    
+                                </h3>
+                                
+                                {{-- <div class="banner-price">
                                     Price from:
                                     <span class="number-price">$45.00</span>
-                                </div>
-                                <a href="#" class="button btn-shop-now">Shop now</a>
-                                <a href="#" class="button btn-view-collection">View more</a>
+                                </div> --}}
+                                <a href="{{url('/catalogproduct')}}" class="button btn-shop-now">Belanja Sekarang</a>
+                                <a href="{{url('/gridblog')}}" class="button btn-view-collection">Lihat Blog</a>
                             </div>
                         </div>
                     </div>
@@ -458,7 +494,7 @@
                                 </div>
                                 <div class="content">
                                     <h4 class="title">
-                                        Aisya Catering Spesialis Dadakan
+                                        Aisya Catering Spesialis Dadakan 
                                     </h4>
                                 </div>
                             </div>

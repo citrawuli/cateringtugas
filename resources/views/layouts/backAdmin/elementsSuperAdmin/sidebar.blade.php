@@ -66,7 +66,7 @@
 				<div class="add-menu-sidebar">
 					<img src="{{ asset('davur/images/icon1.png') }}" alt=""/>
 					<p>Organisasikan Profilmu, <strong>{{ Auth::user()->name }}</strong>. Ganti Sandi atau ubah nama.</p>
-					<a href="{{ url('/uprof')}}" class="btn btn-warning btn-block light">Profilku</a>
+					<a href="{{ url('/uprof')}}" class="btn btn-danger btn-block light">Profilku</a>
 				</div>
 				<div class="copyright">
 					<p><strong>Davur - Restaurant Admin Dashboard</strong> © 2020 All Rights Reserved</p>

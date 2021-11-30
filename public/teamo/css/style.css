@@ -1915,7 +1915,8 @@ table tr:last-child td, table tr:last-child th {
 	margin-bottom: 0;
 }
 .submenu.menu-page {
-	background-image: url(../images/mega-bg.jpg);
+	/* background-image: url(../images/mega-bg.jpg); */
+	background-color: #f3f3f3;
 	background-repeat: no-repeat;
 	background-size: cover;
 	padding: 50px 0 40px;
@@ -4934,7 +4935,7 @@ ul.list-products {
 /*about page*/
 /*banner about*/
 .header-banner.banner-image .banner-wrap {
-	background-image: url(../images/about-background.jpg) !important;
+	/* background-image: url(../images/about-background.jpg) !important; */
 	background-position: center !important;
 	background-repeat: no-repeat !important;
 	background-size: cover !important;
@@ -6706,7 +6707,10 @@ ul.list-products {
 	margin-bottom: 20px;
 }
 .slider-item.style7 .slider-inner {
-	background-image: url(../images/slider-thumb4.jpg);
+	/* background-image: url(../images/slider-thumb4.jpg); */
+	/* background-image: url(../images/aisya_product/wedding1.jpg); */
+	background-image: linear-gradient(rgba(0, 0, 0, .1), rgba(0, 0, 0, .1)), url(../images/aisya_product/wedding1.jpg);
+	background-size: 770px 620px;
 }
 .slider-item.style7 .slider-inner .slider-infor {
 	padding-top: 185px;
@@ -6715,7 +6719,9 @@ ul.list-products {
 	padding-right: 400px;
 }
 .slider-item.style8 .slider-inner {
-	background-image: url(../images/slider-thumb5.jpg);
+	/* background-image: url(../images/slider-thumb5.jpg); */
+	background-image: linear-gradient(rgba(0, 0, 0, .1), rgba(0, 0, 0, .1)), url(../images/aisya_product/wedding2.jpg);
+	background-size: 770px 620px;
 }
 .slider-item.style8 .slider-inner .slider-infor {
 	padding-top: 185px;
@@ -6724,7 +6730,9 @@ ul.list-products {
 	padding-right: 400px;
 }
 .slider-item.style9 .slider-inner {
-	background-image: url(../images/slider-thumb6.jpg);
+	/* background-image: url(../images/slider-thumb6.jpg); */
+	background-image: linear-gradient(rgba(0, 0, 0, .1), rgba(0, 0, 0, .1)), url(../images/aisya_product/wedding3.jpg);
+	background-size: 770px 620px;
 }
 .slider-item.style9 .slider-inner .slider-infor {
 	padding-top: 185px;
@@ -8521,8 +8529,11 @@ body.vertical-menu-open .vertical-menu-overlay {
 }
 /*banner home 02*/
 .item-banner.style4 .inner {
-	background-image: url(../images/banner-home-2.jpg);
-	background-size: cover;
+	/* background-image: url(../images/banner-home-2.jpg); */
+	
+	background-image: linear-gradient(rgba(0, 0, 0, .1), rgba(0, 0, 0, .1)), url(../images/aisya_product/tumpeng_kue.jpeg);
+	/* background-size: cover; */
+	background-size: 570px 570px;
 }
 .item-banner.style4 .banner-content {
 	padding-left: 40px;
@@ -8540,8 +8551,11 @@ body.vertical-menu-open .vertical-menu-overlay {
 	margin-bottom: 28px;
 }
 .item-banner.style5 .inner {
-	background-image: url(../images/banner-home-3.jpg);
-	background-size: cover;
+	/* background-image: url(../images/banner-home-3.jpg);
+	background-size: cover; */
+	background-image: linear-gradient(rgba(0, 0, 0, .1), rgba(0, 0, 0, .1)), url(../images/aisya_product/tumpeng.jpeg);
+	/* background-size: cover; */
+	background-size: 580px 580px;
 }
 .item-banner.style5 .banner-content {
 	padding-left: 40px;
@@ -8583,7 +8597,9 @@ body.vertical-menu-open .vertical-menu-overlay {
 }
 /*banner home 03*/
 .item-banner.style7 .inner {
-	background-image: url(../images/banner-home-5.jpg);
+	/* background-image: url(../images/banner-home-5.jpg); */
+	background-image: linear-gradient(rgba(0, 0, 0, .1), rgba(0, 0, 1, .1)),url(../images/aisya_product/nasi_kotak.jpeg);
+	background-size: 380px 300px;
 }
 .item-banner.style7 .banner-content {
 	padding-top: 58px;
@@ -8600,7 +8616,9 @@ body.vertical-menu-open .vertical-menu-overlay {
 	margin-bottom: 15px;
 }
 .item-banner.style8 .inner {
-	background-image: url(../images/banner-home-6.jpg);
+	/* background-image: url(../images/banner-home-6.jpg); */
+	background-image: linear-gradient(rgba(0, 0, 0, .1), rgba(0, 0, 1, .1)),url(../images/aisya_product/snack_box2.jpeg);
+	background-size: 400px 460px;
 }
 .item-banner.style8 .banner-content {
 	padding-top: 61px;
@@ -9056,7 +9074,9 @@ iframe {
 	padding-top: 5px;
 }
 .item-banner.style17 .inner {
-	background-image: url(../images/banner-home-15.jpg);
+	/* background-image: url(../images/banner-home-15.jpg); */
+	background-image: linear-gradient(rgba(0, 0, 0, .1), rgba(0, 0, 1, .1)),url(../images/aisya_product/penghargaan.jpeg);
+	background-size: 1170px 370px;
 }
 .item-banner.style17 .banner-content {
 	padding-top: 50px;

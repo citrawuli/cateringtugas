@@ -493,10 +493,18 @@
         
         // $('#nama_lengkap').select2({
         //     placeholder: 'Cari...',
+        //     minimumInputLength: 3,
+        //     allowClear: true,
+        //     tags: [],
         //     ajax: {
-        //         url: "{{URL('/cariUser')}}",
+        //         url: "{{ url('/cariUser') }}",
         //         dataType: 'json',
-        //         delay: 250,
+        //         type: "GET",
+        //         data: function (term) {
+        //             return {
+        //                 term: term
+        //             };
+        //         },
         //         processResults: function (data) {
         //             return {
         //                 results:  $.map(data, function (item) {
@@ -542,10 +550,11 @@
             $('#diambilsendiri').click(function() {
                 $('#alamatsect').slideUp();
             });
+        //SELECT2
             
 
             
-   });
+    });
 
 </script>
 @endsection

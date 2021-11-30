@@ -1394,7 +1394,8 @@ class SuperAdminController extends Controller
         //     $data = DB::table('users')->select("*")->where('name', 'LIKE', '%$cariuser%')->get();
         //     return response()->json($data);
         // }
-        $data=User::all();
+        $data=User::whereNull('deleted_at')->where('name', 'LIKE', '%'.$request->input('term', '').'%')
+        ->get();
         return response()->json($data);
     }
 

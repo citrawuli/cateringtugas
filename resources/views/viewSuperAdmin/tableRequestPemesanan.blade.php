@@ -345,6 +345,8 @@ $(document).ready(function(){
     var dataTable= $('#ordertable').DataTable( {
         dom: 'lBfrtip',
         // Bfrtip you need to add l on your dom. See this for ref: https://datatables.net/reference/option/dom.
+        
+        order: [[ 2, "desc" ]]
     });
     
 
@@ -371,7 +373,7 @@ $(document).ready(function(){
 			},
             success:function(response){
                 
-                setTimeout(function(){window.location = window.location}, 300); 
+                setTimeout(function(){window.location = window.location}, 100); 
                 
                                 
             },
@@ -398,7 +400,7 @@ $(document).ready(function(){
 			    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
 			},
             success:function(response){
-                setTimeout(function(){window.location = window.location}, 300); 
+                setTimeout(function(){window.location = window.location}, 100); 
                                 
             },
             error: function() {
@@ -424,7 +426,7 @@ $(document).ready(function(){
 			    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
 			},
             success:function(response){
-                setTimeout(function(){window.location = window.location}, 300); 
+                setTimeout(function(){window.location = window.location}, 100); 
                                 
             },
             error: function() {

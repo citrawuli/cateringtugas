@@ -61,7 +61,19 @@ Route::get('/Paket/RiceBox', [App\Http\Controllers\HomeController::class, 'viewR
 Route::get('/Paket/Aqiqah', [App\Http\Controllers\HomeController::class, 'viewAqiqah']);
 Route::get('/Paket/Ramadhan', [App\Http\Controllers\HomeController::class, 'viewRamadhan']);
 Route::get('/Paket/Lebaran', [App\Http\Controllers\HomeController::class, 'viewLebaran']);
-Route::get('/Brosur', [App\Http\Controllers\HomeController::class, '']);
+Route::get('/Brosur', function () {
+	$filepath=public_path()."/Final.pdf";
+	$filename="Katalog Aisya Catering Terbaru.pdf";
+	$headers=array('Content-Type' => 'application/pdf');
+
+	if(file_exists($filepath)){
+        // Send Download
+        return \Response::download( $filepath, $filename, $headers );
+    } else {
+        // Error
+        exit( 'File yang diminta tidak ada di server kami!' );
+    }
+});
 
 
 Route::get('/gridblog', [App\Http\Controllers\HomeController::class, 'blog']);

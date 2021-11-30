@@ -200,6 +200,7 @@ $(document).ready(function(){
     var dataTable= $('#ordertable').DataTable( {
         dom: 'lBfrtip',
         // Bfrtip you need to add l on your dom. See this for ref: https://datatables.net/reference/option/dom.
+        order: [[ 1, "desc" ]]
     });
     
     $('[data-toggle="tooltip"]').tooltip();
