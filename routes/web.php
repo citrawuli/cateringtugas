@@ -34,6 +34,8 @@ Route::get('/tentangkami', function () {
 Route::get('/catalogproduct', [App\Http\Controllers\HomeController::class, 'gridprodTable']); //katalog produk grid
 Route::get('/filterproduct', [App\Http\Controllers\HomeController::class, 'filterproduct']);
 Route::get('/searchproduct', [App\Http\Controllers\HomeController::class, 'searchproduct']);
+Route::get('/ketentuan', [App\Http\Controllers\HomeController::class, 'ketentuan']);
+
 
 
 //MIDDLEWARE NEED LOGIN

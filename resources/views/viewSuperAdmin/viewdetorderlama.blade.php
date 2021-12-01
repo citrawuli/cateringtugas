@@ -134,14 +134,14 @@
 
                                         <div class="col-md-6">
                                             {{-- <label class="radio-inline mr-3"><input type="radio" value="1" name="optionkirim"> Diambil</label>
-                                            <label class="radio-inline mr-3"><input type="radio" value="2" name="optionkirim"> Dikirim Go-Car</label> --}}
+                                            <label class="radio-inline mr-3"><input type="radio" value="2" name="optionkirim"> Dikirim Aisya</label> --}}
                                            
                                                 @if ($order->pengambilan == 1)
                                                     <label class="radio-inline mr-3"><input type="radio" value="1" name="optionkirim" checked="true"> Diambil</label>
-                                                    <label class="radio-inline mr-3"><input type="radio" value="2" name="optionkirim" disabled> Dikirim Go-Car</label>
+                                                    <label class="radio-inline mr-3"><input type="radio" value="2" name="optionkirim" disabled> Dikirim Aisya</label>
                                                 @else
                                                     <label class="radio-inline mr-3"><input type="radio" value="1" name="optionkirim" disabled> Diambil</label>
-                                                    <label class="radio-inline mr-3"><input type="radio" value="2" name="optionkirim" checked="true"> Dikirim Go-Car</label>
+                                                    <label class="radio-inline mr-3"><input type="radio" value="2" name="optionkirim" checked="true"> Dikirim Aisya</label>
                                                 @endif
                                         </div>
                                     </div>

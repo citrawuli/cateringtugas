@@ -131,7 +131,7 @@
                                         <div class="form-group">
                                             <label for="product" class="col-sm-3 col-form-label">{{ __('Pengambilan') }}</label>
         <label class="radio-inline mr-3"><input type="radio" value="Diambil" name="optionkirim"> Diambil</label>
-                                        <label class="radio-inline mr-3"><input type="radio" value="Dikirim Go-Car" name="optionkirim"> Dikirim Go-Car</label>
+                                        <label class="radio-inline mr-3"><input type="radio" value="Dikirim Aisya" name="optionkirim"> Dikirim Aisya</label>
                                     
                                         </div>
                                     </div>
@@ -311,7 +311,7 @@
 
                                         <div class="col-md-6">
                                             <label class="radio-inline mr-3"><input type="radio" value="Diambil" name="optionkirim"> Diambil</label>
-                                            <label class="radio-inline mr-3"><input type="radio" value="Dikirim Go-Car" name="optionkirim"> Dikirim Go-Car</label>
+                                            <label class="radio-inline mr-3"><input type="radio" value="Dikirim Aisya" name="optionkirim"> Dikirim Aisya</label>
                                         </div>
                                     </div>
 

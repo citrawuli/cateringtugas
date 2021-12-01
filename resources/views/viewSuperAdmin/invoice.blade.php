@@ -61,7 +61,7 @@
                 @if ($order ->pengambilan == '1')
                 <span>Diambil sendiri</span>
                 @elseif ($order ->pengambilan == '2')
-                <span>Dikirim Go-Car</span>
+                <span>Dikirim Aisya</span>
                 @endif
             </td>
         </tr>

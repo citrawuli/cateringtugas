@@ -100,6 +100,7 @@ class CartController extends Controller
             'cariuser' => ['required', 'max:50'],
             'nomor_telp' => ['required', 'max:15'],
             'optionkirim' => ['required'],
+            'untuk_jam'=>['required'],
             'untuk_tanggal' => ['required'],
             'alamat_lengkap' => ['max:100'],
             'keterangan' => ['max:200'],
@@ -109,6 +110,7 @@ class CartController extends Controller
             'nomor_telp.required' => 'Nomor ponsel harus diisi',
             'optionkirim.required' => 'Metode pengambilan harus diisi',
             'untuk_tanggal.required' => 'Untuk tanggal harus diisi',
+            'untuk_jam.required' => 'Untuk jam harus diisi',
             'cariuser.max' => 'Nama harus dibawah 50 karakter',
             'nomor_telp.max' => 'Nomor ponsel harus dibawah 15 karakter',
             'alamat_lengkap.max' => 'Alamat pengiriman harus dibawah 100 karakter ',
@@ -158,9 +160,9 @@ class CartController extends Controller
         }
         session()->forget('cart');
        
-        Session::flash('message', "Terimakasih, data orderan berhasil ditambahkan! 
-        Mohon mengecek histori pemesanan pada akun Anda untuk melihat status pemesanan. 
-        Admin kami akan menghubungi Anda pada nomor ponsel tertera untuk mengkonfirmasi pemesanan.");
+        Session::flash('message', 'Terimakasih, data orderan berhasil ditambahkan! <br><br>
+        Mohon <a href="'. url('/seeyourorder').'"><strong>klik disini </strong></a>untuk mengecek histori pemesanan pada <a href="'.url('/login').'"><strong>akun Anda </strong></a>dan melihat status pemesanan. 
+        Admin kami akan menghubungi Anda pada nomor ponsel tertera untuk mengkonfirmasi pemesanan.');
         return Redirect::back();
     }
 

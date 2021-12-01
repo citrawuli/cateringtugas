@@ -126,7 +126,7 @@
                                                 @if ($pem ->pengambilan == '1')
                                                     <a href=""></i>Diambil sendiri</a>
                                                 @elseif ($pem ->pengambilan == '2')
-                                                    <a href=""></i>Dikirim Go-Car</a>
+                                                    <a href=""></i>Dikirim Aisya</a>
                                                 @endif
                                         </div>
                                         

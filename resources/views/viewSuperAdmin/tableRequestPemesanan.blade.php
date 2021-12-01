@@ -200,7 +200,7 @@
                                                                         @if ($order ->pengambilan == '1')
                                                                         <span class="badge light badge-warning"><i class="fa fa-circle text-warning mr-1"></i>Diambil sendiri</span>
                                                                         @elseif ($order ->pengambilan == '2')
-                                                                        <span class="badge light badge-success"><i class="fa fa-circle text-success mr-1"></i>Dikirim Go-Car</span>
+                                                                        <span class="badge light badge-success"><i class="fa fa-circle text-success mr-1"></i>Dikirim Aisya</span>
                                                                         @endif
                                                                     </p>
                                                                     <p><strong>Alamat : </strong><span>{{ $order->alamat_lengkap_pembeli }}</span></p>

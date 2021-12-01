@@ -187,6 +187,11 @@ class HomeController extends Controller
         return view('layouts.viewblogmore', compact('ablog')); 
     }
 
+    public function ketentuan()
+    {
+        return view('layouts.ketentuan'); 
+    }
+
     public function viewCOVID19()
     {
         $thiskategori=kategoriProduk::

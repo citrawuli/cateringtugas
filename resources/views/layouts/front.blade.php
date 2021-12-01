@@ -302,10 +302,10 @@
                                 <span class="toggle-submenu"></span>
                                 <ul role="menu" class=" submenu">
                                     <li class="menu-item">
-                                        <a title="New Arrivals" href="#" class="teamo-item-title">New Arrivals</a>
+                                        <a title="New Arrivals" href="{{url('/filterproduct?filter=newarr')}}" class="teamo-item-title">Produk Paling Baru</a>
                                     </li>
                                     <li class="menu-item">
-                                        <a title="Ketentuan" href="#" class="teamo-item-title">Ketentuan</a>
+                                        <a title="Ketentuan" href="{{url('/ketentuan')}}" class="teamo-item-title">Ketentuan Pemesanan & Pembayaran</a>
                                     </li>
                                 </ul>
                             </li>
@@ -528,22 +528,10 @@
                 </div>
                 <div class="box-footer col-xs-12 col-sm-4 col-md-4 col-lg-4">
                     <div class="teamo-custommenu default">
-                        <h2 class="widgettitle">Quick Menu</h2>
+                        {{-- <h2 class="widgettitle">Quick Menu</h2> --}}
                         <ul class="menu">
                             <li class="menu-item">
-                                <a href="#">New arrivals</a>
-                            </li>
-                            <li class="menu-item">
-                                <a href="#">Life style</a>
-                            </li>
-                            <li class="menu-item">
-                                <a href="#">Cacti</a>
-                            </li>
-                            <li class="menu-item">
-                                <a href="#">Palms</a>
-                            </li>
-                            <li class="menu-item">
-                                <a href="#">Ferns</a>
+                                {{-- <a href="#">New arrivals</a> --}}
                             </li>
                         </ul>
                     </div>
@@ -567,22 +555,10 @@
                 </div>
                 <div class="box-footer col-xs-12 col-sm-4 col-md-4 col-lg-4">
                     <div class="teamo-custommenu default">
-                        <h2 class="widgettitle">Information</h2>
+                        {{-- <h2 class="widgettitle">Information</h2> --}}
                         <ul class="menu">
                             <li class="menu-item">
-                                <a href="#">FAQs</a>
-                            </li>
-                            <li class="menu-item">
-                                <a href="#">Track Order</a>
-                            </li>
-                            <li class="menu-item">
-                                <a href="#">Delivery</a>
-                            </li>
-                            <li class="menu-item">
-                                <a href="#">Contact Us</a>
-                            </li>
-                            <li class="menu-item">
-                                <a href="#">Return</a>
+                                {{-- <a href="#">FAQs</a> --}}
                             </li>
                         </ul>
                     </div>

@@ -97,10 +97,10 @@
                     <label class="text">Pengambilan (*)</label>
                    @if ($pem->pengambilan == 1)
                         <label class="radio-inline mr-3 diambilsendiri"><input type="radio" value="1" name="optionkirim" checked="true"> Diambil</label>
-                        <label class="radio-inline mr-3 bygocar"><input type="radio" value="2" name="optionkirim"> Dikirim Go-Car</label>
+                        <label class="radio-inline mr-3 bygocar"><input type="radio" value="2" name="optionkirim"> Dikirim Aisya</label>
                     @else
                         <label class="radio-inline mr-3 diambilsendiri"><input type="radio" value="1" name="optionkirim" > Diambil</label>
-                        <label class="radio-inline mr-3 bygocar"><input type="radio" value="2" name="optionkirim" checked="true"> Dikirim Go-Car</label>
+                        <label class="radio-inline mr-3 bygocar"><input type="radio" value="2" name="optionkirim" checked="true"> Dikirim Aisya</label>
                     @endif
                 
                 

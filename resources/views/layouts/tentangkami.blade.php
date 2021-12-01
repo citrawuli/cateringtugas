@@ -63,7 +63,7 @@
                                         <p>Berkat dukungan pelanggan, kini Aisya Catering dapat memenuhi kebutuhan order hingga 4000 pak dan kapasitas kue 7000 perhari.
                                         </p>
                                    </div>
-                                   <div class="col-lg-5 col-md-offset-7" >
+                                   <div class="col-lg-5 col-md-offset-7"  style="text-align: justify;" >
                                         <div class="content-inner">
                                             <h4>Visi</h4>
                                             <p> “Menjadi perusahaan jasa boga terkemuka dan memiliki reputasi baik dalam menjaga kualitas rasa dan kualitas layanan yang prima.”</p>

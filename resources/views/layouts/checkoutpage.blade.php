@@ -35,7 +35,7 @@
         @if (Session::has('message'))
         <div class="alert alert-success alert-dismissible show">                                   
             
-            <strong>Success! </strong>{{ Session::get('message') }}
+            <strong>Success! </strong>{!! Session::get('message') !!}
             <button type="button" class="close h-100" data-dismiss="alert" aria-label="Close"><span><i class="mdi mdi-close"></i></span>
             </button>
         </div>
@@ -83,22 +83,22 @@
                                 </p>
 
                                 <p class="form-row form-row-last">
-                                    <label class="text">Untuk jam</label>
+                                    <label class="text">Untuk jam (*)</label>
                                     <span style="width: 100%;" class="input-group clockpicker" data-placement="bottom" data-align="top" data-autoclose="true">
-                                        <input type="text" class="input-text @error('untuk_jam') is-invalid @enderror" value="" name="untuk_jam" placeholder="pilih jam (opsional)"> 
+                                        <input type="text" class="input-text @error('untuk_jam') is-invalid @enderror" value="" required name="untuk_jam" placeholder="pilih jam pesanan tiba di tempat"> 
                                     </span>
                                 </p>
 
                                 <p class="form-row forn-row-first">
                                     <label class="text">Pengambilan (*)</label>
                                     <label class="radio-inline mr-3"><input type="radio" value="1" name="optionkirim" id="diambilsendiri"> Diambil</label>
-                                    <label class="radio-inline mr-3"><input type="radio" value="2" name="optionkirim" id="bygocar"> Dikirim Go-Car</label>
+                                    <label class="radio-inline mr-3"><input type="radio" value="2" name="optionkirim" id="bygocar"> Dikirim Aisya</label>
                                 </p>
 
                                 <p class="form-row form-row-col forn-row-col-1" >
                                     <span id="alamatsect">
                                         <label class="text">Alamat Pengantaran</label>
-                                        <small>Mohon menuliskan alamat pengantaran dengan jelas. Pengantaran akan dikenakan biaya tambahan terpisah.</small>
+                                        <small>Mohon menuliskan alamat pengantaran dengan jelas.</small>
                                         <textarea rows="3" class="input-text @error('alamat_lengkap') is-invalid @enderror" name="alamat_lengkap" value="{{ Auth::user()->alamat_user }}" placeholder="">{{ Auth::user()->alamat_user }}</textarea>
                                     </span>
                                 </p>

@@ -97,7 +97,7 @@
 
                                         <div class="col-md-6">
                                             <label class="radio-inline mr-3"><input type="radio" value="1" name="optionkirim" id="diambilsendiri"> Diambil</label>
-                                            <label class="radio-inline mr-3"><input type="radio" value="2" name="optionkirim" id="bygocar"> Dikirim Go-Car</label>
+                                            <label class="radio-inline mr-3"><input type="radio" value="2" name="optionkirim" id="bygocar"> Dikirim Aisya</label>
                                         </div>
                                     </div>
 
