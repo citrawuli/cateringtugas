@@ -194,23 +194,137 @@ class HomeController extends Controller
 
     public function viewCOVID19()
     {
-        $thiskategori=kategoriProduk::
-        join('produk','kategori_produk.id','=','produk.id_kategori')
+        $thiskategori=produk::
+        join('kategori_produk','kategori_produk.id','=','produk.id_kategori')
         ->where('kategori_produk.id', '=','K0007')
-        ->whereNull('produk.deleted_at')->orderBy('produk.created_at', 'desc')->paginate(12);
+        ->whereNull('produk.deleted_at')->select('produk.*', 'kategori_produk.id as katid', 'kategori_produk.nama_kategori')->orderBy('produk.created_at', 'desc')->paginate(12);
         $newarrival = DB::table('produk')->whereNull('produk.deleted_at')->latest()->take(8)->get();
-        dd($thiskategori);
-        return view('layouts.viewCOVID19', compact('thiskategori','newarrival')); 
+        $galpro = DB::table('galeri_produk')->whereNull('galeri_produk.deleted_at')->get();
+        $countprod = $thiskategori->count('produk.id');
+        // dd($namakategori);
+        return view('layouts.paketview', compact('thiskategori','newarrival','galpro','countprod')); 
     }
+
     public function viewWedding()
     {
-        $thiskategori=kategoriProduk::
-        join('produk','kategori_produk.id','=','produk.id_kategori')
+        $thiskategori=produk::
+        join('kategori_produk','kategori_produk.id','=','produk.id_kategori')
         ->where('kategori_produk.id', '=','K0010')
-        ->whereNull('produk.deleted_at')->orderBy('produk.created_at', 'desc')->paginate(12);
+        ->whereNull('produk.deleted_at')->select('produk.*', 'kategori_produk.id as katid', 'kategori_produk.nama_kategori')->orderBy('produk.created_at', 'desc')->paginate(12);
         $newarrival = DB::table('produk')->whereNull('produk.deleted_at')->latest()->take(8)->get();
-        dd($thiskategori);
-        return view('layouts.viewWedding', compact('thiskategori','newarrival')); 
+        $galpro = DB::table('galeri_produk')->whereNull('galeri_produk.deleted_at')->get();
+        $countprod = $thiskategori->count('produk.id');
+        // dd($thiskategori);
+        return view('layouts.paketview', compact('thiskategori','newarrival','galpro','countprod'));  
     }
+
+    public function viewPemerintahan()
+    {
+        $thiskategori=produk::
+        join('kategori_produk','kategori_produk.id','=','produk.id_kategori')
+        ->where('kategori_produk.id', '=','K0008')
+        ->whereNull('produk.deleted_at')->select('produk.*', 'kategori_produk.id as katid', 'kategori_produk.nama_kategori')->orderBy('produk.created_at', 'desc')->paginate(12);
+        $newarrival = DB::table('produk')->whereNull('produk.deleted_at')->latest()->take(8)->get();
+        $galpro = DB::table('galeri_produk')->whereNull('galeri_produk.deleted_at')->get();
+        $countprod = $thiskategori->count('produk.id');
+        // dd($thiskategori);
+        return view('layouts.paketview', compact('thiskategori','newarrival','galpro','countprod')); 
+    }
+
+    public function viewPabrik()
+    {
+        $thiskategori=produk::
+        join('kategori_produk','kategori_produk.id','=','produk.id_kategori')
+        ->where('kategori_produk.id', '=','K0009')
+        ->whereNull('produk.deleted_at')->select('produk.*', 'kategori_produk.id as katid', 'kategori_produk.nama_kategori')->orderBy('produk.created_at', 'desc')->paginate(12);
+        $newarrival = DB::table('produk')->whereNull('produk.deleted_at')->latest()->take(8)->get();
+        $galpro = DB::table('galeri_produk')->whereNull('galeri_produk.deleted_at')->get();
+        $countprod = $thiskategori->count('produk.id');
+        // dd($thiskategori);
+        return view('layouts.paketview', compact('thiskategori','newarrival','galpro','countprod')); 
+    }
+
+    public function  viewTumpengHantaran()
+    {
+        $thiskategori=produk::
+        join('kategori_produk','kategori_produk.id','=','produk.id_kategori')
+        ->where('kategori_produk.id', '=','K0001')
+        ->whereNull('produk.deleted_at')->select('produk.*', 'kategori_produk.id as katid', 'kategori_produk.nama_kategori')->orderBy('produk.created_at', 'desc')->paginate(12);
+        $newarrival = DB::table('produk')->whereNull('produk.deleted_at')->latest()->take(8)->get();
+        $galpro = DB::table('galeri_produk')->whereNull('galeri_produk.deleted_at')->get();
+        $countprod = $thiskategori->count('produk.id');
+        // dd($thiskategori);
+        return view('layouts.paketview', compact('thiskategori','newarrival','galpro','countprod')); 
+    }
+
+    public function viewSnackBox()
+    {
+        $thiskategori=produk::
+        join('kategori_produk','kategori_produk.id','=','produk.id_kategori')
+        ->where('kategori_produk.id', '=','K0003')
+        ->whereNull('produk.deleted_at')->select('produk.*', 'kategori_produk.id as katid', 'kategori_produk.nama_kategori')->orderBy('produk.created_at', 'desc')->paginate(12);
+        $newarrival = DB::table('produk')->whereNull('produk.deleted_at')->latest()->take(8)->get();
+        $galpro = DB::table('galeri_produk')->whereNull('galeri_produk.deleted_at')->get();
+        $countprod = $thiskategori->count('produk.id');
+        // dd($thiskategori);
+        return view('layouts.paketview', compact('thiskategori','newarrival','galpro','countprod')); 
+    }
+
+    public function viewRiceBox()
+    {
+        $thiskategori=produk::
+        join('kategori_produk','kategori_produk.id','=','produk.id_kategori')
+        ->where('kategori_produk.id', '=','K0002')
+        ->whereNull('produk.deleted_at')->select('produk.*', 'kategori_produk.id as katid', 'kategori_produk.nama_kategori')->orderBy('produk.created_at', 'desc')->paginate(12);
+        $newarrival = DB::table('produk')->whereNull('produk.deleted_at')->latest()->take(8)->get();
+        $galpro = DB::table('galeri_produk')->whereNull('galeri_produk.deleted_at')->get();
+        $countprod = $thiskategori->count('produk.id');
+        // dd($thiskategori);
+        return view('layouts.paketview', compact('thiskategori','newarrival','galpro','countprod')); 
+    }
+
+    public function viewAqiqah()
+    {
+        $thiskategori=produk::
+        join('kategori_produk','kategori_produk.id','=','produk.id_kategori')
+        ->where('kategori_produk.id', '=','K0004')
+        ->whereNull('produk.deleted_at')->select('produk.*', 'kategori_produk.id as katid', 'kategori_produk.nama_kategori')->orderBy('produk.created_at', 'desc')->paginate(12);
+        $newarrival = DB::table('produk')->whereNull('produk.deleted_at')->latest()->take(8)->get();
+        $galpro = DB::table('galeri_produk')->whereNull('galeri_produk.deleted_at')->get();
+        $countprod = $thiskategori->count('produk.id');
+        // dd($thiskategori);
+        return view('layouts.paketview', compact('thiskategori','newarrival','galpro','countprod')); 
+    }
+
+    public function viewRamadhan()
+    {
+        $thiskategori=produk::
+        join('kategori_produk','kategori_produk.id','=','produk.id_kategori')
+        ->where('kategori_produk.id', '=','K0005')
+        ->whereNull('produk.deleted_at')->select('produk.*', 'kategori_produk.id as katid', 'kategori_produk.nama_kategori')->orderBy('produk.created_at', 'desc')->paginate(12);
+        $newarrival = DB::table('produk')->whereNull('produk.deleted_at')->latest()->take(8)->get();
+        $galpro = DB::table('galeri_produk')->whereNull('galeri_produk.deleted_at')->get();
+        $countprod = $thiskategori->count('produk.id');
+        // dd($thiskategori);
+        return view('layouts.paketview', compact('thiskategori','newarrival','galpro','countprod')); 
+    }
+
+    public function viewLebaran()
+    {
+        $thiskategori=produk::
+        join('kategori_produk','kategori_produk.id','=','produk.id_kategori')
+        ->where('kategori_produk.id', '=','K0006')
+        ->whereNull('produk.deleted_at')->select('produk.*', 'kategori_produk.id as katid', 'kategori_produk.nama_kategori')->orderBy('produk.created_at', 'desc')->paginate(12);
+        $newarrival = DB::table('produk')->whereNull('produk.deleted_at')->latest()->take(8)->get();
+        $galpro = DB::table('galeri_produk')->whereNull('galeri_produk.deleted_at')->get();
+        $countprod = $thiskategori->count('produk.id');
+        // dd($thiskategori);
+        return view('layouts.paketview', compact('thiskategori','newarrival','galpro','countprod')); 
+    }
+
+  
+    
+
+
    
 }
