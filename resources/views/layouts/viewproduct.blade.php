@@ -12,7 +12,31 @@
                         </li>
                         @foreach ( $produk as $prod)
                         <li class="trail-item">
+                            @if($prod->id_kategori=='K0001')
+                                <a href="{{url('/Paket/TumpengHantaran')}}">{{$prod->nama_kategori}}</a>
+                            @elseif ($prod->id_kategori=='K0002')
+                                <a href="{{url('/Paket/SnackBox')}}">{{$prod->nama_kategori}}</a>
+                            @elseif ($prod->id_kategori=='K0003')
+                                <a href="{{url('/Paket/RiceBox')}}">{{$prod->nama_kategori}}</a>
+                            @elseif ($prod->id_kategori=='K0004')
+                                <a href="{{url('/Paket/Aqiqah')}}">{{$prod->nama_kategori}}</a>
+                            @elseif ($prod->id_kategori=='K0005')
+                                <a href="{{url('/Paket/Ramadhan')}}">{{$prod->nama_kategori}}</a>
+                            @elseif ($prod->id_kategori=='K0006')
+                                <a href="{{url('/Paket/Lebaran')}}">{{$prod->nama_kategori}}</a>
+                            @elseif ($prod->id_kategori=='K0007')
+                                <a href="{{url('/Paket/COVID19')}}">{{$prod->nama_kategori}}</a>
+                            @elseif ($prod->id_kategori=='K0008')
+                                <a href="{{url('/Paket/Pemerintahan')}}">{{$prod->nama_kategori}}</a>
+                            @elseif ($prod->id_kategori=='K0009')
+                                <a href="{{url('/Paket/Pabrik')}}">{{$prod->nama_kategori}}</a>
+                            @elseif ($prod->id_kategori=='K0010')
+                                <a href="{{url('/Paket/Wedding')}}">{{$prod->nama_kategori}}</a>
+                            @elseif ($prod->id_kategori=='K0010')
+                                <a href="{{url('/Paket/Khusus')}}">{{$prod->nama_kategori}}</a>
+                            @else
                             <a href="#">{{$prod->nama_kategori}}</a>
+                            @endif
                         </li>
                         <li class="trail-item trail-end active">
                             {{$prod->nama_produk}}

@@ -289,7 +289,7 @@
                                         </div>
                                         <div class="product-info">
                                             <h5 class="product-name product_title">
-                                                <a href="#">{{$bestps->nama_produk}}</a>
+                                                <a href="{{url('/viewproduct/'.$bestps->id)}}">{{$bestps->nama_produk}}</a>
                                             </h5>
                                             <div class="group-info">
                                                 {{-- <div class="stars-rating">
@@ -389,7 +389,7 @@
                                         </div>
                                         <div class="product-info">
                                             <h5 class="product-name product_title">
-                                                <a href="#">{{$newarr ->nama_produk}}</a>
+                                                <a href="{{url('/viewproduct/'.$newarr->id)}}">{{$newarr ->nama_produk}}</a>
                                             </h5>
                                             <div class="group-info">
                                                 {{-- <div class="stars-rating">

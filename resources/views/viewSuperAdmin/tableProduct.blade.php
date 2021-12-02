@@ -84,6 +84,7 @@
                                 <tr>
                                     <th>ID</th>
                                     <th>Kategori</th>
+                                    <th>Created At</th>
                                     <th>Nama</th>
                                     <th>Tipe</th>
                                     <th>Deskripsi</th>
@@ -100,6 +101,7 @@
                                 <tr>
                                   <td>{{ $prod->id }}</td>
                                   <td>{{ $prod->nama_kategori }}</td>
+                                  <td>{{ $prod->created_at }}</td>
                                   <td>{{ $prod->nama_produk }}</td>
                                   <td>{{ $prod->tipe_produk ?? '-'}}</td>
                                   <td>{{ $prod->deskripsi_produk ?? '-' }}</td>
@@ -223,7 +225,14 @@ $(document).ready(function(){
     var dataTable= $('#producttable').DataTable( {
         dom: 'lBfrtip',
         // Bfrtip you need to add l on your dom. See this for ref: https://datatables.net/reference/option/dom.
-        
+        "columnDefs": [
+            {
+                "targets": [ 2 ],
+                "visible": false,
+                "searchable": false
+            },
+        ],
+        order: [[ 2, "desc" ]]
     });
     $('#rice').on('click', function () {
         dataTable.columns(1).search("Paket Rice Box", true, false, true).draw();
