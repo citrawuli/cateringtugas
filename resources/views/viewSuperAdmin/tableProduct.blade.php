@@ -74,6 +74,7 @@
                     <button id="wedding" class="btn light btn-secondary filter">Paket Wedding</button>
                     <button id="pemerintahan" class="btn light btn-secondary filter">Paket Pemerintahan</button>
                     <button id="pabrik" class="btn light btn-secondary filter">Paket Corporate/Pabrik</button>
+                    <button id="allpack" class="btn light btn-secondary filter">Semua</button>
                 </div>
                 <br> 
 
@@ -266,6 +267,9 @@ $(document).ready(function(){
     });
     $('#wedding').on('click', function () {
         dataTable.columns(1).search("Paket Wedding", true, false, true).draw();
+    });
+    $('#allpack').on('click', function () {
+        dataTable.columns(1).search("").draw();
     });
     
 

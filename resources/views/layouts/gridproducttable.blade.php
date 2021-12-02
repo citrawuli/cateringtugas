@@ -174,7 +174,8 @@
                     </ul>
                     <div class="pagination clearfix style2">
                         <div class="nav-link">
-                            {!! $produk->links() !!}
+                                {!! $produk->links() !!}
+                           
                             {{-- <a href="#" class="page-numbers"><i class="icon fa fa-angle-left" aria-hidden="true"></i></a>
                             <a href="#" class="page-numbers">1</a>
                             <a href="#" class="page-numbers">2</a>

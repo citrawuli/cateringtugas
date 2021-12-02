@@ -104,12 +104,21 @@ class HomeController extends Controller
     public function filterproduct(Request $request)
     {
         // dd($request->all());
-
+        
+        $produk =  produk::
+        join('kategori_produk','kategori_produk.id','=','produk.id_kategori')
+        ->select('kategori_produk.nama_kategori','produk.*')
+        ->whereNull('produk.deleted_at')->paginate(12);
+        // dd($request->filter);
         if($request->filter=='renting'){
             $produk = produk::
             join('kategori_produk','kategori_produk.id','=','produk.id_kategori')
             ->select('kategori_produk.nama_kategori','produk.*')
             ->whereNull('produk.deleted_at')->orderBy('produk.harga_produk', 'asc')->paginate(12);
+            $produk->setPath('filterproduct?filter=renting'); 
+            //alhamdulillah nemu di dokumentasi :)) dan gak ada di stackoverflow 
+            //namanya custom URI yaw, coba diilangin yang line setpath, 
+            //gak bisa di page 2 dsb soalnya pagination URI jadi gak match 
             
         }
         elseif($request->filter=='tingren'){
@@ -117,14 +126,14 @@ class HomeController extends Controller
             join('kategori_produk','kategori_produk.id','=','produk.id_kategori')
             ->select('kategori_produk.nama_kategori','produk.*')
             ->whereNull('produk.deleted_at')->orderBy('produk.harga_produk', 'desc')->paginate(12);
-            
+            $produk->setPath('filterproduct?filter=tingren');
         }
         elseif($request->filter=='newarr'){
             $produk = produk::
             join('kategori_produk','kategori_produk.id','=','produk.id_kategori')
             ->select('kategori_produk.nama_kategori','produk.*')
             ->whereNull('produk.deleted_at')->orderBy('produk.created_at', 'desc')->paginate(12);
-            
+            $produk->setPath('filterproduct?filter=newarr');
         }
        
         $galpro = DB::table('galeri_produk')->whereNull('galeri_produk.deleted_at')->get();
@@ -132,6 +141,8 @@ class HomeController extends Controller
 
         return view('layouts.gridproducttable', compact('produk', 'galpro', 'newarrival')); 
     }
+
+
 
     public function searchproduct(Request $request)
     {
