@@ -303,7 +303,7 @@ class SuperAdminController extends Controller
 
         // User::create($request->all());
         kategoriProduk::create([
-            'nama_kategori' => $request->category_name,
+            'nama_kategori' => ucwords(strtolower($request->category_name)),
         ]);
     
         Session::flash('message', "Data kategori berhasil ditambahkan");
@@ -338,7 +338,7 @@ class SuperAdminController extends Controller
         );
 
         $model = kategoriProduk::find($id);
-        $model->nama_kategori = $request->input('category_name');
+        $model->nama_kategori =ucwords(strtolower($request->input('category_name')));
         $model->touch();
         $model->save();
         Session::flash('message', "Data kategori berhasil diubah");
@@ -410,7 +410,7 @@ class SuperAdminController extends Controller
         $product = DB::table('produk')
             ->join('kategori_produk', 'produk.id_kategori', '=', 'kategori_produk.id')
             ->select('produk.*','kategori_produk.nama_kategori')
-            ->whereNull('produk.deleted_at')->get();
+            ->whereNull('produk.deleted_at')->orderBy('produk.created_at','desc')->get();
         // $fotoproduk = DB::table('galeri_produk')
         //     ->join('produk','galeri_produk.id_produk', '=', 'produk.id')
         //     ->select('produk.id', 'galeri_produk.*')->get();
@@ -630,8 +630,8 @@ class SuperAdminController extends Controller
         produk::create([
             'id_kategori' => $request->category_name,
             'nama_produk' => ucwords(strtolower($request->product_name)),
-            'tipe_produk' => $request->product_type,
-            'deskripsi_produk' => $request->product_desc,
+            'tipe_produk' => ucwords(strtolower($request->product_type)),
+            'deskripsi_produk' => ucfirst(strtolower($request->product_desc)),
             'harga_produk' => $request->product_price,
             'created_at' => \Carbon\Carbon::now(), 
             'updated_at' => \Carbon\Carbon::now(), 
@@ -679,9 +679,9 @@ class SuperAdminController extends Controller
 
         $model = produk::find($id);
         $model->id_kategori = $request->input('category_name');
-        $model->nama_produk = $request->input('product_name');
-        $model->tipe_produk = $request->input('product_type');
-        $model->deskripsi_produk = $request->input('product_desc');
+        $model->nama_produk =  ucwords(strtolower($request->input('product_name')));
+        $model->tipe_produk = ucwords(strtolower($request->input('product_type')));
+        $model->deskripsi_produk =  ucfirst(strtolower($request->input('product_desc')));
         $model->harga_produk = $request->input('product_price');
         $model->touch();
         $model->save();

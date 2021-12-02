@@ -60,11 +60,26 @@
             <div class="card">
                 <div class="card-header text-white bg-danger">
                     <h4 class="card-title">Daftar Produk</h4>
+                </div><br>
+
+                <div class="btn-group btn-group-sm" style="margin-left: 5%; margin-right:5%">
+                    <button id="rice" class="btn light btn-secondary filter">Paket Rice Box</button>
+                    <button id="snack" class="btn light btn-secondary filter">Paket Snack Box</button>
+                    <button id="tumpeng" class="btn light btn-secondary filter">Paket Tumpeng Hantaran</button>
+                    <button id="khusus" class="btn light btn-secondary filter">Paket Khusus Ekonomis</button>
+                    <button id="aqiqah" class="btn light btn-secondary filter">Paket Aqiqah</button>
+                    <button id="ramadhan" class="btn light btn-secondary filter">Paket Ramadhan</button>
+                    <button id="lebaran" class="btn light btn-secondary filter">Paket Lebaran</button>
+                    <button id="covid" class="btn light btn-secondary filter">Paket Covid-19</button>
+                    <button id="wedding" class="btn light btn-secondary filter">Paket Wedding</button>
+                    <button id="pemerintahan" class="btn light btn-secondary filter">Paket Pemerintahan</button>
+                    <button id="pabrik" class="btn light btn-secondary filter">Paket Corporate/Pabrik</button>
                 </div>
+                <br> 
 
                 <div class="card-body">
                     <div class="table-responsive">
-                        <table id="example3" class="display" style="min-width: 845px">
+                        <table id="producttable" class="display" style="min-width: 845px">
                             <thead>
                                 <tr>
                                     <th>ID</th>
@@ -204,6 +219,46 @@ $(document).ready(function(){
     $('[data-toggle="tooltip2"]').tooltip();
 
     $('[data-toggle="tooltip3"]').tooltip();
+
+    var dataTable= $('#producttable').DataTable( {
+        dom: 'lBfrtip',
+        // Bfrtip you need to add l on your dom. See this for ref: https://datatables.net/reference/option/dom.
+        
+    });
+    $('#rice').on('click', function () {
+        dataTable.columns(1).search("Paket Rice Box", true, false, true).draw();
+    });
+    $('#snack').on('click', function () {
+        dataTable.columns(1).search("Paket Snack Box", true, false, true).draw();
+    });
+    $('#tumpeng').on('click', function () {
+        dataTable.columns(1).search("Paket Tumpeng Hantaran", true, false, true).draw();
+    });
+    $('#khusus').on('click', function () {
+        dataTable.columns(1).search("Paket Khusus", true, false, true).draw();
+    });
+    $('#aqiqah').on('click', function () {
+        dataTable.columns(1).search("Paket Aqiqah", true, false, true).draw();
+    });
+    $('#lebaran').on('click', function () {
+        dataTable.columns(1).search("Paket Lebaran", true, false, true).draw();
+    });
+    $('#ramadhan').on('click', function () {
+        dataTable.columns(1).search("Paket Ramadhan", true, false, true).draw();
+    });
+    $('#covid').on('click', function () {
+        dataTable.columns(1).search("Paket Covid-19", true, false, true).draw();
+    });
+    $('#pemerintahan').on('click', function () {
+        dataTable.columns(1).search("Paket Pemerintahan", true, false, true).draw();
+    });
+    $('#pabrik').on('click', function () {
+        dataTable.columns(1).search("Paket Corporate/Pabrik", true, false, true).draw();
+    });
+    $('#wedding').on('click', function () {
+        dataTable.columns(1).search("Paket Wedding", true, false, true).draw();
+    });
+    
 
     
 

@@ -85,7 +85,7 @@
                             <label for="product" class="col-sm-3 col-form-label">{{ __('Deskripsi Produk') }}</label>
 
                             <div class="col-md-6">
-                                <textarea rows="5" class="form-control @error('product_desc') is-invalid @enderror" name="product_desc"  placeholder="Type your description here (optional)" value="{{ $produk->deskripsi_produk }}"></textarea>
+                                <textarea rows="5" class="form-control @error('product_desc') is-invalid @enderror" name="product_desc"  placeholder="Type your description here (optional)" value="">{{ $produk->deskripsi_produk }}</textarea>
                             </div>
                             
                         </div>
