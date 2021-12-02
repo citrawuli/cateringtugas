@@ -49,16 +49,21 @@
                      <form id="form-id" method="POST" action="{{ url('/StoreProduct') }}">
                         @csrf
 
-                        
+                        {{-- {{var_dump(Session::all())}} --}}
                         <div class="form-group row">
                             <label for="category_name" class="col-sm-3 col-form-label">Kategori (*)</label>
                             <div class="col-md-6">
                               <select class="form-control select2"  id="single-select" required=""  name="category_name" autofocus>
                               <option disabled selected="" autofocus>Select Category</option>
                               @foreach($category as $cat)
-                              <option value="{{ $cat->id }}">{{$cat->nama_kategori}}</option>
+                                @if (old('category_name')==$cat->id)
+                                    <option value={{$cat->id}} selected>{{ $cat->nama_kategori }}</option>
+                                @else
+                                    <option value={{$cat->id}} >{{ $cat->nama_kategori }}</option>
+                                @endif
                               @endforeach
                               </select>
+                                
                             </div>
                         </div>
 

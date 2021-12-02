@@ -19,8 +19,8 @@ use App\Models\Pembayaran;
 use Carbon\Carbon;
 use Exception;
 use Illuminate\Support\Str;
-use Illuminate\Support\Facades\Input;
 use PDF;
+
 
 class SuperAdminController extends Controller
 {
@@ -611,7 +611,7 @@ class SuperAdminController extends Controller
             'category_name' => ['required'],
             'product_name' => ['required', 'string', 'max:50', 'unique:produk,nama_produk'],
             'product_type' => ['max:20'],
-            'product_desc' => ['max:150'],
+            'product_desc' => ['max:600'],
             'product_price' => ['required'],
         ],
         [
@@ -620,7 +620,7 @@ class SuperAdminController extends Controller
             'product_name.unique' => 'Produk ini sudah ada',
             'product_name.max' => 'Nama produk harus dibawah 50 karakter',
             'product_type.max' => 'Tipe produk harus dibawah 20 karakter',
-            'product_desc.max' => 'Deskripsi produk harus dibawah 150 karakter',
+            'product_desc.max' => 'Deskripsi produk harus dibawah 600 karakter',
             'product_price.required' => 'Mohon mengisi harga produk',
             
         ]
@@ -629,7 +629,7 @@ class SuperAdminController extends Controller
 
         produk::create([
             'id_kategori' => $request->category_name,
-            'nama_produk' => $request->product_name,
+            'nama_produk' => ucwords(strtolower($request->product_name)),
             'tipe_produk' => $request->product_type,
             'deskripsi_produk' => $request->product_desc,
             'harga_produk' => $request->product_price,
@@ -637,8 +637,8 @@ class SuperAdminController extends Controller
             'updated_at' => \Carbon\Carbon::now(), 
         ]);
 
-        Session::flash('message', "Data produk berhasil ditambahkan");
-        return Redirect::back();
+        // Session::flash('message', "Data produk berhasil ditambahkan");
+        return Redirect::back()->withInput($request->all())->with('message', "Data produk berhasil ditambahkan");
     }
 
     public function editproduct($id)

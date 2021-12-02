@@ -322,6 +322,20 @@ class HomeController extends Controller
         return view('layouts.paketview', compact('thiskategori','newarrival','galpro','countprod')); 
     }
 
+    public function viewKhusus()
+    {
+        $thiskategori=produk::
+        join('kategori_produk','kategori_produk.id','=','produk.id_kategori')
+        ->where('kategori_produk.id', '=','K0011')
+        ->whereNull('produk.deleted_at')->select('produk.*', 'kategori_produk.id as katid', 'kategori_produk.nama_kategori')->orderBy('produk.created_at', 'desc')->paginate(12);
+        $newarrival = DB::table('produk')->whereNull('produk.deleted_at')->latest()->take(8)->get();
+        $galpro = DB::table('galeri_produk')->whereNull('galeri_produk.deleted_at')->get();
+        $countprod = $thiskategori->count('produk.id');
+        // dd($thiskategori);
+        return view('layouts.paketview', compact('thiskategori','newarrival','galpro','countprod')); 
+    }
+
+
   
     
 

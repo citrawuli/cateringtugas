@@ -63,6 +63,7 @@ Route::get('/Paket/RiceBox', [App\Http\Controllers\HomeController::class, 'viewR
 Route::get('/Paket/Aqiqah', [App\Http\Controllers\HomeController::class, 'viewAqiqah']);
 Route::get('/Paket/Ramadhan', [App\Http\Controllers\HomeController::class, 'viewRamadhan']);
 Route::get('/Paket/Lebaran', [App\Http\Controllers\HomeController::class, 'viewLebaran']);
+Route::get('/Paket/Khusus', [App\Http\Controllers\HomeController::class, 'viewKhusus']);
 Route::get('/Brosur', function () {
 	$filepath=public_path()."/Final.pdf";
 	$filename="Katalog Aisya Catering Terbaru.pdf";

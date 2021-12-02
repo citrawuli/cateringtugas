@@ -33,15 +33,15 @@
         <BR></BR>
         <h4>KETENTUAN PEMBAYARAN</h4>
         <ul>
-            <li>Pembayaran bisa ditransfer melalui <strong>Rek. BCA 3640902379 </strong>A/N Aida Ayu Muspitasari atau COD</li>
-            <li>H-1 harus konfirmasi ke <a href="http://wa.me/6281216855310">Whatsapp ini</a></li>
+            <li>Pembayaran bisa ditransfer melalui <strong>Rek. BCA 3640902379 </strong>A/N Aida Ayu Muspitasari atau COD.</li>
+            <li>H-1 harus konfirmasi ke <a href="http://wa.me/6281216855310">Whatsapp ini</a>.</li>
         </ul>
 
         <BR></BR>
         <h4>PERLU DIPERHATIKAN</h4>
         <ul>
-            <li>Makanan sebaiknya dikonsumsi maksimal 4 jam setelah pengantaran</li>
-            <li>Letakkan makanan ditempat sejuk dan jauhi dari sinar matahari langsung </li>
+            <li>Makanan sebaiknya dikonsumsi maksimal 4 jam setelah pengantaran.</li>
+            <li>Letakkan makanan ditempat sejuk dan jauhi dari sinar matahari langsung.</li>
         </ul>
        
         
