@@ -121,13 +121,18 @@ class CartController extends Controller
         // // dd($request->all());
         
         $a=Carbon::parse($request->input('untuk_tanggal'));
+        if (Carbon::now() >= $a){
+            $tgl  = $a->addYear();
+        } else {
+            $tgl  = $a;
+        }
 
         $ord = Pemesanan::create([
             'user_id' =>  Auth::user()->id,
             'nama_lengkap_pembeli'  =>  $request->cariuser,
             'no_hp_pembeli' =>  $request->nomor_telp,
             'alamat_lengkap_pembeli' =>  $request->alamat_lengkap,
-            'untuk_tanggal' =>  $a,
+            'untuk_tanggal' =>  $tgl,
             'untuk_jam' =>  $request->untuk_jam,
             'pengambilan' =>  $request->optionkirim,
             'keterangan' =>  $request->keterangan,

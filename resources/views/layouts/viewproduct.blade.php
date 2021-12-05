@@ -234,6 +234,10 @@
                                                 <td>Menu</td>
                                                 <td> {{$prod->nama_kategori}}</td>
                                             </tr>
+                                            <tr>
+                                                <td>Tipe</td>
+                                                <td> {{$prod->tipe_produk ?? '-'}} </td>
+                                            </tr>
                                             {{-- <tr>
                                                 <td>Color</td>
                                                 <td>White/ Black/ Teal/ Brown</td>

@@ -169,7 +169,30 @@
                                             </div>
                                         </div>
                                     </div>
-                                    
+                                    <div class="teamo-team-member">
+                                        <div class="team-member-item">
+                                            <div class="member_avatar">
+                                                <img src="{{ asset('teamo/images/aisya_product/harian_kantor.jpg')}}" style="object-fit: cover;border-radius: 50%;width: 310px;
+                                                height: 310px;" alt="img">
+                                            </div>
+                                            <h5 class="member_name">Katering Harian Perusahaan</h5>
+                                            <div class="member_position">
+                                                Aisya menawarkan berbagai pilihan paket katering dan kerja sama untuk menyediakan kantin di area kerja, sekolah, kantor, dan industri.
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="teamo-team-member">
+                                        <div class="team-member-item">
+                                            <div class="member_avatar">
+                                                <img src="{{ asset('teamo/images/aisya_product/pemerintah.jpg')}}" style="object-fit: cover;border-radius: 50%;width: 310px;
+                                                height: 310px;" alt="img">
+                                            </div>
+                                            <h5 class="member_name">Katering Instansi</h5>
+                                            <div class="member_position">
+                                                Percayakan katering harian maupun event seperti seminar, workshop, gathering, dan sejenisnya pada Aisya. Aisya berpengalaman, tepat waktu, dan profesional.
+                                            </div>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -201,7 +224,7 @@
                                         </div>
                                         <div class="content">
                                             <h4 class="title">
-                                                Higienis dan Bergizi
+                                                Higienis, Sehat, dan Bergizi
                                             </h4>
                                             <div class="text">
                                                 {{-- Free Delivery on all order from EU with price more than $90.00 --}}
@@ -250,12 +273,12 @@
                                 <div class="teamo-iconbox  layout1">
                                     <div class="iconbox-inner">
                                         <div class="icon-item">
-                                            <span class="placeholder-text">02</span>
+                                            <span class="placeholder-text">01</span>
                                             <span class="icon flaticon-shopping-cart"></span>
                                         </div>
                                         <div class="content">
                                             <h4 class="title">
-                                                Paket Katering Murah
+                                                Paket Katering Murah(Harga Bersahabat)
                                             </h4>
                                             <div class="text">
                                                 {{-- 30 Days money back guarantee no question asked! --}}
@@ -264,7 +287,25 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="col-lg-3 col-md-4 col-sm-4 col-lg-offset-1">
+                            <div class="col-lg-3 col-md-4 col-sm-4">
+                                <div class="teamo-iconbox  layout1">
+                                    <div class="iconbox-inner">
+                                        <div class="icon-item">
+                                            <span class="placeholder-text">01</span>
+                                            <span class="icon flaticon-checked"></span>
+                                        </div>
+                                        <div class="content">
+                                            <h4 class="title">
+                                                CITA RASA MAKANAN & VARIASI MENU YANG BERAGAM
+                                            </h4>
+                                            <div class="text">
+                                                {{-- Free Delivery on all order from EU with price more than $90.00 --}}
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-3 col-md-4 col-sm-4">
                                 <div class="teamo-iconbox  layout1">
                                     <div class="iconbox-inner">
                                         <div class="icon-item">

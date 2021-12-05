@@ -153,6 +153,7 @@ class HomeController extends Controller
         join('kategori_produk','kategori_produk.id','=','produk.id_kategori')
         ->select('kategori_produk.nama_kategori','produk.*')
         ->where('nama_produk','like',"%".$cari."%")// mengambil data dari table produk sesuai pencarian data
+        ->orWhere('tipe_produk', 'LIKE', "%{$cari}%") 
         ->whereNull('produk.deleted_at')->orderBy('produk.created_at', 'desc')
         ->paginate(12);        
         

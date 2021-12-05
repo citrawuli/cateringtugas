@@ -153,6 +153,8 @@
             $('.diambilsendiri').click(function() {
                 $('#alamatsect').slideUp();
             });
+
+            $('.datepicker-default').pickadate()
     });
 </script>
 @endsection

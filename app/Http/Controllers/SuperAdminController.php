@@ -609,8 +609,8 @@ class SuperAdminController extends Controller
     public function storeproduct(Request $request){
         $validator = $request->validate([
             'category_name' => ['required'],
-            'product_name' => ['required', 'string', 'max:50', 'unique:produk,nama_produk'],
-            'product_type' => ['max:20'],
+            'product_name' => ['required', 'string', 'max:75', 'unique:produk,nama_produk'],
+            'product_type' => ['max:40'],
             'product_desc' => ['max:600'],
             'product_price' => ['required'],
         ],
@@ -618,20 +618,27 @@ class SuperAdminController extends Controller
             'category_name.required' => 'Mohon memilih nama kategori',
             'product_name.required' => 'Mohon mengisi nama produk',
             'product_name.unique' => 'Produk ini sudah ada',
-            'product_name.max' => 'Nama produk harus dibawah 50 karakter',
-            'product_type.max' => 'Tipe produk harus dibawah 20 karakter',
+            'product_name.max' => 'Nama produk harus dibawah 75 karakter',
+            'product_type.max' => 'Tipe produk harus dibawah 40 karakter',
             'product_desc.max' => 'Deskripsi produk harus dibawah 600 karakter',
             'product_price.required' => 'Mohon mengisi harga produk',
             
         ]
         );
 
-
+        $type=null;
+        if (!empty($request->product_type)){
+            $type=ucwords(strtolower($request->product_type));
+        }
+        $desc=null;
+        if (!empty($request->product_desc)){
+            $desc=ucwords(strtolower($request->product_desc));
+        }
         produk::create([
             'id_kategori' => $request->category_name,
             'nama_produk' => ucwords(strtolower($request->product_name)),
-            'tipe_produk' => ucwords(strtolower($request->product_type)),
-            'deskripsi_produk' => ucfirst(strtolower($request->product_desc)),
+            'tipe_produk' =>  $type,
+            'deskripsi_produk' => $desc,
             'harga_produk' => $request->product_price,
             'created_at' => \Carbon\Carbon::now(), 
             'updated_at' => \Carbon\Carbon::now(), 
@@ -661,27 +668,36 @@ class SuperAdminController extends Controller
     {
        $validator = $request->validate([
             'category_name' => ['required'],
-            'product_name' => ['required', 'string', 'max:50'],
-            'product_type' => ['max:20'],
-            'product_desc' => ['max:150'],
+            'product_name' => ['required', 'string', 'max:75'],
+            'product_type' => ['max:40'],
+            'product_desc' => ['max:600'],
             'product_price' => ['required'],
         ],
         [
             'category_name.required' => 'Mohon memilih nama kategori',
             'product_name.required' => 'Mohon mengisi nama produk',
-            'product_name.max' => 'Nama produk harus dibawah 50 karakter',
-            'product_type.max' => 'Tipe produk harus dibawah 20 karakter',
-            'product_desc.max' => 'Deskripsi produk harus dibawah 150 karakter',
+            'product_name.max' => 'Nama produk harus dibawah 75 karakter',
+            'product_type.max' => 'Tipe produk harus dibawah 40 karakter',
+            'product_desc.max' => 'Deskripsi produk harus dibawah 600 karakter',
             'product_price.required' => 'Mohon mengisi harga produk',
             
         ]
         );
 
+        $type=null;
+        if (!empty($request->product_type)){
+            $type=ucwords(strtolower($request->product_type));
+        }
+        $desc=null;
+        if (!empty($request->product_desc)){
+            $desc=ucwords(strtolower($request->product_desc));
+        }
+
         $model = produk::find($id);
         $model->id_kategori = $request->input('category_name');
         $model->nama_produk =  ucwords(strtolower($request->input('product_name')));
-        $model->tipe_produk = ucwords(strtolower($request->input('product_type')));
-        $model->deskripsi_produk =  ucfirst(strtolower($request->input('product_desc')));
+        $model->tipe_produk = $type;
+        $model->deskripsi_produk =  $desc;
         $model->harga_produk = $request->input('product_price');
         $model->touch();
         $model->save();
@@ -837,6 +853,11 @@ class SuperAdminController extends Controller
         //why I cant save discount value huh?!!
 
         $a=Carbon::parse($request->input('untuk_tanggal'));
+        if (Carbon::now() >= $a){
+            $tgl  = $a->addYear();
+        } else {
+            $tgl  = $a;
+        }
         $b=$request->money_off;
         $ba=$request->percent_off;
         //dd($b,$ba);
@@ -847,7 +868,7 @@ class SuperAdminController extends Controller
             'nama_lengkap_pembeli'  =>  $request->nama_lengkap,
             'no_hp_pembeli' =>  $request->nomor_telp,
             'alamat_lengkap_pembeli' =>  $request->alamat_lengkap,
-            'untuk_tanggal' =>  $a,
+            'untuk_tanggal' =>  $tgl,
             'untuk_jam' =>  $request->untuk_jam,
             'pengambilan' =>  $request->optionkirim,
             'keterangan' =>  $request->keterangan,
@@ -902,17 +923,25 @@ class SuperAdminController extends Controller
 
     public function UpdateOrder(Request $request, $id)
     {
-    
-
-        // $model = produk::find($id);
-        // $model->id_kategori = $request->input('category_name');
-        // $model->nama_produk = $request->input('product_name');
-        // $model->tipe_produk = $request->input('product_type');
-        // $model->deskripsi_produk = $request->input('product_desc');
-        // $model->harga_produk = $request->input('product_price');
+        $model = Pemesanan::find($id);
+        $a=Carbon::parse($request->input('untuk_tanggal'));
+        if (Carbon::now() >= $a){
+            $tgl  = $a->addYear();
+        } else {
+            $tgl  = $a;
+        }
+        // dd($a,$tgl); harus pake add year cuz if not, when youre in 2021 and scheduling for 2022,
+        // it will return the expected date and month but the current year.
+        $model->nama_lengkap_pembeli = $request->input('nama_lengkap');
+        $model->no_hp_pembeli = $request->input('nomor_telp');
+        $model->alamat_lengkap_pembeli = $request->input('alamat_lengkap');
+        $model->untuk_tanggal = $tgl;
+        $model->untuk_jam = $request->input('untuk_jam');
+        $model->pengambilan = $request->input('optionkirim');
+        $model->keterangan = $request->input('keterangan');
         $model->touch();
         $model->save();
-        Session::flash('message', "Data produk berhasil diubah");
+        Session::flash('message', "Data Pemesanan berhasil diubah");
         return Redirect::back();
     }
 

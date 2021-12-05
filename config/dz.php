@@ -1140,7 +1140,7 @@ return [
 							'davur/js/deznav-init.js',
 							
 							'davur/vendor/select2/js/select2.full.min.js',
-							'davur/js/plugins-init/datatables.init.js',
+							// 'davur/js/plugins-init/datatables.init.js',
 							
 							'davur/vendor/maskk/js/jquery.mask.js',
 							'davur/vendor/jqueryui/js/jquery-ui.min.js',

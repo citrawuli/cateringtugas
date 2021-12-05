@@ -123,11 +123,16 @@ class UserController extends Controller
     public function updateyourdetailorder(Request $request, $id)
     {
         $a=Carbon::parse($request->input('untuk_tanggal'));
+        if (Carbon::now() >= $a){
+            $tgl  = $a->addYear();
+        } else {
+            $tgl  = $a;
+        }
         $model = Pemesanan::find($id);
         $model->nama_lengkap_pembeli = $request->input('cariuser');
         $model->no_hp_pembeli = $request->input('nomor_telp');
         $model->alamat_lengkap_pembeli = $request->input('alamat_lengkap');
-        $model->untuk_tanggal = $a;
+        $model->untuk_tanggal = $tgl;
         $model->untuk_jam = $request->input('untuk_jam');
         $model->pengambilan = $request->input('optionkirim');
         $model->keterangan = $request->input('keterangan');
