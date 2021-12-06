@@ -206,10 +206,9 @@
                                         </div>
                                         <div class="content">
                                             <h4 class="title">
-                                               Kualitas Terjamin
+                                               Kualitas Terjamin 
                                             </h4>
-                                            <div class="text">
-                                                {{-- Free Delivery on all order from EU with price more than $90.00 --}}
+                                            <div class="text">bersertifikat Laik Higiene Sanitasi Jasa Boga, ISO 22000:2005, dan HACCP
                                             </div>
                                         </div>
                                     </div>
@@ -269,7 +268,7 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="col-lg-3 col-md-4 col-sm-4 col-lg-offset-1">
+                            <div class="col-lg-3 col-md-4 col-sm-4">
                                 <div class="teamo-iconbox  layout1">
                                     <div class="iconbox-inner">
                                         <div class="icon-item">

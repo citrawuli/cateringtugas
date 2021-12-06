@@ -79,7 +79,7 @@
                             <label for="product" class="col-sm-3 col-form-label">{{ __('Tipe Produk') }}</label>
 
                             <div class="col-md-6">
-                                <input id="tproduct" type="text" class="form-control @error('product_type') is-invalid @enderror" name="product_type"  placeholder="Product Type (optional)">
+                                <input id="tproduct" value="{{old('product_type')}}" type="text" class="form-control @error('product_type') is-invalid @enderror" name="product_type"  placeholder="Product Type (optional)">
                             </div>
                         </div>
 
@@ -87,7 +87,7 @@
                             <label for="product" class="col-sm-3 col-form-label">{{ __('Deskripsi Produk') }}</label>
 
                             <div class="col-md-6">
-                                <textarea rows="5" class="form-control @error('product_desc') is-invalid @enderror" name="product_desc"  placeholder="Type your description here (optional)"></textarea>
+                                <textarea rows="5"  class="form-control @error('product_desc') is-invalid @enderror" name="product_desc"  placeholder="Type your description here (optional)">{{old('product_desc')}}</textarea>
                             </div>
                             
                         </div>
