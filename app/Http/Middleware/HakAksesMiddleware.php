@@ -27,7 +27,8 @@ class HakAksesMiddleware
                 if(Auth::user()->hasRole($role))
                     return $next($request);
             }
-            return redirect('/'); // not admin. redirect wherever you like
+            abort(403, 'Akses ditolak');
+            // return redirect('/'); // not admin. redirect wherever you like
         }
         return redirect('/login');
 

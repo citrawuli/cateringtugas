@@ -405,7 +405,10 @@
                                                 <h2 class="widgettitle">Brosur</h2>
                                                 <ul class="menu">
                                                     <li class="menu-item">
-                                                        <a href="{{url('/Brosur')}}">Download Brosur Disini</a>
+                                                        <a href="{{url('/Brosur')}}">Download Brosur di sini</a>
+                                                    </li>
+                                                    <li class="menu-item">
+                                                        <a href="{{url('/BrosurWedding')}}">Download Brosur Wedding di sini</a>
                                                     </li>
                                                 </ul>
                                             </div>

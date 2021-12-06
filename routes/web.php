@@ -77,6 +77,19 @@ Route::get('/Brosur', function () {
         exit( 'File yang diminta tidak ada di server kami!' );
     }
 });
+Route::get('/BrosurWedding', function () {
+	$filepath=public_path()."/Brosur Wedding AISYA.pdf";
+	$filename="Katalog Wedding Aisya Catering Terbaru.pdf";
+	$headers=array('Content-Type' => 'application/pdf');
+
+	if(file_exists($filepath)){
+        // Send Download
+        return \Response::download( $filepath, $filename, $headers );
+    } else {
+        // Error
+        exit( 'File yang diminta tidak ada di server kami!' );
+    }
+});
 
 
 Route::get('/gridblog', [App\Http\Controllers\HomeController::class, 'blog']);
@@ -196,8 +209,8 @@ Route::get('/AddPayment', [App\Http\Controllers\SuperAdminController::class, 'ad
 Route::get('/TrashedPayment', [App\Http\Controllers\SuperAdminController::class, 'trashedPaymentinAll'])->middleware('hak.akses:superAdmin,adminPembayaran'); //lihat data Payment all di tong sampah
 
 Route::get('/user', [App\Http\Controllers\UserController::class, 'index'])->middleware('hak.akses:user')->name('homeUser');
-Route::get('/adminPemesanan', [App\Http\Controllers\AdminPemesananController::class, 'index'])->middleware('hak.akses:adminPemesanan')->name('homeAdminPemesanan');
-Route::get('/adminPembayaran', [App\Http\Controllers\AdminPembayaranController::class, 'index'])->middleware('hak.akses:adminPembayaran')->name('homeAdminPembayaran');
+Route::get('/adminPemesanan', [App\Http\Controllers\AdminPemesananController::class, 'indexAdPem'])->middleware('hak.akses:adminPemesanan')->name('homeAdminPemesanan');
+Route::get('/adminPembayaran', [App\Http\Controllers\AdminPembayaranController::class, 'indexAdPembayaran'])->middleware('hak.akses:adminPembayaran')->name('homeAdminPembayaran');
 Route::get('/getdataproduk/{id}', [App\Http\Controllers\SuperAdminController::class,'getdataproduk'])->middleware('hak.akses:superAdmin,adminPemesanan');
 
 
@@ -215,8 +228,8 @@ Route::get('/RestoreBlog/{id}', [App\Http\Controllers\SuperAdminController::clas
 Route::get('/RestoreAllBlog', [App\Http\Controllers\SuperAdminController::class, 'restoreallBlog'])->middleware('hak.akses:superAdmin,adminPemesanan,adminPembayaran'); //kembalikan semua data blog dari tong sampah
 
 
-Route::get('/uprof', [App\Http\Controllers\SuperAdminController::class, 'edituprof'])->middleware('hak.akses:user'); //lihat form edit profil
-Route::post('/uprofupdate/{id}', [App\Http\Controllers\SuperAdminController::class, 'updateuprof'])->middleware('hak.akses:user'); //update data form edit produk ke DB
+Route::get('/uprof', [App\Http\Controllers\SuperAdminController::class, 'edituprof']); //lihat form edit profil
+Route::post('/uprofupdate/{id}', [App\Http\Controllers\SuperAdminController::class, 'updateuprof']); //update data form edit produk ke DB
 
 
 Route::get('/davurdash', [App\Http\Controllers\DavuradminController::class, 'dashboard_1']);
