@@ -99,46 +99,48 @@ Route::post('/storeyourpayment/{id}', [App\Http\Controllers\UserController::clas
 Route::get('/coba', [App\Http\Controllers\SuperAdminController::class, 'dashboard_1']);
 
 //SUPER ADMIN
+//maybe yang hak akses bisa di construct controller tetapi tetapiiii udah kadung semua itu tuh di super admin jadi ga bisa ngebagi pembayaran pemesanan
+//but maybeeee yang di user bisa so lets gooo biar gak satu satu middleware route atau pake groupp aja belum pernah nyoba :)
 Route::get('/superAdmin', [App\Http\Controllers\SuperAdminController::class, 'dashboard_1'])->name('homeSuperAdmin');
-Route::get('/UserTable', [App\Http\Controllers\SuperAdminController::class, 'viewusertable']); //lihat Table User dan Role
-Route::get('/UserFormInput', [App\Http\Controllers\SuperAdminController::class, 'viewuserforminput']); //lihat form input user
-Route::post('/AddUser', [App\Http\Controllers\SuperAdminController::class, 'storeuser']); // store data user ke DB
-Route::get('/AddUserRole', [App\Http\Controllers\SuperAdminController::class, 'viewformaddroleuser']); //lihat form input user role
+Route::get('/UserTable', [App\Http\Controllers\SuperAdminController::class, 'viewusertable'])->middleware('hak.akses:superAdmin'); //lihat Table User dan Role
+Route::get('/UserFormInput', [App\Http\Controllers\SuperAdminController::class, 'viewuserforminput'])->middleware('hak.akses:superAdmin'); //lihat form input user
+Route::post('/AddUser', [App\Http\Controllers\SuperAdminController::class, 'storeuser'])->middleware('hak.akses:superAdmin'); // store data user ke DB
+Route::get('/AddUserRole', [App\Http\Controllers\SuperAdminController::class, 'viewformaddroleuser'])->middleware('hak.akses:superAdmin'); //lihat form input user role
 Route::post('/StoreUserRole', [App\Http\Controllers\SuperAdminController::class, 'storeuserrole']); // store data role user ke DB
-Route::get('/EditUser/{id}', [App\Http\Controllers\SuperAdminController::class, 'edituser']); //lihat form edit role user
-Route::post('/UpdateUser/{id}', [App\Http\Controllers\SuperAdminController::class, 'updateuser']); //update data form edit user ke DB
-Route::get('/DeleteUser/{id}', [App\Http\Controllers\SuperAdminController::class, 'deleteuser']); //delete data form delete user ke DB
-Route::get('/TrashedUser', [App\Http\Controllers\SuperAdminController::class, 'trasheduser']); //lihat data user di tong sampah
-Route::get('/RestoreUser/{id}', [App\Http\Controllers\SuperAdminController::class, 'restoreuser']); //kembalikan data user dari tong sampah
-Route::get('/DeletePermanentUser/{id}', [App\Http\Controllers\SuperAdminController::class, 'deletepermanentuser']); //hapus permanen data user dari tong sampah
-Route::get('/RestoreAllUser', [App\Http\Controllers\SuperAdminController::class, 'restorealluser']); //kembalikan semua data user dari tong sampah
-Route::get('/DeletePermanentAllUser', [App\Http\Controllers\SuperAdminController::class, 'deletepermanentalluser']); //hapus permanen semua data user dari tong sampah
+Route::get('/EditUser/{id}', [App\Http\Controllers\SuperAdminController::class, 'edituser'])->middleware('hak.akses:superAdmin'); //lihat form edit role user
+Route::post('/UpdateUser/{id}', [App\Http\Controllers\SuperAdminController::class, 'updateuser'])->middleware('hak.akses:superAdmin'); //update data form edit user ke DB
+Route::get('/DeleteUser/{id}', [App\Http\Controllers\SuperAdminController::class, 'deleteuser'])->middleware('hak.akses:superAdmin'); //delete data form delete user ke DB
+Route::get('/TrashedUser', [App\Http\Controllers\SuperAdminController::class, 'trasheduser'])->middleware('hak.akses:superAdmin'); //lihat data user di tong sampah
+Route::get('/RestoreUser/{id}', [App\Http\Controllers\SuperAdminController::class, 'restoreuser'])->middleware('hak.akses:superAdmin'); //kembalikan data user dari tong sampah
+Route::get('/DeletePermanentUser/{id}', [App\Http\Controllers\SuperAdminController::class, 'deletepermanentuser'])->middleware('hak.akses:superAdmin'); //hapus permanen data user dari tong sampah
+Route::get('/RestoreAllUser', [App\Http\Controllers\SuperAdminController::class, 'restorealluser'])->middleware('hak.akses:superAdmin'); //kembalikan semua data user dari tong sampah
+Route::get('/DeletePermanentAllUser', [App\Http\Controllers\SuperAdminController::class, 'deletepermanentalluser'])->middleware('hak.akses:superAdmin'); //hapus permanen semua data user dari tong sampah
 
-Route::get('/CategoryTable', [App\Http\Controllers\SuperAdminController::class, 'viewcategorytable']); //lihat Table Category
-Route::get('/ViewFormCategory', [App\Http\Controllers\SuperAdminController::class, 'viewcategoryforminput']); //lihat form input kategori
-Route::post('/StoreCategory', [App\Http\Controllers\SuperAdminController::class, 'storecategory']); // store data user ke DB
-Route::get('/EditCategory/{id}', [App\Http\Controllers\SuperAdminController::class, 'editcategory']); //lihat form edit kategori
-Route::post('/UpdateCategory/{id}', [App\Http\Controllers\SuperAdminController::class, 'updatecategory']); //update data form edit kategori ke DB
-Route::get('/DeleteCategory/{id}', [App\Http\Controllers\SuperAdminController::class, 'deletecategory']); //delete data form delete kategori ke DB
-Route::get('/TrashedCategory', [App\Http\Controllers\SuperAdminController::class, 'trashedcategory']); //lihat data kategori di tong sampah
+Route::get('/CategoryTable', [App\Http\Controllers\SuperAdminController::class, 'viewcategorytable'])->middleware('hak.akses:superAdmin,adminPemesanan'); //lihat Table Category
+Route::get('/ViewFormCategory', [App\Http\Controllers\SuperAdminController::class, 'viewcategoryforminput'])->middleware('hak.akses:superAdmin,adminPemesanan'); //lihat form input kategori
+Route::post('/StoreCategory', [App\Http\Controllers\SuperAdminController::class, 'storecategory'])->middleware('hak.akses:superAdmin,adminPemesanan'); // store data user ke DB
+Route::get('/EditCategory/{id}', [App\Http\Controllers\SuperAdminController::class, 'editcategory'])->middleware('hak.akses:superAdmin,adminPemesanan'); //lihat form edit kategori
+Route::post('/UpdateCategory/{id}', [App\Http\Controllers\SuperAdminController::class, 'updatecategory'])->middleware('hak.akses:superAdmin,adminPemesanan'); //update data form edit kategori ke DB
+Route::get('/DeleteCategory/{id}', [App\Http\Controllers\SuperAdminController::class, 'deletecategory'])->middleware('hak.akses:superAdmin,adminPemesanan'); //delete data form delete kategori ke DB
+Route::get('/TrashedCategory', [App\Http\Controllers\SuperAdminController::class, 'trashedcategory'])->middleware('hak.akses:superAdmin,adminPemesanan'); //lihat data kategori di tong sampah
 Route::get('/RestoreCategory/{id}', [App\Http\Controllers\SuperAdminController::class, 'restorecategory']); //kembalikan data kategori dari tong sampah
-Route::get('/DeletePermanentCategory/{id}', [App\Http\Controllers\SuperAdminController::class, 'deletepermanentcategory']); //hapus permanen data kategori dari tong sampah
-Route::get('/RestoreAllCategory', [App\Http\Controllers\SuperAdminController::class, 'restoreallcategory']); //kembalikan semua data kategori dari tong sampah
-Route::get('/DeletePermanentAllCategory', [App\Http\Controllers\SuperAdminController::class, 'deletepermanentallcategory']); //hapus permanen semua data kategori dari tong sampah
+Route::get('/DeletePermanentCategory/{id}', [App\Http\Controllers\SuperAdminController::class, 'deletepermanentcategory'])->middleware('hak.akses:superAdmin'); //hapus permanen data kategori dari tong sampah
+Route::get('/RestoreAllCategory', [App\Http\Controllers\SuperAdminController::class, 'restoreallcategory'])->middleware('hak.akses:superAdmin,adminPemesanan'); //kembalikan semua data kategori dari tong sampah
+Route::get('/DeletePermanentAllCategory', [App\Http\Controllers\SuperAdminController::class, 'deletepermanentallcategory'])->middleware('hak.akses:superAdmin'); //hapus permanen semua data kategori dari tong sampah
 
 
-Route::get('/ProductTable', [App\Http\Controllers\SuperAdminController::class, 'viewproducttable']); //lihat Table Product
-Route::get('/getModalPhotoProduct/{id}', [App\Http\Controllers\SuperAdminController::class, 'getModalPhotoProduct']); //lihat Galeri Product per id
-Route::get('/ViewFormProduct', [App\Http\Controllers\SuperAdminController::class, 'viewproductforminput']); //lihat form input produk
-Route::post('/StoreProduct', [App\Http\Controllers\SuperAdminController::class, 'storeproduct']); // store data produk ke DB
-Route::get('/EditProduct/{id}', [App\Http\Controllers\SuperAdminController::class, 'editproduct']); //lihat form edit produk
-Route::post('/UpdateProduct/{id}', [App\Http\Controllers\SuperAdminController::class, 'updateproduct']); //update data form edit produk ke DB
-Route::get('/DeleteProduct/{id}', [App\Http\Controllers\SuperAdminController::class, 'deleteproduct']); //delete data form delete produk ke DB
-Route::get('/TrashedProduct', [App\Http\Controllers\SuperAdminController::class, 'trashedproduct']); //lihat data produk di tong sampah
-Route::get('/RestoreProduct/{id}', [App\Http\Controllers\SuperAdminController::class, 'restoreproduct']); //kembalikan data produk dari tong sampah
-Route::get('/DeletePermanent/{id}', [App\Http\Controllers\SuperAdminController::class, 'deletepermanent']); //hapus permanen data produk dari tong sampah
-Route::get('/RestoreAllProduct', [App\Http\Controllers\SuperAdminController::class, 'restoreallproduct']); //kembalikan semua data produk dari tong sampah
-Route::get('/DeletePermanentAllProduct', [App\Http\Controllers\SuperAdminController::class, 'deletepermanentallproduct']); //hapus permanen semua data produk dari tong sampah
+Route::get('/ProductTable', [App\Http\Controllers\SuperAdminController::class, 'viewproducttable'])->middleware('hak.akses:superAdmin,adminPemesanan'); //lihat Table Product
+Route::get('/getModalPhotoProduct/{id}', [App\Http\Controllers\SuperAdminController::class, 'getModalPhotoProduct'])->middleware('hak.akses:superAdmin,adminPemesanan'); //lihat Galeri Product per id
+Route::get('/ViewFormProduct', [App\Http\Controllers\SuperAdminController::class, 'viewproductforminput'])->middleware('hak.akses:superAdmin,adminPemesanan'); //lihat form input produk
+Route::post('/StoreProduct', [App\Http\Controllers\SuperAdminController::class, 'storeproduct'])->middleware('hak.akses:superAdmin,adminPemesanan'); // store data produk ke DB
+Route::get('/EditProduct/{id}', [App\Http\Controllers\SuperAdminController::class, 'editproduct'])->middleware('hak.akses:superAdmin,adminPemesanan'); //lihat form edit produk
+Route::post('/UpdateProduct/{id}', [App\Http\Controllers\SuperAdminController::class, 'updateproduct'])->middleware('hak.akses:superAdmin,adminPemesanan'); //update data form edit produk ke DB
+Route::get('/DeleteProduct/{id}', [App\Http\Controllers\SuperAdminController::class, 'deleteproduct'])->middleware('hak.akses:superAdmin,adminPemesanan'); //delete data form delete produk ke DB
+Route::get('/TrashedProduct', [App\Http\Controllers\SuperAdminController::class, 'trashedproduct'])->middleware('hak.akses:superAdmin,adminPemesanan'); //lihat data produk di tong sampah
+Route::get('/RestoreProduct/{id}', [App\Http\Controllers\SuperAdminController::class, 'restoreproduct'])->middleware('hak.akses:superAdmin,adminPemesanan'); //kembalikan data produk dari tong sampah
+Route::get('/DeletePermanent/{id}', [App\Http\Controllers\SuperAdminController::class, 'deletepermanent'])->middleware('hak.akses:superAdmin'); //hapus permanen data produk dari tong sampah
+Route::get('/RestoreAllProduct', [App\Http\Controllers\SuperAdminController::class, 'restoreallproduct'])->middleware('hak.akses:superAdmin,adminPemesanan'); //kembalikan semua data produk dari tong sampah
+Route::get('/DeletePermanentAllProduct', [App\Http\Controllers\SuperAdminController::class, 'deletepermanentallproduct'])->middleware('hak.akses:superAdmin'); //hapus permanen semua data produk dari tong sampah
 
 Route::get('/dropzone/coba', [App\Http\Controllers\SuperAdminController::class, 'viewcobadropzone']);
 //Route::post('/dropzone/storecoba', [App\Http\Controllers\SuperAdminController::class, 'dropzoneCobaStore'])->name('dropzone.upload');
