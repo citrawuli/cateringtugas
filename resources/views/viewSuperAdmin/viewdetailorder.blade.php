@@ -1,9 +1,18 @@
-@extends('layouts.backAdmin.layout.defaultSuperAdmin')
+@php
+    if(Auth::user()->hasRole('superAdmin')) {
+        $layoutDirectory = 'layouts.backAdmin.layout.defaultSuperAdmin';
+    }  
+    elseif(Auth::user()->hasRole('adminPemesanan')) {
+        $layoutDirectory = 'layouts.backAdmin.layout.defaultAdminPemesanan';
+    } 
+    elseif(Auth::user()->hasRole('adminPembayaran')) {
+        $layoutDirectory = 'layouts.backAdmin.layout.defaultAdminPembayaran';
+    } 
+@endphp
+@extends($layoutDirectory)
+{{-- @extends('layouts.backAdmin.layout.defaultSuperAdmin') --}}
 
 @section('content')
-
-
-
 <div class="container-fluid">
     <div class="row page-titles mx-0">
         <div class="col-sm-6 p-md-0">

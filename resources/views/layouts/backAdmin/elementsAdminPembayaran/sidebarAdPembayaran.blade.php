@@ -1,31 +1,22 @@
 <div class="deznav">
     <div class="deznav-scroll">
-        <ul class="metismenu" id="menu">
+        <ul class="metismenu" id="menu2">
             <li><a href="{!! url('/adminPembayaran'); !!}" class="ai-icon" aria-expanded="false">
                     <i class="flaticon-381-networking"></i>
                     <span class="nav-text">Beranda</span>
                 </a>
             </li>
             <li><a class="has-arrow ai-icon" href="javascript:void()" aria-expanded="false">
-                    <i class="flaticon-381-notepad"></i>
-                    <span class="nav-text">Order Masuk</span>
+                <i class="flaticon-381-reading"></i>
+                <span class="nav-text">Progress Masuk</span>
                 </a>
                 <ul aria-expanded="false">
-                    <li><a href="{!! url('/PemesananTable'); !!}">Daftar Order Masuk</a></li>
                     <li><a href="{!! url('/OrderDiterima'); !!}">Daftar Order Diterima</a></li>
                     <li><a href="{!! url('/PaymentTable'); !!}">Daftar Pembayaran</a></li>
                 </ul>
             </li>
-            {{-- <li><a class="has-arrow ai-icon" href="javascript:void()" aria-expanded="false">
-                <i class="flaticon-381-tab"></i>
-                <span class="nav-text">Kalender Orderan</span>
-            </a>
-                <ul aria-expanded="false">
-                    <li><a href="{!! url('/OrderCalendar'); !!}">Kalender Order</a></li>
-                </ul>
-            </li> --}}
             <li><a class="has-arrow ai-icon" href="javascript:void()" aria-expanded="false">
-                <i class="flaticon-381-notebook-3"></i>
+                <i class="flaticon-381-newspaper"></i>
                 <span class="nav-text">Blog</span>
             </a>
                 <ul aria-expanded="false">

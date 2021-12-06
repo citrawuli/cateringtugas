@@ -1,4 +1,23 @@
-@extends('layouts.backAdmin.layout.defaultSuperAdmin')
+{{-- kalau nggak dikasih ini ntar walau sidebar di default udah di setting punya admin lain, 
+    tapi gara gara ini awalnya manggil ke default super admin, 
+    jadinya pas laman ini ke reload sidebarnya jadi super admin, dan walaupun udah di kasih hak akses dan bakal ketolak, 
+    sedih aja gitu kalo gak sinkron sama yang awal kannn :)  
+    cuma ini doang yg bisa, if else lainnya dsb gak bisa, so using php rather than another unworking method :)
+    mager bikin view satu-satu, using the SA view is better--}}
+
+@php
+    if(Auth::user()->hasRole('superAdmin')) {
+        $layoutDirectory = 'layouts.backAdmin.layout.defaultSuperAdmin';
+    }  
+    elseif(Auth::user()->hasRole('adminPemesanan')) {
+        $layoutDirectory = 'layouts.backAdmin.layout.defaultAdminPemesanan';
+    } 
+    elseif(Auth::user()->hasRole('adminPembayaran')) {
+        $layoutDirectory = 'layouts.backAdmin.layout.defaultAdminPembayaran';
+    } 
+@endphp
+@extends($layoutDirectory)
+{{-- @extends('layouts.backAdmin.layout.defaultSuperAdmin') --}}
 
 @section('content')
 <style>

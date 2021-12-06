@@ -1,4 +1,16 @@
-@extends('layouts.backAdmin.layout.defaultSuperAdmin')
+@php
+    if(Auth::user()->hasRole('superAdmin')) {
+        $layoutDirectory = 'layouts.backAdmin.layout.defaultSuperAdmin';
+    }  
+    elseif(Auth::user()->hasRole('adminPemesanan')) {
+        $layoutDirectory = 'layouts.backAdmin.layout.defaultAdminPemesanan';
+    } 
+    elseif(Auth::user()->hasRole('adminPembayaran')) {
+        $layoutDirectory = 'layouts.backAdmin.layout.defaultAdminPembayaran';
+    } 
+@endphp
+@extends($layoutDirectory)
+{{-- @extends('layouts.backAdmin.layout.defaultSuperAdmin') --}}
 
 @section('link')
 <link rel="stylesheet" href="https://cdn.datatables.net/datetime/1.1.1/css/dataTables.dateTime.min.css">

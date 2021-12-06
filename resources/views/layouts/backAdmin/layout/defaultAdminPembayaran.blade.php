@@ -83,7 +83,7 @@
             Header start
         ***********************************-->
         
-		@include('layouts.backAdmin.elementsSuperAdmin.header')
+		@include('layouts.backAdmin.elementsAdminPembayaran.header')
 		
 		
         <!--**********************************
@@ -93,7 +93,7 @@
         <!--**********************************
             Sidebar start
         ***********************************-->
-        @include('layouts.backAdmin.elementsAdminPemesanan.sidebarAdPembayaran')
+        @include('layouts.backAdmin.elementsAdminPembayaran.sidebarAdPembayaran')
         <!--**********************************
             Sidebar end
         ***********************************-->
@@ -116,7 +116,7 @@
             Footer start
         ***********************************-->
         
-		@include('layouts.backAdmin.elementsSuperAdmin.footer')
+		@include('layouts.backAdmin.elementsAdminPembayaran.footer')
 		
         <!--**********************************
             Footer end
@@ -139,7 +139,7 @@
     <!--**********************************
         Scripts
     ***********************************-->
-	@include('layouts.backAdmin.elementsSuperAdmin.footer-scripts')
+	@include('layouts.backAdmin.elementsAdminPembayaran.footer-scripts')
     @yield('script')
 </body>
 </html>

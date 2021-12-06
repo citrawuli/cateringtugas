@@ -41,10 +41,17 @@
                         <ul aria-expanded="false">
                             <li><a href="{!! url('/PemesananTable'); !!}">Daftar Order Masuk</a></li>
                             <li><a href="{!! url('/ViewFormPemesanan'); !!}">Tambah Order Masuk</a></li>
+                        </ul>
+                    </li>
+                    <li><a class="has-arrow ai-icon" href="javascript:void()" aria-expanded="false">
+                        <i class="flaticon-381-reading"></i>
+                        <span class="nav-text">Progress Masuk</span>
+                        </a>
+                        <ul aria-expanded="false">
                             <li><a href="{!! url('/OrderDiterima'); !!}">Daftar Order Diterima</a></li>
                             <li><a href="{!! url('/PaymentTable'); !!}">Daftar Pembayaran</a></li>
                         </ul>
-                    </li>
+                     </li>
                     {{-- <li><a class="has-arrow ai-icon" href="javascript:void()" aria-expanded="false">
                         <i class="flaticon-381-tab"></i>
                         <span class="nav-text">Kalender Orderan</span>
@@ -54,7 +61,7 @@
                         </ul>
                     </li> --}}
                     <li><a class="has-arrow ai-icon" href="javascript:void()" aria-expanded="false">
-                        <i class="flaticon-381-notebook-3"></i>
+                        <i class="flaticon-381-newspaper"></i>
                         <span class="nav-text">Blog</span>
                     </a>
                         <ul aria-expanded="false">

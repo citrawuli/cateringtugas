@@ -85,12 +85,12 @@
                                     Layanan Kami
                                 </h2>
                                 <div class="team-member-slider nav-center owl-slick"
-                                     data-slick='{"autoplay":false, "autoplaySpeed":1000, "arrows":true, "dots":false, "infinite":true, "speed":800, "rows":1}'
+                                     data-slick='{"autoplay":false, "autoplaySpeed":3000, "arrows":true, "dots":false, "infinite":true, "speed":800, "rows":1}'
                                      data-responsive='[{"breakpoint":"0","settings":{"slidesToShow":1}},{"breakpoint":"480","settings":{"slidesToShow":1}},{"breakpoint":"767","settings":{"slidesToShow":2}},{"breakpoint":"991","settings":{"slidesToShow":3}},{"breakpoint":"1199","settings":{"slidesToShow":3}},{"breakpoint":"2000","settings":{"slidesToShow":3}}]'>
                                     <div class="teamo-team-member">
                                         <div class="team-member-item">
                                             <div class="member_avatar">
-                                                <video muted loop controls style="object-fit: cover;border-radius: 50%;width: 310px;
+                                                <video autoplay muted loop controls style="object-fit: cover;border-radius: 50%;width: 310px;
                                                 height: 310px;">
                                                     <source src="{{asset('/teamo/images/aisya_product/vid1.mp4')}}" type="video/mp4">
                                                 </video>
@@ -208,7 +208,7 @@
                                             <h4 class="title">
                                                Kualitas Terjamin 
                                             </h4>
-                                            <div class="text">bersertifikat Laik Higiene Sanitasi Jasa Boga, ISO 22000:2005, dan HACCP
+                                            <div class="text">Bersertifikat Laik Higiene Sanitasi Jasa Boga, ISO 22000:2005, dan HACCP
                                             </div>
                                         </div>
                                     </div>

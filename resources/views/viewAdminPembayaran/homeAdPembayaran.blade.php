@@ -1,5 +1,5 @@
 
-@extends('layouts.backAdmin.layout.defaultSuperAdmin')
+@extends('layouts.backAdmin.layout.defaultAdminPembayaran')
 @section('content')
             <!-- row -->
 			<div class="container-fluid">
@@ -108,10 +108,6 @@
 							</div>
 						</div>
 					</div>
-					
-					
-					
 				 </div>
             </div>
-			
 @endsection		
