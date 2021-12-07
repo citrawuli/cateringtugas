@@ -208,7 +208,7 @@
                                         
                                     @endif
 
-                                    @if ($prod->nama_kategori!='Paket Wedding')
+                                    @if ($prod->nama_kategori!='Paket Wedding' && $prod->nama_kategori!='Paket Corporate/Pabrik')
                                         <a class="single_add_to_cart_button button" href="{{ route('add.to.cart', $prod->id) }}">Tambah ke Keranjang</a>
                                 
                                     @endif

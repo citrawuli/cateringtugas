@@ -63,7 +63,7 @@
                 
 
                     @if ($katid=='K0010')
-                    {{-- //Wedding --}}
+                    {{-- Wedding --}}
                         <div class="page-main-content">
                             <div class="header-banner banner-image">
                                 <div class="banner-wrap">
@@ -314,8 +314,138 @@
                              </div>
                         </div>
                         <br><br><br>
-                    @else
-                        
+                    @elseif($katid=='K0009')
+                    {{-- Pabrik --}}
+                        <div class="page-main-content">
+                            <div class="header-banner banner-image">
+                                <div class="banner-wrap">
+                                    <div class="banner-header">
+                                    
+                                        <img src="{{ asset('teamo/images/aisya_product/harian_kantor.jpg')}}" style="object-fit: cover; width: 670px;
+                                                    height: 350px;" alt="img">
+                                        <div class="col-lg-5 col-md-offset-7" >
+                                            <div class="content-inner">
+                                                <h2 class="title">
+                                                    Aisya Catering  <br/> Surabaya
+                                                </h2>
+                                                <div class="sub-title" style="text-align: justify;">
+                                                    <p>Hai, Aisya Catering menawarkan berbagai pilihan paket katering harian pabrik atau kantor dan kerja sama
+                                                         untuk menyediakan kantin di area kerja kantor dan industri.
+                                                    </p>  
+                                                    <p>Sebagai pengelola jasa boga, kami ingin turut menyediakan konsumi makanan yang bergizi, enak, dan terjangkau. </p>
+                                                    <p>Kami akan curahkan sepenuhnya hobi, pengalaman, dan sumber daya yang kami miliki untuk memberikan manfaat terutama dalam hal katering.</p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="team-member">
+                                    <div class="row">
+                                        <div class="col-sm-12 border-custom">
+                                            <span></span>
+                                        </div>
+                                    </div>
+                                    <h2 class="custom_blog_title center">
+                                        Mengapa Aisya?
+                                    </h2>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-lg-6 col-md-4 col-sm-4">
+                                    <div class="teamo-iconbox  layout1">
+                                        <div class="iconbox-inner">
+                                            <div class="icon-item">
+                                                <h1 class="title" style="color: rgb(101,161,90)">
+                                                1
+                                                </h1>
+                                            </div>
+                                            <div class="content">
+                                                <h4 class="title">
+                                                    BANYAK PILIHAN MENU
+                                                </h4>
+                                                <div class="text">
+                                                    Anda tidak akan merasa bosan dengan menu makanan beragam yang Aisya sajikan.
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-lg-6 col-md-4 col-sm-4">
+                                    <div class="teamo-iconbox  layout1">
+                                        <div class="iconbox-inner">
+                                            <div class="icon-item">
+                                            <h1 class="title" style="color: rgb(101,161,90)">
+                                                2
+                                                </h1>
+                                            </div>
+                                            <div class="content">
+                                                <h4 class="title">
+                                                    SEHAT DAN BERGIZI
+                                                </h4>
+                                                <div class="text">
+                                                    Aisya hanya menggunakan bahan makanan seperti ikan dan sayur segar untuk dimasak menjadi makanan sehat dan bergizi.
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-lg-6 col-md-4 col-sm-4">
+                                    <div class="teamo-iconbox  layout1">
+                                        <div class="iconbox-inner">
+                                            <div class="icon-item">
+                                            <h1 class="title" style="color: rgb(101,161,90)">
+                                                3
+                                                </h1>
+                                            </div>
+                                            <div class="content">
+                                                <h4 class="title">
+                                                    BERPENGALAMAN
+                                                </h4>
+                                                <div class="text">
+                                                    Chef dan tim pendukung dari Aisya sudah berpengalaman dalam bidang kuliner,
+                                                     menjadikan cita rasa dan variasi makanan yang beragam tak perlu diragukan lagi.
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-lg-6 col-md-4 col-sm-4">
+                                    <div class="teamo-iconbox  layout1">
+                                        <div class="iconbox-inner">
+                                            <div class="icon-item">
+                                                <h1 class="title" style="color: rgb(101,161,90)">
+                                                    4
+                                                </h1>
+                                            </div>
+                                            <div class="content">
+                                                <h4 class="title">
+                                                    HARGA BERSAHABAT
+                                                </h4>
+                                                <div class="text">
+                                                    Aisya tetap memprioritaskan level rasa dan kualitas makanan,  
+                                                    serta harga terbaik untuk pilihan paket katering pabrik.
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                               
+                            </div>
+                            <br>
+
+                            <div class="team-member">
+                                    <div class="row">
+                                        <div class="col-sm-12 border-custom">
+                                            <span></span>
+                                        </div>
+                                    </div>
+                                    <h2 class="custom_blog_title center">
+                                        Contoh paket Aisya
+                                    </h2>
+                            </div>
+                        </div>
+                        <br><br><br>
                     @endif
 
                     <ul class="row list-products auto-clear equal-container product-grid">
@@ -357,7 +487,7 @@
                                            
                                             <a href="{{url('/viewproduct/'.$prod->id)}}" class="button quick-wiew-button" id="quick-wiew-button"">Quick View</a>
                                           
-                                            @if ($katid!='K0010')
+                                            @if ($katid!='K0010' && $katid!='K0009' )
                                                 <div class="loop-form-add-to-cart">
                                                     <a class="single_add_to_cart_button button" href="{{ route('add.to.cart', $prod->id) }}">Add to cart
                                                     </a>
