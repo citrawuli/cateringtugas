@@ -446,6 +446,138 @@
                             </div>
                         </div>
                         <br><br><br>
+                    @elseif($katid=='K0008')
+                        {{-- Pemerintahan --}}
+                            <div class="page-main-content">
+                                <div class="header-banner banner-image">
+                                    <div class="banner-wrap">
+                                        <div class="banner-header">
+                                        
+                                            <img src="{{ asset('teamo/images/aisya_product/pemerintah2.jpg')}}" style="object-fit: cover; width: 670px;
+                                                        height: 350px;" alt="img">
+                                            <div class="col-lg-5 col-md-offset-7" >
+                                                <div class="content-inner">
+                                                    <h2 class="title">
+                                                        Aisya Catering  <br/> Surabaya
+                                                    </h2>
+                                                    <div class="sub-title" style="text-align: justify;">
+                                                        <p>Hai, Aisya Catering menawarkan berbagai pilihan paket katering untuk Dinas, Rumah Sakit, dan Instansi Pemerintah.
+                                                        </p>  
+                                                        <p>Kami telah dipercaya dalam menangani katering harian atau event seperti seminar, workshop, gathering dan sejenisnya. 
+                                                        </p>
+                                                        <p>Tersedia berbagai pilihan paket dan menu makan yang lezat khas Jawa Timur. </p>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+    
+                                    <div class="team-member">
+                                        <div class="row">
+                                            <div class="col-sm-12 border-custom">
+                                                <span></span>
+                                            </div>
+                                        </div>
+                                        <h2 class="custom_blog_title center">
+                                            Mengapa Aisya?
+                                        </h2>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-lg-6 col-md-4 col-sm-4">
+                                        <div class="teamo-iconbox  layout1">
+                                            <div class="iconbox-inner">
+                                                <div class="icon-item">
+                                                    <h1 class="title" style="color: rgb(101,161,90)">
+                                                    1
+                                                    </h1>
+                                                </div>
+                                                <div class="content">
+                                                    <h4 class="title">
+                                                        BANYAK PILIHAN MENU
+                                                    </h4>
+                                                    <div class="text">
+                                                        Aisya memiliki banyak varian menu dengan cita rasa memuaskan yang dapat memenuhi keinginan Anda.
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-6 col-md-4 col-sm-4">
+                                        <div class="teamo-iconbox  layout1">
+                                            <div class="iconbox-inner">
+                                                <div class="icon-item">
+                                                <h1 class="title" style="color: rgb(101,161,90)">
+                                                    2
+                                                    </h1>
+                                                </div>
+                                                <div class="content">
+                                                    <h4 class="title">
+                                                        SEHAT DAN BERGIZI
+                                                    </h4>
+                                                    <div class="text">
+                                                        Aisya hanya menggunakan bahan makanan seperti ikan dan sayur segar untuk dimasak menjadi makanan sehat dan bergizi.
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-6 col-md-4 col-sm-4">
+                                        <div class="teamo-iconbox  layout1">
+                                            <div class="iconbox-inner">
+                                                <div class="icon-item">
+                                                    <h1 class="title" style="color: rgb(101,161,90)">
+                                                        3
+                                                    </h1>
+                                                </div>
+                                                <div class="content">
+                                                    <h4 class="title">
+                                                        HARGA BERSAHABAT
+                                                    </h4>
+                                                    <div class="text">
+                                                        Menu katering pilihan Anda tidak akan mengecewakan dalam kualitas masakan, pelayanan, dan harga. 
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-6 col-md-4 col-sm-4">
+                                        <div class="teamo-iconbox  layout1">
+                                            <div class="iconbox-inner">
+                                                <div class="icon-item">
+                                                <h1 class="title" style="color: rgb(101,161,90)">
+                                                    4
+                                                    </h1>
+                                                </div>
+                                                <div class="content">
+                                                    <h4 class="title">
+                                                        BERPENGALAMAN
+                                                    </h4>
+                                                    <div class="text">
+                                                        Chef dan tim pendukung dari Aisya sudah berpengalaman dalam bidang kuliner,
+                                                         menjadikan cita rasa dan variasi makanan yang beragam tak perlu diragukan lagi.
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    
+                                   
+                                </div>
+                                <br>
+    
+                                <div class="team-member">
+                                        <div class="row">
+                                            <div class="col-sm-12 border-custom">
+                                                <span></span>
+                                            </div>
+                                        </div>
+                                        <h2 class="custom_blog_title center">
+                                            Paket Aisya
+                                        </h2>
+                                </div>
+                            </div>
+                            <br><br><br>   
                     @endif
 
                     <ul class="row list-products auto-clear equal-container product-grid">
@@ -474,7 +606,7 @@
                                             @foreach ($prod->images->slice(0,1) as  $gal)
                                 
                                                 <img id="img_zoom" data-zoom-image="{{ asset($gal->foto) }}"
-                                                src="{{ asset($gal->foto) }}" alt="img">
+                                                src="{{ asset($gal->foto) }}" alt="img" style="width:265px;height:265px">
                                                 
                                                 {{-- <a href="#" class="btn-zoom open_qv"><i class="fa fa-search" aria-hidden="true"></i></a> --}}
                                             @endforeach
@@ -520,7 +652,7 @@
                     </ul>
                     <div class="pagination clearfix style2">
                         <div class="nav-link">
-                            {!! $thiskategori->links() !!}
+                            {{ $thiskategori->links() }}
                             
                         </div>
                     </div>
