@@ -207,8 +207,12 @@
                                         </div>
                                         
                                     @endif
-                                    <a class="single_add_to_cart_button button" href="{{ route('add.to.cart', $prod->id) }}">Tambah ke Keranjang</a>
-                                    
+
+                                    @if ($prod->nama_kategori!='Paket Wedding')
+                                        <a class="single_add_to_cart_button button" href="{{ route('add.to.cart', $prod->id) }}">Tambah ke Keranjang</a>
+                                
+                                    @endif
+                                   
                                 </div>
                             </div>
 

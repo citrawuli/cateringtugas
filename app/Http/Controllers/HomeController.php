@@ -213,8 +213,9 @@ class HomeController extends Controller
         $newarrival = DB::table('produk')->whereNull('produk.deleted_at')->latest()->take(8)->get();
         $galpro = DB::table('galeri_produk')->whereNull('galeri_produk.deleted_at')->get();
         $countprod = $thiskategori->count('produk.id');
+        $katid='K0007';
         // dd($namakategori);
-        return view('layouts.paketview', compact('thiskategori','newarrival','galpro','countprod')); 
+        return view('layouts.paketview', compact('thiskategori','newarrival','galpro','countprod','katid')); 
     }
 
     public function viewWedding()
@@ -226,8 +227,9 @@ class HomeController extends Controller
         $newarrival = DB::table('produk')->whereNull('produk.deleted_at')->latest()->take(8)->get();
         $galpro = DB::table('galeri_produk')->whereNull('galeri_produk.deleted_at')->get();
         $countprod = $thiskategori->count('produk.id');
+        $katid='K0010';
         // dd($thiskategori);
-        return view('layouts.paketview', compact('thiskategori','newarrival','galpro','countprod'));  
+        return view('layouts.paketview', compact('thiskategori','newarrival','galpro','countprod','katid'));  
     }
 
     public function viewPemerintahan()
@@ -239,8 +241,9 @@ class HomeController extends Controller
         $newarrival = DB::table('produk')->whereNull('produk.deleted_at')->latest()->take(8)->get();
         $galpro = DB::table('galeri_produk')->whereNull('galeri_produk.deleted_at')->get();
         $countprod = $thiskategori->count('produk.id');
+        $katid='K0008';
         // dd($thiskategori);
-        return view('layouts.paketview', compact('thiskategori','newarrival','galpro','countprod')); 
+        return view('layouts.paketview', compact('thiskategori','newarrival','galpro','countprod','katid')); 
     }
 
     public function viewPabrik()
@@ -252,8 +255,9 @@ class HomeController extends Controller
         $newarrival = DB::table('produk')->whereNull('produk.deleted_at')->latest()->take(8)->get();
         $galpro = DB::table('galeri_produk')->whereNull('galeri_produk.deleted_at')->get();
         $countprod = $thiskategori->count('produk.id');
+        $katid='K0009';
         // dd($thiskategori);
-        return view('layouts.paketview', compact('thiskategori','newarrival','galpro','countprod')); 
+        return view('layouts.paketview', compact('thiskategori','newarrival','galpro','countprod','katid')); 
     }
 
     public function  viewTumpengHantaran()
@@ -265,8 +269,9 @@ class HomeController extends Controller
         $newarrival = DB::table('produk')->whereNull('produk.deleted_at')->latest()->take(8)->get();
         $galpro = DB::table('galeri_produk')->whereNull('galeri_produk.deleted_at')->get();
         $countprod = $thiskategori->count('produk.id');
+        $katid='K0001';
         // dd($thiskategori);
-        return view('layouts.paketview', compact('thiskategori','newarrival','galpro','countprod')); 
+        return view('layouts.paketview', compact('thiskategori','newarrival','galpro','countprod','katid')); 
     }
 
     public function viewSnackBox()
@@ -278,8 +283,9 @@ class HomeController extends Controller
         $newarrival = DB::table('produk')->whereNull('produk.deleted_at')->latest()->take(8)->get();
         $galpro = DB::table('galeri_produk')->whereNull('galeri_produk.deleted_at')->get();
         $countprod = $thiskategori->count('produk.id');
+        $katid='K0003';
         // dd($thiskategori);
-        return view('layouts.paketview', compact('thiskategori','newarrival','galpro','countprod')); 
+        return view('layouts.paketview', compact('thiskategori','newarrival','galpro','countprod','katid'));   
     }
 
     public function viewRiceBox()
@@ -291,8 +297,9 @@ class HomeController extends Controller
         $newarrival = DB::table('produk')->whereNull('produk.deleted_at')->latest()->take(8)->get();
         $galpro = DB::table('galeri_produk')->whereNull('galeri_produk.deleted_at')->get();
         $countprod = $thiskategori->count('produk.id');
+        $katid='K0002';
         // dd($thiskategori);
-        return view('layouts.paketview', compact('thiskategori','newarrival','galpro','countprod')); 
+        return view('layouts.paketview', compact('thiskategori','newarrival','galpro','countprod','katid')); 
     }
 
     public function viewAqiqah()
@@ -304,8 +311,9 @@ class HomeController extends Controller
         $newarrival = DB::table('produk')->whereNull('produk.deleted_at')->latest()->take(8)->get();
         $galpro = DB::table('galeri_produk')->whereNull('galeri_produk.deleted_at')->get();
         $countprod = $thiskategori->count('produk.id');
+        $katid='K0004';
         // dd($thiskategori);
-        return view('layouts.paketview', compact('thiskategori','newarrival','galpro','countprod')); 
+        return view('layouts.paketview', compact('thiskategori','newarrival','galpro','countprod','katid')); 
     }
 
     public function viewRamadhan()
@@ -317,8 +325,9 @@ class HomeController extends Controller
         $newarrival = DB::table('produk')->whereNull('produk.deleted_at')->latest()->take(8)->get();
         $galpro = DB::table('galeri_produk')->whereNull('galeri_produk.deleted_at')->get();
         $countprod = $thiskategori->count('produk.id');
+        $katid='K0005';
         // dd($thiskategori);
-        return view('layouts.paketview', compact('thiskategori','newarrival','galpro','countprod')); 
+        return view('layouts.paketview', compact('thiskategori','newarrival','galpro','countprod','katid')); 
     }
 
     public function viewLebaran()
@@ -330,8 +339,9 @@ class HomeController extends Controller
         $newarrival = DB::table('produk')->whereNull('produk.deleted_at')->latest()->take(8)->get();
         $galpro = DB::table('galeri_produk')->whereNull('galeri_produk.deleted_at')->get();
         $countprod = $thiskategori->count('produk.id');
+        $katid='K0006';
         // dd($thiskategori);
-        return view('layouts.paketview', compact('thiskategori','newarrival','galpro','countprod')); 
+        return view('layouts.paketview', compact('thiskategori','newarrival','galpro','countprod','katid')); 
     }
 
     public function viewKhusus()
@@ -343,8 +353,9 @@ class HomeController extends Controller
         $newarrival = DB::table('produk')->whereNull('produk.deleted_at')->latest()->take(8)->get();
         $galpro = DB::table('galeri_produk')->whereNull('galeri_produk.deleted_at')->get();
         $countprod = $thiskategori->count('produk.id');
+        $katid='K00011';
         // dd($thiskategori);
-        return view('layouts.paketview', compact('thiskategori','newarrival','galpro','countprod')); 
+        return view('layouts.paketview', compact('thiskategori','newarrival','galpro','countprod','katid')); 
     }
 
 
