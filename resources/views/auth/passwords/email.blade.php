@@ -69,7 +69,8 @@
         <h3 class="custom_blog_title">
             Reset Kata Sandi
         </h3>
-        @if (Session::has('status'))
+        @if (Session::has('status')) 
+        {{-- harus status bukan message kayak lainnya soalnya defaultnya begitu ternyata, mager ngubah --}}
         <div class="alert alert-success alert-dismissible show">                                   
             
             <strong>Success! </strong>{{ Session::get('status') }}
