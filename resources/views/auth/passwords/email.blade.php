@@ -69,10 +69,10 @@
         <h3 class="custom_blog_title">
             Reset Kata Sandi
         </h3>
-        @if (Session::has('message'))
+        @if (Session::has('status'))
         <div class="alert alert-success alert-dismissible show">                                   
             
-            <strong>Success! </strong>{{ Session::get('message') }}
+            <strong>Success! </strong>{{ Session::get('status') }}
             <button type="button" class="close h-100" data-dismiss="alert" aria-label="Close"><span><i class="mdi mdi-close"></i></span>
             </button>
         </div>

@@ -64,13 +64,13 @@
 </div>
 
 
-<div class="main-content main-content-checkout">
+{{-- <div class="main-content main-content-checkout">
     <div class="container">
         <div class="row">
             aaaaaaaaaaaaaaa
         </div>
     </div>
-</div>
+</div> --}}
 
 
 @endsection
