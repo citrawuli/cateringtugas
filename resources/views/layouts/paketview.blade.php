@@ -68,17 +68,16 @@
                             <div class="header-banner banner-image">
                                 <div class="banner-wrap">
                                     <div class="banner-header">
-                                        <video  autoplay muted loop controls >
-                                            <source src="{{asset('/teamo/images/aisya_product/vid2.mp4')}}" type="video/mp4">
-                                        </video>
-                                
+                                       
+                                        <img src="{{ asset('teamo/images/aisya_product/wedding6.jpeg')}}" style="object-fit: cover; width: 670px;
+                                                    height: 350px;" alt="img">
                                         <div class="col-lg-5 col-md-offset-7" >
                                             <div class="content-inner">
                                                 <h2 class="title">
                                                     Aisya Catering  <br/> Surabaya
                                                 </h2>
                                                 <div class="sub-title" style="text-align: justify;">
-                                                    <p>Hai, Aisya Catering menawarkan layanan katering pernikahan untuk Anda.</p>  
+                                                    <p>Hai, Aisya Catering hadir menawarkan layanan katering pernikahan untuk Anda.</p>  
                                                     <p>Aisya Catering menjadi solusi katering pernikahan di Surabaya khususnya dan Jawa Timur pada umumnya.</p>
                                                    <p> Hingga saat ini kami telah melayani ratusan kali acara katering dengan berbagai konsep menyesuaikan permintaan para klien.</p>
                                                                                                 
@@ -89,8 +88,8 @@
                                         <div class="col-lg-7 col-md-1" style="text-align: justify;">
                                             <h4>Hidangan Sesuai Selera</h4>
                                             <p>Jamu tamu undangan dengan gaya buffet prasmanan, sitting-dinner atau yang lainnya dengan menu hidangan lezat dan berkualitas.</p>
-                                            <p>Dimasak oleh pakar kuliner kami yang sudah sangat berpengalaman. Ada banyak macam pilihan menu makanan sebagai hidangan dalam acara wedding party sesuai dengan selera Anda.</p>
-                                            <p>Free test food menu wedding catering agar Anda dapat mengetahui rasa dan kualitas menu makanan yang kami tawarkan.</p>
+                                            <p>Dimasak oleh pakar kuliner Aisya yang sudah sangat berpengalaman. Ada banyak macam pilihan menu makanan sebagai hidangan dalam acara wedding party sesuai dengan selera Anda.</p>
+                                            <p>Free test food menu wedding catering agar Anda dapat mengetahui rasa dan kualitas menu makanan yang Aisya tawarkan.</p>
                                         </div>
                                         <div class="col-lg-5 col-md-offset-7"  style="text-align: justify;" >
                                                 <div class="content-inner">
@@ -123,101 +122,55 @@
                                                         <source src="{{asset('/teamo/images/aisya_product/vid1.mp4')}}" type="video/mp4">
                                                     </video>
                                                 </div>
-                                                <h5 class="member_name">Katering Pernikahan</h5>
-                                                <div class="member_position">
-                                                    Makanan yang lezat dan dekorasi yang mewah akan memberikan kesan yang tak terlupakan
-                                                </div>
                                             </div>
                                         </div>
                                         <div class="teamo-team-member">
                                             <div class="team-member-item">
                                                 <div class="member_avatar">
-                                                    {{-- <img src="{{ asset('teamo/images/member2.png')}}" alt="img"> --}}
-                                                    <video muted loop controls style="object-fit: cover;border-radius: 50%;width: 310px;
+                                                    <video autoplay muted loop controls style="object-fit: cover;border-radius: 50%;width: 310px;
                                                     height: 310px;">
-                                                        <source src="{{asset('/teamo/images/aisya_product/vid3.mp4')}}" type="video/mp4">
+                                                        <source src="{{asset('/teamo/images/aisya_product/wedding004.mp4')}}" type="video/mp4">
                                                     </video>
                                                 </div>
-                                                <h5 class="member_name">Hantaran</h5>
-                                                <div class="member_position">
-                                                    Hantaran spesial untuk momen spesial. 
-                                                </div>
                                             </div>
                                         </div>
                                         <div class="teamo-team-member">
                                             <div class="team-member-item">
                                                 <div class="member_avatar">
-                                                    <video muted loop controls style="object-fit: cover;border-radius: 50%;width: 310px;
+                                                    <video autoplay muted loop controls style="object-fit: cover;border-radius: 50%;width: 310px;
                                                     height: 310px;">
-                                                        <source src="{{asset('/teamo/images/aisya_product/vid4.mp4')}}" type="video/mp4">
+                                                        <source src="{{asset('/teamo/images/aisya_product/wedding005.mp4')}}" type="video/mp4">
                                                     </video>
                                                 </div>
-                                                <h5 class="member_name">Nasi Kotak</h5>
-                                                <div class="member_position">
-                                                    Rapat seharian bingung konsumsi? Menu nasi kotak Aisya bisa jadi andalan kamu
-                                                </div>
                                             </div>
                                         </div>
                                         <div class="teamo-team-member">
                                             <div class="team-member-item">
                                                 <div class="member_avatar">
-                                                    <img src="{{ asset('teamo/images/aisya_product/snack_box.jpeg')}}" height="300" width="300" alt="img">
-                                                </div>
-                                                <h5 class="member_name">Kue</h5>
-                                                <div class="member_position">
-                                                    Nikmat, dilengkapi pilihan rasa asin dan manis dari katalog produk kami
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="teamo-team-member">
-                                            <div class="team-member-item">
-                                                <div class="member_avatar">
-                                                    <video muted loop controls style="object-fit: cover;border-radius: 50%;width: 310px;
+                                                    <video autoplay muted loop controls style="object-fit: cover;border-radius: 50%;width: 310px;
                                                     height: 310px;">
-                                                        <source src="{{asset('/teamo/images/aisya_product/vid6.mp4')}}" type="video/mp4">
+                                                        <source src="{{asset('/teamo/images/aisya_product/wedding003.mp4')}}" type="video/mp4">
                                                     </video>
                                                 </div>
-                                                <h5 class="member_name">Prasmanan</h5>
-                                                <div class="member_position">
-                                                    Menu enak bergizi dan pelayanan memuaskan dari Aisya Catering, joss
-                                                </div>
                                             </div>
                                         </div>
                                         <div class="teamo-team-member">
                                             <div class="team-member-item">
                                                 <div class="member_avatar">
-                                                    <video muted loop controls style="object-fit: cover;border-radius: 50%;width: 310px;
+                                                    <video autoplay muted loop controls style="object-fit: cover;border-radius: 50%;width: 310px;
                                                     height: 310px;">
-                                                        <source src="{{asset('/teamo/images/aisya_product/vid5.mp4')}}" type="video/mp4">
+                                                        <source src="{{asset('/teamo/images/aisya_product/wedding002.mp4')}}" type="video/mp4">
                                                     </video>
                                                 </div>
-                                                <h5 class="member_name">Tumpengan</h5>
-                                                <div class="member_position">
-                                                    Menghangatkan suasana syukuran dengan tumpeng cantik dari Aisya Catering
-                                                </div>
                                             </div>
                                         </div>
                                         <div class="teamo-team-member">
                                             <div class="team-member-item">
                                                 <div class="member_avatar">
-                                                    <img src="{{ asset('teamo/images/aisya_product/harian_kantor.jpg')}}" style="object-fit: cover;border-radius: 50%;width: 310px;
-                                                    height: 310px;" alt="img">
-                                                </div>
-                                                <h5 class="member_name">Katering Harian Perusahaan</h5>
-                                                <div class="member_position">
-                                                    Aisya menawarkan berbagai pilihan paket katering dan kerja sama untuk menyediakan kantin di area kerja, sekolah, kantor, dan industri.
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="teamo-team-member">
-                                            <div class="team-member-item">
-                                                <div class="member_avatar">
-                                                    <img src="{{ asset('teamo/images/aisya_product/pemerintah.jpg')}}" style="object-fit: cover;border-radius: 50%;width: 310px;
-                                                    height: 310px;" alt="img">
-                                                </div>
-                                                <h5 class="member_name">Katering Instansi</h5>
-                                                <div class="member_position">
-                                                    Percayakan katering harian maupun event seperti seminar, workshop, gathering, dan sejenisnya pada Aisya. Aisya berpengalaman, tepat waktu, dan profesional.
+                                                    <video autoplay muted loop controls style="object-fit: cover;border-radius: 50%;width: 310px;
+                                                    height: 310px;">
+                                                        <source src="{{asset('/teamo/images/aisya_product/wedding007.mp4')}}" type="video/mp4">
+                                                    </video>
                                                 </div>
                                             </div>
                                         </div>
