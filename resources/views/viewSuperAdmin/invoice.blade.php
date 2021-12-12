@@ -53,7 +53,7 @@
         <tr>
             <td width="30%">{{ $order->alamat_lengkap_pembeli }} </td>
             <td>{{ date('d-M-Y', strtotime($order->untuk_tanggal)) }} | {{ $order->untuk_jam }}</td>
-            <td align="right"><strong> Pesan tidak bisa dibatalkan atau diubah H-1</strong></td>
+            <td align="right"><strong> Pesanan tidak bisa dibatalkan atau diubah H-1</strong></td>
         </tr>
         <tr>
             <td>{{ $order->no_hp_pembeli }}</td>

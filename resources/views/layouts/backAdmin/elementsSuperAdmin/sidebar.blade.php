@@ -49,6 +49,7 @@
                         </a>
                         <ul aria-expanded="false">
                             <li><a href="{!! url('/OrderDiterima'); !!}">Daftar Order Diterima</a></li>
+                            <li><a href="{!! url('/Rekap'); !!}">Rekap H-1</a></li>
                             <li><a href="{!! url('/PaymentTable'); !!}">Daftar Pembayaran</a></li>
                         </ul>
                      </li>

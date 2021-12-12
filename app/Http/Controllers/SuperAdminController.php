@@ -835,17 +835,22 @@ class SuperAdminController extends Controller
         $validator = $request->validate([
             'nama_lengkap' => ['required', 'max:50'],
             'nomor_telp' => ['required', 'max:15'],
-            'alamat_lengkap' => ['required', 'max:100'],
+            'untuk_tanggal' => ['required'],
+            'untuk_jam' => ['required'],
+            'alamat_lengkap' => ['max:100'],
             'keterangan' => ['max:200'],
         ],
         [
             'nama_lengkap.required' => 'Nama harus diisi',
             'nomor_telp.required' => 'Nomor ponsel harus diisi',
             'alamat_lengkap.required' => 'Alamat pengiriman harus diisi',
+            'untuk_tanggal.required' => 'Nomor ponsel harus diisi',
+            'untuk_jam.required' => 'Nomor ponsel harus diisi',
             'nama_lengkap.max' => 'Nama harus dibawah 50 karakter',
             'nomor_telp.max' => 'Nomor ponsel harus dibawah 15 karakter',
             'alamat_lengkap.max' => 'Alamat pengiriman harus dibawah 100 karakter ',
             'keterangan.max' => 'Keterangan harus dibawah 200 karakter',
+            
             ]
         );
         
@@ -1603,6 +1608,18 @@ class SuperAdminController extends Controller
  
         Session::flash('message', "Semua data Blog berhasil dikembalikan");
         return Redirect::back();
+    }
+
+    public function rekapOrderanBesok()
+    {
+        $pemesanan = Pemesanan::with(['products'])->whereNull('pemesanan.deleted_at')->where('status_pemesanan', '=', '2')->where('untuk_tanggal', '=', \Carbon\Carbon::tomorrow())->get();
+        $page_title = 'Rekap Order';
+        $page_description = 'Some description for the page';
+        $logo = "teamo/images/aisyacatering_kontak_logo.png";
+        $logoText = "teamo/images/aisya-catering-logo3.png";
+        $action = __FUNCTION__;
+        return view('viewSuperAdmin.viewrekaporder', compact('pemesanan', 'page_title', 'page_description','action','logo','logoText'));
+    
     }
 
 

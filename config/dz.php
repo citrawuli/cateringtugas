@@ -375,6 +375,10 @@ return [
 							'davur/vendor/bootstrap-select/dist/css/bootstrap-select.min.css',
 							'davur/vendor/datatables/css/jquery.dataTables.min.css',
 	  			],
+				'rekapOrderanBesok' => [
+						'davur/vendor/bootstrap-select/dist/css/bootstrap-select.min.css',
+						'davur/vendor/datatables/css/jquery.dataTables.min.css',
+		  		],
 				'OrderCalendar' => [
 							'davur/vendor/bootstrap-select/dist/css/bootstrap-select.min.css',
 							'davur/vendor/fullcalendar/css/fullcalendarV3.min.css',
@@ -1198,6 +1202,16 @@ return [
 							'davur/vendor/datatables/js/jquery.dataTables.min.js',
 							'davur/js/plugins-init/datatables.init.js',
 	  			],
+				'rekapOrderanBesok' => [
+					'davur/vendor/bootstrap-select/dist/js/bootstrap-select.min.js',
+				
+					'davur/js/custom.min.js',
+					'davur/js/deznav-init.js',
+
+					'davur/vendor/datatables/js/jquery.dataTables.min.js',
+					'davur/js/plugins-init/datatables.init.js',
+		  		],
+				  
 				'OrderCalendar' => [
 							'davur/vendor/bootstrap-select/dist/js/bootstrap-select.min.js',
 							'davur/vendor/chart.js/Chart.bundle.min.js',

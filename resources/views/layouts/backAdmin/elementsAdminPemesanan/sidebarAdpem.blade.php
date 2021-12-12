@@ -39,6 +39,7 @@
                 </a>
                 <ul aria-expanded="false">
                     <li><a href="{!! url('/OrderDiterima'); !!}">Daftar Order Diterima</a></li>
+                    <li><a href="{!! url('/Rekap'); !!}">Rekap H-1</a></li>
                 </ul>
              </li>
             {{-- <li><a class="has-arrow ai-icon" href="javascript:void()" aria-expanded="false">

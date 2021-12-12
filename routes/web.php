@@ -191,6 +191,9 @@ Route::post('/insend/{id}', [App\Http\Controllers\SuperAdminController::class, '
 Route::post('/done/{id}', [App\Http\Controllers\SuperAdminController::class, 'done'])->middleware('hak.akses:superAdmin,adminPemesanan'); //change status order into done
 Route::get('/LihatDetailOrder/{id}', [App\Http\Controllers\SuperAdminController::class, 'viewdetailorder'])->middleware('hak.akses:superAdmin,adminPemesanan'); //lihat detail order 
 
+
+Route::get('/Rekap', [App\Http\Controllers\SuperAdminController::class, 'rekapOrderanBesok'])->middleware('hak.akses:superAdmin,adminPemesanan'); //lihat Table Pemesanan
+
 Route::get('/OrderCalendar', [App\Http\Controllers\SuperAdminController::class, 'OrderCalendar'])->middleware('hak.akses:superAdmin,adminPemesanan'); //lihat Kalender Pemesanan
 
 Route::get('/Payment/{id}', [App\Http\Controllers\SuperAdminController::class, 'paymentIDtable'])->middleware('hak.akses:superAdmin,adminPemesanan,adminPembayaran'); // lihat pembayaran per ID pemesanan
