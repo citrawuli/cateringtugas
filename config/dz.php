@@ -53,6 +53,12 @@ return [
 					'davur/vendor/chartist/css/chartist.min.css',
 					'https://cdn.lineicons.com/2.0/LineIcons.css',
 				],
+				'indexAdBlog' => [
+					'davur/vendor/bootstrap-select/dist/css/bootstrap-select.min.css',
+					'davur/vendor/jqvmap/css/jqvmap.min.css',
+					'davur/vendor/chartist/css/chartist.min.css',
+					'https://cdn.lineicons.com/2.0/LineIcons.css',
+				],
 				'analytics' => [
 							'davur/vendor/bootstrap-select/dist/css/bootstrap-select.min.css',
 							'davur/vendor/jqvmap/css/jqvmap.min.css',
@@ -450,6 +456,17 @@ return [
 							'davur/js/dashboard/dashboard-1.js',
 							'davur/js/custom.min.js',
 							'davur/js/deznav-init.js',
+				],
+				'indexAdBlog' => [
+					'davur/vendor/bootstrap-select/dist/js/bootstrap-select.min.js',
+					'davur/vendor/chart.js/Chart.bundle.min.js',
+					'davur/vendor/waypoints/jquery.waypoints.min.js',
+					'davur/vendor/jquery.counterup/jquery.counterup.min.js',
+					'davur/vendor/apexchart/apexchart.js',
+					'davur/vendor/peity/jquery.peity.min.js',
+					'davur/js/dashboard/dashboard-1.js',
+					'davur/js/custom.min.js',
+					'davur/js/deznav-init.js',
 				],
 				'analytics' => [
 							'davur/vendor/bootstrap-select/dist/js/bootstrap-select.min.js',

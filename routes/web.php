@@ -214,21 +214,22 @@ Route::get('/TrashedPayment', [App\Http\Controllers\SuperAdminController::class,
 Route::get('/user', [App\Http\Controllers\UserController::class, 'index'])->middleware('hak.akses:user')->name('homeUser');
 Route::get('/adminPemesanan', [App\Http\Controllers\AdminPemesananController::class, 'indexAdPem'])->middleware('hak.akses:adminPemesanan')->name('homeAdminPemesanan');
 Route::get('/adminPembayaran', [App\Http\Controllers\AdminPembayaranController::class, 'indexAdPembayaran'])->middleware('hak.akses:adminPembayaran')->name('homeAdminPembayaran');
+Route::get('/adminBlog', [App\Http\Controllers\AdminBlogController::class, 'indexAdBlog'])->middleware('hak.akses:adminBlog')->name('homeAdminBlog');
 Route::get('/getdataproduk/{id}', [App\Http\Controllers\SuperAdminController::class,'getdataproduk'])->middleware('hak.akses:superAdmin,adminPemesanan');
 
 
 
-Route::get('/BlogTable', [App\Http\Controllers\SuperAdminController::class, 'blogTable'])->middleware('hak.akses:superAdmin,adminPemesanan,adminPembayaran');
-Route::get('/BlogTableASC', [App\Http\Controllers\SuperAdminController::class, 'blogTableASC'])->middleware('hak.akses:superAdmin,adminPemesanan,adminPembayaran');
-Route::get('/blogForm', [App\Http\Controllers\SuperAdminController::class, 'blogForm'])->middleware('hak.akses:superAdmin,adminPemesanan,adminPembayaran');
-Route::post('/StoreBlog', [App\Http\Controllers\SuperAdminController::class, 'storeBlog'])->middleware('hak.akses:superAdmin,adminPemesanan,adminPembayaran');
-Route::get('/blog/{id}', [App\Http\Controllers\SuperAdminController::class, 'showBlog'])->middleware('hak.akses:superAdmin,adminPemesanan,adminPembayaran');
-Route::get('/EditBlog/{id}', [App\Http\Controllers\SuperAdminController::class, 'EditBlog'])->middleware('hak.akses:superAdmin,adminPemesanan,adminPembayaran'); //lihat form edit Blog
-Route::post('/UpdateBlog/{id}', [App\Http\Controllers\SuperAdminController::class, 'UpdateBlog'])->middleware('hak.akses:superAdmin,adminPemesanan,adminPembayaran'); //update data form edit Blog ke DB
-Route::get('/DeleteBlog/{id}', [App\Http\Controllers\SuperAdminController::class, 'deleteBlog'])->middleware('hak.akses:superAdmin,adminPemesanan,adminPembayaran'); //delete data form delete blog ke DB
-Route::get('/TrashedBlog', [App\Http\Controllers\SuperAdminController::class, 'trashedBlog'])->middleware('hak.akses:superAdmin,adminPemesanan,adminPembayaran'); //lihat data blog di tong sampah
-Route::get('/RestoreBlog/{id}', [App\Http\Controllers\SuperAdminController::class, 'restoreBlog'])->middleware('hak.akses:superAdmin,adminPemesanan,adminPembayaran'); //kembalikan data blog dari tong sampah
-Route::get('/RestoreAllBlog', [App\Http\Controllers\SuperAdminController::class, 'restoreallBlog'])->middleware('hak.akses:superAdmin,adminPemesanan,adminPembayaran'); //kembalikan semua data blog dari tong sampah
+Route::get('/BlogTable', [App\Http\Controllers\SuperAdminController::class, 'blogTable'])->middleware('hak.akses:superAdmin,adminBlog');
+Route::get('/BlogTableASC', [App\Http\Controllers\SuperAdminController::class, 'blogTableASC'])->middleware('hak.akses:superAdmin,adminBlog');
+Route::get('/blogForm', [App\Http\Controllers\SuperAdminController::class, 'blogForm'])->middleware('hak.akses:superAdmin,adminBlog');
+Route::post('/StoreBlog', [App\Http\Controllers\SuperAdminController::class, 'storeBlog'])->middleware('hak.akses:superAdmin,adminBlog');
+Route::get('/blog/{id}', [App\Http\Controllers\SuperAdminController::class, 'showBlog'])->middleware('hak.akses:superAdmin,adminBlog');
+Route::get('/EditBlog/{id}', [App\Http\Controllers\SuperAdminController::class, 'EditBlog'])->middleware('hak.akses:superAdmin,adminBlog'); //lihat form edit Blog
+Route::post('/UpdateBlog/{id}', [App\Http\Controllers\SuperAdminController::class, 'UpdateBlog'])->middleware('hak.akses:superAdmin,adminBlog'); //update data form edit Blog ke DB
+Route::get('/DeleteBlog/{id}', [App\Http\Controllers\SuperAdminController::class, 'deleteBlog'])->middleware('hak.akses:superAdmin,adminBlog'); //delete data form delete blog ke DB
+Route::get('/TrashedBlog', [App\Http\Controllers\SuperAdminController::class, 'trashedBlog'])->middleware('hak.akses:superAdmin,adminBlog'); //lihat data blog di tong sampah
+Route::get('/RestoreBlog/{id}', [App\Http\Controllers\SuperAdminController::class, 'restoreBlog'])->middleware('hak.akses:superAdmin,adminBlog'); //kembalikan data blog dari tong sampah
+Route::get('/RestoreAllBlog', [App\Http\Controllers\SuperAdminController::class, 'restoreallBlog'])->middleware('hak.akses:superAdmin,adminBlog'); //kembalikan semua data blog dari tong sampah
 
 
 Route::get('/uprof', [App\Http\Controllers\SuperAdminController::class, 'edituprof']); //lihat form edit profil

@@ -52,6 +52,10 @@ class HomeController extends Controller
         if ($request->user()->hasRole('superAdmin')){
             return redirect('/superAdmin');
         }
+
+        if ($request->user()->hasRole('adminBlog')){
+            return redirect('/adminBlog');
+        }
  
  
     }

@@ -42,22 +42,6 @@
                     <li><a href="{!! url('/Rekap'); !!}">Rekap H-1</a></li>
                 </ul>
              </li>
-            {{-- <li><a class="has-arrow ai-icon" href="javascript:void()" aria-expanded="false">
-                <i class="flaticon-381-tab"></i>
-                <span class="nav-text">Kalender Orderan</span>
-            </a>
-                <ul aria-expanded="false">
-                    <li><a href="{!! url('/OrderCalendar'); !!}">Kalender Order</a></li>
-                </ul>
-            </li> --}}
-            <li><a class="has-arrow ai-icon" href="javascript:void()" aria-expanded="false">
-                <i class="flaticon-381-newspaper"></i>
-                <span class="nav-text">Blog</span>
-            </a>
-                <ul aria-expanded="false">
-                    <li><a href="{!! url('/BlogTable'); !!}">Daftar Blog</a></li>
-                </ul>
-            </li>
         </ul>
     
         <div class="add-menu-sidebar">

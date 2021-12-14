@@ -15,6 +15,9 @@
     elseif(Auth::user()->hasRole('adminPembayaran')) {
         $layoutDirectory = 'layouts.backAdmin.layout.defaultAdminPembayaran';
     } 
+    elseif(Auth::user()->hasRole('adminBlog')) {
+        $layoutDirectory = 'layouts.backAdmin.layout.defaultAdminBlog';
+    } 
 @endphp
 @extends($layoutDirectory)
 {{-- @extends('layouts.backAdmin.layout.defaultSuperAdmin') --}}

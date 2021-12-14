@@ -182,7 +182,7 @@
                                     
                                     
                                     <td>{{ $b->nomor_rekening ?? '-'}}</td>
-                                    <td>{{ $b->atas_nama }}</td>
+                                    <td>{{ $b->atas_nama ?? '-'}}</td>
                                     <td>{{ $b->created_at }}</td>
                                     <td>{{ $b->updated_at }}</td>
                                     <td>
