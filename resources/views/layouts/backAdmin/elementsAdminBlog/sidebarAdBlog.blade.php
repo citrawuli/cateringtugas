@@ -1,7 +1,7 @@
 <div class="deznav">
     <div class="deznav-scroll">
         <ul class="metismenu" id="menu2">
-            <li><a href="{!! url('/adminPembayaran'); !!}" class="ai-icon" aria-expanded="false">
+            <li><a href="{!! url('/adminBlog'); !!}" class="ai-icon" aria-expanded="false">
                     <i class="flaticon-381-networking"></i>
                     <span class="nav-text">Beranda</span>
                 </a>
@@ -12,6 +12,9 @@
             </a>
                 <ul aria-expanded="false">
                     <li><a href="{!! url('/BlogTable'); !!}">Daftar Blog</a></li>
+                </ul>
+                <ul aria-expanded="false">
+                    <li><a href="{!! url('/blogForm'); !!}">Tambah Blog</a></li>
                 </ul>
             </li>
            

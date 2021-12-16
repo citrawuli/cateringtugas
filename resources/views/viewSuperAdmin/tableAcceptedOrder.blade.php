@@ -186,7 +186,9 @@
                                         <a href="{!! url('/Invoice/'. $order->id_pemesanan); !!}" class="btn btn-success btn-xs btn-rounded">Invoice</a>
                                         <a href="{!! url('/Payment/'. $order->id_pemesanan); !!}" class="btn btn-info btn-xs btn-rounded">Pembayaran</a>
                                         <a href="{!! url('/LihatDetailOrder/'. $order->id_pemesanan); !!}" class="btn btn-secondary btn-xs btn-rounded">Lihat detail</a>
-                                        <a href="{!! url('/EditOrder/'. $order->id_pemesanan); !!}" class="btn btn-warning btn-xs btn-rounded">Edit</a>
+                                        @if ($order ->status_progress == '1')
+                                            <a href="{!! url('/EditOrder/'. $order->id_pemesanan); !!}" class="btn btn-warning btn-xs btn-rounded">Edit</a>
+                                        @endif
                                     </td>
                                 </tr>
                                 
