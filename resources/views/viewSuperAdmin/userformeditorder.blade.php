@@ -59,7 +59,7 @@
                 </div>
             @foreach( $pemesanan as $key =>$order )
                 <div class="card-body">
-                    <form method="POST" action="{{ url('/UpdateOrder/'.$order->id_pemesanan) }}" class="step-form-horizontal">
+                    <form method="POST" action="{{ url('/UpdateOrder/'.$order->id_pemesanan) }}" class="step-form-horizontal" id="updateord">
                         @csrf
                         <div>
            
@@ -169,6 +169,113 @@
 
                             </section>
 
+                            <h4>Data Pesanan</h4>
+                            <section>
+                                <div class="table-responsive">
+                                    <table class="table table-striped display" id="simulationRow">
+                                        <thead>
+                                            <tr>
+                                                <!-- <th class="center">#</th> -->
+                                                <th>Produk</th>
+                                                <th class="center">Qty</th>
+                                                <th class="right">Harga Jual</th>
+                                                <th class="right">Total</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            @foreach ($order->products as $det_pem  )
+                                               <tr id="iterationn">
+                                                    
+                                                    <td class="left strong"><div class=""><select class="form-control selected_product"  id="select_produk{{ $loop->iteration }}" required=""  name="select_produk[]">
+                                                        <option disabled selected="">Enter Produk</option>
+                                                        @foreach($produk as $p)
+                                                        @if ($det_pem->pivot->id_produk == $p->id)
+                                                            <option value="{{ $p->id }}" selected>{{$p->nama_produk}}</option>
+                                                        @else
+                                                            <option value="{{ $p->id }}">{{$p->nama_produk}}</option>
+                                                        @endif
+                                                        @endforeach</select></div></td>
+                                                    <td class="center" style="width:12%;"><input id="quantity{{ $loop->iteration }}" type="number" min="1" class="form-control @error('+quantity+') is-invalid @enderror" name="quantity[]" required  value="{{ $det_pem->pivot->kuantitas }}" ></td>
+                                                    
+                                                    <td class="right"><input id="hargajual{{ $loop->iteration }}" type="number" min="0" class="form-control @error('+hargajual+') is-invalid @enderror" name="hargajual[]" disabled="" 
+                                                        value="{{ $det_pem->harga_produk}}"></td>
+                                                    <td class="right"><input id="totalrowharga{{ $loop->iteration }}" type="number"  class="form-control @error('+totalrow+') is-invalid @enderror totalrowharga" name="totalrowharga[]" value="{{ $det_pem->pivot->sub_total }}" required readonly></td>
+                                                </tr>
+                                                <input type="text" value="{{ $loop->count }}" hidden id="iteration">
+                                            @endforeach
+                                            
+                                        </tbody>
+                                    </table>
+                                </div>
+                                <div class="row">
+                                    <div class="col-lg-4 col-sm-7"> </div>
+                                    <div class="col-lg-4 col-sm-7 ml-auto">
+                                        <br><table class="table table-clear">
+                                            <tbody>
+                                                <tr>
+                                                    <td class="left"><strong>Subtotal</strong></td>
+                                                    <td class="right">Rp <p style="display:inline" id="sub_total">0</p></td>
+                                                </tr>
+                                                <tr>
+                                                    <td class="left"><strong>Discount</strong></td>
+                                                    <td class="right" >
+                                                        {{-- <input id="discount" type="number" min="0" class="discount form-control @error('discount') is-invalid @enderror" 
+                                                        name="discount" required  placeholder="0" style="width:88%; display:inline; white-space:nowrap; margin-left: 5px;">
+                                                         --}}
+                                                        @if (!empty($order->discount))
+                                                            <div class="row">
+                                                                <label for="money-radio" class="radio-inline mr-3"><input type="radio" id="money-radio" name="discount" checked=""> Rp Off</label>
+                                                                <input type="number" value="{{$order->discount}}"class="discount control-group" id="money-text" name="money_off" style="margin-left: 5px" placeholder="dalam rupiah"/>
+                                                            </div>
+                                                            <div class="row">
+                                                                <label for="percent-radio" class="radio-inline mr-3"><input type="radio" id="percent-radio" name="discount" > % Off</label>
+                                                                <input type="number" class="discount control-group" id="percent-text" name="percent_off" style="margin-left: 14px" placeholder="dalam persen" />
+                                                            </div>
+                                                        @elseif(!empty($order->discount_inpercent))
+                                                            <div class="row">
+                                                                <label for="money-radio" class="radio-inline mr-3"><input type="radio" id="money-radio" name="discount"/> Rp Off</label>
+                                                                <input type="number" class="discount control-group" id="money-text" name="money_off" style="margin-left: 5px" placeholder="dalam rupiah"/>
+                                                            </div>
+                                                            <div class="row">
+                                                                <label for="percent-radio" class="radio-inline mr-3"><input type="radio" id="percent-radio" name="discount" checked> % Off</label>
+                                                                <input type="number" value="{{$order->discount_inpercent}}"class="discount control-group" id="percent-text" name="percent_off" style="margin-left: 14px" placeholder="dalam persen" />
+                                                            </div>
+                                                        @else
+                                                        <div class="row">
+                                                            <label for="money-radio" class="radio-inline mr-3"><input type="radio" id="money-radio" name="discount"/> Rp Off</label>
+                                                            <input type="number" value=""class="discount control-group" id="money-text" name="money_off" style="margin-left: 5px" placeholder="dalam rupiah"/>
+                                                        </div>
+                                                        <div class="row">
+                                                            <label for="percent-radio" class="radio-inline mr-3"><input type="radio" id="percent-radio" name="discount"/> % Off</label>
+                                                            <input type="number" class="discount control-group" id="percent-text" name="percent_off" style="margin-left: 14px" placeholder="dalam persen" />
+                                                        </div>
+                                                        @endif
+                                                        
+
+                                                       
+                                                    
+                                                    </td>
+                                                </tr>
+                                                {{-- <tr>
+                                                    <td class="left"><strong>PPN (10%)</strong></td>
+                                                    <td class="right">Rp <p style="display:inline" id="ppn">0</p></td>
+                                                </tr> --}}
+                                                <tr>
+                                                    <td class="left"><strong>Total</strong></td>
+                                                    <td class="right"><strong>Rp <p style="display:inline" id="total_amount" name="total_amount">0</p></strong><br></td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                            </div>
+                                            
+
+                            <input id="product_total" hidden type="number" 
+                            class="form-control @error('product_total') is-invalid @enderror" 
+                            name="product_total" required  placeholder="Total Transaksi" hidden>
+                                    
+                            </section>
+
                             
             @endforeach
                             
@@ -204,6 +311,150 @@
             $('.diambil').click(function() {
                 $('#alamatsect').slideUp();
             });
+
+        //SELECT2
+            $('.selected_product').select2();
+            // it hurt while doing update considered the disabled one wont be included while submitting.... :) jadiiii jadi ya jadiii
+            $('.selected_product').prop('disabled', true);
+            // To re-enable it before submission so that GET / POST data is included:
+
+            $('#updateord').on('submit', function() {
+                $('.selected_product').prop('disabled', false);
+            });
+           
+          
+
+        //DATA
+        var iter = $('#iteration');
+        var counteriteration=parseInt(iter.val());
+        // alert(counteriteration);
+       
+        for ( i = 1; i <= counteriteration; i++) {
+            //i mulai dari 1 ya, cuz laravel loop iteration index start from 1 :) HA!
+            // console.log(i)
+            hitung(i);
+        }
+            function hitung(id){
+
+                let harga= $("#hargajual"+id);
+                // console.log("harga");
+                // console.log(harga);
+                let qty= $("#quantity"+id);
+                // console.log("qty "+harga);
+                let rowharga= $("#totalrowharga"+id);
+                let produk= $("#select_produk"+id);
+                //dont use class .select okayyy it wil ruined all
+                $(document).on('change','#select_produk'+id, function(){
+                    console.log('row select produk');
+                    let produkval = $(this).val();
+                    // console.log("val"+produkval);
+                        var a = "{{URL('/getdataproduk')}}";
+                        var dltUrl = a+"/"+produkval;
+                        $.ajax({
+                            url: dltUrl,
+                            type:'GET',
+                            success:function(response){
+                                var response = JSON.parse(response);
+                                // console.log("response");
+                                // console.log(response);
+                                
+                                var hg = `${response[0]['harga_produk']}`;
+                                harga.val(hg);
+                                // console.log("hargaa");
+                                // console.log(hg);
+
+                                //$("#hargajual"+id).html(response[0]['harga_produk']);    
+                                
+                                let thg= hg * qty.val();
+                                //$("#totalrowharga"+id).val(thg);
+                                
+                                //$("#totalrowharga"+id).mask('#.##0', {reverse: true});
+                                $("#totalrowharga"+id).val(thg);
+                                hitung_calc();
+                            }          
+                        })
+                    
+                });
+
+                $(document).on('change','#quantity'+id, function(){
+                    console.log('row quantity');
+                    //oke entah kenapa yg ini bisa. awas non nan * non nan jadi nan lagi!!!
+                    qty2=parseInt(qty.val());
+                    // console.log(qty2);
+                    // alert ( isNaN(qty2)); 
+
+                    hargaa=parseInt(harga.val());
+                    // console.log(hargaa);
+                    // alert ( isNaN(hargaa)); 
+
+                    //thg= parseInt(hargaa.innerHTML) * qty2.value;
+                    thg= qty2 * hargaa;
+                    //alert ( isNaN(thg)); 
+                    $("#totalrowharga"+id).val(thg);
+
+                    hitung_calc();
+                });
+
+                hitung_calc();
+            }
+
+            function hitung_calc(){
+                //console.log('row calc');
+                sbtotal=0;
+                $('.totalrowharga').each(function() {
+                    sbtotal += parseInt($(this).val());
+                });
+                
+                $('#sub_total').html(sbtotal);
+                $('#sub_total_todb').val(parseInt(sbtotal));
+                discount=0;
+            //discount = $('.discount').val(); this is without radio button
+                if ($('#money-radio').is(':checked')) {
+                    $('#percent-text').val(null);
+                    discount = $('#money-text').val();
+                    $('#discount_todb').val(discount);
+                }
+                else if($('#percent-radio').is(':checked')) {
+                    $('#money-text').val(null);
+                    discount = ($('#percent-text').val()/100)*sbtotal;
+                    $('#discount_dbinpercent').val(discount);
+
+
+                }
+            
+                
+                
+                ta=parseInt(sbtotal-discount);
+                // alert(isNaN(discount));
+                // alert(isNaN(ta));
+                $('#total_amount').html(ta);
+                $('#product_total').val(ta);
+                
+            }
+
+            $(document).on('input','.discount', function(){
+                console.log('row discount');
+                hitung_calc();
+                    
+            });
+
+        
+            $('#percent-radio, #money-radio').change(function() {
+                if ($('#percent-radio').is(':checked')) {
+                    $('#percent-text').removeAttr('disabled').focus();
+                } else {
+                    $('#percent-text').attr('disabled', 'disabled');
+                }
+
+                if ($('#money-radio').is(':checked')){
+                    $('#money-text').removeAttr('disabled').focus();
+                } else {
+                    $('#money-text').attr('disabled', 'disabled');
+                }
+            }).change();
+
+
+
    });
 
 </script>

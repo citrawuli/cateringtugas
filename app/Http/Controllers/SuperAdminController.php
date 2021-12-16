@@ -944,6 +944,36 @@ class SuperAdminController extends Controller
         $model->untuk_jam = $request->input('untuk_jam');
         $model->pengambilan = $request->input('optionkirim');
         $model->keterangan = $request->input('keterangan');
+        $model->total_transaksi = $request->input('product_total');
+        $model->discount = $request->input('money_off');
+        $model->discount_inpercent = $request->input('percent_off');
+
+        $products = $request->input('select_produk', []);
+        $quantities = $request->input('quantity', []);
+        $sub_totals = $request->totalrowharga;
+        for ($product=0; $product < count($products); $product++) {
+            if ($products[$product] != '') {
+                //dd($sub_totals); dont use disable input in subtotal, it will return offset
+                
+                $model->products()->updateExistingPivot($products[$product], 
+                    ['id_pemesanan'=>$id,
+                    'kuantitas' => $quantities[$product], 
+                    'sub_total' => $sub_totals[$product],
+                ],false);
+                
+            }
+        }
+
+        // $selectedItems = [];         
+        //  foreach($request->get('item_id') as $key => $id) {
+        //      $selectedItems[$id] = ['qty' => $request->get('quantity')[$key]];
+        //  }  
+        //  $service->items()->updateExistingPivot($item_id, ['quantity' => selectedItems], false);
+        //  $messages  = Message::where('message_id', $id)->get();
+        //     foreach($messages as $message)
+        //     $message->users()->updateExistingPivot($user, array('status' => 1), false);
+
+        
         $model->touch();
         $model->save();
         Session::flash('message', "Data Pemesanan berhasil diubah");
