@@ -271,8 +271,11 @@
                                             
 
                             <input id="product_total" hidden type="number" 
-                            class="form-control @error('product_total') is-invalid @enderror" 
-                            name="product_total" required  placeholder="Total Transaksi" hidden>
+                                class="form-control @error('product_total') is-invalid @enderror" 
+                                name="product_total" required  placeholder="Total Transaksi" hidden>
+                            <input id="sub_total_todb" hidden type="number" 
+                                class="form-control @error('sub_total_todb') is-invalid @enderror" 
+                                 name="sub_total_todb"  placeholder="Sub Total" hidden>
                                     
                             </section>
 
@@ -317,7 +320,6 @@
             // it hurt while doing update considered the disabled one wont be included while submitting.... :) jadiiii jadi ya jadiii
             $('.selected_product').prop('disabled', true);
             // To re-enable it before submission so that GET / POST data is included:
-
             $('#updateord').on('submit', function() {
                 $('.selected_product').prop('disabled', false);
             });

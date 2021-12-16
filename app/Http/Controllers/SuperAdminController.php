@@ -945,6 +945,7 @@ class SuperAdminController extends Controller
         $model->pengambilan = $request->input('optionkirim');
         $model->keterangan = $request->input('keterangan');
         $model->total_transaksi = $request->input('product_total');
+        $model->total_sub = $request->input('sub_total_todb');
         $model->discount = $request->input('money_off');
         $model->discount_inpercent = $request->input('percent_off');
 
