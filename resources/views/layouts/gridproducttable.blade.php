@@ -102,18 +102,19 @@
                                     @endforeach
                                 </div>
                                 <div class="product-thumb">
-                                    <div class="thumb-inner">
+                                    <div class="thumb-inner" >
                                         <a href="{{url('/viewproduct/'.$prod->id)}}">
                                             @if($prod->images()->exists())
                                             @foreach ($prod->images->slice(0,1) as  $gal)
                                 
                                                 <img id="img_zoom" data-zoom-image="{{ asset($gal->foto) }}"
-                                                src="{{ asset($gal->foto) }}" alt="img">
+                                                src="{{ asset($gal->foto) }}" alt="img" style=" height:100%;
+                                                max-height:268px;" >
                                                 
                                                 {{-- <a href="#" class="btn-zoom open_qv"><i class="fa fa-search" aria-hidden="true"></i></a> --}}
                                             @endforeach
                                             @else
-                                            <img src="{{ asset('teamo/images/product-item-1.jpg')}}" alt="img">
+                                            <img src="{{ asset('teamo/images/product-item-1.jpg')}}" alt="img" >
                                             @endif
 
                                             {{-- ini salah@foreach ($galpro->slice(0, 1) as $gal)
