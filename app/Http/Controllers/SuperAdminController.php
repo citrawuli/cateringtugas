@@ -108,7 +108,7 @@ class SuperAdminController extends Controller
 
     public function storeuser(Request $request){
         $validator = $request->validate([
-            'name' => ['required', 'string', 'max:50'],
+            'name' => ['required', 'string', 'max:35'],
             'email' => ['required', 'string', 'email', 'max:50', 'unique:users'],
             'password' => ['required', 'string', 'min:8', 'confirmed'],
         ],
@@ -516,7 +516,6 @@ class SuperAdminController extends Controller
             galeriProduk::create([
                 'id_produk' => $id,
                 'foto' => $imagePath,
-                'id_default' => '0',
                 'created_at' => \Carbon\Carbon::now(), 
                 'updated_at' => \Carbon\Carbon::now(), 
             ]);
@@ -837,6 +836,7 @@ class SuperAdminController extends Controller
             'nomor_telp' => ['required', 'max:15'],
             'untuk_tanggal' => ['required'],
             'untuk_jam' => ['required'],
+            'optionkirim' => ['required'],
             'alamat_lengkap' => ['max:100'],
             'keterangan' => ['max:200'],
         ],
@@ -844,6 +844,7 @@ class SuperAdminController extends Controller
             'nama_lengkap.required' => 'Nama harus diisi',
             'nomor_telp.required' => 'Nomor ponsel harus diisi',
             'alamat_lengkap.required' => 'Alamat pengiriman harus diisi',
+            'optionkirim.required' => 'Metode pengambilan harus diisi',
             'untuk_tanggal.required' => 'Nomor ponsel harus diisi',
             'untuk_jam.required' => 'Nomor ponsel harus diisi',
             'nama_lengkap.max' => 'Nama harus dibawah 50 karakter',
