@@ -832,7 +832,7 @@ class SuperAdminController extends Controller
 
     public function storePemesanan(Request $request){
         $validator = $request->validate([
-            'nama_lengkap' => ['required', 'max:50'],
+            'nama_lengkap' => ['required', 'max:35'],
             'nomor_telp' => ['required', 'max:15'],
             'untuk_tanggal' => ['required'],
             'untuk_jam' => ['required'],
@@ -847,7 +847,7 @@ class SuperAdminController extends Controller
             'optionkirim.required' => 'Metode pengambilan harus diisi',
             'untuk_tanggal.required' => 'Nomor ponsel harus diisi',
             'untuk_jam.required' => 'Nomor ponsel harus diisi',
-            'nama_lengkap.max' => 'Nama harus dibawah 50 karakter',
+            'nama_lengkap.max' => 'Nama harus dibawah 35 karakter',
             'nomor_telp.max' => 'Nomor ponsel harus dibawah 15 karakter',
             'alamat_lengkap.max' => 'Alamat pengiriman harus dibawah 100 karakter ',
             'keterangan.max' => 'Keterangan harus dibawah 200 karakter',

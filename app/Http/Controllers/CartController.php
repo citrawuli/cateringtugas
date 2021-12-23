@@ -97,7 +97,7 @@ class CartController extends Controller
     {
         
         $validator = $request->validate([
-            'cariuser' => ['required', 'max:50'],
+            'cariuser' => ['required', 'max:35'],
             'nomor_telp' => ['required', 'max:15'],
             'optionkirim' => ['required'],
             'untuk_jam'=>['required'],
@@ -111,7 +111,7 @@ class CartController extends Controller
             'optionkirim.required' => 'Metode pengambilan harus diisi',
             'untuk_tanggal.required' => 'Untuk tanggal harus diisi',
             'untuk_jam.required' => 'Untuk jam harus diisi',
-            'cariuser.max' => 'Nama harus dibawah 50 karakter',
+            'cariuser.max' => 'Nama harus dibawah 35 karakter',
             'nomor_telp.max' => 'Nomor ponsel harus dibawah 15 karakter',
             'alamat_lengkap.max' => 'Alamat pengiriman harus dibawah 100 karakter ',
             'keterangan.max' => 'Keterangan harus dibawah 200 karakter',
