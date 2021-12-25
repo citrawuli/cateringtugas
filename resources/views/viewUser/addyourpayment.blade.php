@@ -65,7 +65,7 @@
                                     <div class="shipping-address">
                                         <form id="form-id" method="POST" action="{{ url('/storeyourpayment/'.$pemesanan_id) }}" enctype="multipart/form-data">
                                             @csrf
-                                            <small>*Mohon membayar sejumlah dengan tagihan bayar.</small>
+                                            <small>*Wajib diisi. Mohon membayar sejumlah dengan tagihan bayar.</small>
                                             <br><br>
                                             <div class="form-row form-row-col">
                                                 <label for="id_pemesanan" class="text">ID Pemesanan (*)</label>
