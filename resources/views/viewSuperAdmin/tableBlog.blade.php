@@ -108,17 +108,23 @@
                     <div class="media review-box">
                         {{-- <img class="mr-3 img-fluid btn-rounded" width="55" 
                         src="http://localhost/cathering/public/davur/images/avatar/1.jpg" alt="DexignZone"> --}}
-                        <div class="media-body">
+                        <div class="media-body"  >
+                            
                             <h4 class="mt-0 mb-0 text-black">{{$b->judul_blog}}</h4>
                             <ul class="review-meta mb-3 d-block d-lg-flex align-items-center">
                                 <li class="mr-3"><small>{{$b->name}}</small></li>
                                 <li class="mr-3"><small>{{$b->role_name}}</small></li>
                                 <li class="mr-3"><small>{{ date('d M Y, H:i:s', strtotime($b->updated_at)) }}</small></li>
                                 {{-- <li class="ml-auto"><span class="badge badge-rounded badge-warning light font-w500">Excelent</span></li> --}}
-                                <li class="ml-auto"><a href="{{ url( '/EditBlog/' . $b->id_blog ) }}" class="btn btn-primary shadow btn-xs sharp mr-1" data-toggle="tooltip" data-placement="top" title="Edit Blog" id="editt"><i class="fa fa-pencil"></i></a>
+                                <li class="ml-auto">
+                                    <a href="{{ url( '/EditBlog/' . $b->id_blog ) }}" class="btn btn-primary shadow btn-xs sharp mr-1" data-toggle="tooltip" data-placement="top" title="Edit Blog" id="editt"><i class="fa fa-pencil"></i></a>
                                     <a href="{{ url( '/DeleteBlog/' . $b->id_blog ) }}" class="btn btn-danger shadow btn-xs sharp" data-toggle="tooltip2" data-placement="top" title="Soft Delete Blog"><i class="fa fa-trash"></i></a>
+                                
+                                    <a href="{!!url('/readmoreblog/'.$b->id_blog)!!}"> Read More... </a>
                                 </li>
                             </ul>
+                                           
+                            <span> {!! Str::words($b->konten_blog, 150) !!}</span>
 
                             {{-- {!!Str::limit($b->konten_blog, 300, '....')!!} <a href='#' class='read-more-show'>Read More</a> --}}
 
@@ -141,8 +147,7 @@
                                 {!! $b->konten_blog !!}
                             @endif --}}
 
-                            <span> {!! Str::words($b->konten_blog, 150) !!}</span><br><br>                                                
-                            <a href="{{url('/readmoreblog/'.$b->id_blog)}}">Read More... </a>
+                            
 
                             
                         </div>
