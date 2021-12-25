@@ -151,26 +151,16 @@
 
                             
                         </div>
-                        {{-- <div class="media-footer align-self-center">
-                            <div class="star-review text-md-center">
-                                <span class="text-secondary">4.5</span>
-                                <i class="fa fa-star text-primary"></i>
-                                <i class="fa fa-star text-primary"></i>
-                                <i class="fa fa-star text-primary"></i>
-                                <i class="fa fa-star text-primary"></i>
-                                <i class="fa fa-star text-gray"></i>
-                            </div>
-                        </div> --}}
                     </div>       
                 @endforeach  
                 
-                <div class="d-flex justify-content-center">
-                    {!! $blog->links() !!}
-                </div>
+               
             </div>
 
             
-            
+            <div class="d-flex justify-content-center">
+                {!! $blog->links() !!}
+            </div>
             {{-- <div class="card-footer border-0 text-center py-4">
                 <a href="javascript:void(0);" class="btn btn-primary see-more" data-page="2" data-link="localhost:8000/post?page=" data-div="#posts">Read More <i class="fa fa-angle-double-down scale2 ml-2"></i></a>
             </div> --}}
