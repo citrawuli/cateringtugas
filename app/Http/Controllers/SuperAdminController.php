@@ -597,7 +597,7 @@ class SuperAdminController extends Controller
 
     public function viewproductforminput(){
         $category = DB::table('kategori_produk')->get();
-        $page_title = 'Add Category Form';
+        $page_title = 'Add Product Form';
         $page_description = 'Some description for the page';
         $logo = "teamo/images/aisyacatering_kontak_logo.png";
         $logoText = "teamo/images/aisya-catering-logo3.png";
@@ -653,7 +653,7 @@ class SuperAdminController extends Controller
                 ->first();
         $category = DB::table('kategori_produk')->get();
        
-        $page_title = 'Edit Category Form';
+        $page_title = 'Edit Product Form';
         $page_description = 'Some description for the page';
         $logo = "teamo/images/aisyacatering_kontak_logo.png";
         $logoText = "teamo/images/aisya-catering-logo3.png";
@@ -822,7 +822,7 @@ class SuperAdminController extends Controller
     public function viewformpemesanan(){
         $users = DB::table('users')->get();
         $produk = DB::table('produk')->get();
-        $page_title = 'Add Category Form';
+        $page_title = 'Add Order Form';
         $page_description = 'Some description for the page';
         $logo = "teamo/images/aisyacatering_kontak_logo.png";
         $logoText = "teamo/images/aisya-catering-logo3.png";
@@ -1008,7 +1008,7 @@ class SuperAdminController extends Controller
 
     public function Invoice($id)
     {
-        $page_title = 'Add Category Form';
+        $page_title = 'Invoice';
         $page_description = 'Some description for the page';
         $logo = "teamo/images/aisyacatering_kontak_logo.png";
         $logoText = "teamo/images/aisya-catering-logo3.png";
@@ -1140,7 +1140,7 @@ class SuperAdminController extends Controller
     public function addpaymentIDtable($id)
     {
         $pemesanan_id=$id;
-        $page_title = 'Add Category Form';
+        $page_title = 'Payment Table';
         $page_description = 'Some description for the page';
         $logo = "teamo/images/aisyacatering_kontak_logo.png";
         $logoText = "teamo/images/aisya-catering-logo3.png";
@@ -1371,7 +1371,7 @@ class SuperAdminController extends Controller
     public function addpaymentinAll()
     {
         $pemesanan=Pemesanan::whereNull('pemesanan.deleted_at')->get();
-        $page_title = 'Add Category Form';
+        $page_title = 'Add Payment Form';
         $page_description = 'Some description for the page';
         $logo = "teamo/images/aisyacatering_kontak_logo.png";
         $logoText = "teamo/images/aisya-catering-logo3.png";

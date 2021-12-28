@@ -58,7 +58,7 @@ class UserController extends Controller
             ],
             'name' => ['required','nullable', 'string', 'max:50'],
             'alamat_lengkap' => ['sometimes','nullable', 'string', 'max:100'],
-            'nomor_telp' => ['sometimes','nullable', 'string', 'max:15'],
+            'nomor_telp' => ['sometimes','nullable', 'string', 'max:13'],
             'email' => ['required','nullable', 'string', 'email', 'max:50', 'unique:users,email,'.$user->id.',id'],
         ],
         [
@@ -67,7 +67,7 @@ class UserController extends Controller
             'new_password.required_with' => 'Anda perlu mengisi kolom Password Baru jika mengisi kolom Password Lama',
             'name.max' => 'Nama maksimal 50 karakter',
             'alamat_lengkap.max' => 'Alamat lengkap maksimal 100 karakter',
-            'nomor_telp.max' => 'Nomor Telepon maksimal 15 karakter',
+            'nomor_telp.max' => 'Nomor Telepon maksimal 13 karakter',
             'email.unique' => 'Email ini sudah ada',
         ]
         );
