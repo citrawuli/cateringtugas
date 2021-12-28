@@ -129,7 +129,7 @@
                                     </div>
 
                                     <div class="form-group row">
-                                        <label for="product" class="col-sm-3 col-form-label">{{ __('Untuk jam') }}</label>
+                                        <label for="product" class="col-sm-3 col-form-label">{{ __('Untuk jam (*)') }}</label>
 
                                         <div class="col-md-6">
                                             <div class="input-group clockpicker" data-placement="bottom" data-align="top" data-autoclose="true">
