@@ -1140,7 +1140,7 @@ class SuperAdminController extends Controller
     public function addpaymentIDtable($id)
     {
         $pemesanan_id=$id;
-        $page_title = 'Payment Table';
+        $page_title = 'Add Payment ID Form';
         $page_description = 'Some description for the page';
         $logo = "teamo/images/aisyacatering_kontak_logo.png";
         $logoText = "teamo/images/aisya-catering-logo3.png";
