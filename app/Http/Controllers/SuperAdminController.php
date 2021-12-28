@@ -1127,7 +1127,7 @@ class SuperAdminController extends Controller
         // }
        
        
-        $page_title = 'Edit Order Form';
+        $page_title = 'Payment ID Table';
         $page_description = 'Some description for the page';
         $logo = "teamo/images/aisyacatering_kontak_logo.png";
         $logoText = "teamo/images/aisya-catering-logo3.png";
@@ -1331,7 +1331,7 @@ class SuperAdminController extends Controller
         $roles = DB::table('roles')->get();
         $galpro = DB::table('galeri_produk')->get();
        
-        $page_title = 'Edit Order Form';
+        $page_title = 'Detail Order';
         $page_description = 'Some description for the page';
         $logo = "teamo/images/aisyacatering_kontak_logo.png";
         $logoText = "teamo/images/aisya-catering-logo3.png";

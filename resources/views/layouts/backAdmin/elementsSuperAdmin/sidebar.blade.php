@@ -68,6 +68,9 @@
                         <ul aria-expanded="false">
                             <li><a href="{!! url('/BlogTable'); !!}">Daftar Blog</a></li>
                         </ul>
+                        <ul aria-expanded="false">
+                            <li><a href="{!! url('/blogForm'); !!}">Tambah Blog</a></li>
+                        </ul>
                     </li>
                 </ul>
             
