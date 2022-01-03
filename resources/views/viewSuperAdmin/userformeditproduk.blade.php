@@ -103,7 +103,10 @@
                         </div>
 
                         <div class="form-group row">
-                            <label for="product" class="col-sm-3 col-form-label">{{ __('Harga Produk (*)') }}</label>
+                            <label for="product" class="col-sm-3 col-form-label">{{ __('Harga Produk (*)') }} 
+                                <small>Perlu diperhatikan!!! <br> mengganti harga produk akan berakibat mengganti seluruh harga pada nominal pemesanan yang sudah ada.
+                                <br> <strong>Saran: membuat produk baru dengan harga sesuai dengan kebutuhan.</strong> </small>
+                            </label>
 
                             <div class="col-md-6">
                                 <div class="input-group mb-3">
