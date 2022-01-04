@@ -163,7 +163,15 @@
     Dropzone.options.dropzoneForm = {
 	    autoProcessQueue : false,
       addRemoveLinks: true,
-	    acceptedFiles : ".png,.jpg,.gif,.bmp,.jpeg",
+	    acceptedFiles : ".png,.jpg,.gif,.bmp,.jpeg", 
+      success: function(file, response){
+        //alert(response);
+        Swal.fire(
+              'Success!',
+              'Upload Berhasil',
+              'success'
+            )
+      },
 	    init:function(){
 	      	var submitButton = document.querySelector("#submit-all");
 	      	myDropzone = this;
@@ -175,11 +183,11 @@
 
 	      	this.on("complete", function(){
             //alert("UPLOAD BERHASIL")
-            Swal.fire(
-              'Success!',
-              'Upload Berhasil',
-              'success'
-            )
+            // Swal.fire(
+            //   'Success!',
+            //   'Upload Berhasil',
+            //   'success'
+            // )
 	        	if(this.getQueuedFiles().length == 0 && this.getUploadingFiles().length == 0){
 	          		var _this = this;
 	          		_this.removeAllFiles();
