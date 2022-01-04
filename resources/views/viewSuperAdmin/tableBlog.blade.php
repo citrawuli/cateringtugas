@@ -120,11 +120,10 @@
                                     <a href="{{ url( '/EditBlog/' . $b->id_blog ) }}" class="btn btn-primary shadow btn-xs sharp mr-1" data-toggle="tooltip" data-placement="top" title="Edit Blog" id="editt"><i class="fa fa-pencil"></i></a>
                                     <a href="{{ url( '/DeleteBlog/' . $b->id_blog ) }}" class="btn btn-danger shadow btn-xs sharp" data-toggle="tooltip2" data-placement="top" title="Soft Delete Blog"><i class="fa fa-trash"></i></a>
                                 
-                                    <a href="{!!url('/readmoreblog/'.$b->id_blog)!!}"> Read More... </a>
+                                    <a href="{{url('/readmoreblog/'.$b->id_blog)}}"> Read More... </a>
                                 </li>
-                            </ul>
-                                           
-                            <span> {!! Str::words($b->konten_blog, 150) !!}</span>
+                            </ul> 
+                            <span> {!! Str::words($b->konten_blog, 150) !!}</span><br>
 
                             {{-- {!!Str::limit($b->konten_blog, 300, '....')!!} <a href='#' class='read-more-show'>Read More</a> --}}
 

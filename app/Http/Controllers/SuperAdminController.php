@@ -1400,7 +1400,7 @@ class SuperAdminController extends Controller
         // dd($request->all(),$user->password);
         $validated = $request->validate([
             'current_password' => [    
-                'sometimes', 'nullable',           
+                'sometimes', 'nullable',   'required_with:new_password',        
                 function ($attribute, $value, $fail) use ($user) {
                     if (!Hash::check($value, $user->password)) {
                         $fail('Mohon memasukkan password lama yang benar');
@@ -1418,6 +1418,7 @@ class SuperAdminController extends Controller
             'new_password.different' => 'Password baru harus berbeda dengan password lama',
             'new_password.min' => 'Password baru harus memiliki 8 karakter',
             'new_password.required_with' => 'Anda perlu mengisi kolom Password Baru jika mengisi kolom Password Lama',
+            'current_password.required_with' => 'Anda perlu mengisi kolom Password Lama jika mengisi kolom Password Baru',
             'name.max' => 'Nama makasimal 50 karakter',
             'email.unique' => 'Email ini sudah ada',
         ]
@@ -1563,7 +1564,7 @@ class SuperAdminController extends Controller
     {
         $validator = $request->validate([
             'judulblog' => ['required', 'max:100'],
-            'summernote' => ['required'],
+            'summernote' => ['required','max:65535'],
         ],
         [
             'judulblog.required' => 'Mohon mengisi judul blog',
@@ -1605,7 +1606,7 @@ class SuperAdminController extends Controller
     {
         $validator = $request->validate([
             'judulblog' => ['required', 'max:100'],
-            'summernote' => ['required'],
+            'summernote' => ['required','max:65535'],
         ],
         [
             'judulblog.required' => 'Mohon mengisi judul blog',

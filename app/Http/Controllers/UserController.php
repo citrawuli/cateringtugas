@@ -45,7 +45,7 @@ class UserController extends Controller
         // dd($request->all(),$user->password);
         $validated = $request->validate([
             'current_password' => [    
-                'sometimes', 'nullable',           
+                'sometimes', 'nullable',   'required_with:new_password',        
                 function ($attribute, $value, $fail) use ($user) {
                     if (!Hash::check($value, $user->password)) {
                         $fail('Mohon memasukkan password lama yang benar');
@@ -65,6 +65,7 @@ class UserController extends Controller
             'new_password.different' => 'Password baru harus berbeda dengan password lama',
             'new_password.min' => 'Password baru harus memiliki 8 karakter',
             'new_password.required_with' => 'Anda perlu mengisi kolom Password Baru jika mengisi kolom Password Lama',
+            'current_password.required_with' => 'Anda perlu mengisi kolom Password Lama jika mengisi kolom Password Baru',
             'name.max' => 'Nama maksimal 50 karakter',
             'alamat_lengkap.max' => 'Alamat lengkap maksimal 100 karakter',
             'nomor_telp.max' => 'Nomor Telepon maksimal 13 karakter',
