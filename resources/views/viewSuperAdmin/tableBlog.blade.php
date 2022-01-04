@@ -99,7 +99,7 @@
                     
                     <div class="dropdown-menu">
                         <a class="dropdown-item" href="{{url('BlogTable')}}">Latest</a>
-                        <a class="dropdown-item" href="{{url('BlogTableASC')}}">OLD</a>
+                        <a class="dropdown-item" href="{{url('BlogTableASC')}}">OLDEST</a>
                     </div>
                 </div>
             </div>
