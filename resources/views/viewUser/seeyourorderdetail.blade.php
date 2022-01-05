@@ -235,7 +235,7 @@
                 </div>
 
                 <br>
-                @if ($pem ->status_pemesanan == '1' || $pem ->status_pemesanan == '2')
+                @if ($pem ->status_pemesanan == '2')
                 <h4>PEMBAYARAN {{$pem->id_pemesanan}}</h4>
                 
                 
