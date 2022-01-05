@@ -44,6 +44,7 @@
                                         <small>{{ date('d M Y, H:i:s', strtotime($b->updated_at)) }} - oleh {{$b->name}}</small>
                                         <div class="main-info-post">
                                             <p class="des">
+                                               
                                                 {{-- @if(strlen($b->konten_blog) > 400) --}}
                                                     {{-- {!!substr($b->konten_blog,0,100)!!} --}}
                                                     {{-- {!! substr($b->konten_blog,0,200) !!} --}}
@@ -55,11 +56,12 @@
 
                                                 {{-- IDK why but this one doesnt put the other blog content to showed up and the anchore doesnt work... sooo use words okay :D--}}
                                                 {{-- <span class="read-more-content"> {!! Str::limit($b->konten_blog, 500) !!}</span><br><br> --}}
-                                                <span class="read-more-content"> {!! Str::words($b->konten_blog, 150) !!}</span><br><br>                                                
-                                                <a href="{{url('/readmoreblog/'.$b->id_blog)}}">Read More... </a>
+                                                <span class="read-more-content"> {!! Str::words($b->konten_blog, 150) !!}</span>                                                
+                                                
                                             </p>
                                         </div>
                                         <div class="author-view">
+                                            <a href="{{url('/readmoreblog/'.$b->id_blog)}}">Read More... </a>
                                             {{-- <div class="author">
                                                 <div class="avt">
                                                     <img src="assets/images/avt-blog1.png" alt="img">
