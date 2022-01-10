@@ -100,6 +100,8 @@
                 <div class="btn-group btn-group-sm" style="margin-left: 5%; margin-right:5%">
                     <button id="menunggu" class="btn light btn-warning filter">Menunggu Verifikasi</button>
                     <button id="diverif" class="btn light btn-success filter">Diverifikasi</button>
+                    <button id="penangguhan" class="btn light btn-dark filter">Penangguhan</button>
+                    <button id="semuatagihan" class="btn light btn-secondary filter">Semua Tagihan</button>
                 </div>
                 <br>
         
@@ -151,12 +153,16 @@
                                             {{-- <input data-id="{{$b->id_pembayaran}}" type="checkbox" data-toggle="toggle" class="toggle-class " 
                                             data-on="Diverifikasi" data-off="Klik untuk verifikasi" data-onstyle="success" data-offstyle="danger" {{ $b->status_bayar ? 'checked' : '' }}> --}}
                                         </td>
-                                    @else
+                                    @elseif($b->status_bayar == '1')
                                         <td>
                                             <span class="badge light badge-success"><i class="fa fa-circle text-success mr-1"></i>Diverifikasi</span> 
                                             {{-- <input data-id="{{$b->id_pembayaran}}" type="checkbox" data-toggle="toggle" class="toggle-class"
                                             data-on="Diverifikasi" data-off="Klik untuk verifikasi" data-onstyle="success" data-offstyle="danger" {{ $b->status_bayar ? 'checked' : '' }}>   --}}
                                         </td> 
+                                    @elseif ($b->status_bayar == '2')
+                                        <td>
+                                            <span class="badge light badge-dark"><i class="fa fa-circle text-dark mr-1"></i>Penangguhan</span> 
+                                        </td>
                                     @endif
 
                                     @if ($b->bank_transfer == '1')
@@ -191,13 +197,40 @@
                                             {{-- <a href="{{ url( '/EditPay/' . $b->id ) }}" class="btn btn-primary shadow btn-xs sharp mr-1" data-toggle="tooltip" data-placement="top" title="Edit Kategori" id="editt"><i class="fa fa-pencil"></i></a> --}}
                                             
                                             <a href="{{ url( '/DeletePayment/' . $b->id_pembayaran ) }}" class="btn btn-danger shadow btn-xs sharp" data-toggle="tooltip2" data-placement="top" title="Soft Delete Pembayaran"><i class="fa fa-trash"></i></a>
-                                            @if ($b->status_bayar == '0')
+                                            {{-- @if ($b->status_bayar == '0')
                                             <input data-id="{{$b->id_pembayaran}}" type="checkbox" data-toggle="toggle" class="toggle-class" 
                                             data-on="Diverifikasi" data-off="Klik untuk verifikasi" data-onstyle="success" data-offstyle="danger" {{ $b->status_bayar ? 'checked' : '' }}>
                                             @else
                                             <input data-id="{{$b->id_pembayaran}}" type="checkbox" data-toggle="toggle" class="toggle-class"
                                             data-on="Diverifikasi" data-off="Klik untuk verifikasi" data-onstyle="success" data-offstyle="danger" {{ $b->status_bayar ? 'checked' : '' }}>  
+                                            @endif --}}
+                                            <div style="margin-left: 20px">
+                                            @if ($b->status_bayar == '0')
+                                                <div class="btn-group" role="group">
+                                                    <button type="button" class="btn btn-danger btn-sm dropdown-toggle" data-toggle="dropdown"><span style="display: none">_</span>Menunggu Verifikasi</button>
+                                                    <div class="dropdown-menu">
+                                                        <a class="dropdown-item penangguhan"  name="{{$b->id_pembayaran}}"><i class="flaticon-381-pause scale5 text-warning mr-2"></i>Penangguhan</a>
+                                                        <a class="dropdown-item verified" name="{{$b->id_pembayaran}}"><i class="flaticon-381-success-2 scale5 text-success mr-2"></i>Sudah Diverifikasi</a>
+                                                    </div>
+                                                </div>
+                                            @elseif ($b->status_bayar == '1')
+                                                <div class="btn-group" role="group">
+                                                    <button type="button" class="btn btn-success btn-sm dropdown-toggle" data-toggle="dropdown"><span style="display: none">_</span>Sudah Diverifikasi</button>
+                                                    <div class="dropdown-menu">
+                                                        <a class="dropdown-item needverification" name="{{$b->id_pembayaran}}"><i class="flaticon-381-promotion scale5 text-danger mr-2"></i>Menunggu Verifikasi</a>
+                                                        <a class="dropdown-item penangguhan"  name="{{$b->id_pembayaran}}"><i class="flaticon-381-pause scale5 text-warning mr-2"></i>Penangguhan</a>
+                                                    </div>
+                                                </div>
+                                            @elseif ($b->status_bayar == '2')
+                                                <div class="btn-group" role="group">
+                                                    <button type="button" class="btn btn-warning btn-sm dropdown-toggle" data-toggle="dropdown"><span style="display: none">_</span>Penangguhan</button>
+                                                    <div class="dropdown-menu">
+                                                        <a class="dropdown-item needverification" name="{{$b->id_pembayaran}}"><i class="flaticon-381-promotion scale5 text-danger mr-2"></i>Menunggu Verifikasi</a>
+                                                        <a class="dropdown-item verified" name="{{$b->id_pembayaran}}"><i class="flaticon-381-success-2 scale5 text-success mr-2"></i>Sudah Diverifikasi</a>
+                                                    </div>
+                                                </div>
                                             @endif
+                                            </div>
                                         </div>
                                     </td>
                                   
@@ -343,6 +376,14 @@ $(document).ready(function(){
         dataTable.columns(2).search("Diverifikasi", true, false, true).draw();
     });
 
+    $('#penangguhan').on('click', function () {
+        dataTable.columns(2).search("Penangguhan", true, false, true).draw();
+    });
+
+    $('#semuatagihan').on('click', function () {
+        dataTable.columns(2).search("").draw();
+    });
+
         $.ajaxSetup({ headers: { 'X-CSRF-TOKEN': jQuery('meta[name="csrf-token"]').attr('content') } });
         $('.toggle-class').on('change', function () {
         //its a table row, so yeah... dont do #toggle-class okayy, use more general than id so you figured the rowss
@@ -372,6 +413,84 @@ $(document).ready(function(){
                     console.log( "Ajax Not Working" );
                 }         
             });    
+        });
+
+        $.ajaxSetup({ headers: { 'X-CSRF-TOKEN': jQuery('meta[name="csrf-token"]').attr('content') } });
+        $('.needverification').on('click', function () {
+            //its a table row, so yeah... dont do #... okayy, use more general than id so you figured the rowss
+            //I already used id but it will not be as easy as this :)
+            var getid=$(this).attr('name');
+            console.log("getid");
+            console.log(getid);
+            
+            var a = "{{URL('/changeStatusConfirm')}}";
+            var fUrl = a+"/"+getid;
+            $.ajax({
+                url: fUrl,
+                type:'POST',
+                data: {'status': 0, 'id': getid},
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                },
+                success:function(response){
+                    setTimeout(function(){window.location = window.location}, 300); 
+                },
+                error: function() {
+                    console.log( "Ajax Not Working" );
+                }         
+            })
+        });
+
+        $.ajaxSetup({ headers: { 'X-CSRF-TOKEN': jQuery('meta[name="csrf-token"]').attr('content') } });
+        $('.verified').on('click', function () {
+            //its a table row, so yeah... dont do #... okayy, use more general than id so you figured the rowss
+            //I already used id but it will not be as easy as this :)
+            var getid=$(this).attr('name');
+            console.log("getid");
+            console.log(getid);
+            
+            var a = "{{URL('/changeStatusConfirm')}}";
+            var fUrl = a+"/"+getid;
+            $.ajax({
+                url: fUrl,
+                type:'POST',
+                data: {'status': 1, 'id': getid},
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                },
+                success:function(response){
+                    setTimeout(function(){window.location = window.location}, 300); 
+                },
+                error: function() {
+                    console.log( "Ajax Not Working" );
+                }         
+            })
+        });
+
+        $.ajaxSetup({ headers: { 'X-CSRF-TOKEN': jQuery('meta[name="csrf-token"]').attr('content') } });
+        $('.penangguhan').on('click', function () {
+            //its a table row, so yeah... dont do #... okayy, use more general than id so you figured the rowss
+            //I already used id but it will not be as easy as this :)
+            var getid=$(this).attr('name');
+            console.log("getid");
+            console.log(getid);
+            
+            var a = "{{URL('/changeStatusConfirm')}}";
+            var fUrl = a+"/"+getid;
+            $.ajax({
+                url: fUrl,
+                type:'POST',
+                data: {'status': 2, 'id': getid},
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                },
+                success:function(response){
+                    setTimeout(function(){window.location = window.location}, 300); 
+                },
+                error: function() {
+                    console.log( "Ajax Not Working" );
+                }         
+            })
         });
 
         var minDate, maxDate;

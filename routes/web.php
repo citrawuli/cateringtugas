@@ -95,17 +95,20 @@ Route::get('/BrosurWedding', function () {
 Route::get('/gridblog', [App\Http\Controllers\HomeController::class, 'blog']);
 Route::get('/readmoreblog/{id}', [App\Http\Controllers\HomeController::class, 'readmoreblog']);
 
-Route::get('/edityourprofile', [App\Http\Controllers\UserController::class, 'edityourprofile']);
-Route::get('/seeyourorder', [App\Http\Controllers\UserController::class, 'seeyourorder']);
-Route::get('/seeyourpayment', [App\Http\Controllers\UserController::class, 'seeyourpayment']);
-Route::post('/updateyouruprofile/{id}', [App\Http\Controllers\UserController::class, 'updateyouruprofile']);
+Route::get('/edityourprofile', [App\Http\Controllers\UserController::class, 'edityourprofile'])->middleware('hak.akses:user');
+Route::get('/seeyourorder', [App\Http\Controllers\UserController::class, 'seeyourorder'])->middleware('hak.akses:user');
+Route::get('/seeyourpayment', [App\Http\Controllers\UserController::class, 'seeyourpayment'])->middleware('hak.akses:user');
+Route::post('/updateyouruprofile/{id}', [App\Http\Controllers\UserController::class, 'updateyouruprofile'])->middleware('hak.akses:user');
 
-Route::get('/seeyourdetailorder/{id}', [App\Http\Controllers\UserController::class, 'seeyourdetailorder']);
-Route::get('/edityourdetailorder/{id}', [App\Http\Controllers\UserController::class, 'edityourdetailorder']);
-Route::get('/updateyourdetailorder/{id}', [App\Http\Controllers\UserController::class, 'updateyourdetailorder']);
-Route::get('/cancelyourorder/{id}', [App\Http\Controllers\UserController::class, 'cancelyourorder']); 
-Route::get('/addyourpayment/{id}', [App\Http\Controllers\UserController::class, 'addyourpayment']); 
-Route::post('/storeyourpayment/{id}', [App\Http\Controllers\UserController::class, 'storeyourpayment']); 
+Route::get('/seeyourdetailorder/{id}', [App\Http\Controllers\UserController::class, 'seeyourdetailorder'])->middleware('hak.akses:user');
+Route::get('/edityourdetailorder/{id}', [App\Http\Controllers\UserController::class, 'edityourdetailorder'])->middleware('hak.akses:user');
+Route::get('/updateyourdetailorder/{id}', [App\Http\Controllers\UserController::class, 'updateyourdetailorder'])->middleware('hak.akses:user');
+Route::get('/cancelyourorder/{id}', [App\Http\Controllers\UserController::class, 'cancelyourorder'])->middleware('hak.akses:user'); 
+Route::get('/addyourpayment/{id}', [App\Http\Controllers\UserController::class, 'addyourpayment'])->middleware('hak.akses:user'); 
+Route::post('/storeyourpayment/{id}', [App\Http\Controllers\UserController::class, 'storeyourpayment'])->middleware('hak.akses:user');  
+Route::get('/edityourpayment/{id}', [App\Http\Controllers\UserController::class, 'edityourpayment'])->middleware('hak.akses:user'); 
+Route::post('/updateyourpayment/{id}', [App\Http\Controllers\UserController::class, 'updateyourpayment'])->middleware('hak.akses:user'); 
+
 
 
 //COBA ROUTE

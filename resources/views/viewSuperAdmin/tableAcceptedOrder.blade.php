@@ -75,7 +75,8 @@
                     <button id="belumlunas" class="btn light btn-dark filter">Belum Bayar Penuh</button>
                     <button id="lunas" class="btn light btn-light filter">Bayar Penuh</button>
                     <button id="semuatagihan" class="btn light btn-secondary filter">Semua Tagihan</button>
-                    <button id="notverified" class="btn light btn-warning filter">Belum Diverifikasi!!!</button>
+                    <button id="notverified" class="btn light btn-danger filter">Belum Diverifikasi!!!</button>
+                    <button id="penangguhan" class="btn light btn-warning filter">Penangguhan</button>
                     <button id="verified" class="btn light btn-info filter">Diverifikasi</button>
                 </div>
                 <br> 
@@ -168,6 +169,9 @@
                                                 <span class="badge light badge-info"><i class="fa text-info mr-1"></i><span style="display: none">_</span>Diverifikasi </span>
                                             @elseif ($payid->status_bayar == '0' )
                                                 <span class="badge light badge-warning"><i class="fa text-warning mr-1"></i><span style="display: none">_</span>Belum diverifikasi!!! </span>
+                                            @elseif ($payid->status_bayar == '2' )
+                                                <span class="badge light badge-dark"><i class="fa text-dark mr-1"></i><span style="display: none">_</span>Penangguhan </span>
+                                            
                                             @endif                
                                         @endforeach
                                         @elseif($total >= $order->total_transaksi )
@@ -176,7 +180,10 @@
                                                 @if ($payid->status_bayar == '1' )
                                                     <span class="badge light badge-info"><i class="fa text-info mr-1"></i><span style="display: none">_</span>Diverifikasi </span>
                                                 @elseif ($payid->status_bayar == '0' )
-                                                    <span class="badge light badge-warning"><i class="fa text-warning mr-1"></i><span style="display: none">_</span>Belum Diverifikasi!!! </span>
+                                                    <span class="badge light badge-warning"><i class="fa text-warning mr-1"></i><span style="display: none">_</span>Belum diverifikasi!!! </span>
+                                                @elseif ($payid->status_bayar == '2' )
+                                                    <span class="badge light badge-dark"><i class="fa text-dark mr-1"></i><span style="display: none">_</span>Penangguhan</span>
+                                                
                                                 @endif                
                                             @endforeach
                                         @endif
@@ -261,6 +268,10 @@ $(document).ready(function(){
 
     $('#verified').on('click', function () {
         dataTable.columns(4).search("_Diverifikasi", true, false, true).draw();
+    });
+
+    $('#penangguhan').on('click', function () {
+        dataTable.columns(4).search("_Penangguhan", true, false, true).draw();
     });
 
 

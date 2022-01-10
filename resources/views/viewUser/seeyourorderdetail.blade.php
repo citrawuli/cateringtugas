@@ -373,8 +373,17 @@
                                                     <div class="single_variation_wrap">
                                                         @if ($pay->status_bayar == '0')
                                                             <a class="single_add_to_cart_button button" href="#">Menunggu Verifikasi</a>
-                                                        @else
+                                                        @elseif($pay->status_bayar == '1')
                                                             <a class="single_add_to_cart_button button" href="#">Diverifikasi</a>
+                                                        @elseif($pay->status_bayar == '2')
+                                                            <a class="single_add_to_cart_button button" href="#">Ditangguhkan</a>
+                                                            <br>
+                                                            <strong style="color: red">PEMBERITAHUAN!!!</strong><br>
+                                                            <small>Pembayaran ini sedang dalam penangguhan. <br>
+                                                            Mohon mengecek data bayar Anda karena data bayar tidak sesuai dengan mutasi rekening.</small><br>
+                                                            <small>Salah input data? Edit pembayaran.</small>
+                                                            <a href="{{url('/edityourpayment/'.$pay->id_pembayaran)}}">
+                                                                <span class="blog-title"> <strong>Klik disini!</strong> </span></a>
                                                         @endif
                                                     </div>
                                                 </ul>
