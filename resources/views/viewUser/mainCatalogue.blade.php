@@ -263,7 +263,7 @@
                                         <div class="product-thumb">
                                             <div class="thumb-inner">
                                                 <a href="{{url('/viewproduct/'.$bestps->id)}}">
-                                                    @foreach ($galpro->slice(0, 1) as $gal)
+                                                    {{-- @foreach ($galpro->slice(0, 1) as $gal)
                                                         @if ($bestps->id == $gal->id_produk)
                                                         <span href="{!! url('/ecom-product-detail'); !!}">
                                                             <img class="mr-3 img-fluid rounded"  style="max-width: 300px" src="{{ asset($gal->foto) }}" alt="Gamber Produk">
@@ -271,7 +271,19 @@
                                                         @else
                                                         <img src="{{ asset('teamo/images/product-item-1.jpg')}}" alt="img">
                                                         @endif
+                                                    @endforeach --}}
+
+                                                    @if($bestps->images()->exists())
+                                                    @foreach ($bestps->images->slice(0,1) as  $gal)
+                                        
+                                                        <img id="img_zoom" data-zoom-image="{{ asset($gal->foto) }}"
+                                                        src="{{ asset($gal->foto) }}" alt="img" style=" height:100%;
+                                                        max-height:268px;" >
+                                                        
                                                     @endforeach
+                                                    @else
+                                                        <img src="{{ asset('teamo/images/product-item-9.jpg')}}" alt="img">
+                                                    @endif
                                                 </a>
                                                 <div class="thumb-group">
                                                     {{-- <div class="yith-wcwl-add-to-wishlist">
@@ -363,7 +375,7 @@
                                         <div class="product-thumb">
                                             <div class="thumb-inner">
                                                 <a href="{{url('/viewproduct/'.$newarr->id)}}">
-                                                    @foreach ($galpro->slice(0, 1) as $gal)
+                                                    {{-- @foreach ($galpro->slice(0, 1) as $gal)
                                                         @if ($newarr->id == $gal->id_produk)
                                                         <span href="{!! url('/ecom-product-detail'); !!}">
                                                             <img class="mr-3 img-fluid rounded"  style="max-width: 300px" src="{{ asset($gal->foto) }}" alt="Gamber Produk">
@@ -371,7 +383,22 @@
                                                         @else
                                                         <img src="{{ asset('teamo/images/product-item-9.jpg')}}" alt="img">
                                                         @endif
+                                                    @endforeach --}}
+
+                                                    @if($newarr->images()->exists())
+                                                    @foreach ($newarr->images->slice(0,1) as  $gal)
+                                        
+                                                        <img id="img_zoom" data-zoom-image="{{ asset($gal->foto) }}"
+                                                        src="{{ asset($gal->foto) }}" alt="img" style=" height:100%;
+                                                        max-height:268px;" >
+                                                        
                                                     @endforeach
+                                                    @else
+                                                        <img src="{{ asset('teamo/images/product-item-9.jpg')}}" alt="img">
+                                                    @endif
+        
+
+
                                                 </a>
                                                 <div class="thumb-group">
                                                     {{-- <div class="yith-wcwl-add-to-wishlist">

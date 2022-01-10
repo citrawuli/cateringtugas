@@ -167,7 +167,7 @@ class CartController extends Controller
        
         Session::flash('message', 'Terimakasih, data orderan berhasil ditambahkan! <br><br>
         Mohon <a href="'. url('/seeyourorder').'"><strong>klik disini </strong></a>untuk mengecek histori pemesanan pada <a href="'.url('/login').'"><strong>akun Anda </strong></a>dan melihat status pemesanan. 
-        Admin kami akan menghubungi Anda pada nomor ponsel tertera untuk mengkonfirmasi pemesanan.');
+        Admin kami akan menghubungi Anda pada nomor ponsel tertera untuk mengonfirmasi pemesanan.');
         return Redirect::back();
     }
 
