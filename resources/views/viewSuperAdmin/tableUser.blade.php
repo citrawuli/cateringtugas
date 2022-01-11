@@ -72,30 +72,30 @@
                         <table id="example3" class="display" style="min-width: 845px">
                             <thead>
                                 <tr>
-                                    <th>ID</th>
+                                    {{-- <th>ID</th> --}}
                                     <th>Nama</th>
                                     <th>Email</th>
                                     <th>Hak Akses</th>
-                                    <th>Tanggal Dibuat</th>
-                                    <th>Tanggal Peran Diedit</th>
+                                    {{-- <th>Tanggal Dibuat</th> --}}
+                                    {{-- <th>Tanggal Peran Diedit</th> --}}
                                     <th>Aksi</th>
                                 </tr>
                             </thead>
                             <tbody>
                                 @foreach( $user as $u )
                                 <tr>
-                                  <td>{{ $u->id }}</td>
+                                  {{-- <td>{{ $u->id }}</td> --}}
                                   <td>{{ $u->name }}</td>
                                   <td>{{ $u->email }}</td>
                                   <td>{{ $u->role_name}}</td>
-                                  <td>{{ $u->created_at }}</td>
-                                  <td>{{ $u->updated_at ?? '-'}}</td>
+                                  {{-- <td>{{ $u->created_at }}</td>
+                                  <td>{{ $u->updated_at ?? '-'}}</td> --}}
                                   <td>
                                     <div class="d-flex">
                                         @if ($u ->role_name != '')
-                                        <a href="{{ url( '/EditUser/' . $u->id ) }}" class="btn btn-primary shadow btn-xs sharp mr-1" data-toggle="tooltip" data-placement="top" title="Edit Role User" value="{{ $u->role_name }}" id="editt"><i class="fa fa-pencil"></i></a>
+                                        <a href="{{ url( '/EditUser/' . $u->id ) }}" class="btn btn-primary shadow btn-xs sharp mr-1" data-toggle="tooltip" data-placement="top" title="Edit Role User {{$u->name}}" value="{{ $u->role_name }}" id="editt"><i class="fa fa-pencil"></i></a>
                                         @endif
-                                        <a href="{{ url( '/DeleteUser/' . $u->id ) }}" class="btn btn-danger shadow btn-xs sharp" data-toggle="tooltip2" data-placement="top" title="Soft Delete User"><i class="fa fa-trash"></i></a>
+                                        <a href="{{ url( '/DeleteUser/' . $u->id ) }}" class="btn btn-danger shadow btn-xs sharp" data-toggle="tooltip2" data-placement="top" title="Soft Delete User {{$u->name}}"><i class="fa fa-trash"></i></a>
                                     </div>
                                     
 
