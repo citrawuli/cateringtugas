@@ -227,6 +227,19 @@
                     @endforeach
                         <tfoot>
                             <tr>
+                                <td colspan="3" style="text-align:right;"> Diskon:</td>
+                                <td>
+                                    <h4 class="my-0 text-secondary font-w600">
+                                        @if ($pem->discount != null)
+                                            @currency($pem->discount )
+                                            @else
+                                            {{$pem->discount_inpercent }}%
+                                            </h4>
+                                        @endif
+                                    </h4>
+                                </td>
+                            </tr>
+                            <tr>
                                 <td colspan="3" style="text-align:right;"> Total:</td>
                                 <td><h4 class="my-0 text-secondary font-w600">@currency($pem->total_transaksi)</h4></td>
                             </tr>
