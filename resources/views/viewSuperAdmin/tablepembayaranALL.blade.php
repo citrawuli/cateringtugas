@@ -381,7 +381,7 @@ $(document).ready(function(){
     });
 
     $('#semuatagihan').on('click', function () {
-        dataTable.columns(2).search("").draw();
+        dataTable.columns(2).search("Menunggu Verifikasi|Diverifikasi|Penangguhan").draw();
     });
 
         $.ajaxSetup({ headers: { 'X-CSRF-TOKEN': jQuery('meta[name="csrf-token"]').attr('content') } });

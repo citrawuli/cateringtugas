@@ -121,6 +121,14 @@ class UserController extends Controller
         return view('viewUser.edityourdetailorder', compact('pemesanan','pemid'));
     }
 
+    public function edityourpayment($id)
+    {
+        $pembayaran = Pembayaran::where('pembayaran.id_pembayaran', '=', $id)->whereNull('pembayaran.deleted_at')->get();
+        $pemid=$id;
+        return view('viewUser.edityourpayment', compact('pembayaran','pemid'));
+    }
+
+
     public function updateyourdetailorder(Request $request, $id)
     {
         $a=Carbon::parse($request->input('untuk_tanggal'));
@@ -140,6 +148,43 @@ class UserController extends Controller
         $model->touch();
         $model->save();
         Session::flash('message', "Data Pemesanan berhasil diubah");
+        return Redirect::back();
+    }
+
+    public function updateyourpayment(Request $request, $id)
+    {
+        $a=Carbon::parse($request->input('tanggal_bayar'));
+        if (Carbon::now() >= $a){
+            $tgl  = $a->addYear();
+        } else {
+            $tgl  = $a;
+        }
+
+        $buktiPath="";
+        if($request->hasFile('file')){
+            $bukti=$request->file('file');
+            //dd($request->all());
+            $buktiname=time(). '-'.$bukti->getClientOriginalName();
+            $bukti->move(public_path('bukti'),$buktiname);
+            $buktiPath= "/bukti/$buktiname";
+
+            $first_file=Pembayaran::select('bukti_bayar')->where('id_pembayaran', $id)->get();
+            // dd($first_file);
+            if($first_file){
+                \File::delete(public_path($first_file));
+            }
+        }
+        
+        $model = Pembayaran::find($id);
+        $model->jumlah_bayar = $request->input('jumlah_bayar');
+        $model->tanggal_pembayaran = $tgl;
+        $model->bank_transfer = $request->input('optionbank');
+        $model->atas_nama =$request->input('atas_nama');
+        $model->bukti_bayar = $buktiPath;
+        $model->nomor_rekening = $request->input('no_rek');
+        $model->touch();
+        $model->save();
+        Session::flash('message', "Data pembayaran berhasil diubah");
         return Redirect::back();
     }
 

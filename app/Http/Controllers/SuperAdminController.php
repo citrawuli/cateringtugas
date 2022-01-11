@@ -1183,7 +1183,7 @@ class SuperAdminController extends Controller
         Pembayaran::create([
             'id_pemesanan' => $request->id_pemesanan,
             'jumlah_bayar' => $request->jumlah_bayar,
-            'tanggal_pembayaran' => \Carbon\Carbon::now(),
+            'tanggal_pembayaran' => \Carbon\Carbon::now()->format('Y-m-d'),
             'bank_transfer' => $request->optionbank,
             'atas_nama' => $request->atas_nama,
             'status_bayar' => '0',
