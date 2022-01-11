@@ -80,12 +80,33 @@
                                             <div class="form-row form-row-col">
                                                 <label for="optionbank" class="text">{{ ('Bank Transfer (*)') }}</label>
 
-                                            @if ($pem->bank_transfer == 2)
-                                                <label class="radio-inline mr-3"><input type="radio" value="2" name="optionbank" checked="true"> BRI</label>
-                                                <label class="radio-inline mr-3"><input type="radio" value="3" name="optionbank" > BCA</label>
+                                            @if ($pem->bank_transfer == 1)
+                                                <label class="radio-inline mr-3 tunai"><input type="radio" value="1" name="optionbank" checked="true"> Tunai</label>
+                                                <label class="radio-inline mr-3 bri"><input type="radio" value="2" name="optionbank" > BRI</label>
+                                                <label class="radio-inline mr-3 bca"><input type="radio" value="3" name="optionbank" > BCA</label>
+                                                <label class="radio-inline mr-3 banklain"><input type="radio" value="4" name="optionbank" > Bank Lainnya</label>
+                                                <input type="text" maxlength="20" class="discount control-group lainnya" name="lainnya"
+                                                     style="margin-left: 14px" placeholder="Mohon diisi"  />
+                                            @elseif ($pem->bank_transfer == 2)
+                                                <label class="radio-inline mr-3 bri"><input type="radio" value="2" name="optionbank" checked="true" > BRI</label>
+                                                <label class="radio-inline mr-3 bca"><input type="radio" value="3" name="optionbank" > BCA</label> 
+                                                <label class="radio-inline mr-3 banklain"><input type="radio" value="4" name="optionbank" > Bank Lainnya</label>
+                                                <input type="text" maxlength="20" class="discount control-group lainnya" name="lainnya"
+                                                     style="margin-left: 14px" placeholder="Mohon diisi"/>
                                             @elseif ($pem->bank_transfer == 3)
-                                                <label class="radio-inline mr-3"><input type="radio" value="2" name="optionbank" > BRI</label>
-                                                <label class="radio-inline mr-3"><input type="radio" value="3" name="optionbank" checked="true"> BCA</label>
+                                                <label class="radio-inline mr-3 bri"><input type="radio" value="2" name="optionbank" > BRI</label>
+                                                <label class="radio-inline mr-3 bca"><input type="radio" value="3" name="optionbank" checked="true"> BCA</label>
+                                                <label class="radio-inline mr-3 banklain"><input type="radio" value="4" name="optionbank" > Bank Lainnya</label>
+                                                <input type="text" maxlength="20" class="discount control-group lainnya" name="lainnya"
+                                                     style="margin-left: 14px" placeholder="Mohon diisi" />
+                                            @else
+                                                <label class="radio-inline mr-3 bri"><input type="radio" value="2" name="optionbank" > BRI</label>
+                                                <label class="radio-inline mr-3 bca"><input type="radio" value="3" name="optionbank"> BCA</label>
+                                                <label class="radio-inline mr-3 banklain"><input type="radio" value="4" name="optionbank" checked="true" > Bank Lainnya</label>
+                                                <input type="text" maxlength="20" class="discount control-group lainnya" name="lainnya"  
+                                                     style="margin-left: 14px" placeholder="Mohon diisi" value={{$pem->bank_transfer}} />
+                                                 
+                                                
                                             @endif
                         
                                                     
@@ -175,6 +196,20 @@ $(document).ready(function(){
     $("#form-id").submit(function(){
         var value=$('#jumlah_bayar').cleanVal();
         $('#jumlah_bayar').val(value);
+    });
+
+    $('.tunai').click(function() {
+         $('.lainnya').slideUp();
+         
+    });
+    $('.bri').click(function() {
+         $('.lainnya').slideUp();
+    });
+    $('.bca').click(function() {
+         $('.lainnya').slideUp();
+    });
+    $('.banklain').click(function() {
+         $('.lainnya').slideDown();
     });
 
 });

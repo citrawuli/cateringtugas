@@ -79,7 +79,10 @@
                         
                                                     <label class="radio-inline mr-3"><input type="radio" value="2" name="optionbank"> BRI</label>
                                                     <label class="radio-inline mr-3"><input type="radio" value="3" name="optionbank"> BCA</label>
-                                                
+                                                    <label class="radio-inline mr-3 banklain"><input type="radio" value="4" name="optionbank" > Bank Lainnya</label>
+                                                    <input type="text" maxlength="20" class="discount control-group lainnya" name="lainnya"  
+                                                     style="margin-left: 14px" placeholder="Mohon diisi"  />
+                                                 
                                             </div>
                                             <br>
                                             <div class="form-row form-row-col">

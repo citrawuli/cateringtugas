@@ -1178,14 +1178,23 @@ class SuperAdminController extends Controller
     
         }
 
+        // dd($request->all());
+        $bank="";
+        if($request->optionbank == 4){
+            $bank=strtoupper($request->lainnya);
+        }
+        elseif($request->optionbank != 4){
+            $bank=$request->optionbank;
+        }
+
         
 
         Pembayaran::create([
             'id_pemesanan' => $request->id_pemesanan,
             'jumlah_bayar' => $request->jumlah_bayar,
             'tanggal_pembayaran' => \Carbon\Carbon::now()->format('Y-m-d'),
-            'bank_transfer' => $request->optionbank,
-            'atas_nama' => $request->atas_nama,
+            'bank_transfer' => $bank,
+            'atas_nama' => ucwords(strtolower($request->atas_nama)),
             'status_bayar' => '0',
             'bukti_bayar' => $buktiPath,
             'nomor_rekening' => $request->no_rek,

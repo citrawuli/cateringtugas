@@ -339,6 +339,8 @@
                                                             <a>BRI</a>
                                                         @elseif ($pay->bank_transfer == '3')
                                                             <a>BCA</a>
+                                                        @else
+                                                            <a>{{$pay->bank_transfer}}</a>
                                                         @endif
                                                     </li>
                                                 </ul>

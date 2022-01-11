@@ -174,11 +174,19 @@ class UserController extends Controller
             //     \File::delete(public_path($first_file));
             // }
         }
+
+        $bank="";
+        if($request->optionbank == 4){
+            $bank=strtoupper($request->lainnya);
+        }
+        elseif($request->optionbank != 4){
+            $bank=$request->optionbank;
+        }
         
         $model = Pembayaran::find($id);
         $model->jumlah_bayar = $request->input('jumlah_bayar');
         $model->tanggal_pembayaran = $tgl;
-        $model->bank_transfer = $request->input('optionbank');
+        $model->bank_transfer =  $bank;
         $model->atas_nama =$request->input('atas_nama');
         $model->bukti_bayar = $buktiPath;
         $model->nomor_rekening = $request->input('no_rek');
@@ -248,12 +256,19 @@ class UserController extends Controller
             $buktiPath= "/bukti/$buktiname";
     
         }
+        $bank="";
+        if($request->optionbank == 4){
+            $bank=strtoupper($request->lainnya);
+        }
+        elseif($request->optionbank != 4){
+            $bank=$request->optionbank;
+        }
         $tgl=Carbon::parse($request->input('tanggal_bayar'));
         Pembayaran::create([
             'id_pemesanan' => $request->id_pemesanan,
             'jumlah_bayar' => $request->jumlah_bayar,
             'tanggal_pembayaran' => $tgl,
-            'bank_transfer' => $request->optionbank,
+            'bank_transfer' => $bank,
             'atas_nama' => $request->atas_nama,
             'status_bayar' => '0',
             'bukti_bayar' => $buktiPath,

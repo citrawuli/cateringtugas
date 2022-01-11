@@ -171,12 +171,14 @@
                                         <td>BRI</td>
                                     @elseif ($b->bank_transfer == '3')
                                         <td>BCA</td>
+                                    @else
+                                        <td>{{$b->bank_transfer}}</td>
                                     @endif
 
                                     <td>
                                         @if ($b->bukti_bayar != null)
                                         <div class="zoom">
-                                            <img src="{{ asset($b->bukti_bayar) }}" width="200px" >
+                                            <img src="{{ asset($b->bukti_bayar) }}" width="200px" style="max-height: 100px">
                                             <a href='{{ asset($b->bukti_bayar) }}' target='_blank'>Lihat Gambar Full</a>
                                         </div>
                                         @else
@@ -184,7 +186,7 @@
                                         @endif
                                     </td>
                                     <td>@currency($b->jumlah_bayar)</td>
-                                    <td>{{ date('d-M-Y H:i:s', strtotime($b->tanggal_pembayaran)) }}</td>
+                                    <td>{{ date('d-M-Y', strtotime($b->tanggal_pembayaran)) }}</td>
                                     
                                     
                                     <td>{{ $b->nomor_rekening ?? '-'}}</td>

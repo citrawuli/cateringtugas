@@ -81,10 +81,14 @@
                             <label for="optionbank" class="col-sm-3 col-form-label">{{ __('Jenis Bayar (*)') }}</label>
 
                             <div class="col-md-6">
-                                <label class="radio-inline mr-3"><input type="radio" value="1" name="optionbank"> Tunai</label>
-                                <label class="radio-inline mr-3"><input type="radio" value="2" name="optionbank"> BRI</label>
-                                <label class="radio-inline mr-3"><input type="radio" value="3" name="optionbank"> BCA</label>
+                                <label class="radio-inline mr-3"><input type="radio" value="1" name="optionbank" id="tunai"> Tunai</label>
+                                <label class="radio-inline mr-3"><input type="radio" value="2" name="optionbank" id="bri"> BRI</label>
+                                <label class="radio-inline mr-3"><input type="radio" value="3" name="optionbank" id="bca"> BCA</label>
+                                <label class="radio-inline mr-3"><input type="radio" value="4" name="optionbank" id="banklainnya"> Lainnya</label>
+                                <input type="text" maxlength="20" class="discount control-group" id="lainnya" name="lainnya" style="margin-left: 14px" placeholder="Mohon diisi" />
                             </div>
+
+                           
                         </div>
 
                         <div class="form-group row">
@@ -110,7 +114,7 @@
                         </div>
 
                         
-                        <div class="form-group row">
+                        <div class="form-group row" id="divrek">
                                         
                             <label for="no_rek" class="col-sm-3 col-form-label">{{ __('Nomor Rekening') }}</label>
 
@@ -119,7 +123,7 @@
                             </div>
                         </div>
 
-                        <div class="form-group row ">
+                        <div class="form-group row " id="divbukti">
                             <label for="no_rek" class="col-sm-3 col-form-label">{{ __('Bukti Bayar (.jpg atau .jpeg)') }}</label>
                             <div class="col-md-6 input-group">
                                 <input type="file" name="file" accept="image/jpg, image/jpeg">
@@ -168,6 +172,29 @@ $(document).ready(function(){
 
    
     $('.select2').select2();
+
+    $('#tunai').click(function() {
+         $('#lainnya').slideUp();
+         $('#divrek').slideUp();
+         $('#divbukti').slideUp();
+         
+    });
+    $('#bri').click(function() {
+         $('#lainnya').slideUp();
+         $('#divrek').slideDown();
+         $('#divbukti').slideDown();
+    });
+    $('#bca').click(function() {
+         $('#lainnya').slideUp();
+         $('#divrek').slideDown();
+         $('#divbukti').slideDown();
+    });
+    $('#banklainnya').click(function() {
+         $('#lainnya').slideDown();
+         $('#divrek').slideDown();
+         $('#divbukti').slideDown();
+    });
+           
 
 
 });
