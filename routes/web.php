@@ -118,6 +118,8 @@ Route::get('/coba', [App\Http\Controllers\SuperAdminController::class, 'dashboar
 //maybe yang hak akses bisa di construct controller tetapi tetapiiii udah kadung semua itu tuh di super admin jadi ga bisa ngebagi pembayaran pemesanan
 //but maybeeee yang di user bisa so lets gooo biar gak satu satu middleware route atau pake groupp aja belum pernah nyoba :)
 Route::get('/superAdmin', [App\Http\Controllers\SuperAdminController::class, 'dashboard_1'])->middleware('hak.akses:superAdmin')->name('homeSuperAdmin');
+Route::get('/dashboardFilter', [App\Http\Controllers\SuperAdminController::class, 'dashboardFilter'])->middleware('hak.akses:superAdmin,adminPemesanan,adminPembayaran'); 
+
 Route::get('/UserTable', [App\Http\Controllers\SuperAdminController::class, 'viewusertable'])->middleware('hak.akses:superAdmin'); //lihat Table User dan Role
 Route::get('/UserFormInput', [App\Http\Controllers\SuperAdminController::class, 'viewuserforminput'])->middleware('hak.akses:superAdmin'); //lihat form input user
 Route::post('/AddUser', [App\Http\Controllers\SuperAdminController::class, 'storeuser'])->middleware('hak.akses:superAdmin'); // store data user ke DB

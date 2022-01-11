@@ -65,7 +65,13 @@ class SuperAdminController extends Controller
             $JMLnotverif = Pembayaran::with('detpems')->where('status_bayar', '=', '0')->whereNull('pembayaran.deleted_at')->get()->sum('jumlah_bayar');
             $verified = Pembayaran::with('detpems')->where('status_bayar', '=', '1')->whereNull('pembayaran.deleted_at')->get()->count('id_pembayaran');
             $JMLverified = Pembayaran::with('detpems')->where('status_bayar', '=', '1')->whereNull('pembayaran.deleted_at')->get()->sum('jumlah_bayar');
+            $penangguhan = Pembayaran::with('detpems')->where('status_bayar', '=', '2')->whereNull('pembayaran.deleted_at')->get()->count('id_pembayaran');
+            $JMLpenangguhan = Pembayaran::with('detpems')->where('status_bayar', '=', '2')->whereNull('pembayaran.deleted_at')->get()->sum('jumlah_bayar');
             $pycount = Pembayaran::with('detpems')->whereNull('pembayaran.deleted_at')->get()->count('id_pembayaran');
+
+            $last_15_days = Pemesanan::where('untuk_tanggal','>=',Carbon::now()->subdays(15))->get()->count('id_pemesanan');
+
+
 
             $page_title = 'Dashboard';
             $page_description = 'Some description for the page';
@@ -74,11 +80,33 @@ class SuperAdminController extends Controller
             $action = __FUNCTION__;
             return view('viewSuperAdmin.homeSA', compact('page_title', 'totalusers', 'totalproduk',
             'totalpemesanan','jumlahSudahBayar','waiting','notyet','still','delivered','finished',
-            'notverif', 'verified', 'pycount', 'JMLnotverif', 'JMLverified',
+            'notverif', 'verified', 'pycount', 'JMLnotverif', 'JMLverified', 'penangguhan', 'JMLpenangguhan',
+            'last_15_days',
             'page_description','action','logo','logoText'));
         } else {
             return redirect('/');
         } 
+        
+    }
+
+    public function dashboardFilter(Request $request)
+    {
+        $day = Carbon::now()->format('d');
+        $month = Carbon::now()->addMonth(1)->format('m');
+        $year = Carbon::now()->format('Y');
+
+        if($request->filter == 'today_or'){
+            $pemesananToday=Pemesanan::whereDate('untuk_tanggal', $day)->count('id_pemesanan');
+            return response()->json($pemesananToday);
+        }
+        elseif($request->filter == 'month_or'){
+            $pemesananMonth=Pemesanan::whereMonth('untuk_tanggal', $month)->count('id_pemesanan');
+            return response()->json($pemesananMonth);
+        }
+        elseif($request->filter == 'year_or'){
+            $pemesananYear=Pemesanan::whereYear('untuk_tanggal', $year)->count('id_pemesanan');
+            return response()->json($pemesananYear);
+        }
         
     }
 
