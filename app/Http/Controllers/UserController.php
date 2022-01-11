@@ -168,11 +168,11 @@ class UserController extends Controller
             $bukti->move(public_path('bukti'),$buktiname);
             $buktiPath= "/bukti/$buktiname";
 
-            $first_file=Pembayaran::select('bukti_bayar')->where('id_pembayaran', $id)->get();
-            // dd($first_file);
-            if($first_file){
-                \File::delete(public_path($first_file));
-            }
+            // $first_file=Pembayaran::select('bukti_bayar')->where('id_pembayaran', $id)->get();
+            // // dd($first_file);
+            // if($first_file){
+            //     \File::delete(public_path($first_file));
+            // }
         }
         
         $model = Pembayaran::find($id);
