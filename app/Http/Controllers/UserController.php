@@ -269,7 +269,7 @@ class UserController extends Controller
             'jumlah_bayar' => $request->jumlah_bayar,
             'tanggal_pembayaran' => $tgl,
             'bank_transfer' => $bank,
-            'atas_nama' => $request->atas_nama,
+            'atas_nama' => ucwords(strtolower($request->atas_nama)),
             'status_bayar' => '0',
             'bukti_bayar' => $buktiPath,
             'nomor_rekening' => $request->no_rek,
