@@ -51,7 +51,7 @@ class SuperAdminController extends Controller
             ->whereNull('users.deleted_at')->get()->count('users.id');
 
             $totalproduk = produk::whereNull('deleted_at')->get()->count('id');
-            $totalpemesanan = Pemesanan::with(['products'])->whereNull('pemesanan.deleted_at')->get()->count('id_pemesanan');
+            $totalpemesanan = Pemesanan::with(['products'])->whereNull('pemesanan.deleted_at')->where('status_pemesanan', '=', '2')->get()->count('id_pemesanan');
             $jumlahSudahBayar = Pembayaran::with('detpems')->whereNull('pembayaran.deleted_at')->get()->sum('jumlah_bayar');
 
             $waiting = Pemesanan::with(['products'])->where('status_pemesanan', '=', '1')->whereNull('pemesanan.deleted_at')->get()->count('id_pemesanan');
@@ -69,7 +69,7 @@ class SuperAdminController extends Controller
             $JMLpenangguhan = Pembayaran::with('detpems')->where('status_bayar', '=', '2')->whereNull('pembayaran.deleted_at')->get()->sum('jumlah_bayar');
             $pycount = Pembayaran::with('detpems')->whereNull('pembayaran.deleted_at')->get()->count('id_pembayaran');
 
-            $last_15_days = Pemesanan::where('untuk_tanggal','>=',Carbon::now()->subdays(15))->get()->count('id_pemesanan');
+            $last_15_days = Pemesanan::whereNull('deleted_at')->where('status_pemesanan', '=', '2')->where('untuk_tanggal','>=',Carbon::now()->subdays(15))->get()->count('id_pemesanan');
 
 
 
@@ -96,16 +96,28 @@ class SuperAdminController extends Controller
         $year = Carbon::now()->format('Y');
 
         if($request->filter == 'today_or'){
-            $pemesananToday=Pemesanan::whereDate('untuk_tanggal', $day)->count('id_pemesanan');
+            $pemesananToday=Pemesanan::whereNull('deleted_at')->where('status_pemesanan', '=', '2')->whereDate('untuk_tanggal', $day)->count('id_pemesanan');
             return response()->json($pemesananToday);
         }
         elseif($request->filter == 'month_or'){
-            $pemesananMonth=Pemesanan::whereMonth('untuk_tanggal', $month)->count('id_pemesanan');
+            $pemesananMonth=Pemesanan::whereNull('deleted_at')->where('status_pemesanan', '=', '2')->whereMonth('untuk_tanggal', $month)->count('id_pemesanan');
             return response()->json($pemesananMonth);
         }
         elseif($request->filter == 'year_or'){
-            $pemesananYear=Pemesanan::whereYear('untuk_tanggal', $year)->count('id_pemesanan');
+            $pemesananYear=Pemesanan::whereNull('deleted_at')->where('status_pemesanan', '=', '2')->whereYear('untuk_tanggal', $year)->count('id_pemesanan');
             return response()->json($pemesananYear);
+        }
+        if($request->filter == 'today_pay'){
+            $pembayaranToday=Pembayaran::with('detpems')->whereNull('deleted_at')->where('status_bayar', '=', '1')->whereDate('tanggal_pembayaran', $day)->sum('jumlah_bayar');
+            return response()->json($pembayaranToday);
+        }
+        elseif($request->filter == 'month_pay'){
+            $pembayaranMonth=Pembayaran::with('detpems')->whereNull('deleted_at')->where('status_bayar', '=', '1')->whereMonth('tanggal_pembayaran', $month)->sum('jumlah_bayar');
+            return response()->json($pembayaranMonth);
+        }
+        elseif($request->filter == 'year_pay'){
+            $pembayaranYear=Pembayaran::with('detpems')->whereNull('deleted_at')->where('status_bayar', '=', '1')->whereYear('tanggal_pembayaran', $year)->sum('jumlah_bayar');
+            return response()->json($pembayaranYear);
         }
         
     }

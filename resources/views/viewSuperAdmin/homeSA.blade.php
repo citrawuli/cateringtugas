@@ -78,9 +78,19 @@
 										</svg>
 									</span>
 									<div class="media-body">
-										<h3 class="mb-0 text-black"><span class="counter ml-0">{{$jumlahSudahBayar}}</span></h3>
-										<p class="mb-0">Total Pendapatan</p>
+										<h3 class="mb-0 text-black"><span class="counter ml-0"id="totalpendapatan">@currency($jumlahSudahBayar)</span></h3>
+										<p class="mb-0" >Total Pendapatan Kotor</p>
 										{{-- <small>4% (30 days)</small> --}}
+									</div>
+								</div>
+								<div class="dropdown mt-3 mt-sm-0" style="text-align:right">
+									<button type="button" class="btn btn-primary dropdown-toggle light fs-14" data-toggle="dropdown" aria-expanded="false" id="fil_pay">
+										Filter
+									</button>
+									<div class="dropdown-menu">
+										<a class="dropdown-item today_pay" id="today_pay" >Hari ini</a>
+										<a class="dropdown-item month_pay" id="month_pay">Bulan ini</a>
+										<a class="dropdown-item year_pay" id="year_pay">Tahun ini</a>
 									</div>
 								</div>
 							</div>
@@ -88,7 +98,7 @@
 					</div>
 					<div class="col-xl-3 col-xxl-3 col-lg-6 col-md-6 col-sm-6">
 						<div class="widget-stat card">
-							
+							 
 							<div class="card-body p-4">
 								<div class="media ai-icon">
 									<span class="mr-3 bgl-primary text-primary">
@@ -97,11 +107,12 @@
 									</span>
 									<div class="media-body">
 										<h3 class="mb-0 text-black"><span class="counter ml-0" id="totalpemesanan">{{$totalpemesanan}}</span></h3>
-										<p class="mb-0">Total Order</p>
-										<small>{{$last_15_days}} order (15 hari kebelakang)</small>
+										<p class="mb-0">Total Order Fix</p>
+										<small>{{$last_15_days}} order fix (15 hari kebelakang)</small>
+										
 									</div>
 									<div class="dropdown mt-3 mt-sm-0">
-										<button type="button" class="btn btn-primary dropdown-toggle light fs-14" data-toggle="dropdown" aria-expanded="false">
+										<button type="button" class="btn btn-primary dropdown-toggle light fs-14" data-toggle="dropdown" aria-expanded="false" id="fil_or">
 											Filter
 										</button>
 										<div class="dropdown-menu">
@@ -263,6 +274,7 @@ $(document).ready(function () {
 			cache:false,
             success:function(response){ 
 				$('#totalpemesanan').html(response); // use it to fill your result
+				$('#fil_or').html("Hari ini");
             },
             error: function() {
                 console.log( "Ajax Not Working" );
@@ -279,6 +291,7 @@ $(document).ready(function () {
 			cache:false,
             success:function(response){ 
 				$('#totalpemesanan').html(response); // use it to fill your result
+				$('#fil_or').html("Bulan ini");
             },
             error: function() {
                 console.log( "Ajax Not Working" );
@@ -295,12 +308,66 @@ $(document).ready(function () {
 			cache:false,
             success:function(response){ 
 				$('#totalpemesanan').html(response); // use it to fill your result
+				$('#fil_or').html("Tahun ini");
             },
             error: function() {
                 console.log( "Ajax Not Working" );
             }         
         })
     });
+
+	$('#today_pay').on('click', function () {
+        var a = "{{URL('/dashboardFilter')}}";
+        $.ajax({
+            url: a,
+            type:'GET',
+			data: {'filter': 'today_pay'},
+			cache:false,
+            success:function(response){ 
+				$('#totalpendapatan').html("Rp"+parseInt(response).toLocaleString('id') ); // use it to fill your result
+				$('#fil_pay').html("Hari ini");
+            },
+            error: function() {
+                console.log( "Ajax Not Working" );
+            }         
+        })
+    });
+
+	$('#month_pay').on('click', function () {
+        var a = "{{URL('/dashboardFilter')}}";
+        $.ajax({
+            url: a,
+            type:'GET',
+			data: {'filter': 'month_pay'},
+			cache:false,
+            success:function(response){ 
+				$('#totalpendapatan').html("Rp"+parseInt(response).toLocaleString('id') ); // use it to fill your result
+				$('#fil_pay').html("Bulan ini");
+            },
+            error: function() {
+                console.log( "Ajax Not Working" );
+            }         
+        })
+    });
+
+	$('#year_pay').on('click', function () {
+        var a = "{{URL('/dashboardFilter')}}";
+        $.ajax({
+            url: a,
+            type:'GET',
+			data: {'filter': 'year_pay'},
+			cache:false,
+            success:function(response){ 
+				$('#totalpendapatan').html("Rp"+parseInt(response).toLocaleString('id') ); // use it to fill your result
+				$('#fil_pay').html("Tahun ini");
+            },
+            error: function() {
+                console.log( "Ajax Not Working" );
+            }         
+        })
+    });
+
+	
 
 
 
