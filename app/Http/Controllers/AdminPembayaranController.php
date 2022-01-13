@@ -13,6 +13,7 @@ use App\Models\galeriProduk;
 use App\Models\Pemesanan;
 use App\Models\Pembayaran;
 use Exception;
+use Carbon\Carbon;
 
 class AdminPembayaranController extends Controller
 {
@@ -33,7 +34,7 @@ class AdminPembayaranController extends Controller
             ->whereNull('users.deleted_at')->get()->count('users.id');
 
             $totalproduk = produk::whereNull('deleted_at')->get()->count('id');
-            $totalpemesanan = Pemesanan::with(['products'])->whereNull('pemesanan.deleted_at')->get()->count('id_pemesanan');
+            $totalpemesanan = Pemesanan::with(['products'])->whereNull('pemesanan.deleted_at')->where('status_pemesanan', '=', '2')->get()->count('id_pemesanan');
             $jumlahSudahBayar = Pembayaran::with('detpems')->whereNull('pembayaran.deleted_at')->get()->sum('jumlah_bayar');
 
             $waiting = Pemesanan::with(['products'])->where('status_pemesanan', '=', '1')->whereNull('pemesanan.deleted_at')->get()->count('id_pemesanan');
@@ -47,7 +48,11 @@ class AdminPembayaranController extends Controller
             $JMLnotverif = Pembayaran::with('detpems')->where('status_bayar', '=', '0')->whereNull('pembayaran.deleted_at')->get()->sum('jumlah_bayar');
             $verified = Pembayaran::with('detpems')->where('status_bayar', '=', '1')->whereNull('pembayaran.deleted_at')->get()->count('id_pembayaran');
             $JMLverified = Pembayaran::with('detpems')->where('status_bayar', '=', '1')->whereNull('pembayaran.deleted_at')->get()->sum('jumlah_bayar');
+            $penangguhan = Pembayaran::with('detpems')->where('status_bayar', '=', '2')->whereNull('pembayaran.deleted_at')->get()->count('id_pembayaran');
+            $JMLpenangguhan = Pembayaran::with('detpems')->where('status_bayar', '=', '2')->whereNull('pembayaran.deleted_at')->get()->sum('jumlah_bayar');
             $pycount = Pembayaran::with('detpems')->whereNull('pembayaran.deleted_at')->get()->count('id_pembayaran');
+
+            $last_15_days = Pemesanan::whereNull('deleted_at')->where('status_pemesanan', '=', '2')->where('untuk_tanggal','>=',Carbon::now()->subdays(15))->get()->count('id_pemesanan');
 
             $page_title = 'Dashboard';
             $page_description = 'Some description for the page';
@@ -56,7 +61,8 @@ class AdminPembayaranController extends Controller
             $action = __FUNCTION__;
             return view('viewAdminPembayaran.homeAdPembayaran', compact('page_title', 'totalusers', 'totalproduk',
             'totalpemesanan','jumlahSudahBayar','waiting','notyet','still','delivered','finished',
-            'notverif', 'verified', 'pycount', 'JMLnotverif', 'JMLverified',
+            'notverif', 'verified', 'pycount', 'JMLnotverif', 'JMLverified', 'penangguhan', 'JMLpenangguhan',
+            'last_15_days',
             'page_description','action','logo','logoText'));
         } else {
             return redirect('/');
