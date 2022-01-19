@@ -232,9 +232,10 @@
                                     <h4 class="my-0 text-secondary font-w600">
                                         @if ($pem->discount != null)
                                             @currency($pem->discount )
-                                            @else
+                                        @elseif($pem->discount_inpercent != null)
                                             {{$pem->discount_inpercent }}%
                                             </h4>
+                                        @else -
                                         @endif
                                     </h4>
                                 </td>
