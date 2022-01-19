@@ -141,7 +141,7 @@ Route::get('/EditCategory/{id}', [App\Http\Controllers\SuperAdminController::cla
 Route::post('/UpdateCategory/{id}', [App\Http\Controllers\SuperAdminController::class, 'updatecategory'])->middleware('hak.akses:superAdmin,adminPemesanan'); //update data form edit kategori ke DB
 Route::get('/DeleteCategory/{id}', [App\Http\Controllers\SuperAdminController::class, 'deletecategory'])->middleware('hak.akses:superAdmin,adminPemesanan'); //delete data form delete kategori ke DB
 Route::get('/TrashedCategory', [App\Http\Controllers\SuperAdminController::class, 'trashedcategory'])->middleware('hak.akses:superAdmin,adminPemesanan'); //lihat data kategori di tong sampah
-Route::get('/RestoreCategory/{id}', [App\Http\Controllers\SuperAdminController::class, 'restorecategory']); //kembalikan data kategori dari tong sampah
+Route::get('/RestoreCategory/{id}', [App\Http\Controllers\SuperAdminController::class, 'restorecategory'])->middleware('hak.akses:superAdmin,adminPemesanan'); //kembalikan data kategori dari tong sampah
 Route::get('/DeletePermanentCategory/{id}', [App\Http\Controllers\SuperAdminController::class, 'deletepermanentcategory'])->middleware('hak.akses:superAdmin'); //hapus permanen data kategori dari tong sampah
 Route::get('/RestoreAllCategory', [App\Http\Controllers\SuperAdminController::class, 'restoreallcategory'])->middleware('hak.akses:superAdmin,adminPemesanan'); //kembalikan semua data kategori dari tong sampah
 Route::get('/DeletePermanentAllCategory', [App\Http\Controllers\SuperAdminController::class, 'deletepermanentallcategory'])->middleware('hak.akses:superAdmin'); //hapus permanen semua data kategori dari tong sampah

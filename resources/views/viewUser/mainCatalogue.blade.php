@@ -521,7 +521,7 @@
                                 </div>
                                 <div class="content">
                                     <h4 class="title">
-                                        Aisya Catering Spesialis Dadakan 
+                                        Aisya Catering Surabaya 
                                     </h4>
                                 </div>
                             </div>
