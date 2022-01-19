@@ -268,8 +268,10 @@
                                         <td class="right" ><h4 class="my-0 text-secondary font-w600">
                                             @if ($order->discount != null)
                                             @currency($order->discount )
-                                            @else
+                                            @elseif ($order->discount_inpercent != null)
                                             {{$order->discount_inpercent }}%
+                                            @else
+                                            -
                                             </h4>
                                             @endif
                                         </td>
