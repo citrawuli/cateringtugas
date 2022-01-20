@@ -367,7 +367,7 @@ $(document).ready(function(){
         fixedHeader: {
             header: true,
             footer: true
-        }
+        },
     });
 
     $('#menunggu').on('click', function () {
@@ -385,6 +385,7 @@ $(document).ready(function(){
     $('#semuatagihan').on('click', function () {
         dataTable.columns(2).search("Menunggu Verifikasi|Diverifikasi|Penangguhan").draw();
     });
+
 
         $.ajaxSetup({ headers: { 'X-CSRF-TOKEN': jQuery('meta[name="csrf-token"]').attr('content') } });
         $('.toggle-class').on('change', function () {
@@ -416,9 +417,15 @@ $(document).ready(function(){
                 }         
             });    
         });
-
+//REALLY IMPORTANT MESSAGE!!!! I WAS WONDERING TO PASS THE URL JUST LIKE THE CUST SIDE ON FILTERING WHHICH IS KINDA HUAAAA IF I USE THE DATATABLE
+//AND MIGHT BE CHANGE IT TO SERVER SIDE HUAA2
+//YET A THING COULD FIXED IT....... 
+// "event handler only handle to those elements which exists in the dom when the code was executed so need to use delegation based event handler. try using document on click"
+//really good advice sobbbbb
+//THANKS TO WHOM? OUR BELOVED GOD ALLAH :D
+        
         $.ajaxSetup({ headers: { 'X-CSRF-TOKEN': jQuery('meta[name="csrf-token"]').attr('content') } });
-        $('.needverification').on('click', function () {
+        $(document).on('click', '.needverification', function(){
             //its a table row, so yeah... dont do #... okayy, use more general than id so you figured the rowss
             //I already used id but it will not be as easy as this :)
             var getid=$(this).attr('name');
@@ -442,9 +449,35 @@ $(document).ready(function(){
                 }         
             })
         });
-
+        //USE DOM DOCUMENT OKAYY
+            // $.ajaxSetup({ headers: { 'X-CSRF-TOKEN': jQuery('meta[name="csrf-token"]').attr('content') } });
+            // $('.needverification').on('click', function () {
+            //     //its a table row, so yeah... dont do #... okayy, use more general than id so you figured the rowss
+            //     //I already used id but it will not be as easy as this :)
+            //     var getid=$(this).attr('name');
+            //     console.log("getid");
+            //     console.log(getid);
+                
+            //     var a = "{{URL('/changeStatusConfirm')}}";
+            //     var fUrl = a+"/"+getid;
+            //     $.ajax({
+            //         url: fUrl,
+            //         type:'POST',
+            //         data: {'status': 0, 'id': getid},
+            //         headers: {
+            //             'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            //         },
+            //         success:function(response){
+            //             setTimeout(function(){window.location = window.location}, 300); 
+            //         },
+            //         error: function() {
+            //             console.log( "Ajax Not Working" );
+            //         }         
+            //     })
+            // });
+        //END
         $.ajaxSetup({ headers: { 'X-CSRF-TOKEN': jQuery('meta[name="csrf-token"]').attr('content') } });
-        $('.verified').on('click', function () {
+        $(document).on('click', '.verified', function(){
             //its a table row, so yeah... dont do #... okayy, use more general than id so you figured the rowss
             //I already used id but it will not be as easy as this :)
             var getid=$(this).attr('name');
@@ -467,10 +500,36 @@ $(document).ready(function(){
                     console.log( "Ajax Not Working" );
                 }         
             })
-        });
-
+        }); 
+        //USE DOM DOCUMENT OKAYY
+            // $.ajaxSetup({ headers: { 'X-CSRF-TOKEN': jQuery('meta[name="csrf-token"]').attr('content') } });
+            // $('.verified').on('click', function () {
+            //     //its a table row, so yeah... dont do #... okayy, use more general than id so you figured the rowss
+            //     //I already used id but it will not be as easy as this :)
+            //     var getid=$(this).attr('name');
+            //     console.log("getid");
+            //     console.log(getid);
+                
+            //     var a = "{{URL('/changeStatusConfirm')}}";
+            //     var fUrl = a+"/"+getid;
+            //     $.ajax({
+            //         url: fUrl,
+            //         type:'POST',
+            //         data: {'status': 1, 'id': getid},
+            //         headers: {
+            //             'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            //         },
+            //         success:function(response){
+            //             setTimeout(function(){window.location = window.location}, 300); 
+            //         },
+            //         error: function() {
+            //             console.log( "Ajax Not Working" );
+            //         }         
+            //     })
+            // });
+        //END
         $.ajaxSetup({ headers: { 'X-CSRF-TOKEN': jQuery('meta[name="csrf-token"]').attr('content') } });
-        $('.penangguhan').on('click', function () {
+        $(document).on('click', '.penangguhan', function(){
             //its a table row, so yeah... dont do #... okayy, use more general than id so you figured the rowss
             //I already used id but it will not be as easy as this :)
             var getid=$(this).attr('name');
@@ -494,7 +553,33 @@ $(document).ready(function(){
                 }         
             })
         });
-
+        //USE DOM DOCUMENT OKAYYY
+            // $.ajaxSetup({ headers: { 'X-CSRF-TOKEN': jQuery('meta[name="csrf-token"]').attr('content') } });
+            // $('.penangguhan').on('click', function () {
+            //     //its a table row, so yeah... dont do #... okayy, use more general than id so you figured the rowss
+            //     //I already used id but it will not be as easy as this :)
+            //     var getid=$(this).attr('name');
+            //     console.log("getid");
+            //     console.log(getid);
+                
+            //     var a = "{{URL('/changeStatusConfirm')}}";
+            //     var fUrl = a+"/"+getid;
+            //     $.ajax({
+            //         url: fUrl,
+            //         type:'POST',
+            //         data: {'status': 2, 'id': getid},
+            //         headers: {
+            //             'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            //         },
+            //         success:function(response){
+            //             setTimeout(function(){window.location = window.location}, 300); 
+            //         },
+            //         error: function() {
+            //             console.log( "Ajax Not Working" );
+            //         }         
+            //     })
+            // });
+        //END
         var minDate, maxDate;
         //Custom filtering function which will search data in column four between two values
         $.fn.dataTable.ext.search.push(

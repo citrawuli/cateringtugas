@@ -368,7 +368,9 @@ $(document).ready(function(){
     $('[data-toggle="tooltip3"]').tooltip();
 
     $.ajaxSetup({ headers: { 'X-CSRF-TOKEN': jQuery('meta[name="csrf-token"]').attr('content') } });
-    $('.accept').on('click', function () {
+    $(document).on('click', '.accept', function(){
+    // $('.accept').on('click', function () {
+        //using dom document on click... see in pembayraan all for detail okay :) we almost cant do ajax in the next page uing datatable pagination
         //its a table row, so yeah... dont do #accept okayy, use more general than id so you figured the rowss
         //I already used id but it will not be as easy as this :)
         var getid=$(this).attr('name');
@@ -396,7 +398,8 @@ $(document).ready(function(){
                         
     });
 
-    $('.reject').on('click', function () {
+    $(document).on('click', '.reject', function(){
+    // $('.reject').on('click', function () {
         //its a table row, so yeah... dont do #accept okayy, use more general than id so you figured the rowss
         //I already used id but it will not be as easy as this :)
         var getid=$(this).attr('name');
@@ -422,7 +425,8 @@ $(document).ready(function(){
                         
     });
 
-    $('.confirm').on('click', function () {
+    $(document).on('click', '.confirm', function(){
+    // $('.confirm').on('click', function () {
         //its a table row, so yeah... dont do #accept okayy, use more general than id so you figured the rowss
         //I already used id but it will not be as easy as this :)
         var getid=$(this).attr('name');

@@ -69,7 +69,7 @@ class SuperAdminController extends Controller
             $JMLpenangguhan = Pembayaran::with('detpems')->where('status_bayar', '=', '2')->whereNull('pembayaran.deleted_at')->get()->sum('jumlah_bayar');
             $pycount = Pembayaran::with('detpems')->whereNull('pembayaran.deleted_at')->get()->count('id_pembayaran');
 
-            $last_15_days = Pemesanan::whereNull('deleted_at')->where('status_pemesanan', '=', '2')->where('untuk_tanggal','>=',Carbon::now()->subdays(15))->get()->count('id_pemesanan');
+            $last_15_days = Pemesanan::whereNull('deleted_at')->where('status_pemesanan', '=', '2')->where('untuk_tanggal','>',Carbon::now()->subdays(15))->get()->count('id_pemesanan');
 
 
 
@@ -92,11 +92,12 @@ class SuperAdminController extends Controller
     public function dashboardFilter(Request $request)
     {
         $day = Carbon::now()->format('d');
-        $month = Carbon::now()->addMonth(1)->format('m');
+        $month = Carbon::now()->format('m');
         $year = Carbon::now()->format('Y');
+        // dd($day,$month,$year,Carbon::now());
 
         if($request->filter == 'today_or'){
-            $pemesananToday=Pemesanan::whereNull('deleted_at')->where('status_pemesanan', '=', '2')->whereDate('untuk_tanggal', $day)->count('id_pemesanan');
+            $pemesananToday=Pemesanan::whereNull('deleted_at')->where('status_pemesanan', '=', '2')->whereDate('untuk_tanggal', Carbon::now())->count('id_pemesanan');
             return response()->json($pemesananToday);
         }
         elseif($request->filter == 'month_or'){
@@ -108,7 +109,7 @@ class SuperAdminController extends Controller
             return response()->json($pemesananYear);
         }
         if($request->filter == 'today_pay'){
-            $pembayaranToday=Pembayaran::with('detpems')->whereNull('deleted_at')->where('status_bayar', '=', '1')->whereDate('tanggal_pembayaran', $day)->sum('jumlah_bayar');
+            $pembayaranToday=Pembayaran::with('detpems')->whereNull('deleted_at')->where('status_bayar', '=', '1')->whereDate('tanggal_pembayaran', Carbon::now())->sum('jumlah_bayar');
             return response()->json($pembayaranToday);
         }
         elseif($request->filter == 'month_pay'){

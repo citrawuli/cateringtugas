@@ -274,9 +274,10 @@ $(document).ready(function(){
         dataTable.columns(4).search("_Penangguhan", true, false, true).draw();
     });
 
-
+    //USING DOM DOCUMENT..... A FIXED LITERALLY :D see table pembayaranALL for detail
     $.ajaxSetup({ headers: { 'X-CSRF-TOKEN': jQuery('meta[name="csrf-token"]').attr('content') } });
-    $('.notyet').on('click', function () {
+    $(document).on('click', '.notyet', function(){
+        // $('.notyet').on('click', function () {
         //its a table row, so yeah... dont do #notyet okayy, use more general than id so you figured the rowss
         //I already used id but it will not be as easy as this :)
         var getid=$(this).attr('name');
@@ -301,7 +302,8 @@ $(document).ready(function(){
     });
 
     $.ajaxSetup({ headers: { 'X-CSRF-TOKEN': jQuery('meta[name="csrf-token"]').attr('content') } });
-    $('.inprocess').on('click', function () {
+    $(document).on('click', '.inprocess', function(){
+        // $('.inprocess').on('click', function () {
         //its a table row, so yeah... dont do #inprocess okayy, use more general than id so you figured the rowss
         //I already used id but it will not be as easy as this :)
         var getid=$(this).attr('name');
@@ -326,7 +328,8 @@ $(document).ready(function(){
     });
 
     $.ajaxSetup({ headers: { 'X-CSRF-TOKEN': jQuery('meta[name="csrf-token"]').attr('content') } });
-    $('.insend').on('click', function () {
+    $(document).on('click', '.insend', function(){
+    // $('.insend').on('click', function () {
         //its a table row, so yeah... dont do #insend okayy, use more general than id so you figured the rowss
         //I already used id but it will not be as easy as this :)
         var getid=$(this).attr('name');
@@ -351,7 +354,8 @@ $(document).ready(function(){
     });
 
     $.ajaxSetup({ headers: { 'X-CSRF-TOKEN': jQuery('meta[name="csrf-token"]').attr('content') } });
-    $('.done').on('click', function () {
+    $(document).on('click', '.done', function(){
+    // $('.done').on('click', function () {
         //its a table row, so yeah... dont do #done okayy, use more general than id so you figured the rowss
         //I already used id but it will not be as easy as this :)
         var getid=$(this).attr('name');

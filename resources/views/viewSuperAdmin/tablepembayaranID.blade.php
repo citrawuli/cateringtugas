@@ -294,7 +294,8 @@ $(document).ready(function(){
 
 
         $.ajaxSetup({ headers: { 'X-CSRF-TOKEN': jQuery('meta[name="csrf-token"]').attr('content') } });
-        $('.needverification').on('click', function () {
+        $(document).on('click', '.needverification', function(){
+        // $('.needverification').on('click', function () {
             //its a table row, so yeah... dont do #... okayy, use more general than id so you figured the rowss
             //I already used id but it will not be as easy as this :)
             var getid=$(this).attr('name');
@@ -320,7 +321,8 @@ $(document).ready(function(){
         });
 
         $.ajaxSetup({ headers: { 'X-CSRF-TOKEN': jQuery('meta[name="csrf-token"]').attr('content') } });
-        $('.verified').on('click', function () {
+        $(document).on('click', '.verified', function(){
+        // $('.verified').on('click', function () {
             //its a table row, so yeah... dont do #... okayy, use more general than id so you figured the rowss
             //I already used id but it will not be as easy as this :)
             var getid=$(this).attr('name');
@@ -346,7 +348,8 @@ $(document).ready(function(){
         });
 
         $.ajaxSetup({ headers: { 'X-CSRF-TOKEN': jQuery('meta[name="csrf-token"]').attr('content') } });
-        $('.penangguhan').on('click', function () {
+        $(document).on('click', '.penangguhan', function(){
+        // $('.penangguhan').on('click', function () {
             //its a table row, so yeah... dont do #... okayy, use more general than id so you figured the rowss
             //I already used id but it will not be as easy as this :)
             var getid=$(this).attr('name');
