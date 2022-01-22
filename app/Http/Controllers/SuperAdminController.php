@@ -1423,7 +1423,7 @@ class SuperAdminController extends Controller
 
     public function addpaymentinAll()
     {
-        $pemesanan=Pemesanan::whereNull('pemesanan.deleted_at')->get();
+        $pemesanan=Pemesanan::whereNull('pemesanan.deleted_at')->where('status_pemesanan', '=', '2')->get();
         $page_title = 'Add Payment Form';
         $page_description = 'Some description for the page';
         $logo = "teamo/images/aisyacatering_kontak_logo.png";
@@ -1737,14 +1737,13 @@ class SuperAdminController extends Controller
     public function jumlahtagihan($id)
     {
         $pemesanan = Pemesanan::where('id_pemesanan',$id)->get();
-        $pemesanan_id=$id;
         $totaltr="";
         foreach($pemesanan as $pem){
             $totaltr=$pem->total_transaksi;
         }
         $jumlahSudahBayar = Pembayaran::with('detpems')
             ->where('pembayaran.id_pemesanan', $id)->where('status_bayar', '1')->whereNull('pembayaran.deleted_at')->get()->sum('jumlah_bayar');
-        return response()->json(['pemesanan'=>$pemesanan,'pemesanan_id'=>$pemesanan_id,'jumlahSudahBayar'=>$jumlahSudahBayar,'totaltr'=>$totaltr]);
+        return response()->json(['pemesanan'=>$pemesanan,'jumlahSudahBayar'=>$jumlahSudahBayar,'totaltr'=>$totaltr]);
     }
 
 
