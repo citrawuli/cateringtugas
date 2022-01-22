@@ -78,7 +78,9 @@ class UserController extends Controller
         $model->email = $request->input('email');
         $model->alamat_user = $request->input('alamat_lengkap');
         $model->ponsel_user = $request->input('nomor_telp');
-        $model->password = Hash::make($request->input('new_password'));
+        if($request->input('new_password')!=null) {
+            $model->password = Hash::make($request->input('new_password'));
+        };
         $model->touch();
         $model->save();
         Session::flash('message', "Data profil pengguna berhasil diubah");
@@ -219,9 +221,11 @@ class UserController extends Controller
 
     public function addyourpayment($id)
     {
-        $pemesanan = Pemesanan::find($id);
+        $pemesanan = Pemesanan::where('id_pemesanan',$id)->get();
         $pemesanan_id=$id;
-        return view('viewUser.addyourpayment', compact('pemesanan','pemesanan_id'));
+        $jumlahSudahBayar = Pembayaran::with('detpems')
+            ->where('pembayaran.id_pemesanan', $id)->where('status_bayar', '1')->whereNull('pembayaran.deleted_at')->get()->sum('jumlah_bayar');
+        return view('viewUser.addyourpayment', compact('pemesanan','pemesanan_id','jumlahSudahBayar'));
     }
 
     public function storeyourpayment(Request $request, $id)

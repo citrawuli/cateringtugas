@@ -1180,13 +1180,16 @@ class SuperAdminController extends Controller
 
     public function addpaymentIDtable($id)
     {
+        $pemesanan = Pemesanan::where('id_pemesanan',$id)->get();
         $pemesanan_id=$id;
+        $jumlahSudahBayar = Pembayaran::with('detpems')
+            ->where('pembayaran.id_pemesanan', $id)->where('status_bayar', '1')->whereNull('pembayaran.deleted_at')->get()->sum('jumlah_bayar');
         $page_title = 'Add Payment ID Form';
         $page_description = 'Some description for the page';
         $logo = "teamo/images/aisyacatering_kontak_logo.png";
         $logoText = "teamo/images/aisya-catering-logo3.png";
         $action = __FUNCTION__;
-        return view('viewSuperAdmin.addpembayaranID', compact('pemesanan_id', 'page_title', 'page_description','action','logo','logoText'));
+        return view('viewSuperAdmin.addpembayaranID', compact('pemesanan_id','pemesanan','jumlahSudahBayar','page_title', 'page_description','action','logo','logoText'));
     
     }
 
@@ -1477,7 +1480,9 @@ class SuperAdminController extends Controller
         $model = user::find($id);
         $model->name = $request->input('name');
         $model->email = $request->input('email');
-        $model->password = Hash::make($request->input('new_password'));
+        if($request->input('new_password')!=null) {
+            $model->password = Hash::make($request->input('new_password'));
+        };
         $model->touch();
         $model->save();
         Session::flash('message', "Data profil pengguna berhasil diubah");

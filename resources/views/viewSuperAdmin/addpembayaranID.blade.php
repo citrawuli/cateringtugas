@@ -88,17 +88,25 @@
                         </div>
 
                         <div class="form-group row">
-                            <label for="jumlah_bayar" class="col-sm-3 col-form-label">{{ __('Jumlah Bayar (*)') }}</label>
-
-                            <div class="col-md-6">
-                                <div class="input-group mb-3">
-                                     <div class="input-group-prepend">
-                                        <span class="input-group-text">Rp</span>
+                            <label for="jumlah_bayar" class="col-sm-3 col-form-label">{{ __('Jumlah Bayar (*)') }}
+                                <button style="background-color: #ffffff; color: black;outline: none;border: none;"type="button"
+                                class="btn btn-light" data-bs-toggle="popover" title="Keterangan Pembayaran" >&#x1F6C8;</button>
+                            </label>
+                            @foreach ($pemesanan as $pem)
+                                <input type="text" hidden id="transaction_sum" name="@currency($pem->total_transaksi)">
+                                <input type="text" hidden id="sudahbayar_sum" name="@currency($jumlahSudahBayar)">
+                                <input type="text" hidden id="tagihan_sum" name="@currency($pem->total_transaksi-$jumlahSudahBayar)">
+                        
+                                <div class="col-md-6">
+                                    <div class="input-group mb-3">
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text">Rp</span>
+                                        </div>
+                                        <input id="jumlah_bayar" value="{{$pem->total_transaksi-$jumlahSudahBayar}}" type="text" min="0" class="form-control @error('jumlah_bayar') is-invalid @enderror" required  placeholder="Pay Amount" autofocus name="jumlah_bayar">
+                                        <!-- <input id="hiddenrp" hidden="" type="text" min="0" name="product_price"placeholder="Product Price"> -->
                                     </div>
-                                    <input id="jumlah_bayar" type="text" min="0" class="form-control @error('jumlah_bayar') is-invalid @enderror" required  placeholder="Pay Amount" autofocus name="jumlah_bayar">
-                                    <!-- <input id="hiddenrp" hidden="" type="text" min="0" name="product_price"placeholder="Product Price"> -->
                                 </div>
-                            </div>
+                            @endforeach
                         </div>
 
                         <div class="form-group row">
@@ -186,6 +194,16 @@ $(document).ready(function(){
          $('#divrek').slideDown();
          $('#divbukti').slideDown();
     });
+
+    // Enable popovers everywhere
+    var total_sum = $("#transaction_sum").attr("name");
+    var sudahbayar_sum = $("#sudahbayar_sum").attr("name");
+    var tagihan_sum = $("#tagihan_sum").attr("name");    
+    $('[data-bs-toggle="popover"]').popover({
+        title: '<h4 class="custom-title"><i class="bi-info-circle-fill"></i> Popover info</h4>',
+        content: '<p>Total transaksi yang harus dibayar: <strong> ' +total_sum+'</strong></p><p>Jumlah sudah bayar (diverifikasi) : <strong>' +sudahbayar_sum+'</strong></p><p>Jumlah sisa tagihan : <strong>' +tagihan_sum+'<strong></p>',
+        html: true
+    }); 
 });
 </script>
 @endsection

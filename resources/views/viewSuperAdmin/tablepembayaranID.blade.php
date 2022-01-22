@@ -65,7 +65,11 @@
                 </div>
                 <div class="card-body mb-0">
                     <!-- <button type="button" class="btn light btn-danger" data-toggle="modal" data-target="#exampleModalCenter">Add User</button> -->
-                    <a href="{!! url('/AddPayment/'. $pemesanan->id_pemesanan); !!}" class="btn light btn-danger">Tambah Pembayaran</a>
+
+                    @if ($pemesanan->total_transaksi > $jumlahSudahBayar)
+                        <a href="{!! url('/AddPayment/'. $pemesanan->id_pemesanan); !!}" class="btn light btn-danger">Tambah Pembayaran</a>
+                    @endif
+                   
                     <a href="{{ url('/TrashedPayment/'.$pemesanan->id_pemesanan)}}" class="btn btn-primary light btn-card"><i class="fa fa-trash" style="margin-right: 10px;"></i>Lihat Tong Sampah</a> 
                 </div>
             </div>

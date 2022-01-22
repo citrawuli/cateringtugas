@@ -86,11 +86,20 @@
                                             </div>
                                             <br>
                                             <div class="form-row form-row-col">
-                                                <label for="jumlah_bayar" class="text">{{ ('Jumlah Bayar (*)') }}</label>
-                        
+                                                <label for="jumlah_bayar" class="text">{{ ('Jumlah Bayar (*)') }}
+                                                    <button style="background-color: #ffffff; color: black;outline: none;border: none;"type="button"
+                                                     class="btn btn-light" data-bs-toggle="popover" title="Keterangan Pembayaran" >&#x1F6C8;</button>
+                                                </label>
+                                                @foreach ($pemesanan as $pem)
+                                                    <input type="text" hidden id="transaction_sum" name="@currency($pem->total_transaksi)">
+                                                    <input type="text" hidden id="sudahbayar_sum" name="@currency($jumlahSudahBayar)">
+                                                    <input type="text" hidden id="tagihan_sum" name="@currency($pem->total_transaksi-$jumlahSudahBayar)">
+                                                
                                                     <div class="input-group mb-3">
-                                                        <input id="jumlah_bayar" type="text" min="0" class="input-text @error('jumlah_bayar') is-invalid @enderror" required  placeholder="Jumlah bayar(Rp)" autofocus name="jumlah_bayar">
+                                                        <input id="jumlah_bayar" value="{{$pem->total_transaksi-$jumlahSudahBayar}}"type="text" min="0" class="input-text @error('jumlah_bayar') is-invalid @enderror" required  placeholder="Jumlah bayar(Rp)" autofocus name="jumlah_bayar">
                                                     </div>
+                                                @endforeach
+                                                    
                                             </div>
                                             <br>
                                             <div class="form-row form-row-col">
@@ -168,6 +177,16 @@ $(document).ready(function(){
         var value=$('#jumlah_bayar').cleanVal();
         $('#jumlah_bayar').val(value);
     });
+
+    // Enable popovers everywhere
+    var total_sum = $("#transaction_sum").attr("name");
+    var sudahbayar_sum = $("#sudahbayar_sum").attr("name");
+    var tagihan_sum = $("#tagihan_sum").attr("name");    
+    $('[data-bs-toggle="popover"]').popover({
+        title: '<h4 class="custom-title"><i class="bi-info-circle-fill"></i> Popover info</h4>',
+        content: '<p>Total transaksi yang harus dibayar: <strong> ' +total_sum+'</strong></p><p>Jumlah sudah bayar (diverifikasi) : <strong>' +sudahbayar_sum+'</strong></p><p>Jumlah sisa tagihan : <strong>' +tagihan_sum+'<strong></p>',
+        html: true
+    }); 
 
 });
 </script>

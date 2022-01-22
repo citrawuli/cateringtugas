@@ -354,14 +354,14 @@ $(document).ready(function(){
  
             // Update footer
             var numFormat = $.fn.dataTable.render.number( ',', '.', 3, 'Rp' ).display;
-            $( api.column( 5 ).footer() ).html(
-                // 'Total Pembayaran: '+ numFormat(total)
-                // 'Due '+ numFormat(total)
-            );
+            // $( api.column( 5 ).footer() ).html(
+            //     // 'Total Pembayaran: '+ numFormat(total)
+            //     // 'Due '+ numFormat(total)
+            // );
             // $( api.column( 5 ).footer() ).html(
             //     'Laman Ini : Rp'+pageTotal +' ( Seluruh Laman : Rp'+ total +')'
             
-                // 'Laman Ini: '+numFormat(pageTotal) +'\r\n Seluruh Laman: '+ numFormat(total) +''
+            //     'Laman Ini: '+numFormat(pageTotal) +'\r\n Seluruh Laman: '+ numFormat(total) +''
             // );
         },
         fixedHeader: {
