@@ -1734,5 +1734,18 @@ class SuperAdminController extends Controller
     
     }
 
+    public function jumlahtagihan($id)
+    {
+        $pemesanan = Pemesanan::where('id_pemesanan',$id)->get();
+        $pemesanan_id=$id;
+        $totaltr="";
+        foreach($pemesanan as $pem){
+            $totaltr=$pem->total_transaksi;
+        }
+        $jumlahSudahBayar = Pembayaran::with('detpems')
+            ->where('pembayaran.id_pemesanan', $id)->where('status_bayar', '1')->whereNull('pembayaran.deleted_at')->get()->sum('jumlah_bayar');
+        return response()->json(['pemesanan'=>$pemesanan,'pemesanan_id'=>$pemesanan_id,'jumlahSudahBayar'=>$jumlahSudahBayar,'totaltr'=>$totaltr]);
+    }
+
 
 }

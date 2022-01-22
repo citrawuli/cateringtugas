@@ -221,6 +221,7 @@ Route::get('/adminPemesanan', [App\Http\Controllers\AdminPemesananController::cl
 Route::get('/adminPembayaran', [App\Http\Controllers\AdminPembayaranController::class, 'indexAdPembayaran'])->middleware('hak.akses:adminPembayaran')->name('homeAdminPembayaran');
 Route::get('/adminBlog', [App\Http\Controllers\AdminBlogController::class, 'indexAdBlog'])->middleware('hak.akses:adminBlog')->name('homeAdminBlog');
 Route::get('/getdataproduk/{id}', [App\Http\Controllers\SuperAdminController::class,'getdataproduk'])->middleware('hak.akses:superAdmin,adminPemesanan');
+Route::get('/jumlahtagihan/{id}', [App\Http\Controllers\SuperAdminController::class,'jumlahtagihan'])->middleware('hak.akses:superAdmin,adminPembayaran');
 
 
 

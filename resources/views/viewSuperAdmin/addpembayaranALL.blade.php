@@ -77,6 +77,7 @@
                             </div>
                         </div>
 
+                    <div id="kontengulung">
                         <div class="form-group row">
                             <label for="optionbank" class="col-sm-3 col-form-label">{{ __('Jenis Bayar (*)') }}</label>
 
@@ -140,6 +141,7 @@
                                 </button>
                             </div>
                         </div>
+                    </div>
 
                         
 
@@ -194,6 +196,36 @@ $(document).ready(function(){
          $('#divrek').slideDown();
          $('#divbukti').slideDown();
     });
+
+    $('#single-select').on('change',function(e) {
+    var pemesanan_id = e.target.value;
+    var a = "{{url('/jumlahtagihan')}}";
+    var fUrl = a+"/"+pemesanan_id;
+    $.ajax({
+        url:fUrl,
+        type:"get",
+        data: {
+            pemesanan_id: pemesanan_id
+        },
+        success:function (response) {
+            // console.log(response);
+            $('#jumlah_bayar').empty();
+            totaltr=response['totaltr'];
+            sdhbayar=response['jumlahSudahBayar'];
+            if(totaltr>sdhbayar){
+                tagihan=totaltr-sdhbayar;
+                $('#jumlah_bayar').val(parseInt(tagihan).toLocaleString('id') );
+                $('#kontengulung').slideDown();
+            }
+            else{
+                $('#kontengulung').slideUp();
+            }
+            
+        }
+    })
+    });
+
+
            
 
 
