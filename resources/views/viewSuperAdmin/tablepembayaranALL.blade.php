@@ -331,26 +331,46 @@ $(document).ready(function(){
             // Remove the formatting to get integer data for summation
             var intVal = function ( i ) {
                 return typeof i === 'string' ?
-                    i.replace(/[\Rp,]/g, '')*1 :
+                    i.replace(/[\Rp,]/g,'')*1 :
                     typeof i === 'number' ?
                         i : 0;
             };
  
-            // Total over all pages
-            total = api
-                .column( 5 )
-                .data()
-                .reduce( function (a, b) {
-                    return intVal(a) + intVal(b);
-                }, 0 );
+            // // Total over all pages
+            // total = api
+            //     .column( 5 )
+            //     .data()
+            //     .reduce( function (a, b) {
+            //         return intVal(a) + intVal(b);
+            //     }, 0 );
  
-            // Total over this page
-            pageTotal = api
-                .column( 5, { page: 'current'} )
+            // // Total over this page
+            // pageTotal = api
+            //     .column( 5, { page: 'current'} )
+            //     .data()
+            //     .reduce( function (a, b) {
+            //         return intVal(a) + intVal(b);
+            //     }, 0 );
+
+            
+            // };
+
+            // Total over all pages
+            total = api.column(5)
                 .data()
-                .reduce( function (a, b) {
-                    return intVal(a) + intVal(b);
-                }, 0 );
+                .reduce(function (total, b) {
+                b = $(b.replace('Rp', '')).text();
+                return total + parseInt(b);
+            },0);
+            // Total over this page
+            pageTotal = api.column(5, {
+                page: 'current'
+            })
+                .data()
+                .reduce(function (total, b) {
+                b = $(b.replace('Rp', '')).text();
+                return total + parseInt(b);
+            }, 0);
  
             // Update footer
             var numFormat = $.fn.dataTable.render.number( ',', '.', 3, 'Rp' ).display;
@@ -358,11 +378,11 @@ $(document).ready(function(){
             //     // 'Total Pembayaran: '+ numFormat(total)
             //     // 'Due '+ numFormat(total)
             // );
-            // $( api.column( 5 ).footer() ).html(
-            //     'Laman Ini : Rp'+pageTotal +' ( Seluruh Laman : Rp'+ total +')'
+            $( api.column( 5 ).footer() ).html(
+                // 'Laman Ini : Rp'+pageTotal +' ( Seluruh Laman : Rp'+ total +')'
             
-            //     'Laman Ini: '+numFormat(pageTotal) +'\r\n Seluruh Laman: '+ numFormat(total) +''
-            // );
+                'Laman Ini: '+numFormat(pageTotal) +'\r\n Seluruh Laman: '+ numFormat(total) +''
+            );
         },
         fixedHeader: {
             header: true,

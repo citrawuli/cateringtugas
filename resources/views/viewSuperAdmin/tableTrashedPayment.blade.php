@@ -101,10 +101,12 @@
                                         <td>BRI</td>
                                     @elseif ($mod->bank_transfer == '3')
                                         <td>BCA</td>
-                                    @endif 
+                                    @else
+                                        <td>{{$mod->bank_transfer}}</td>
+                                    @endif
                                         
-                                    <td>{{ $mod->nomor_rekening }}</td>
-                                    <td>{{ $mod->atas_nama }}</td>
+                                    <td>{{ $mod->nomor_rekening ?? '-'}}</td>
+                                    <td>{{ $mod->atas_nama ?? '-'}}</td>
                                     <td>{{ $mod->deleted_at }}</td>
                                     <td>
                                     <div class="d-flex">
