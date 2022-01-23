@@ -336,52 +336,47 @@ $(document).ready(function(){
                         i : 0;
             };
  
-            // // Total over all pages
-            // total = api
-            //     .column( 5 )
-            //     .data()
-            //     .reduce( function (a, b) {
-            //         return intVal(a) + intVal(b);
-            //     }, 0 );
- 
-            // // Total over this page
-            // pageTotal = api
-            //     .column( 5, { page: 'current'} )
-            //     .data()
-            //     .reduce( function (a, b) {
-            //         return intVal(a) + intVal(b);
-            //     }, 0 );
-
-            
-            // };
-
             // Total over all pages
-            total = api.column(5)
+            total = api
+                .column( 5 )
                 .data()
-                .reduce(function (total, b) {
-                b = $(b.replace('Rp', '')).text();
-                return total + parseInt(b);
-            },0);
+                .reduce( function (a, b) {
+                    return intVal(a) + intVal(b);
+                }, 0 );
+ 
             // Total over this page
-            pageTotal = api.column(5, {
-                page: 'current'
-            })
+            pageTotal = api
+                .column( 5, { page: 'current'} )
                 .data()
-                .reduce(function (total, b) {
-                b = $(b.replace('Rp', '')).text();
-                return total + parseInt(b);
-            }, 0);
+                .reduce( function (a, b) {
+                    return intVal(a) + intVal(b);
+                }, 0 );
+
+            // // Total over all pages
+            // total = api.column(5)
+            //     .data()
+            //     .reduce(function (total, b) {
+            //     b = $(b.replace('Rp', '')).text();
+            //     return total + parseInt(b);
+            // },0);
+            // // Total over this page
+            // pageTotal = api.column(5, {
+            //     page: 'current'
+            // })
+            //     .data()
+            //     .reduce(function (total, b) {
+            //     b = $(b.replace('Rp', '')).text();
+            //     return total + parseInt(b);
+            // }, 0);
  
             // Update footer
-            var numFormat = $.fn.dataTable.render.number( ',', '.', 3, 'Rp' ).display;
+            var numFormat = $.fn.dataTable.render.number( '.', '.', 3, 'Rp' ).display;
             // $( api.column( 5 ).footer() ).html(
             //     // 'Total Pembayaran: '+ numFormat(total)
             //     // 'Due '+ numFormat(total)
             // );
             $( api.column( 5 ).footer() ).html(
-                // 'Laman Ini : Rp'+pageTotal +' ( Seluruh Laman : Rp'+ total +')'
-            
-                'Laman Ini: '+numFormat(pageTotal) +'\r\n Seluruh Laman: '+ numFormat(total) +''
+                'Laman Ini: '+numFormat(pageTotal) +'\r\n\n Seluruh Laman: '+ numFormat(total) +''
             );
         },
         fixedHeader: {
