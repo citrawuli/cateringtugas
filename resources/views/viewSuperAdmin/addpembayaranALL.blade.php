@@ -93,7 +93,10 @@
                         </div>
 
                         <div class="form-group row">
-                            <label for="jumlah_bayar" class="col-sm-3 col-form-label">{{ __('Jumlah Bayar (*)') }}</label>
+                            <label for="jumlah_bayar" class="col-sm-3 col-form-label">{{ __('Jumlah Bayar (*)') }}
+                                <button style="background-color: #ffffff; color: black;outline: none;border: none;"type="button"
+                                class="btn btn-light" data-bs-toggle="popover" title="Keterangan Pembayaran" >&#x1F6C8;</button>
+                            </label>
 
                             <div class="col-md-6">
                                 <div class="input-group mb-3">
@@ -197,6 +200,12 @@ $(document).ready(function(){
          $('#divbukti').slideDown();
     });
 
+    $('[data-bs-toggle="popover"]').popover({
+                    title: '<h4 class="custom-title"><i class="bi-info-circle-fill"></i> Popover info</h4>',
+                    content: 'Mohon memilih pemesanan terlebih dahulu',
+                    html: true
+                }); 
+
     $('#single-select').on('change',function(e) {
     var pemesanan_id = e.target.value;
     var a = "{{url('/jumlahtagihan')}}";
@@ -216,15 +225,20 @@ $(document).ready(function(){
                 tagihan=totaltr-sdhbayar;
                 $('#jumlah_bayar').val(parseInt(tagihan).toLocaleString('id') );
                 $('#kontengulung').slideDown();
+                $('[data-bs-toggle="popover"]').popover("dispose").popover({
+                    title: '<h4 class="custom-title"><i class="bi-info-circle-fill"></i> Popover info</h4>',
+                    content: '<p>Total transaksi yang harus dibayar: <strong> ' +parseInt(totaltr).toLocaleString('id')+'</strong></p><p>Jumlah sudah bayar (diverifikasi) : <strong>' +parseInt(sdhbayar).toLocaleString('id')+'</strong></p><p>Jumlah sisa tagihan : <strong>' +parseInt(tagihan).toLocaleString('id')+'<strong></p>',
+                    html: true
+                }); 
             }
             else{
-                $('#kontengulung').slideUp();
+                $('#kontengulung').slideUp(); 
+               
             }
             
         }
     })
     });
-
 
            
 
