@@ -185,7 +185,7 @@
                                             Tidak Ada Gambar
                                         @endif
                                     </td>
-                                    <td>@currency($b->jumlah_bayar)</td>
+                                    <td style="min-width:200px">@currency($b->jumlah_bayar)</td>
                                     <td>{{ date('d-M-Y', strtotime($b->tanggal_pembayaran)) }}</td>
                                     
                                     
