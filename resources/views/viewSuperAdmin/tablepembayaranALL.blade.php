@@ -128,6 +128,7 @@
                                     <th>Status Bayar</th>
                                     <th>Metode Bayar</th>
                                     <th>Bukti Bayar</th>
+                                    <th style="display: none;">Jumlah Bayar Raw</th>
                                     <th>Jumlah Bayar</th>
                                     <th>Tanggal Bayar</th>
                                     
@@ -185,6 +186,7 @@
                                             Tidak Ada Gambar
                                         @endif
                                     </td>
+                                    <td style="min-width:200px;display: none;">{{$b->jumlah_bayar}}</td>
                                     <td style="min-width:200px">@currency($b->jumlah_bayar)</td>
                                     <td>{{ date('d-M-Y', strtotime($b->tanggal_pembayaran)) }}</td>
                                     
@@ -246,8 +248,9 @@
                                     <th></th>
                                     <th></th>
                                     <th></th>
-                                    {{-- <th style="text-align:right">Jumlah Bayar:</th> --}}
-                                    <th></th>
+                                    <th colspan="2" style="text-align:left">Jumlah Bayar: <span id="grandbayar"></span> dari keseluruhan : <span id="grandbayarall"></span></th>
+                                    {{-- <th style="text-align:left">dari : <span id="grandbayarall"></span></th> --}}
+                                    {{-- <th> @currency($jumlahpembayaran)</th> --}}
                                 </tr>
                             </tfoot>
                         </table>
@@ -294,18 +297,21 @@ $(document).ready(function(){
     var dataTable= $('#pymntalltable').DataTable( {
         dom: 'lBfrtip',
         // Bfrtip you need to add l on your dom. See this for ref: https://datatables.net/reference/option/dom.
+        // "columnDefs": [
+        //     { "visible": false, "targets": 5 }
+        // ],
         buttons: [
             'copyHtml5',
             {
                 extend: 'excelHtml5',
                 exportOptions: {
-                    columns: [ 0, 1, 2, 3,4,5,6,7,8,9,10]
+                    columns: [ 0, 1, 2, 3,4,6,7,8,9,10,11]
                 },
             },
             {
                 extend: 'csvHtml5',
                 exportOptions: {
-                    columns: [ 0, 1, 2, 3,4,5,6,7,8,9,10]
+                    columns: [ 0, 1, 2, 3,4,6,7,8,9,10,11]
                 },
             },
             // 'pdfHtml5',
@@ -314,7 +320,7 @@ $(document).ready(function(){
                 orientation: 'landscape',
                 pageSize: 'A4',
                 exportOptions: {
-                    columns: [ 0, 1, 2, 3,4,5,6,7,8,9,10]
+                    columns: [ 0, 1, 2, 3,4,6,7,8,9,10,11]
                 },
                 footer: true,
                 // messageBottom: function() {
@@ -325,16 +331,33 @@ $(document).ready(function(){
             },
             'colvis'
         ],
+        // "drawCallback": function( settings ) {
+        //     var api = this.api();
+    
+        //     // Output the data for the visible rows to the browser's console
+        //     console.log( api.rows( {page:'current'} ).data() );
+        // },
         "footerCallback": function ( row, data, start, end, display ) {
-            var api = this.api(), data;
+            var api = this.api();
  
             // Remove the formatting to get integer data for summation
-            var intVal = function ( i ) {
-                return typeof i === 'string' ?
-                    i.replace(/[\Rp,]/g,'')*1 :
-                    typeof i === 'number' ?
-                        i : 0;
-            };
+            // var intVal = function ( i ) {
+            //     return typeof i === 'string' ?
+            //         i.replace(/[\Rp,]/g,' ')*1 :
+            //         typeof i === 'number' ?
+            //             i : 0;
+            // };
+          
+          var intVal = function ( i ) {
+            if(typeof i === 'string') {
+               i = i.replace(/[\Rp]/g,' ')*1;
+            }
+           // check if you got a valid number.
+         if (Number.isNaN(i)) {
+             return 0;
+         }
+         return i;
+          };
  
             // Total over all pages
             total = api
@@ -352,32 +375,19 @@ $(document).ready(function(){
                     return intVal(a) + intVal(b);
                 }, 0 );
 
-            // // Total over all pages
-            // total = api.column(5)
-            //     .data()
-            //     .reduce(function (total, b) {
-            //     b = $(b.replace('Rp', '')).text();
-            //     return total + parseInt(b);
-            // },0);
-            // // Total over this page
-            // pageTotal = api.column(5, {
-            //     page: 'current'
-            // })
-            //     .data()
-            //     .reduce(function (total, b) {
-            //     b = $(b.replace('Rp', '')).text();
-            //     return total + parseInt(b);
-            // }, 0);
+          
  
             // Update footer
-            var numFormat = $.fn.dataTable.render.number( '.', '.', 3, 'Rp' ).display;
+            var numFormat = $.fn.dataTable.render.number( '.', ',', 0, 'Rp' ).display;
             // $( api.column( 5 ).footer() ).html(
             //     // 'Total Pembayaran: '+ numFormat(total)
             //     // 'Due '+ numFormat(total)
             // );
-            $( api.column( 5 ).footer() ).html(
-                'Laman Ini: '+numFormat(pageTotal) +'\r\n\n Seluruh Laman: '+ numFormat(total) +''
-            );
+            // $( api.column( 5 ).footer() ).html(
+            //     'Laman ini: '+numFormat(pageTotal)+'\r\n\n Seluruh Laman: '+ numFormat(total)
+            // );
+            $('#grandbayar').html(numFormat(pageTotal));
+            $('#grandbayarall').html(numFormat(total));
         },
         fixedHeader: {
             header: true,
@@ -398,7 +408,7 @@ $(document).ready(function(){
     });
 
     $('#semuatagihan').on('click', function () {
-        dataTable.columns(2).search("Menunggu Verifikasi|Diverifikasi|Penangguhan").draw();
+        dataTable.columns(2).search("").draw();
     });
 
 

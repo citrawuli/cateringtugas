@@ -1397,13 +1397,14 @@ class SuperAdminController extends Controller
     public function tablePembayaranAll()
     {
         $pembayaran = Pembayaran::with('detpems')->whereNull('pembayaran.deleted_at')->get();
+        $jumlahpembayaran = Pembayaran::with('detpems')->whereNull('pembayaran.deleted_at')->get()->sum('jumlah_bayar');
         $page_title = 'Payment Table';
         $page_description = 'Some description for the page';
         $logo = "teamo/images/aisyacatering_kontak_logo.png";
         $logoText = "teamo/images/aisya-catering-logo3.png";
         $action = __FUNCTION__;
 
-        return view('viewSuperAdmin.tablepembayaranALL',compact('pembayaran', 'page_title', 'page_description','action','logo','logoText') );
+        return view('viewSuperAdmin.tablepembayaranALL',compact('pembayaran', 'jumlahpembayaran','page_title', 'page_description','action','logo','logoText') );
 
     }
 
