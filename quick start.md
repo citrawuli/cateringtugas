@@ -12,5 +12,8 @@ composer install
 cp .env.example .env
 For Windows command line tool use copy command. For unix style - cp.
 
+export the latest .sql file into your dbms
+.env database name must match the database name in your dbms
+
 php artisan key:generate
 For more information about the Laravel installation, check out on this link https://laravel.com/docs/8.x/installation
